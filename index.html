@@ -1281,27 +1281,29 @@ function playAudio(url, card) {
   player.preload = "auto";
   player.load();
 
-  const playPromise = player.play();
+  player.addEventListener("canplay", () => {
+    retryPlay(0);
+  }, { once: true });
 
-  if (playPromise) {
-    playPromise
-      .then(() => {
-        setPlayingState();
-      })
-      .catch(() => {
-        player.addEventListener("canplay", retryPlay, { once: true });
-      });
-  }
+  setTimeout(() => {
+    if (currentUrl === url && player.paused) {
+      retryPlay(0);
+    }
+  }, 500);
 }
 
 function retryPlay(attempt = 0) {
+  if (!currentUrl) return;
+
   player.play()
     .then(() => {
       setPlayingState();
     })
     .catch(() => {
-      if (attempt < 12) {
-        setTimeout(() => retryPlay(attempt + 1), 250);
+      if (attempt < 20) {
+        setTimeout(() => {
+          retryPlay(attempt + 1);
+        }, 250);
       } else {
         stopAudio();
       }
@@ -1318,9 +1320,8 @@ function setPlayingState() {
 function stopAudio() {
   player.pause();
 
-  try {
-    player.currentTime = 0;
-  } catch (e) {}
+  player.removeAttribute("src");
+  player.load();
 
   if (currentCard) {
     currentCard.classList.remove("playing");
