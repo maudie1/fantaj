@@ -1115,6 +1115,8 @@ function createCard(item) {
     img.alt = item.name || String(item.number);
     img.loading = "lazy";
     img.decoding = "async";
+	img.fetchPriority = "low";
+	
 
     img.onerror = () => {
       const noImage = document.createElement("div");
