@@ -1049,12 +1049,8 @@ fetch(API_URL)
     render(allData);
   })
   .catch(() => {
-    content.innerHTML = `
-      <div style="margin:0 0 16px;padding:22px;border-radius:16px;background:white;color:#9b7cff;font-weight:900;text-align:center;">
-        데이터를 불러오지 못했습니다.
-      </div>
-    `;
-  });
+  setTimeout(() => retryPlay(0), 250);
+});
 
 searchInput.addEventListener("input", e => {
   const keyword = e.target.value.trim().toLowerCase();
@@ -1298,13 +1294,17 @@ function playAudio(url, card) {
   }
 }
 
-function retryPlay() {
+function retryPlay(attempt = 0) {
   player.play()
     .then(() => {
       setPlayingState();
     })
     .catch(() => {
-      stopAudio();
+      if (attempt < 12) {
+        setTimeout(() => retryPlay(attempt + 1), 250);
+      } else {
+        stopAudio();
+      }
     });
 }
 
