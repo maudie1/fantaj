@@ -357,12 +357,12 @@ function createCard(item) {
   const card = document.createElement("div");
   card.className = "card";
 
-  const imageName = getFileName(item.image);
+  const imageUrl = getImageUrl(item.image);
 
-  if (imageName) {
-    const img = document.createElement("img");
-    img.className = "thumb";
-    img.src = `images/${imageName}`;
+if (imageUrl) {
+  const img = document.createElement("img");
+  img.className = "thumb";
+  img.src = imageUrl;
     img.alt = item.name || String(item.number);
     img.loading = "lazy";
     img.decoding = "async";
@@ -408,6 +408,21 @@ function getFileName(url) {
   } catch (e) {
     return String(url).split("/").pop().split("?")[0];
   }
+}
+
+function getImageUrl(url) {
+  if (!url) return "";
+
+  const cleanUrl = String(url).split("?")[0].toLowerCase();
+
+  // GIF는 JSON에 있는 외부링크 그대로 사용
+  if (cleanUrl.endsWith(".gif")) {
+    return url;
+  }
+
+  // PNG는 파일명만 뽑아서 /images 폴더 사용
+  const fileName = getFileName(url);
+  return fileName ? `images/${fileName}` : "";
 }
 
 function playAudio(url, card) {
