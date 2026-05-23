@@ -686,140 +686,241 @@ body {
 
 @media (max-width: 700px) {
   .page-wrap {
-    padding: 12px 14px 70px;
+    width: 100%;
+    padding: 10px 8px 50px;
   }
 
   .hero-banner {
-    height: 180px;
-    border-radius: 22px;
+    height: 150px;
+    border-radius: 18px;
   }
 
+  /* 모바일 상단 큰 버튼: 글자 세로쪼개짐 방지 */
   .view-tabs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    gap: 8px;
+    margin: 10px 0 12px;
   }
 
   .view-tab {
-    min-height: 86px;
-    padding: 16px 18px;
-    border-radius: 24px;
+    min-height: 112px;
+    padding: 12px 8px;
+    border-radius: 22px;
+    flex-direction: column;
+    gap: 7px;
+    overflow: hidden;
+  }
+
+  .view-tab:hover {
+    transform: none;
   }
 
   .view-tab .tab-icon {
-    font-size: 30px;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .view-tab .tab-text {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    line-height: 1.15;
+    min-width: 0;
   }
 
   .view-tab .tab-title {
-    font-size: 22px;
+    font-size: 20px;
+    letter-spacing: -0.8px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: clip;
   }
 
   .view-tab .tab-desc {
-    font-size: 12px;
+    margin-top: 6px;
+    font-size: 11px;
+    line-height: 1.15;
+    white-space: nowrap;
+    word-break: keep-all;
   }
 
   .top-panel {
     grid-template-columns: 58% 42%;
-    gap: 14px;
-    padding: 14px;
-    border-radius: 24px;
+    margin: 0 0 18px;
+    padding: 10px;
+    gap: 8px;
+    border-radius: 22px;
   }
 
   .search-box input {
-    padding: 14px 18px;
-    font-size: 17px;
+    padding: 12px 14px;
+    font-size: 15px;
   }
 
   .volume-box {
-    padding: 12px 16px;
+    padding: 10px 8px;
+    gap: 6px;
+  }
+
+  .volume-label {
+    font-size: 13px;
+  }
+
+  .volume-box input {
+    min-width: 0;
+  }
+
+  #volumeText {
+    display: none;
+  }
+
+  .section {
+    margin: 0 0 22px;
   }
 
   .section-title {
-    padding: 14px 18px;
-    border-radius: 16px;
-    font-size: 20px;
-    margin-bottom: 16px;
+    padding: 11px 13px;
+    border-radius: 14px;
+    font-size: 16px;
+    margin-bottom: 10px;
   }
 
-  /* 모바일에서도 PC 카드 모양 그대로: 4칸만 강제 */
+  /* 참고 파일(index1)처럼 모바일 4칸을 깔끔하게 유지 */
   .grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
+    gap: 8px;
   }
 
   .card {
-    padding: 8px;
-    border-radius: 18px;
+    padding: 4px;
+    border-radius: 12px;
+  }
+
+  .card:hover {
+    transform: none;
   }
 
   .thumb,
   .no-image {
     width: 100%;
-    height: auto;
-    aspect-ratio: 132 / 70;
-    border-radius: 12px;
+    height: 46px;
+    aspect-ratio: auto;
+    border-radius: 8px;
     object-fit: cover;
-    display: block;
   }
 
   .no-image {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 10px;
   }
 
   .name {
-    margin-top: 8px;
-    font-size: 13px;
-    line-height: 1.25;
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1.15;
     word-break: keep-all;
+    overflow-wrap: normal;
   }
 
   .count {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    font-size: 13px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 10px;
   }
 
   .member-panel.full-panel {
-    padding: 16px;
-    border-radius: 24px;
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .member-main-title {
+    padding: 18px 14px;
+    margin-bottom: 18px;
+    border-radius: 20px;
   }
 
   .member-main-title .big {
     font-size: 24px;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .member-group {
+    margin-top: 18px;
+  }
+
+  .member-group-title {
+    padding: 12px 14px;
+    border-radius: 16px;
+    font-size: 20px;
+    white-space: nowrap;
+    word-break: keep-all;
   }
 
   .member-list.leaders,
   .member-list.members,
   .member-list.waiters {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 10px;
   }
 
   .member-card {
-    padding: 14px 10px;
+    min-height: 158px;
+    padding: 12px 8px;
     border-radius: 18px;
   }
 
+  .member-card.leader {
+    min-height: 178px;
+  }
+
   .member-card.leader .member-photo-wrap {
-    width: 80px;
-    height: 80px;
+    width: 76px;
+    height: 76px;
   }
 
   .member-photo-wrap {
-    width: 66px;
-    height: 66px;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 10px;
   }
 
   .member-name {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .member-card.leader .member-name {
-    font-size: 16px;
+    font-size: 15px;
+  }
+
+  .member-id {
+    font-size: 10px;
+  }
+
+  .member-role {
+    margin-top: 8px;
+    padding: 4px 10px;
+    font-size: 10px;
   }
 }
+
+@media (max-width: 380px) {
+  .view-tab .tab-title {
+    font-size: 18px;
+  }
+
+  .view-tab .tab-desc {
+    font-size: 10px;
+  }
+
+  .grid {
+    gap: 7px;
+  }
+}
+
 </style>
 </head>
 
