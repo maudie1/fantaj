@@ -663,6 +663,393 @@ td:nth-child(4) {
       }
     }
 
+    /* ===== 모바일 전용 정리 CSS: PC/기능 영향 없음 ===== */
+    @media (max-width: 700px) {
+      /* 상단 3개 메뉴 버튼 축소 */
+      .view-tabs {
+        gap: 6px;
+        margin: 8px 0 10px;
+      }
+
+      .view-tab {
+        min-height: 64px;
+        padding: 7px 4px;
+        border-radius: 15px;
+        gap: 4px;
+        box-shadow: 0 5px 14px rgba(120, 120, 180, .14);
+      }
+
+      .view-tab.active {
+        outline: 3px solid rgba(255,255,255,.95);
+      }
+
+      .view-tab .tab-icon {
+        font-size: 18px;
+      }
+
+      .view-tab .tab-title {
+        font-size: 12px;
+        letter-spacing: -0.5px;
+      }
+
+      .view-tab .tab-desc {
+        margin-top: 3px;
+        font-size: 8px;
+        letter-spacing: -0.3px;
+      }
+
+      /* 랭킹 카드 내부 여백 축소 */
+      .ranking-card {
+        border-radius: 22px;
+        padding: 12px 10px;
+      }
+
+      /* 후원/채팅 버튼은 2칸 가로, 월 선택은 아래 오른쪽 */
+      .topbar {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .tabs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .tab-btn {
+        width: 100%;
+        min-height: 42px;
+        padding: 8px 4px;
+        border-radius: 14px;
+        font-size: 12px;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      .period-box {
+        width: auto;
+        justify-content: flex-end;
+        margin-left: auto;
+      }
+
+      .month-select {
+        width: auto;
+        min-width: 116px;
+        padding: 8px 10px;
+        border-radius: 13px;
+        font-size: 12px;
+      }
+
+      /* TOTAL 3개 카드 가로 배치 */
+      .summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+
+      .summary-box {
+        min-height: 66px;
+        border-radius: 16px;
+        padding: 9px 6px;
+      }
+
+      .summary-label {
+        font-size: 8px;
+        line-height: 1.1;
+        letter-spacing: -0.2px;
+        margin-bottom: 5px;
+        white-space: nowrap;
+      }
+
+      .summary-value {
+        font-size: clamp(16px, 5.1vw, 21px);
+        line-height: 1;
+        letter-spacing: -0.8px;
+      }
+
+      /* 1~3등 카드 모바일에서도 가로 3명 */
+      .podium {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        align-items: stretch;
+        margin-bottom: 12px;
+      }
+
+      .winner,
+      .winner.rank-1,
+      .winner.rank-2,
+      .winner.rank-3 {
+        min-height: 132px;
+        border-radius: 17px;
+        padding: 9px 4px;
+      }
+
+      .crown {
+        font-size: 17px;
+        margin-bottom: 5px;
+      }
+
+      .avatar {
+        width: 46px;
+        height: 46px;
+        border-width: 3px;
+      }
+
+      .winner-name {
+        margin-top: 7px;
+        font-size: 11px;
+        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .winner-tier {
+        margin-top: 6px;
+      }
+
+      .winner-sub {
+        margin-top: 4px;
+        font-size: 9px;
+      }
+
+      .winner .tier-badge {
+        font-size: 9px;
+        padding: 5px 6px;
+        gap: 3px;
+      }
+
+      /* 랭킹 표 모바일 겹침 방지 */
+      .table-wrap {
+        border-radius: 16px;
+      }
+
+      table {
+        table-layout: fixed;
+        width: 100%;
+      }
+
+      th, td {
+        padding: 9px 3px;
+        font-size: 11px;
+        line-height: 1.2;
+      }
+
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 12%;
+      }
+
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 39%;
+      }
+
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 31%;
+      }
+
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 18%;
+      }
+
+      .rank-num {
+        width: auto;
+        font-size: 14px;
+      }
+
+      .user-cell {
+        width: 100%;
+        min-width: 0;
+        gap: 5px;
+        justify-content: flex-start;
+      }
+
+      .mini-avatar {
+        flex: 0 0 auto;
+        width: 28px;
+        height: 28px;
+        border-width: 2px;
+      }
+
+      .nickname {
+        max-width: 68px;
+        font-size: 12px;
+        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      td .tier-badge {
+        max-width: 92px;
+        padding: 5px 6px;
+        gap: 3px;
+        font-size: 10px;
+        line-height: 1;
+      }
+
+      .sub-score {
+        font-size: 10px;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      .phrase {
+        max-width: 92px;
+        padding: 5px 7px;
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .view-tab {
+        min-height: 58px;
+        padding: 6px 3px;
+      }
+
+      .view-tab .tab-icon {
+        font-size: 16px;
+      }
+
+      .view-tab .tab-title {
+        font-size: 11px;
+      }
+
+      .view-tab .tab-desc {
+        font-size: 7px;
+      }
+
+      .tab-btn {
+        font-size: 11px;
+      }
+
+      .summary-label {
+        font-size: 7px;
+      }
+
+      .summary-value {
+        font-size: 16px;
+      }
+
+      .winner,
+      .winner.rank-1,
+      .winner.rank-2,
+      .winner.rank-3 {
+        min-height: 124px;
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+      }
+
+      .winner-name {
+        font-size: 10px;
+      }
+
+      .nickname {
+        max-width: 58px;
+        font-size: 11px;
+      }
+
+      td .tier-badge {
+        max-width: 82px;
+        font-size: 9px;
+        padding: 5px 5px;
+      }
+
+      .sub-score {
+        font-size: 9px;
+      }
+    }
+
+
+    /* ===== 랭킹 페이지 상단 모바일 비율 보정: 멤버 조직도와 동일 / PC 영향 없음 ===== */
+    @media (max-width: 700px) {
+      .page {
+        width: 100%;
+        padding: 8px 7px 44px;
+      }
+
+      .hero-banner {
+        height: 104px;
+        border-radius: 15px;
+        margin-bottom: 8px;
+      }
+
+      .view-tabs {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 5px;
+        margin: 8px 0 9px;
+      }
+
+      .view-tab {
+        min-height: 58px;
+        padding: 6px 4px;
+        border-radius: 14px;
+        gap: 3px;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 5px 14px rgba(120, 120, 180, .14);
+      }
+
+      .view-tab.active {
+        outline-width: 2px;
+      }
+
+      .view-tab:hover {
+        transform: none;
+      }
+
+      .view-tab .tab-icon {
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      .view-tab .tab-text {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        line-height: 1.08;
+        min-width: 0;
+      }
+
+      .view-tab .tab-title {
+        font-size: 12px;
+        letter-spacing: -0.7px;
+        white-space: nowrap;
+        word-break: keep-all;
+        overflow: hidden;
+        text-overflow: clip;
+      }
+
+      .view-tab .tab-desc {
+        margin-top: 3px;
+        font-size: 7.5px;
+        line-height: 1.1;
+        white-space: nowrap;
+        word-break: keep-all;
+        opacity: .76;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .view-tab .tab-title {
+        font-size: 11px;
+      }
+
+      .view-tab .tab-desc {
+        font-size: 7px;
+      }
+    }
+
+
   </style>
 </head>
 
