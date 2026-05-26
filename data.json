@@ -5,24 +5,7 @@
     "image": "https://cdn.fantaj.kr/888_fight.png",
     "audio": "https://cdn.fantaj.kr/888_fight.mp3",
     "bj": 88,
-    "videos": [
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869437"
-      },
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196870045"
-      },
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869679"
-      },
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869755"
-      }
-    ]
+    "videos": []
   },
   {
     "number": 1000,
