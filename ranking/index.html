@@ -779,11 +779,7 @@ td:nth-child(4) {
     // GitHub rank.json 주소
     // =========================
 
-    const RANK_RAW_BASE_URL =
-      "https://raw.githubusercontent.com/maudie1/fantaj/main/ranking/";
-
-    const RANK_LIST_API_URL =
-      "https://api.github.com/repos/maudie1/fantaj/contents/ranking?ref=main";
+    const RANK_RAW_BASE_URL = "./";
 
     let rankingData = [];
     let currentType = "balloon";
@@ -1204,7 +1200,6 @@ if (value <= 0) return { icon: "🥔", label: "STONE" };
       loadRankingData(event.target.value);
     });
 
-    loadMonthOptions();
     loadRankingData();
 
   </script>
