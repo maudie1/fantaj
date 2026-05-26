@@ -1142,7 +1142,7 @@
   {
     "number": 10022,
     "name": "프레지아",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10022_freesia.gif",
     "audio": "https://cdn.fantaj.kr/10022_freesia.mp3"
   },
   {
@@ -1248,10 +1248,22 @@
     "audio": "https://cdn.fantaj.kr/10174_starstar.mp3"
   },
   {
-    "number": 10333,
+    "number": 10222,
     "name": "레츠필잇",
     "image": "",
-    "audio": "https://cdn.fantaj.kr/10333_letsfeelit.mp3"
+    "audio": "https://cdn.fantaj.kr/10222_letsfeelit.mp3"
+  },
+  {
+    "number": 10304,
+    "name": "Me낼름",
+    "image": "",
+    "audio": "https://cdn.fantaj.kr/10304_menaelreum.mp3"
+  },
+  {
+    "number": 10333,
+    "name": "chu",
+    "image": "",
+    "audio": "https://cdn.fantaj.kr/10333_chu.mp3"
   },
   {
     "number": 10455,
@@ -1298,7 +1310,7 @@
   {
     "number": 10777,
     "name": "when i get old",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10777_whenigetold.gif",
     "audio": "https://cdn.fantaj.kr/10777_whenigetold.mp3"
   },
   {
@@ -1327,8 +1339,8 @@
   },
   {
     "number": 11234,
-    "name": "썸머",
-    "image": "",
+    "name": "water",
+    "image": "https://cdn.fantaj.kr/11234_water.gif",
     "audio": "https://cdn.fantaj.kr/11234_summer.mp3"
   },
   {
@@ -1346,7 +1358,7 @@
   {
     "number": 12005,
     "name": "원더랜드",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/12005_wonderland.gif",
     "audio": "https://cdn.fantaj.kr/12005_wonderland.mp3"
   },
   {
@@ -1364,7 +1376,7 @@
   {
     "number": 12355,
     "name": "스타워킨",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/12355_starwalkin.gif",
     "audio": "https://cdn.fantaj.kr/12355_starwalkin.mp3"
   },
   {
@@ -1382,7 +1394,7 @@
   {
     "number": 12525,
     "name": "도깨비",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/12525_goblin.gif",
     "audio": "https://cdn.fantaj.kr/12525_goblin.mp3"
   },
   {
@@ -1394,7 +1406,7 @@
   {
     "number": 12596,
     "name": "내손을잡아",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/12596_holdmyhand.gif",
     "audio": "https://cdn.fantaj.kr/12596_holdmyhand.mp3"
   },
   {
@@ -1406,7 +1418,7 @@
   {
     "number": 13030,
     "name": "atmosphere",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/13030_atmosphere.gif",
     "audio": "https://cdn.fantaj.kr/13030_atmosphere.mp3"
   },
   {
@@ -1454,7 +1466,7 @@
   {
     "number": 17777,
     "name": "만개화",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/17777_fullbloom.gif",
     "audio": "https://cdn.fantaj.kr/17777_fullbloom.mp3"
   },
   {
@@ -1496,13 +1508,13 @@
   {
     "number": 25196,
     "name": "울애기 나와",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/25196_babyscomeout.gif",
     "audio": "https://cdn.fantaj.kr/25196_babyscomeout.mp3"
   },
   {
     "number": 29486,
     "name": "Flower",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/29486_flower.gif",
     "audio": "https://cdn.fantaj.kr/29486_flower.mp3"
   },
   {
