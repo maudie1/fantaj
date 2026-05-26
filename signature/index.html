@@ -1322,6 +1322,13 @@ body {
   box-shadow: 0 5px 14px rgba(155, 124, 255, .16);
 }
 
+.video-link.active {
+  background: linear-gradient(135deg, #ff8fc7, #9b7cff);
+  border-color: #9b7cff;
+  color: #fff;
+  box-shadow: 0 5px 14px rgba(155, 124, 255, .24);
+}
+
 .video-link span:first-child {
   min-width: 0;
   overflow: hidden;
@@ -1616,21 +1623,21 @@ function openVideoModal(item, videos) {
     const title = document.createElement("span");
     title.textContent = video.title || `영상 ${index + 1}`;
 
-    const arrow = document.createElement("span");
-    arrow.textContent = index === 0 ? "재생 중" : "보기";
+   if (index === 0) {
+  link.classList.add("active");
+}
 
-    link.appendChild(title);
-    link.appendChild(arrow);
+link.appendChild(title);
 
-    link.addEventListener("click", () => {
-      videoFrame.src = video.url;
+link.addEventListener("click", () => {
+  videoFrame.src = video.url;
 
-      videoList.querySelectorAll(".video-link span:last-child").forEach(el => {
-        el.textContent = "보기";
-      });
+  videoList.querySelectorAll(".video-link").forEach(el => {
+    el.classList.remove("active");
+  });
 
-      arrow.textContent = "재생 중";
-    });
+  link.classList.add("active");
+});
 
     videoList.appendChild(link);
   });
