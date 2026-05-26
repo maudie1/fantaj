@@ -935,6 +935,162 @@ body {
   }
 }
 
+
+/* ===== 모바일 전용 최종 보정: PC/기능 영향 없음 ===== */
+@media (max-width: 700px) {
+  .page-wrap {
+    padding: 8px 7px 44px;
+  }
+
+  .hero-banner {
+    height: 104px;
+    border-radius: 15px;
+    margin-bottom: 8px;
+  }
+
+  .view-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    margin: 8px 0 9px;
+  }
+
+  .view-tab {
+    min-height: 58px;
+    padding: 6px 4px;
+    border-radius: 14px;
+    gap: 3px;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .view-tab.active {
+    outline-width: 2px;
+  }
+
+  .view-tab:hover {
+    transform: none;
+  }
+
+  .view-tab .tab-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .view-tab .tab-text {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    line-height: 1.08;
+    min-width: 0;
+  }
+
+  .view-tab .tab-title {
+    font-size: 12px;
+    letter-spacing: -0.7px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+
+  .view-tab .tab-desc {
+    margin-top: 3px;
+    font-size: 7.5px;
+    line-height: 1.1;
+    white-space: nowrap;
+    word-break: keep-all;
+    opacity: .76;
+  }
+}
+
+@media (max-width: 380px) {
+  .view-tab .tab-title {
+    font-size: 11px;
+  }
+
+  .view-tab .tab-desc {
+    font-size: 7px;
+  }
+}
+
+/* ===== 멤버 조직도: 모바일 전용 압축 보정 ===== */
+@media (max-width: 700px) {
+  .member-panel.full-panel {
+    padding: 9px;
+    border-radius: 16px;
+  }
+
+  .member-main-title {
+    padding: 12px 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+  }
+
+  .member-main-title .small {
+    font-size: 8px;
+    letter-spacing: .22em;
+  }
+
+  .member-main-title .big {
+    margin-top: 4px;
+    font-size: 16px;
+  }
+
+  .member-group {
+    margin-top: 11px;
+  }
+
+  .member-group-title {
+    padding: 9px 10px;
+    margin-bottom: 9px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .member-list.leaders,
+  .member-list.members,
+  .member-list.waiters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .member-card,
+  .member-card.leader {
+    min-height: 120px;
+    padding: 9px 5px 8px;
+    border-radius: 14px;
+  }
+
+  .member-card.leader .member-photo-wrap,
+  .member-photo-wrap {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 7px;
+    padding: 3px;
+  }
+
+  .member-photo {
+    border-width: 2px;
+  }
+
+  .member-name,
+  .member-card.leader .member-name {
+    font-size: 11px;
+    letter-spacing: -0.5px;
+  }
+
+  .member-id {
+    margin-top: 3px;
+    font-size: 8px;
+  }
+
+  .member-role {
+    margin-top: 5px;
+    padding: 3px 8px;
+    font-size: 8px;
+  }
+}
+
 </style>
 </head>
 <body>
