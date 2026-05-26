@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>판타지유 시그니처 목록</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<style>
+:root {
+  --pink: #ff77b7;
+  --hot-pink: #ff5eaa;
+  --purple: #9b7cff;
+  --soft-purple: #b89cff;
+  --cream: #fbf4e8;
+  --beige: #efe2cf;
+  --sky: #dcebf7;
+  --deep-sky: #8fb4d7;
+  --ink: #333;
+  
+  /* 조직도 전용 프리미엄 컬러셋 */
+  --member-bg: #1e293b;
+  --member-card-bg: rgba(255, 255, 255, 0.06);
+  --member-border: rgba(255, 255, 255, 0.08);
+  --gold-gradient: linear-gradient(135deg, #ffe0a3 0%, #d4af37 50%, #aa820a 100%);
+  --blue-gradient: linear-gradient(135deg, #e0f2fe 0%, #38bdf8 50%, #0369a1 100%);
+  --purple-gradient: linear-gradient(135deg, #f3e8ff 0%, #c084fc 50%, #6b21a8 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background:
+    radial-gradient(circle at 12% 5%, rgba(255, 183, 217, .32), transparent 28%),
+    radial-gradient(circle at 86% 12%, rgba(184, 156, 255, .25), transparent 30%),
+    linear-gradient(180deg, #fff7fb 0%, #fffaf2 52%, #f4f9ff 100%);
+  color: var(--ink);
+}
+
+.page-wrap {
+  width: min(1520px, 100%);
+  margin: 0 auto;
+  padding: 12px 14px 70px;
+}
+
+.hero-banner {
+  height: 330px;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 14px 38px rgba(120, 120, 180, 0.22);
+  background: linear-gradient(135deg, #ffe1f0, #eee6ff);
+
+  margin-bottom: 18px;
+}
+
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.16));
+  pointer-events: none;
+}
+
+.hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.header {
+  margin: 14px 0 16px;
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 900;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #ff8fc7, #b89cff);
+  color: white;
+  box-shadow: 0 6px 18px rgba(255, 143, 199, .35);
+  letter-spacing: -0.5px;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 390px;
+  gap: 18px;
+  align-items: start;
+}
+
+.left-side,
+.right-side {
+  min-width: 0;
+}
+
+.top-panel {
+  margin-bottom: 18px;
+  padding: 14px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #f2d7e6;
+  box-shadow: 0 6px 18px rgba(255, 143, 199, .18);
+  display: grid;
+  grid-template-columns: 58% 42%;
+  gap: 14px;
+  align-items: center;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 17px;
+  border: 2px solid #ffb7d9;
+  border-radius: 999px;
+  outline: none;
+  background: #fff;
+}
+
+.search-box input:focus {
+  border-color: var(--soft-purple);
+  box-shadow: 0 0 0 4px rgba(184, 156, 255, .18);
+}
+
+.volume-box {
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fff0f8, #f3edff);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--hot-pink);
+  font-weight: 900;
+  min-width: 0;
+}
+
+.volume-label {
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.volume-box input {
+  flex: 1;
+  min-width: 80px;
+  accent-color: var(--pink);
+}
+
+#volumeText {
+  min-width: 42px;
+  text-align: right;
+  color: var(--purple);
+  font-size: 14px;
+}
+
+.section {
+  margin: 0 0 28px;
+}
+
+.section-title {
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  box-shadow: 0 4px 12px rgba(155, 124, 255, .25);
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #f2d7e6;
+  border-radius: 18px;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(255, 143, 199, .18);
+  transition: .18s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(155, 124, 255, .28);
+}
+
+.card.playing {
+  outline: 4px solid var(--pink);
+}
+
+.card.loading {
+  outline: 4px solid var(--soft-purple);
+}
+
+.thumb {
+  width: 132px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #ffe1f0, #eee6ff);
+}
+
+.no-image {
+  width: 132px;
+  height: 70px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffe1f0, #eee6ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--purple);
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.name {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.count {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: var(--hot-pink);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+/* ==========================================================================\n   우측 멤버 조직도 - 파스텔 프리미엄 리디자인\n   ========================================================================== */
+.member-panel.full-panel {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 32px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 214, 233, .95), transparent 32%),
+    radial-gradient(circle at 92% 18%, rgba(224, 214, 255, .9), transparent 34%),
+    radial-gradient(circle at 50% 96%, rgba(255, 246, 220, .9), transparent 36%),
+    linear-gradient(145deg, #fff9fc 0%, #f7f1ff 50%, #fffaf0 100%);
+  border: 1px solid rgba(255, 185, 221, .55);
+  box-shadow: 0 18px 42px rgba(177, 128, 190, .18);
+}
+
+.member-panel.full-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.08));
+  pointer-events: none;
+}
+
+.member-panel.full-panel::after {
+  content: "✦";
+  position: absolute;
+  right: 24px;
+  top: 18px;
+  font-size: 44px;
+  color: rgba(255, 183, 217, .7);
+  text-shadow: 0 0 18px rgba(184, 156, 255, .32);
+  pointer-events: none;
+}
+
+.member-main-title {
+  position: relative;
+  z-index: 1;
+  padding: 22px 20px;
+  margin-bottom: 24px;
+  border-radius: 24px;
+  text-align: center;
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(255, 255, 255, .9);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 10px 24px rgba(155, 124, 255, .12);
+  backdrop-filter: blur(10px);
+}
+
+.member-main-title .small {
+  font-size: 12px;
+  font-weight: 900;
+  color: #b16ac7;
+  letter-spacing: .24em;
+}
+
+.member-main-title .big {
+  margin-top: 7px;
+  font-size: 30px;
+  font-weight: 900;
+  color: #6d4f9d;
+  letter-spacing: -1px;
+}
+
+.member-group {
+  position: relative;
+  z-index: 1;
+  margin-top: 24px;
+}
+
+.member-group-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 14px;
+  padding: 15px 18px;
+
+  border-radius: 18px;
+
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.6px;
+
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    #f890cc 0%,
+    #c4a5f6 45%,
+    #748cfd 100%
+  );
+
+  border: 1px solid rgba(248, 144, 204, 0.38);
+
+  box-shadow:
+    0 8px 22px rgba(248, 144, 204, 0.18),
+    0 0 16px rgba(116, 140, 253, 0.22);
+}
+
+.member-group-title span {
+  color: #ffffff;
+}
+
+.member-group-title span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.member-count {
+  font-size: 12px;
+  color: #9b7cff;
+  background: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 156, 255, .25);
+}
+
+.member-list {
+  display: grid;
+  gap: 14px;
+}
+
+.member-list.leaders {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.member-list.members {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.member-list.waiters {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.member-card {
+  position: relative;
+  min-height: 184px;
+  padding: 16px 12px 14px;
+  border-radius: 24px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #4d465c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.92);
+  box-shadow: 0 8px 18px rgba(155, 124, 255, .12);
+}
+
+.member-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .78;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+.member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(155, 124, 255, .2);
+}
+
+.member-card:hover::before {
+  opacity: 1;
+}
+
+.member-card.leader {
+  min-height: 216px;
+  background: linear-gradient(145deg, rgba(255, 251, 236, .94), rgba(255, 240, 191, .76));
+  border-color: rgba(223, 176, 68, .45);
+  box-shadow: 0 12px 28px rgba(196, 151, 52, .18);
+}
+
+.member-card.leader::before {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,255,255,.9), transparent 34%),
+    linear-gradient(135deg, rgba(255, 231, 156, .45), rgba(255,255,255,0));
+}
+
+.member-card.member::before {
+  background: linear-gradient(145deg, rgba(255, 229, 244, .64), rgba(226, 236, 255, .58));
+}
+
+.member-card.waiter::before {
+  background: linear-gradient(145deg, rgba(236, 255, 247, .72), rgba(255, 244, 223, .6));
+}
+
+.member-photo-wrap,
+.member-info,
+.live-badge {
+  position: relative;
+  z-index: 1;
+}
+
+.member-photo-wrap {
+  width: 78px;
+  height: 78px;
+  margin-bottom: 12px;
+  padding: 4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb7d9, #b89cff);
+  box-shadow: 0 8px 18px rgba(155, 124, 255, .18);
+}
+
+.member-card.leader .member-photo-wrap {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #fff8d8 0%, #f5c85b 42%, #d79b1f 100%);
+  box-shadow: 0 10px 24px rgba(204, 151, 35, .28);
+}
+
+.member-card.waiter .member-photo-wrap {
+  background: linear-gradient(135deg, #baf7df, #ffdca8);
+}
+
+.member-photo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  border: 3px solid rgba(255,255,255,.88);
+}
+
+.live-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: none;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff3b6b, #ff7aa8);
+  color: white;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .4px;
+  box-shadow: 0 0 14px rgba(255, 59, 107, .42);
+}
+
+.member-card.is-live .live-badge {
+  display: inline-flex;
+}
+
+.member-info {
+  width: 100%;
+}
+
+.member-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  font-weight: 900;
+  color: #4c4264;
+  letter-spacing: -0.4px;
+}
+
+.member-card.leader .member-name {
+  font-size: 19px;
+  color: #8a5a00;
+}
+
+.member-id {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #9c8fb0;
+}
+
+.member-role {
+  display: inline-flex;
+  margin-top: 10px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  background: rgba(255,255,255,.8);
+  border: 1px solid rgba(184, 156, 255, .22);
+  color: #8f73ce;
+}
+
+.member-card.leader .member-role {
+  color: #a96e00;
+  background: rgba(255, 248, 218, .9);
+  border-color: rgba(214, 156, 38, .32);
+}
+
+.member-card.waiter .member-role {
+  color: #4e9b7a;
+  border-color: rgba(102, 190, 149, .28);
+}
+
+.member-channel-hint {
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #b5a9c7;
+}
+
+.member-card:hover .member-channel-hint {
+  color: #ff77b7;
+}
+
+/* 기존 불필요 스타일 제거 및 유지 */
+.view-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 18px;
+}
+
+.view-tab {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 86px;
+  padding: 16px 18px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: inherit;
+  font-weight: 900;
+  box-shadow: 0 8px 22px rgba(120, 120, 180, .18);
+  transition: .18s;
+}
+
+.view-tab:hover {
+  transform: translateY(-2px);
+}
+
+.view-tab .tab-icon {
+  font-size: 30px;
+}
+
+.view-tab .tab-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+
+.view-tab .tab-title {
+  font-size: 22px;
+  letter-spacing: -0.7px;
+}
+
+.view-tab .tab-desc {
+  margin-top: 5px;
+  font-size: 12px;
+  opacity: .72;
+}
+
+.view-tab.signature-tab {
+  background: linear-gradient(135deg, #fff0f8, #eee6ff);
+  color: #9b4b9e;
+  border: 1px solid rgba(255, 183, 217, .8);
+}
+
+.view-tab.member-tab {
+  background: linear-gradient(135deg, #fbf4e8, #dcebf7);
+  color: #517da6;
+  border: 1px solid rgba(185, 169, 143, .32);
+}
+
+.view-tab.ranking-tab {
+  background: linear-gradient(135deg, #fff9dc, #ffe8f7);
+  color: #9a6b19;
+  border: 1px solid rgba(223, 176, 68, .35);
+}
+
+.view-tab.ranking-tab:hover {
+  box-shadow: 0 12px 30px rgba(223, 176, 68, .2);
+}
+
+
+.view-tab.active {
+  outline: 4px solid rgba(255, 255, 255, .95);
+  box-shadow: 0 12px 30px rgba(155, 124, 255, .28);
+  transform: translateY(-1px);
+}
+
+.view-tab.signature-tab.active {
+  background: linear-gradient(135deg, #ff8fc7, #b89cff);
+  color: #fff;
+}
+
+.view-tab.member-tab {
+  background: linear-gradient(
+    135deg,
+    #f4fbff 0%,
+    #e7f5ff 45%,
+    #d8efff 100%
+  );
+
+  color: #5f7fa6;
+
+  border: 1px solid rgba(180, 220, 255, 0.45);
+
+  box-shadow:
+    0 6px 18px rgba(180, 220, 255, 0.18),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+
+  transition: all 0.18s ease;
+}
+
+.view-tab.member-tab.active {
+  background: linear-gradient(
+    135deg,
+    #f890cc 0%,
+    #c4a5f6 45%,
+    #748cfd 100%
+  );
+
+  color: #ffffff;
+
+  border-color: rgba(248, 144, 204, 0.45);
+
+  box-shadow:
+    0 8px 24px rgba(248, 144, 204, 0.22),
+    0 0 18px rgba(116, 140, 253, 0.28);
+
+  transform: translateY(-1px);
+
+  transition: all 0.18s ease;
+}
+
+.tab-view {
+  display: none;
+}
+
+.tab-view.active {
+  display: block;
+}
+
+@media (max-width: 1150px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+  .member-list.members {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .member-list.waiters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .page-wrap {
+    width: 100%;
+    padding: 10px 8px 50px;
+  }
+
+  .hero-banner {
+    height: 150px;
+    border-radius: 18px;
+  }
+
+  /* 모바일 상단 큰 버튼: 글자 세로쪼개짐 방지 */
+  .view-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 10px 0 12px;
+  }
+
+  .view-tab {
+    min-height: 112px;
+    padding: 12px 8px;
+    border-radius: 22px;
+    flex-direction: column;
+    gap: 7px;
+    overflow: hidden;
+  }
+
+  .view-tab:hover {
+    transform: none;
+  }
+
+  .view-tab .tab-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .view-tab .tab-text {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .view-tab .tab-title {
+    font-size: 20px;
+    letter-spacing: -0.8px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+
+  .view-tab .tab-desc {
+    margin-top: 6px;
+    font-size: 11px;
+    line-height: 1.15;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .top-panel {
+    grid-template-columns: 58% 42%;
+    margin: 0 0 18px;
+    padding: 10px;
+    gap: 8px;
+    border-radius: 22px;
+  }
+
+  .search-box input {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .volume-box {
+    padding: 10px 8px;
+    gap: 6px;
+  }
+
+  .volume-label {
+    font-size: 13px;
+  }
+
+  .volume-box input {
+    min-width: 0;
+  }
+
+  #volumeText {
+    display: none;
+  }
+
+  .section {
+    margin: 0 0 22px;
+  }
+
+  .section-title {
+    padding: 11px 13px;
+    border-radius: 14px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  /* 참고 파일(index1)처럼 모바일 4칸을 깔끔하게 유지 */
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .card {
+    padding: 4px;
+    border-radius: 12px;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .thumb,
+  .no-image {
+    width: 100%;
+    height: 46px;
+    aspect-ratio: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+
+  .name {
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1.15;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  .count {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 10px;
+  }
+
+  .member-panel.full-panel {
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .member-main-title {
+    padding: 18px 14px;
+    margin-bottom: 18px;
+    border-radius: 20px;
+  }
+
+  .member-main-title .big {
+    font-size: 24px;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .member-group {
+    margin-top: 18px;
+  }
+
+  .member-group-title {
+    padding: 12px 14px;
+    border-radius: 16px;
+    font-size: 20px;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .member-list.leaders,
+  .member-list.members,
+  .member-list.waiters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .member-card {
+    min-height: 158px;
+    padding: 12px 8px;
+    border-radius: 18px;
+  }
+
+  .member-card.leader {
+    min-height: 178px;
+  }
+
+  .member-card.leader .member-photo-wrap {
+    width: 76px;
+    height: 76px;
+  }
+
+  .member-photo-wrap {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 10px;
+  }
+
+  .member-name {
+    font-size: 13px;
+  }
+
+  .member-card.leader .member-name {
+    font-size: 15px;
+  }
+
+  .member-id {
+    font-size: 10px;
+  }
+
+  .member-role {
+    margin-top: 8px;
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .view-tab .tab-title {
+    font-size: 18px;
+  }
+
+  .view-tab .tab-desc {
+    font-size: 10px;
+  }
+
+  .grid {
+    gap: 7px;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="page-wrap">
+  <div class="hero-banner">
+    <img src="../images/banner.webp" alt="FantaJ Banner">
+  </div>
+
+  <div class="view-tabs" role="navigation" aria-label="메인 메뉴">
+    <a class="view-tab signature-tab active" href="../signature/">
+      <span class="tab-icon">🎀</span>
+      <span class="tab-text">
+        <span class="tab-title">시그니처 목록</span>
+        <span class="tab-desc">번호 검색 · 음원 재생</span>
+      </span>
+    </a>
+
+    <a class="view-tab member-tab" href="../members/">
+      <span class="tab-icon">👥</span>
+      <span class="tab-text">
+        <span class="tab-title">멤버 조직도</span>
+        <span class="tab-desc">대표 · 멤버 · 웨이터</span>
+      </span>
+    </a>
+
+    <a class="view-tab ranking-tab nav-link" href="../ranking/">
+      <span class="tab-icon">🏆</span>
+      <span class="tab-text">
+        <span class="tab-title">랭킹</span>
+        <span class="tab-desc">후원 · 채팅 TOP 100</span>
+      </span>
+    </a>
+  </div>
+
+  <main id="signatureView" role="main">
+    <div class="top-panel">
+      <div class="search-box">
+        <input id="searchInput" type="text" placeholder="번호 또는 이름 검색">
+      </div>
+
+      <div class="volume-box">
+        <span class="volume-label">🔊</span>
+        <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.5">
+        <span id="volumeText">50%</span>
+      </div>
+    </div>
+
+    <div id="content"></div>
+  </main>
+</div>
+
+<audio id="player" playsinline preload="none"></audio>
+
+<script>const API_URL = "https://raw.githubusercontent.com/maudie1/fantaj/main/data.json";
+
+let allData = [];
+let currentUrl = "";
+let currentCard = null;
+let volume = 0.5;
+
+const player = document.getElementById("player");
+const content = document.getElementById("content");
+const searchInput = document.getElementById("searchInput");
+const volumeControl = document.getElementById("volumeControl");
+const volumeText = document.getElementById("volumeText");
+
+volumeControl.addEventListener("input", e => {
+  volume = Number(e.target.value);
+  volumeText.textContent = Math.round(volume * 100) + "%";
+  player.volume = volume;
+});
+
+fetch(API_URL)
+  .then(res => res.json())
+  .then(data => {
+    allData = Array.isArray(data) ? data : [];
+    render(allData);
+  })
+  .catch(() => {
+    setTimeout(() => retryPlay(0), 250);
+  });
+
+searchInput.addEventListener("input", e => {
+  const keyword = e.target.value.trim().toLowerCase();
+
+  const filtered = allData.filter(item =>
+    String(item.number).includes(keyword) ||
+    String(item.name || "").toLowerCase().includes(keyword)
+  );
+
+  render(filtered);
+});
+
+function render(data) {
+  const groups = [
+    { title: "1~1999", min: 1, max: 1999 },
+    { title: "2000~2999", min: 2000, max: 2999 },
+    { title: "3000~4999", min: 3000, max: 4999 },
+    { title: "5000~9999", min: 5000, max: 9999 },
+    { title: "10000~300000", min: 10000, max: 300000 }
+  ];
+
+  content.innerHTML = "";
+
+  groups.forEach(group => {
+    const items = data.filter(item => {
+      const num = Number(item.number);
+      return num >= group.min && num <= group.max;
+    });
+
+    if (items.length === 0) return;
+
+    const section = document.createElement("div");
+    section.className = "section";
+
+    const sectionTitle = document.createElement("div");
+    sectionTitle.className = "section-title";
+    sectionTitle.textContent = `${group.title} (${items.length}개)`;
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+
+    items.forEach(item => {
+      grid.appendChild(createCard(item));
+    });
+
+    section.appendChild(sectionTitle);
+    section.appendChild(grid);
+    content.appendChild(section);
+  });
+}
+
+function createCard(item) {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const imageUrl = getImageUrl(item.image);
+
+  if (imageUrl) {
+    const img = document.createElement("img");
+    img.className = "thumb";
+    img.src = imageUrl;
+    img.alt = item.name || String(item.number);
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.fetchPriority = "low";
+
+    img.onerror = () => {
+      const noImage = document.createElement("div");
+      noImage.className = "no-image";
+      noImage.textContent = "이미지 없음";
+      img.replaceWith(noImage);
+    };
+
+    card.appendChild(img);
+  } else {
+    const noImage = document.createElement("div");
+    noImage.className = "no-image";
+    noImage.textContent = "이미지 없음";
+    card.appendChild(noImage);
+  }
+
+  const name = document.createElement("div");
+  name.className = "name";
+  name.textContent = `${item.number} ${item.name || ""}`;
+
+  const count = document.createElement("div");
+  count.className = "count";
+  count.textContent = `${item.number}개`;
+
+  card.appendChild(name);
+  card.appendChild(count);
+
+  card.addEventListener("click", () => {
+    playAudio(item.audio || "", card);
+  });
+
+  return card;
+}
+
+function getFileName(url) {
+  if (!url) return "";
+
+  try {
+    return decodeURIComponent(String(url).split("/").pop().split("?")[0]);
+  } catch (e) {
+    return String(url).split("/").pop().split("?")[0];
+  }
+}
+
+function getImageUrl(url) {
+  if (!url) return "";
+
+  const cleanUrl = String(url).split("?")[0].toLowerCase();
+
+  if (cleanUrl.endsWith(".gif")) {
+    return url;
+  }
+
+  const fileName = getFileName(url);
+  return fileName ? `../images/${fileName}` : "";
+}
+
+function playAudio(url, card) {
+  if (!url) return;
+
+  if (currentUrl === url && !player.paused) {
+    stopAudio();
+    return;
+  }
+
+  stopAudio();
+
+  currentUrl = url;
+  currentCard = card;
+
+  currentCard.classList.add("loading");
+
+  player.src = url;
+  player.volume = volume;
+  player.preload = "auto";
+  player.load();
+
+  player.addEventListener("canplay", () => {
+    retryPlay(0);
+  }, { once: true });
+
+  setTimeout(() => {
+    if (currentUrl === url && player.paused) {
+      retryPlay(0);
+    }
+  }, 500);
+}
+
+function retryPlay(attempt = 0) {
+  if (!currentUrl) return;
+
+  player.play()
+    .then(() => {
+      setPlayingState();
+    })
+    .catch(() => {
+      if (attempt < 20) {
+        setTimeout(() => {
+          retryPlay(attempt + 1);
+        }, 250);
+      } else {
+        stopAudio();
+      }
+    });
+}
+
+function setPlayingState() {
+  if (!currentCard) return;
+
+  currentCard.classList.remove("loading");
+  currentCard.classList.add("playing");
+}
+
+function stopAudio() {
+  player.pause();
+
+  player.removeAttribute("src");
+  player.load();
+
+  if (currentCard) {
+    currentCard.classList.remove("playing");
+    currentCard.classList.remove("loading");
+  }
+
+  currentUrl = "";
+  currentCard = null;
+}
+
+player.addEventListener("playing", setPlayingState);
+player.addEventListener("ended", stopAudio);
+player.addEventListener("error", stopAudio);</script>
+</body>
+</html>
