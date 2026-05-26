@@ -1278,12 +1278,12 @@ body {
 .video-frame {
   width: 100%;
   aspect-ratio: 16 / 9;
-    min-height: 620px;
+    min-height: 0;
   border: 0;
   border-radius: 18px;
   background: #111;
   display: block;
-  box-shadow: 0 8px 22px rgba(40, 30, 70, .18);
+  box-shadow: 0 8px 22px rgba(40, 30, 70, .18);v
 }
 
 .video-list {
@@ -1359,8 +1359,10 @@ body {
   }
 
   .video-frame {
-    border-radius: 14px;
-  }
+  border-radius: 14px;
+  min-height: auto;
+  height: auto;
+}
 
   .video-list {
     padding: 10px;
