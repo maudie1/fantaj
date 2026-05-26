@@ -1179,6 +1179,200 @@ body {
   }
 }
 
+
+/* ===== 영상 버튼 + 팝업: 기존 카드/음원 기능은 유지하고 추가만 함 ===== */
+.video-btn {
+  width: 100%;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, #7ddcff, #9b7cff);
+  box-shadow: 0 3px 10px rgba(155, 124, 255, .20);
+  transition: .15s;
+}
+
+.video-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(155, 124, 255, .28);
+}
+
+.video-btn.no-video {
+  cursor: default;
+  color: #aaa;
+  background: #eeeeee;
+  box-shadow: none;
+}
+
+.video-btn.no-video:hover {
+  transform: none;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(30, 20, 45, .42);
+  backdrop-filter: blur(6px);
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal-box {
+  width: min(1100px, 96vw);
+  max-height: 86vh;
+  overflow: auto;
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid rgba(255, 183, 217, .65);
+  box-shadow: 0 20px 55px rgba(40, 30, 70, .28);
+}
+
+.video-modal-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(135deg, #ff8fc7, #9b7cff);
+  color: #fff;
+}
+
+.video-modal-title {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.video-close {
+  border: 0;
+  background: rgba(255,255,255,.95);
+  color: #7d55e8;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.video-player-wrap {
+  padding: 14px 14px 0;
+}
+
+.video-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+    min-height: 620px;
+  border: 0;
+  border-radius: 18px;
+  background: #111;
+  display: block;
+  box-shadow: 0 8px 22px rgba(40, 30, 70, .18);
+}
+
+.video-list {
+  padding: 14px;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+
+  max-height: 170px;
+  overflow-y: auto;
+}
+
+.video-link {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 16px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #f4fbff, #fff0f8);
+  border: 1px solid #efd7ff;
+  color: #4d465c;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.video-link:hover {
+  border-color: #9b7cff;
+  box-shadow: 0 5px 14px rgba(155, 124, 255, .16);
+}
+
+.video-link span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.video-link span:last-child {
+  flex: 0 0 auto;
+  color: #9b7cff;
+}
+
+@media (max-width: 700px) {
+  .video-btn {
+    margin-top: 2px;
+    padding: 3px 4px;
+    font-size: 7.5px;
+  }
+
+  .video-modal {
+    padding: 10px;
+  }
+
+  .video-modal-box {
+    width: 96vw;
+    border-radius: 18px;
+  }
+
+  .video-modal-title {
+    font-size: 14px;
+  }
+
+  .video-player-wrap {
+    padding: 10px 10px 0;
+  }
+
+  .video-frame {
+    border-radius: 14px;
+  }
+
+  .video-list {
+    padding: 10px;
+  }
+
+  .video-link {
+    padding: 10px 11px;
+    border-radius: 13px;
+    font-size: 12px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1230,6 +1424,20 @@ body {
   </main>
 </div>
 
+
+<div id="videoModal" class="video-modal" aria-hidden="true">
+  <div class="video-modal-box" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+    <div class="video-modal-head">
+      <div id="videoModalTitle" class="video-modal-title">영상 목록</div>
+      <button id="videoClose" class="video-close" type="button" aria-label="닫기">×</button>
+    </div>
+    <div class="video-player-wrap">
+      <iframe id="videoFrame" class="video-frame" src="" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div id="videoList" class="video-list"></div>
+  </div>
+</div>
+
 <audio id="player" playsinline preload="none"></audio>
 
 <script>const API_URL = "../data.json";
@@ -1244,6 +1452,11 @@ const content = document.getElementById("content");
 const searchInput = document.getElementById("searchInput");
 const volumeControl = document.getElementById("volumeControl");
 const volumeText = document.getElementById("volumeText");
+const videoModal = document.getElementById("videoModal");
+const videoModalTitle = document.getElementById("videoModalTitle");
+const videoList = document.getElementById("videoList");
+const videoFrame = document.getElementById("videoFrame");
+const videoClose = document.getElementById("videoClose");
 
 volumeControl.addEventListener("input", e => {
   volume = Number(e.target.value);
@@ -1360,12 +1573,90 @@ function createCard(item) {
   card.appendChild(name);
   card.appendChild(count);
 
+  const videos = Array.isArray(item.videos) ? item.videos.filter(video => video && video.url) : [];
+  const videoBtn = document.createElement("button");
+  videoBtn.type = "button";
+  videoBtn.className = videos.length ? "video-btn" : "video-btn no-video";
+  videoBtn.textContent = videos.length ? `🎬 영상 ${videos.length}개` : "🎬 영상 없음";
+
+  videoBtn.addEventListener("click", e => {
+    e.stopPropagation();
+
+    if (!videos.length) return;
+
+    openVideoModal(item, videos);
+  });
+
+  card.appendChild(videoBtn);
+
   card.addEventListener("click", () => {
     playAudio(item.audio || "", card);
   });
 
   return card;
 }
+
+
+function openVideoModal(item, videos) {
+  stopAudio();
+
+  videoModalTitle.textContent = `${item.number} ${item.name || ""} 영상 목록`;
+  videoList.innerHTML = "";
+
+  const firstVideo = videos[0];
+  videoFrame.src = firstVideo.url;
+
+  videos.forEach((video, index) => {
+    const link = document.createElement("button");
+    link.type = "button";
+    link.className = "video-link";
+
+    const title = document.createElement("span");
+    title.textContent = video.title || `영상 ${index + 1}`;
+
+    const arrow = document.createElement("span");
+    arrow.textContent = index === 0 ? "재생 중" : "보기";
+
+    link.appendChild(title);
+    link.appendChild(arrow);
+
+    link.addEventListener("click", () => {
+      videoFrame.src = video.url;
+
+      videoList.querySelectorAll(".video-link span:last-child").forEach(el => {
+        el.textContent = "보기";
+      });
+
+      arrow.textContent = "재생 중";
+    });
+
+    videoList.appendChild(link);
+  });
+
+  videoModal.classList.add("active");
+  videoModal.setAttribute("aria-hidden", "false");
+}
+
+function closeVideoModal() {
+  videoModal.classList.remove("active");
+  videoModal.setAttribute("aria-hidden", "true");
+  videoFrame.src = "";
+  videoList.innerHTML = "";
+}
+
+videoClose.addEventListener("click", closeVideoModal);
+
+videoModal.addEventListener("click", e => {
+  if (e.target === videoModal) {
+    closeVideoModal();
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && videoModal.classList.contains("active")) {
+    closeVideoModal();
+  }
+});
 
 function getFileName(url) {
   if (!url) return "";
