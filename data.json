@@ -1805,14 +1805,6 @@
     "videos": []
   },
   {
-    "number": 10500,
-    "name": "꽃길만 걷자",
-    "image": "",
-    "audio": "https://cdn.fantaj.kr/10500_flowerroad.mp3",
-    "bj": 1150,
-    "videos": []
-  },
-  {
     "number": 10519,
     "name": "REWRITE THE STARS",
     "image": "",
@@ -1922,6 +1914,14 @@
     "image": "",
     "audio": "https://cdn.fantaj.kr/12222_martini.mp3",
     "bj": 1222,
+    "videos": []
+  },
+  {
+    "number": 12333,
+    "name": "on my way",
+    "image": "",
+    "audio": "https://cdn.fantaj.kr/12333_onmyway.mp3",
+    "bj": 1233,
     "videos": []
   },
   {
@@ -2046,9 +2046,9 @@
   },
   {
     "number": 17296,
-    "name": "DIE",
+    "name": "heart of asia",
     "image": "",
-    "audio": "https://cdn.fantaj.kr/17296_die.mp3",
+    "audio": "https://cdn.fantaj.kr/17296_heartofasia.mp3",
     "bj": 1796,
     "videos": []
   },
