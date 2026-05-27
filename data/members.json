@@ -100,5 +100,11 @@
     "soopId": "rhdskadh",
     "group": "웨이터",
     "rank": "웨이터"
+  },
+  {
+    "name": "양히",
+    "soopId": "dptmf12345",
+    "group": "멤버",
+    "rank": "수습"
   }
 ]
