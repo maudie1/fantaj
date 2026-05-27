@@ -428,36 +428,128 @@
     }
 
     @media (max-width: 900px) {
-      .nav-menu { display: none; }
-      .hero { height: 250px; }
+      .navbar {
+        height: auto;
+        padding: 12px 0 10px;
+      }
+
+      .nav-inner {
+        width: min(1180px, calc(100% - 24px));
+        flex-wrap: wrap;
+        gap: 10px 12px;
+      }
+
+      .logo {
+        order: 1;
+        font-size: 24px;
+        letter-spacing: 0.10em;
+      }
+
+      .nav-live {
+        order: 2;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        margin-left: auto;
+      }
+
+      .nav-menu {
+        order: 3;
+        width: 100%;
+        display: flex;
+        gap: 18px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 4px 2px 2px;
+        font-size: 13px;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-menu::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-menu a {
+        flex: 0 0 auto;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        white-space: nowrap;
+      }
+
+      .hero { height: 210px; }
       .podium { gap: 10px; }
     }
 
     @media (max-width: 700px) {
-      .navbar { height: 66px; }
-      .logo { font-size: 23px; }
+      .navbar {
+        padding: 11px 0 9px;
+      }
+
+      .nav-inner {
+        width: min(100% - 20px, 1180px);
+        gap: 10px 12px;
+      }
+
+      .logo {
+        font-size: 22px;
+        letter-spacing: 0.10em;
+      }
+
+      .nav-live {
+        padding: 8px 13px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+
+      .nav-menu {
+        gap: 15px;
+        font-size: 12px;
+        padding-bottom: 1px;
+      }
+
+      .nav-menu a {
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: 0;
+        font-size: inherit;
+      }
 
       .page {
         width: min(100% - 20px, 1180px);
-        padding-top: 18px;
+        padding-top: 12px;
       }
 
       .hero {
-        height: 190px;
-        margin-bottom: 18px;
+        height: 126px;
+        margin-bottom: 12px;
+        border-radius: 9px;
+      }
+
+      .hero-content {
+        padding: 14px 10px;
       }
 
       .hero-kicker {
-        font-size: 11px;
-        letter-spacing: 0.18em;
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        margin-bottom: 5px;
       }
 
       .hero-title {
-        font-size: 39px;
+        font-size: 30px;
+        letter-spacing: 0.05em;
       }
 
       .hero-sub {
-        font-size: 13px;
+        margin-top: 6px;
+        font-size: 10px;
+        line-height: 1.3;
       }
 
       .ranking-card {
@@ -505,28 +597,32 @@
 
       .summary {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 6px;
-        margin-bottom: 12px;
+        gap: 4px;
+        margin-bottom: 9px;
       }
 
       .summary-box {
-        min-height: 66px;
-        border-radius: var(--radius-sm);
-        padding: 9px 6px;
+        min-height: 44px;
+        border-radius: 7px;
+        padding: 5px 4px 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       .summary-label {
-        font-size: 8px;
-        line-height: 1.1;
-        letter-spacing: -0.2px;
-        margin-bottom: 5px;
+        font-size: 6px;
+        line-height: 1;
+        letter-spacing: -0.45px;
+        margin-bottom: 3px;
         white-space: nowrap;
       }
 
       .summary-value {
-        font-size: clamp(16px, 5.1vw, 21px);
+        font-size: clamp(12px, 4vw, 15px);
         line-height: 1;
         letter-spacing: -0.8px;
+        white-space: nowrap;
       }
 
       .podium {
@@ -638,8 +734,8 @@
 
     @media (max-width: 380px) {
       .tab-btn { font-size: 11px; }
-      .summary-label { font-size: 7px; }
-      .summary-value { font-size: 16px; }
+      .summary-label { font-size: 6.5px; }
+      .summary-value { font-size: 15px; }
 
       .winner,
       .winner.rank-1,

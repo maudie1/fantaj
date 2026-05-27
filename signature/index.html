@@ -522,44 +522,348 @@
     border-color: transparent;
     background: linear-gradient(135deg, var(--pink), var(--purple));
   }
-
   @media (max-width: 900px) {
-    .nav-menu { display: none; }
-    .hero { height: 240px; }
-    .control-panel { grid-template-columns: 1fr; }
-    .range-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .video-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .navbar {
+      height: auto;
+      padding: 12px 0 10px;
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 24px));
+      flex-wrap: wrap;
+      gap: 10px 12px;
+    }
+
+    .logo {
+      order: 1;
+      font-size: 24px;
+      letter-spacing: .10em;
+    }
+
+    .nav-live {
+      order: 2;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-left: auto;
+    }
+
+    .nav-menu {
+      order: 3;
+      width: 100%;
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 2px 2px;
+      font-size: 13px;
+      white-space: nowrap;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-menu::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-menu a {
+      flex: 0 0 auto;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      white-space: nowrap;
+    }
+
+    .hero {
+      height: 210px;
+      border-radius: 10px;
+    }
+
+    .control-panel {
+      margin-top: 16px;
+      padding: 11px;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      border-radius: 11px;
+    }
+
+    .range-tabs {
+      margin-top: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .video-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    main {
+      width: min(100% - 20px, 1180px);
+      padding: 18px 0 60px;
+    }
   }
 
   @media (max-width: 560px) {
-    .navbar { height: 66px; }
-    .logo { font-size: 23px; }
-    main { width: min(100% - 20px, 1180px); padding-top: 18px; }
-    .hero { height: 170px; }
-    .hero-kicker { font-size: 10px; letter-spacing: .16em; }
-    .hero-title { font-size: 38px; }
-    .hero-sub { font-size: 12px; }
-    .control-panel { margin-top: 16px; padding: 10px; gap: 8px; }
-    .search-input, .members-link, .volume-box { height: 40px; font-size: 12px; }
-    .range-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
-    .range-btn { min-height: 36px; font-size: 11px; }
-    .section { margin-top: 18px; }
-    .section-title { min-height: 42px; }
-    .section-name { width: min(210px, 100%); min-height: 42px; padding: 9px 10px; font-size: 15px; }
-    .section-count { font-size: 10px; min-width: 54px; padding: 5px 6px; }
-    .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-    .sig-card { padding: 5px; border-radius: 9px; }
-    .thumb, .no-image { border-radius: 7px; }
-    .no-image { font-size: 10px; }
-    .sig-info { padding-top: 5px; }
-    .sig-number { font-size: 9px; padding: 3px 5px; margin-bottom: 3px; }
-    .sig-name { min-height: 24px; font-size: 10px; line-height: 1.12; }
-    .video-btn { margin-top: 2px; padding: 5px 3px; font-size: 9px; border-radius: 6px; }
-    .video-modal-head { padding: 5px 10px; }
-    .video-modal-title { font-size: 12px; }
-    .video-close { width: 24px; height: 24px; font-size: 15px; }
+    .navbar {
+      padding: 11px 0 9px;
+    }
+
+    .nav-inner {
+      width: min(100% - 20px, 1180px);
+      gap: 10px 12px;
+    }
+
+    .logo {
+      font-size: 22px;
+      letter-spacing: .10em;
+    }
+
+    .nav-live {
+      padding: 8px 13px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .nav-menu {
+      gap: 15px;
+      font-size: 12px;
+      padding-bottom: 1px;
+    }
+
+    .nav-menu a {
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      font-size: inherit;
+    }
+
+    main {
+      width: min(100% - 16px, 1180px);
+      padding-top: 12px;
+      padding-bottom: 44px;
+    }
+
+    .hero {
+      height: 126px;
+      border-radius: 9px;
+    }
+
+    .hero-content {
+      padding: 14px 10px;
+    }
+
+    .hero-kicker {
+      font-size: 9px;
+      letter-spacing: .12em;
+      margin-bottom: 5px;
+    }
+
+    .hero-title {
+      font-size: 30px;
+      letter-spacing: .05em;
+    }
+
+    .hero-sub {
+      margin-top: 6px;
+      font-size: 10px;
+      line-height: 1.3;
+    }
+
+    .control-panel {
+      margin-top: 10px;
+      padding: 8px;
+      gap: 6px;
+      border-radius: 10px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .search-input,
+    .members-link,
+    .volume-box {
+      height: 36px;
+      min-height: 36px;
+      border-radius: 8px;
+      font-size: 11px;
+    }
+
+    .search-input {
+      grid-column: 1 / -1;
+      padding: 7px 9px;
+    }
+
+    .volume-box {
+      min-width: 0;
+      padding: 0 7px;
+      gap: 5px;
+    }
+
+    .volume-box span {
+      flex: none;
+      font-size: 10px;
+    }
+
+    .volume-box input {
+      min-width: 42px;
+    }
+
+    .members-link {
+      padding: 0 10px;
+    }
+
+    .range-tabs {
+      margin-top: 7px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 5px;
+    }
+
+    .range-btn {
+      min-height: 28px;
+      border-radius: 7px;
+      font-size: 9px;
+      line-height: 1.15;
+      padding: 3px 2px;
+    }
+
+    .section {
+      margin-top: 14px;
+    }
+
+    .section-title {
+      min-height: 36px;
+      margin-bottom: 8px;
+    }
+
+    .section-name {
+      width: min(178px, 100%);
+      min-height: 36px;
+      padding: 7px 8px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .section-count {
+      min-width: 46px;
+      padding: 4px 5px;
+      border-radius: 7px;
+      font-size: 9px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .sig-card {
+      padding: 4px;
+      border-radius: 8px;
+      box-shadow: 0 8px 18px rgba(150,94,171,.07);
+    }
+
+    .thumb,
+    .no-image {
+      border-radius: 6px;
+    }
+
+    .no-image {
+      font-size: 9px;
+    }
+
+    .sig-info {
+      padding-top: 4px;
+    }
+
+    .sig-number {
+      padding: 2px 4px;
+      margin-bottom: 2px;
+      border-radius: 6px;
+      font-size: 8px;
+    }
+
+    .sig-name {
+      min-height: 21px;
+      font-size: 9px;
+      line-height: 1.1;
+    }
+
+    .video-btn {
+      margin-top: 2px;
+      padding: 4px 2px;
+      border-radius: 5px;
+      font-size: 8px;
+    }
+
+    .video-modal {
+      padding: 10px;
+    }
+
+    .video-modal-box {
+      width: 100%;
+      max-height: 88vh;
+      border-radius: 10px;
+    }
+
+    .video-modal-head {
+      padding: 6px 9px;
+    }
+
+    .video-modal-title {
+      font-size: 12px;
+    }
+
+    .video-close {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .video-player-wrap {
+      margin: 10px;
+      border-radius: 8px;
+    }
+
+    .video-list {
+      padding: 0 10px 10px;
+      gap: 6px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .video-link {
+      padding: 7px 6px;
+      border-radius: 7px;
+      font-size: 10px;
+    }
+
+    .empty {
+      margin-top: 16px;
+      padding: 28px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
   }
+
+  @media (max-width: 420px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .hero-title {
+      font-size: 28px;
+    }
+
+    .range-btn {
+      font-size: 9px;
+    }
+  }
+
 </style>
 </head>
 <body>

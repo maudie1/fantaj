@@ -516,43 +516,206 @@
     }
 
     @media (max-width: 900px) {
-      .nav-menu { display: none; }
-      .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
+      .navbar {
+        height: auto;
+        padding: 12px 0 10px;
+      }
 
-    @media (max-width: 620px) {
-      .navbar { height: 66px; }
-      .logo { font-size: 23px; }
-      .nav-inner { width: min(100% - 20px, 1180px); gap: 12px; }
-      .nav-live { padding: 8px 12px; font-size: 12px; }
+      .nav-inner {
+        width: min(1180px, calc(100% - 24px));
+        flex-wrap: wrap;
+        gap: 10px 12px;
+      }
+
+      .logo {
+        order: 1;
+        font-size: 24px;
+        letter-spacing: .10em;
+      }
+
+      .nav-live {
+        order: 2;
+        min-width: 0;
+        margin-left: auto;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+
+      .nav-menu {
+        order: 3;
+        width: 100%;
+        display: flex;
+        gap: 18px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 4px 2px 2px;
+        font-size: 13px;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-menu::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-menu a {
+        flex: 0 0 auto;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        white-space: nowrap;
+      }
 
       main {
         width: min(100% - 20px, 1180px);
-        padding: 20px 0 60px;
+        padding: 18px 0 60px;
       }
 
       .member-hero {
-        border-radius: 14px;
-        min-height: auto;
-        padding: 28px 20px;
+        min-height: 210px;
+        border-radius: 10px;
+        padding: 24px;
       }
 
-      .hero-kicker { font-size: 11px; letter-spacing: 0.2em; }
-      .hero-title { font-size: 38px; }
-      .hero-sub { font-size: 13px; }
+      .member-hero-content {
+        height: 100%;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        align-items: center;
+        text-align: center;
+      }
 
       .hero-stat-card {
-        padding: 14px;
-        grid-template-columns: 1fr;
+        width: min(300px, 100%);
+        padding: 10px 12px;
+        border-radius: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .stat-row {
-        border-right: 0;
-        border-bottom: 1px solid rgba(226, 194, 223, 0.48);
-        padding: 9px 0;
+        padding: 0 10px;
+        border-bottom: 0;
+        border-right: 1px solid rgba(226, 194, 223, 0.48);
       }
 
-      .stat-row:last-child { border-bottom: 0; }
+      .stat-row:last-child {
+        border-right: 0;
+      }
+
+      .member-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .navbar {
+        padding: 11px 0 9px;
+      }
+
+      .nav-inner {
+        width: min(100% - 20px, 1180px);
+        gap: 10px 12px;
+      }
+
+      .logo {
+        font-size: 22px;
+        letter-spacing: .10em;
+      }
+
+      .nav-live {
+        padding: 8px 13px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+
+      .nav-menu {
+        gap: 15px;
+        font-size: 12px;
+        padding-bottom: 1px;
+      }
+
+      .nav-menu a {
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: 0;
+        font-size: inherit;
+      }
+
+      main {
+        width: min(100% - 16px, 1180px);
+        padding-top: 12px;
+        padding-bottom: 44px;
+      }
+
+      .member-hero {
+        min-height: 126px;
+        border-radius: 9px;
+        padding: 14px 10px;
+      }
+
+      .member-hero-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        text-align: center;
+      }
+
+      .hero-kicker {
+        font-size: 9px;
+        letter-spacing: .12em;
+        margin-bottom: 5px;
+      }
+
+      .hero-title {
+        font-size: 30px;
+        letter-spacing: .05em;
+        line-height: 1;
+      }
+
+      .hero-sub {
+        margin-top: 6px;
+        font-size: 10px;
+        line-height: 1.3;
+      }
+
+      .hero-stat-card {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        width: auto;
+        min-width: 96px;
+        padding: 5px 7px;
+        border-radius: 8px;
+        grid-template-columns: repeat(2, minmax(0, auto));
+        gap: 6px;
+        background: rgba(255,255,255,0.68);
+      }
+
+      .stat-row {
+        gap: 4px;
+        padding: 0 6px 0 0;
+        border-right: 1px solid rgba(226, 194, 223, 0.48);
+      }
+
+      .stat-row:last-child {
+        padding-right: 0;
+        border-right: 0;
+      }
+
+      .stat-label {
+        font-size: 8px;
+      }
+
+      .stat-value {
+        font-size: 12px;
+      }
 
       .member-section {
         margin-top: 14px;
@@ -560,24 +723,391 @@
         border-radius: 15px;
       }
 
-      .group-head { margin-bottom: 11px; }
-      .group-title { font-size: 18px; }
+      .member-section:first-of-type {
+        margin-top: 14px;
+      }
+
+      .group-head {
+        margin-bottom: 11px;
+      }
+
+      .group-title {
+        font-size: 18px;
+      }
 
       .member-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
       }
 
-      .member-cover { height: 78px; }
-      .member-photo-wrap { width: 70px; height: 70px; margin-top: -35px; padding: 4px; }
-      .member-photo { border-width: 2px; }
-      .member-info { padding: 10px 8px 12px; }
-      .member-name { font-size: 13px; }
-      .member-id { font-size: 10px; }
-      .role-chip, .link-chip { min-height: 24px; padding: 0 8px; font-size: 10px; }
-      .live-title { margin-top: 9px; min-height: 30px; font-size: 11px; }
-      .live-badge { top: 8px; left: 8px; padding: 5px 8px; font-size: 10px; }
+      .member-cover {
+        height: 78px;
+      }
+
+      .member-photo-wrap {
+        width: 70px;
+        height: 70px;
+        margin-top: -35px;
+        padding: 4px;
+      }
+
+      .member-photo {
+        border-width: 2px;
+      }
+
+      .member-info {
+        padding: 10px 8px 12px;
+      }
+
+      .member-name {
+        font-size: 13px;
+      }
+
+      .member-id {
+        font-size: 10px;
+      }
+
+      .role-chip,
+      .link-chip {
+        min-height: 24px;
+        padding: 0 8px;
+        font-size: 10px;
+      }
+
+      .live-title {
+        margin-top: 9px;
+        min-height: 30px;
+        font-size: 11px;
+      }
+
+      .live-badge {
+        top: 8px;
+        left: 8px;
+        padding: 5px 8px;
+        font-size: 10px;
+      }
+
+      .rank-guide {
+        margin-top: 18px;
+        padding: 13px;
+        border-radius: 12px;
+      }
+
+      .rank-guide-title {
+        font-size: 13px;
+        margin-bottom: 9px;
+      }
+
+      .rank-list {
+        gap: 5px;
+      }
+
+      .rank-item {
+        padding: 5px 7px;
+        border-radius: 7px;
+        font-size: 10px;
+      }
     }
+
+    @media (max-width: 420px) {
+      .hero-title {
+        font-size: 28px;
+      }
+
+      .member-grid {
+        gap: 8px;
+      }
+
+      .member-section {
+        padding: 12px;
+      }
+    }
+
+
+    /* mobile only: compact hero stats and member cards */
+    @media (max-width: 620px) {
+      .member-hero {
+        position: relative;
+        min-height: 126px;
+        padding: 14px 10px;
+      }
+
+      .member-hero-content {
+        min-height: 98px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-stat-card {
+        position: absolute;
+        right: 10px;
+        bottom: 9px;
+        width: auto;
+        min-width: 88px;
+        padding: 4px 6px;
+        border-radius: 7px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, auto));
+        gap: 5px;
+        background: rgba(255,255,255,0.72);
+        box-shadow: 0 8px 18px rgba(150,94,171,0.10);
+      }
+
+      .stat-row {
+        gap: 3px;
+        padding: 0 5px 0 0;
+        border-bottom: 0;
+        border-right: 1px solid rgba(226, 194, 223, 0.42);
+      }
+
+      .stat-row:last-child {
+        padding-right: 0;
+        border-right: 0;
+      }
+
+      .stat-label {
+        font-size: 7px;
+        line-height: 1;
+      }
+
+      .stat-value {
+        font-size: 11px;
+        line-height: 1;
+      }
+
+      .member-section {
+        margin-top: 12px;
+        padding: 11px;
+        border-radius: 13px;
+      }
+
+      .group-head {
+        margin-bottom: 8px;
+      }
+
+      .group-title {
+        font-size: 16px;
+      }
+
+      .group-dot {
+        width: 9px;
+        height: 9px;
+      }
+
+      .member-grid {
+        gap: 8px;
+      }
+
+      .member-card {
+        border-radius: 12px;
+      }
+
+      .member-cover {
+        height: 60px;
+      }
+
+      .member-photo-wrap {
+        width: 58px;
+        height: 58px;
+        margin-top: -29px;
+        padding: 3px;
+      }
+
+      .member-info {
+        padding: 7px 6px 9px;
+      }
+
+      .member-name {
+        font-size: 12px;
+        line-height: 1.12;
+      }
+
+      .member-id {
+        margin-top: 3px;
+        font-size: 9px;
+      }
+
+      .member-role-row {
+        margin-top: 7px;
+        gap: 4px;
+      }
+
+      .role-chip,
+      .link-chip {
+        min-height: 20px;
+        padding: 0 6px;
+        border-radius: 6px;
+        font-size: 9px;
+      }
+
+      .live-title {
+        margin-top: 6px;
+        min-height: 24px;
+        font-size: 10px;
+        line-height: 1.25;
+      }
+
+      .live-badge {
+        top: 7px;
+        left: 7px;
+        padding: 4px 7px;
+        border-radius: 6px;
+        font-size: 9px;
+      }
+    }
+
+
+    /* mobile only: move stats to lower-left and make member cards shorter */
+    @media (max-width: 620px) {
+      .member-hero {
+        position: relative;
+        min-height: 126px;
+        padding: 14px 10px;
+      }
+
+      .member-hero-content {
+        min-height: 98px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-stat-card {
+        position: absolute;
+        left: 6px;
+        right: auto;
+        bottom: 6px;
+        width: auto;
+        min-width: 72px;
+        padding: 3px 5px;
+        border-radius: 6px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, auto));
+        gap: 4px;
+        background: rgba(255,255,255,0.70);
+        box-shadow: 0 6px 14px rgba(150,94,171,0.08);
+      }
+
+      .stat-row {
+        gap: 2px;
+        padding: 0 4px 0 0;
+        border-bottom: 0;
+        border-right: 1px solid rgba(226, 194, 223, 0.38);
+      }
+
+      .stat-row:last-child {
+        padding-right: 0;
+        border-right: 0;
+      }
+
+      .stat-label {
+        font-size: 6px;
+        line-height: 1;
+      }
+
+      .stat-value {
+        font-size: 10px;
+        line-height: 1;
+      }
+
+      .member-section {
+        margin-top: 11px;
+        padding: 10px;
+        border-radius: 12px;
+      }
+
+      .group-head {
+        margin-bottom: 7px;
+      }
+
+      .member-grid {
+        gap: 7px;
+      }
+
+      .member-card {
+        border-radius: 11px;
+      }
+
+      .member-cover {
+        height: 46px;
+      }
+
+      .member-photo-wrap {
+        width: 50px;
+        height: 50px;
+        margin-top: -25px;
+        padding: 3px;
+      }
+
+      .member-info {
+        padding: 6px 5px 7px;
+      }
+
+      .member-name {
+        font-size: 11px;
+        line-height: 1.08;
+      }
+
+      .member-id {
+        margin-top: 2px;
+        font-size: 8px;
+        line-height: 1.05;
+      }
+
+      .member-role-row {
+        margin-top: 5px;
+        gap: 3px;
+      }
+
+      .role-chip,
+      .link-chip {
+        min-height: 17px;
+        padding: 0 5px;
+        border-radius: 5px;
+        font-size: 8px;
+      }
+
+      .live-title {
+        margin-top: 4px;
+        min-height: 0;
+        font-size: 9px;
+        line-height: 1.15;
+        -webkit-line-clamp: 1;
+      }
+
+      .live-badge {
+        top: 6px;
+        left: 6px;
+        padding: 3px 6px;
+        border-radius: 5px;
+        font-size: 8px;
+      }
+    }
+
+
+    /* mobile only: place TOTAL / LIVE at top-right inside banner */
+    @media (max-width: 620px) {
+      .hero-stat-card {
+        left: auto;
+        right: 6px;
+        top: 6px;
+        bottom: auto;
+        z-index: 3;
+        width: auto;
+        min-width: 72px;
+        padding: 3px 5px;
+        border-radius: 6px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, auto));
+        gap: 4px;
+        background: rgba(255,255,255,0.72);
+        box-shadow: 0 6px 14px rgba(150,94,171,0.08);
+      }
+    }
+
   </style>
 </head>
 <body>
