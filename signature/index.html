@@ -864,6 +864,72 @@
     }
   }
 
+
+  /* Mobile video modal override: keep desktop/function untouched */
+  @media (max-width: 560px) {
+    .video-modal {
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-modal-box {
+      width: calc(100vw - 12px);
+      max-height: calc(100dvh - 12px);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .video-modal-head {
+      min-height: 34px;
+      padding: 5px 8px;
+    }
+
+    .video-modal-title {
+      font-size: 12px;
+    }
+
+    .video-close {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .video-player-wrap {
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+      aspect-ratio: 16 / 9;
+      max-height: 46vh;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .video-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .video-list {
+      padding: 8px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .video-link {
+      min-height: 28px;
+      padding: 6px 5px;
+      border-radius: 6px;
+      font-size: 10px;
+    }
+  }
+
 </style>
 </head>
 <body>
