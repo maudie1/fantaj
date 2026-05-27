@@ -1216,6 +1216,30 @@
       return `https://www.sooplive.com/station/${encodeURIComponent(userId)}`;
     }
 
+    function isMobileDevice() {
+      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    function getLiveBroadNo(live) {
+      const directBroadNo = live?.broadNo || live?.broad_no || live?.broad_no_str || live?.broadNumber || live?.broad_no_str;
+      if (directBroadNo) return String(directBroadNo).trim();
+
+      const url = String(live?.url || "").trim();
+      const match = url.match(/\/(\d+)(?:[?#].*)?$/);
+      return match ? match[1] : "";
+    }
+
+    function getLiveLink(member, live) {
+      const webUrl = String(live?.url || "").trim() || `https://play.sooplive.com/${encodeURIComponent(member.id)}/${getLiveBroadNo(live)}`;
+      const broadNo = getLiveBroadNo(live);
+
+      if (isMobileDevice() && member.id && broadNo) {
+        return `sooplive://player/live?user_id=${encodeURIComponent(member.id)}&broad_no=${encodeURIComponent(broadNo)}`;
+      }
+
+      return webUrl;
+    }
+
     function normalizeGroup(group) {
       const value = String(group || "멤버").trim();
       if (GROUP_ORDER.includes(value)) return value;
@@ -1254,7 +1278,7 @@
       const name = escapeHtml(member.name);
       const id = escapeHtml(member.id);
       const title = escapeHtml(live?.title || "");
-      const href = isLive && live?.url ? live.url : getStationUrl(member.id);
+      const href = isLive ? getLiveLink(member, live) : getStationUrl(member.id);
       const linkText = isLive ? "방송 보기" : "방송국";
       const groupClass = GROUP_CLASS[member.group] || "member";
 
