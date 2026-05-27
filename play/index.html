@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FANTAJ PLAY</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --text: #3d3148;
+  --muted: #7c6d85;
+  --soft: rgba(255, 255, 255, 0.78);
+  --line: rgba(226, 194, 223, 0.55);
+  --pink: #ff7eb7;
+  --purple: #a965e8;
+  --deep: #8f4eb2;
+  --mint: #25bec1;
+  --shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 12% 5%, rgba(255, 183, 217, .26), transparent 28%),
+    radial-gradient(circle at 86% 12%, rgba(184, 156, 255, .22), transparent 30%),
+    linear-gradient(180deg, #fff7fb 0%, #f7f0ff 45%, #fffaf4 100%);
+  color: var(--text);
+}
+
+a { color: inherit; text-decoration: none; }
+
+.page {
+  min-height: 100vh;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(226, 194, 223, 0.55);
+  box-shadow: 0 8px 28px rgba(177, 122, 174, 0.12);
+}
+
+.nav-inner {
+  width: min(1180px, calc(100% - 32px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  color: var(--deep);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #6b5b75;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: #b05cc9;
+}
+
+.nav-live {
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: white;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(177, 92, 201, 0.24);
+  white-space: nowrap;
+}
+
+main {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 34px 0 80px;
+}
+
+.coming-card {
+  position: relative;
+  min-height: calc(100vh - 170px);
+  border-radius: 13px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, .95), transparent 28%),
+    radial-gradient(circle at 86% 16%, rgba(255, 214, 239, .9), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(255, 244, 214, .86), transparent 35%),
+    linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
+  border: 1px solid rgba(226, 194, 223, 0.55);
+  box-shadow: 0 26px 60px rgba(150, 94, 171, 0.18);
+}
+
+.coming-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 12%, rgba(255,255,255,0.52) 48%, transparent 72%),
+    radial-gradient(circle at 46% 68%, rgba(255,255,255,0.66), transparent 24%);
+  opacity: .75;
+  pointer-events: none;
+}
+
+.coming-card::after {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.52);
+  pointer-events: none;
+}
+
+.coming-content {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 170px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 54px 28px;
+  transform: translateY(18px);
+}
+
+
+.kicker {
+  font-size: 14px;
+  font-weight: 950;
+  letter-spacing: .26em;
+  color: #a061bb;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: clamp(48px, 8vw, 88px);
+  font-weight: 950;
+  letter-spacing: .08em;
+  color: #fff;
+  text-shadow: 0 8px 28px rgba(117, 67, 151, .26);
+}
+
+.sub {
+  margin-top: 12px;
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 950;
+  color: #5f4072;
+  letter-spacing: -.03em;
+}
+
+.desc {
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 850;
+  color: #7c6d85;
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  min-width: 130px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 950;
+  border: 1px solid rgba(226, 194, 223, .65);
+  background: rgba(255, 255, 255, .82);
+  color: #765a88;
+  box-shadow: 0 10px 22px rgba(150, 94, 171, .10);
+  transition: .14s ease;
+}
+
+.action-btn.primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(176, 97, 209, .20);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 900px) {
+  .nav-menu { display: none; }
+  main { padding-top: 22px; }
+}
+
+@media (max-width: 560px) {
+  .navbar { height: 66px; }
+  .logo { font-size: 23px; }
+
+  main {
+    width: min(100% - 20px, 1180px);
+    padding-top: 18px;
+  }
+
+  .coming-card,
+  .coming-content {
+    min-height: calc(100vh - 120px);
+  }
+
+  .coming-content {
+    padding: 42px 18px;
+    transform: translateY(10px);
+  }
+
+  .kicker {
+    font-size: 10px;
+    letter-spacing: .16em;
+  }
+
+  .title {
+    font-size: 42px;
+  }
+
+  .sub {
+    font-size: 22px;
+  }
+
+  .desc {
+    font-size: 13px;
+  }
+
+  .action-btn {
+    min-width: 112px;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="navbar">
+      <div class="nav-inner">
+        <a class="logo" href="../">FANTAJ</a>
+
+        <nav class="nav-menu" aria-label="상단 메뉴">
+          <a href="../live/">LIVE</a>
+          <a href="../members/">MEMBER</a>
+          <a class="" href="../notice/">NOTICE</a>
+          <a href="../ranking/">RANKING</a>
+          <a class="active" href="../play/">PLAY</a>
+          <a href="../signature/">SIGNATURE</a>
+        </nav>
+
+        <a class="nav-live" id="onAirButton" href="../live/">ON AIR</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="coming-card" aria-label="PLAY 준비중">
+        <div class="coming-content">
+          <div class="kicker">FANTAJ OFFICIAL FAN PORTAL</div>
+          <h1 class="title">COMING SOON</h1>
+          <p class="sub">준비중입니다.</p>
+          <p class="desc">PLAY 페이지는 곧 다양한 콘텐츠와 함께 업데이트됩니다.</p>
+
+          <div class="actions">
+            <a class="action-btn primary" href="../">메인으로</a>
+            <a class="action-btn" href="../signature/">시그니처</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+<script>
+const LIVE_API_URL_FOR_ON_AIR = "https://fantj-live.4rgn2004.workers.dev/";
+
+async function updateOnAirCount() {
+  const onAirButton = document.getElementById("onAirButton");
+  if (!onAirButton) return;
+
+  try {
+    const response = await fetch(LIVE_API_URL_FOR_ON_AIR, { cache: "no-store" });
+    if (!response.ok) throw new Error("LIVE API 응답 오류");
+
+    const data = await response.json();
+    const members = Array.isArray(data.members) ? data.members : [];
+    const liveCount = members.filter(member => member && member.isLive).length;
+
+    onAirButton.textContent = liveCount > 0 ? `ON AIR ${liveCount}` : "ON AIR";
+  } catch (error) {
+    console.error(error);
+    onAirButton.textContent = "ON AIR";
+  }
+}
+
+updateOnAirCount();
+setInterval(updateOnAirCount, 60000);
+</script>
+</body>
+</html>

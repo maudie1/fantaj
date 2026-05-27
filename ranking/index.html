@@ -3,131 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>판타지유 랭킹</title>
+  <title>FANTAJ RANKING</title>
   <link rel="icon" type="image/png" href="../favicon.png">
 
   <style>
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-1: #fff7fb;
+      --bg-2: #f7f0ff;
+      --bg-3: #fffaf4;
+      --text-main: #3d3148;
+      --text-sub: #7c6d85;
+      --purple: #8f4eb2;
+      --purple-2: #a061bb;
+      --pink: #ff7eb7;
+      --line: rgba(226, 194, 223, 0.58);
+      --card: rgba(255, 255, 255, 0.78);
+      --soft-card: rgba(255, 246, 252, 0.82);
+      --radius-sm: 8px;
+      --radius-md: 10px;
+      --radius-lg: 13px;
     }
 
     body {
-      margin: 0;
-      font-family: "Pretendard", "Noto Sans KR", sans-serif;
-      background:
-        radial-gradient(circle at top left, #ffe4f3 0%, transparent 35%),
-        radial-gradient(circle at top right, #dff1ff 0%, transparent 35%),
-        linear-gradient(135deg, #fff0f8 0%, #f8efff 45%, #eef7ff 100%);
       min-height: 100vh;
-      color: #2f2a36;
+      font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(255, 183, 217, .26), transparent 28%),
+        radial-gradient(circle at 86% 12%, rgba(184, 156, 255, .22), transparent 30%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
+      color: var(--text-main);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(226, 194, 223, 0.55);
+      box-shadow: 0 8px 28px rgba(177, 122, 174, 0.12);
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 32px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      color: var(--purple);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #6b5b75;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: #b05cc9;
+    }
+
+    .nav-live {
+      padding: 9px 15px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(177, 92, 201, 0.24);
     }
 
     .page {
-      width: min(1180px, calc(100% - 24px));
+      width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 24px 0 60px;
+      padding: 26px 0 80px;
     }
 
     .hero {
       position: relative;
+      height: 300px;
+      border-radius: var(--radius-md);
       overflow: hidden;
-      border-radius: 30px;
-      padding: 52px 24px;
-      text-align: center;
       background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.95), transparent 25%),
-        radial-gradient(circle at 80% 30%, rgba(179,220,255,.8), transparent 28%),
-        linear-gradient(135deg, #ffb8df 0%, #e8d2ff 45%, #cfeeff 100%);
-      border: 1px solid rgba(255,255,255,.8);
-      box-shadow: 0 18px 50px rgba(170,120,200,.16);
-      margin-bottom: 16px;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.24);
-      filter: blur(18px);
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), transparent 26%),
+        radial-gradient(circle at 85% 22%, rgba(255, 214, 239, 0.9), transparent 28%),
+        linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
+      box-shadow: 0 26px 60px rgba(150, 94, 171, 0.18);
+      margin-bottom: 28px;
     }
 
     .hero::before {
-      left: -90px;
-      top: -110px;
-    }
-
-    .hero::after {
-      right: -100px;
-      bottom: -130px;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 10%, rgba(255,255,255,0.5) 48%, transparent 70%),
+        radial-gradient(circle at 45% 70%, rgba(255,255,255,0.72), transparent 22%);
+      opacity: 0.75;
     }
 
     .hero-content {
       position: relative;
       z-index: 1;
-    }
-
-    .eyebrow {
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 4px;
-      color: #8d6aa4;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(38px, 6vw, 66px);
-      color: white;
-      text-shadow:
-        0 4px 0 rgba(181,128,205,.45),
-        0 12px 24px rgba(131,86,178,.25);
-    }
-
-    .hero-desc {
-      margin-top: 10px;
-      color: #7f5d92;
-      font-weight: 800;
-    }
-
-
-    .page-nav {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 0 0 16px;
-    }
-
-    .page-nav a {
+      height: 100%;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 58px;
-      padding: 12px 14px;
-      border-radius: 20px;
-      text-decoration: none;
-      color: #745b86;
-      font-weight: 1000;
-      background: rgba(255,255,255,.82);
-      border: 1px solid rgba(255,255,255,.92);
-      box-shadow: 0 10px 24px rgba(169,113,197,.12);
+      text-align: center;
+      padding: 30px;
     }
 
-    .page-nav a.active {
-      color: white;
-      background: linear-gradient(135deg, #ff79c7, #9b7bff);
-      box-shadow: 0 10px 24px rgba(176,97,209,.3);
+    .hero-kicker {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      color: #a061bb;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: clamp(44px, 7vw, 78px);
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-shadow: 0 8px 28px rgba(117, 67, 151, 0.26);
+    }
+
+    .hero-sub {
+      margin-top: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #6f527c;
     }
 
     .ranking-card {
-      background: rgba(255,255,255,.72);
-      backdrop-filter: blur(18px);
-      border-radius: 28px;
-      padding: 18px;
-      border: 1px solid rgba(255,255,255,.85);
-      box-shadow: 0 20px 45px rgba(169,113,197,.15);
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
+      padding: 22px;
+      overflow: hidden;
     }
 
     .topbar {
@@ -146,22 +180,29 @@
     }
 
     .tab-btn {
-      border: 0;
-      border-radius: 16px;
+      border: 1px solid rgba(226, 194, 223, 0.66);
+      border-radius: var(--radius-sm);
       padding: 12px 18px;
-      font-weight: 900;
+      font-family: inherit;
+      font-weight: 950;
       cursor: pointer;
-      color: #8d6ca2;
-      background: rgba(255,255,255,.88);
-      box-shadow: inset 0 0 0 1px rgba(216,188,236,.55);
+      color: #7b628a;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: 0 8px 18px rgba(150, 94, 171, 0.08);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(150, 94, 171, 0.13);
     }
 
     .tab-btn.active {
-      background: linear-gradient(135deg, #ff79c7, #9b7bff);
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
       color: white;
-      box-shadow: 0 10px 24px rgba(176,97,209,.3);
+      border-color: transparent;
+      box-shadow: 0 10px 24px rgba(176, 97, 209, .24);
     }
-
 
     .period-box {
       display: flex;
@@ -170,47 +211,43 @@
     }
 
     .month-select {
-      border: 0;
-      border-radius: 15px;
+      border: 1px solid rgba(226, 194, 223, 0.66);
+      border-radius: var(--radius-sm);
       background: rgba(255,255,255,.92);
       padding: 12px 14px;
       color: #765a88;
-      font-weight: 800;
+      font-family: inherit;
+      font-weight: 850;
       outline: none;
-      box-shadow: inset 0 0 0 1px rgba(220,183,238,.55);
       cursor: pointer;
     }
 
     .summary {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 18px;
     }
 
     .summary-box {
-      border-radius: 22px;
+      border-radius: var(--radius-md);
       padding: 16px;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.95),
-          rgba(255,241,249,.8)
-        );
-      border: 1px solid rgba(255,255,255,.9);
+      background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,241,249,.82));
+      border: 1px solid rgba(236, 206, 232, 0.78);
     }
 
     .summary-label {
       font-size: 12px;
       color: #9c82ae;
-      font-weight: 900;
-      margin-bottom: 4px;
+      font-weight: 950;
+      margin-bottom: 5px;
     }
 
     .summary-value {
-      font-size: 28px;
-      font-weight: 1000;
-      color: #25bec1;
+      font-size: clamp(24px, 3vw, 31px);
+      font-weight: 950;
+      color: #b05cc9;
+      letter-spacing: -0.04em;
     }
 
     .podium {
@@ -222,37 +259,21 @@
     }
 
     .winner {
-      border-radius: 26px;
+      border-radius: var(--radius-md);
       padding: 18px 14px;
       text-align: center;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,.96),
-          rgba(255,241,251,.9)
-        );
-      border: 1px solid rgba(255,255,255,.95);
-      box-shadow: 0 12px 30px rgba(177,116,195,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,241,251,.9));
+      border: 1px solid rgba(236, 206, 232, 0.72);
+      box-shadow: 0 12px 30px rgba(177, 116, 195, .12);
     }
 
     .winner.rank-1 {
-      min-height: 220px;
-      background:
-        linear-gradient(
-          180deg,
-          #fff9dc,
-          #fff,
-          #ffe8f7
-        );
+      min-height: 218px;
+      background: linear-gradient(180deg, #fff6cf 0%, #fff 48%, #ffe8f7 100%);
     }
 
-    .winner.rank-2 {
-      min-height: 188px;
-    }
-
-    .winner.rank-3 {
-      min-height: 170px;
-    }
+    .winner.rank-2 { min-height: 188px; }
+    .winner.rank-3 { min-height: 170px; }
 
     .crown {
       font-size: 28px;
@@ -272,82 +293,73 @@
     .winner-name {
       margin-top: 10px;
       font-size: 16px;
-      font-weight: 1000;
-      color: #25bcc0;
+      font-weight: 950;
+      color: #4b3659;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .winner-tier {
-      margin-top: 8px;
+      margin-top: 9px;
     }
 
     .winner-sub {
       margin-top: 7px;
+      min-height: 16px;
       font-size: 12px;
       color: #9d7daf;
       font-weight: 800;
     }
 
-    .tier-badge {
+    .tier-badge,
+    .phrase {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.95),
-          rgba(255,238,250,.9)
-        );
-      box-shadow:
-        inset 0 0 0 1px rgba(219,185,236,.55);
-      color: #745b86;
+      max-width: 100%;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.78);
+      color: #735b84;
       font-size: 13px;
-      font-weight: 1000;
+      font-weight: 950;
+      box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
       white-space: nowrap;
+    }
+
+    .tier-badge {
+      padding: 8px 12px;
+    }
+
+    .phrase {
+      display: inline-block;
+      max-width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 7px 10px;
     }
 
     .table-wrap {
       overflow: hidden;
-      border-radius: 22px;
+      border-radius: var(--radius-md);
       background: rgba(255,255,255,.7);
-      border: 1px solid rgba(255,255,255,.95);
+      border: 1px solid rgba(236, 206, 232, 0.72);
     }
 
     table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
 
-th:nth-child(1),
-td:nth-child(1) {
-  width: 80px;
-}
-
-th:nth-child(2),
-td:nth-child(2) {
-  width: 38%;
-}
-
-th:nth-child(3),
-td:nth-child(3) {
-  width: 28%;
-}
-
-th:nth-child(4),
-td:nth-child(4) {
-  width: 26%;
-}
+    th:nth-child(1), td:nth-child(1) { width: 80px; }
+    th:nth-child(2), td:nth-child(2) { width: 38%; }
+    th:nth-child(3), td:nth-child(3) { width: 28%; }
+    th:nth-child(4), td:nth-child(4) { width: 26%; }
 
     thead {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,127,200,.18),
-          rgba(167,127,255,.16)
-        );
+      background: linear-gradient(135deg, rgba(255,127,200,.18), rgba(167,127,255,.16));
       color: #7d5a92;
     }
 
@@ -361,8 +373,12 @@ td:nth-child(4) {
       background: rgba(255,245,251,.72);
     }
 
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
     .rank-num {
-      font-weight: 1000;
+      font-weight: 950;
       color: #a27ab5;
       width: 70px;
     }
@@ -371,7 +387,7 @@ td:nth-child(4) {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      width: 220px;
+      width: 230px;
       margin: 0 auto;
       gap: 10px;
       text-align: left;
@@ -385,33 +401,23 @@ td:nth-child(4) {
       object-fit: cover;
       border: 3px solid white;
       background: #f3e7fb;
+      flex: 0 0 auto;
     }
 
     .nickname {
-      font-weight: 1000;
-      color: #24b9be;
+      font-weight: 950;
+      color: #4b3659;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 165px;
     }
 
     .sub-score {
-      font-size: 12px;
-      color: #9c80ad;
-      font-weight: 800;
-    }
-
-    .phrase {
-      display: inline-block;
-      max-width: 240px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.78);
-      color: #755c87;
       font-size: 13px;
+      color: #9c80ad;
       font-weight: 900;
-      box-shadow:
-        inset 0 0 0 1px rgba(220,183,238,.45);
+      white-space: nowrap;
     }
 
     .loading {
@@ -421,290 +427,44 @@ td:nth-child(4) {
       color: #9d7daf;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 900px) {
+      .nav-menu { display: none; }
+      .hero { height: 250px; }
+      .podium { gap: 10px; }
+    }
 
-      .page-nav {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 8px;
+    @media (max-width: 700px) {
+      .navbar { height: 66px; }
+      .logo { font-size: 23px; }
+
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 18px;
       }
 
-      .page-nav a {
-        min-height: 48px;
-        padding: 10px 8px;
-        border-radius: 16px;
+      .hero {
+        height: 190px;
+        margin-bottom: 18px;
+      }
+
+      .hero-kicker {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+      }
+
+      .hero-title {
+        font-size: 39px;
+      }
+
+      .hero-sub {
         font-size: 13px;
       }
 
-      .summary,
-      .podium {
-        grid-template-columns: 1fr;
-      }
-
-      th, td {
-        padding: 12px 8px;
-      }
-
-      .phrase {
-        max-width: 120px;
-      }
-
-      .period-box {
-        width: 100%;
-      }
-
-      .month-select {
-        width: 100%;
-      }
-    }
-
-    /* ===== index(8).html 디자인 호환용: 배너 + 3버튼 메뉴 ===== */
-    body {
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at 12% 5%, rgba(255, 183, 217, .32), transparent 28%),
-        radial-gradient(circle at 86% 12%, rgba(184, 156, 255, .25), transparent 30%),
-        linear-gradient(180deg, #fff7fb 0%, #fffaf2 52%, #f4f9ff 100%);
-      color: #333;
-    }
-
-    .page {
-      width: min(1520px, 100%);
-      margin: 0 auto;
-      padding: 12px 14px 70px;
-    }
-
-    .hero-banner {
-      height: 330px;
-      border-radius: 30px;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0 14px 38px rgba(120, 120, 180, 0.22);
-      background: linear-gradient(135deg, #ffe1f0, #eee6ff);
-      margin-bottom: 18px;
-    }
-
-    .hero-banner::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.16));
-      pointer-events: none;
-    }
-
-    .hero-banner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-
-    .view-tabs {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin: 0 0 18px;
-    }
-
-    .view-tab {
-      appearance: none;
-      border: 0;
-      cursor: pointer;
-      text-decoration: none;
-      min-height: 86px;
-      padding: 16px 18px;
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      font-family: inherit;
-      font-weight: 900;
-      box-shadow: 0 8px 22px rgba(120, 120, 180, .18);
-      transition: .18s;
-    }
-
-    .view-tab:hover {
-      transform: translateY(-2px);
-    }
-
-    .view-tab .tab-icon {
-      font-size: 30px;
-    }
-
-    .view-tab .tab-text {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      line-height: 1.15;
-    }
-
-    .view-tab .tab-title {
-      font-size: 22px;
-      letter-spacing: -0.7px;
-    }
-
-    .view-tab .tab-desc {
-      margin-top: 5px;
-      font-size: 12px;
-      opacity: .72;
-    }
-
-    .view-tab.signature-tab {
-      background: linear-gradient(135deg, #fff0f8, #eee6ff);
-      color: #9b4b9e;
-      border: 1px solid rgba(255, 183, 217, .8);
-    }
-
-    .view-tab.member-tab {
-      background: linear-gradient(
-        135deg,
-        #f4fbff 0%,
-        #e7f5ff 45%,
-        #d8efff 100%
-      );
-      color: #5f7fa6;
-      border: 1px solid rgba(180, 220, 255, 0.45);
-      box-shadow:
-        0 6px 18px rgba(180, 220, 255, 0.18),
-        inset 0 1px 0 rgba(255,255,255,0.7);
-    }
-
-    .view-tab.ranking-tab {
-      background: linear-gradient(135deg, #fff9dc, #ffe8f7);
-      color: #9a6b19;
-      border: 1px solid rgba(223, 176, 68, .35);
-    }
-
-    .view-tab.ranking-tab:hover {
-      box-shadow: 0 12px 30px rgba(223, 176, 68, .2);
-    }
-
-    .view-tab.active {
-      outline: 4px solid rgba(255, 255, 255, .95);
-      box-shadow: 0 12px 30px rgba(155, 124, 255, .28);
-      transform: translateY(-1px);
-    }
-
-    .view-tab.ranking-tab.active {
-      background: linear-gradient(135deg, #fff1b8, #ffd7ef);
-      color: #8a5a00;
-    }
-
-    @media (max-width: 700px) {
-      .page {
-        width: 100%;
-        padding: 10px 8px 50px;
-      }
-
-      .hero-banner {
-        height: 150px;
-        border-radius: 18px;
-        margin-bottom: 12px;
-      }
-
-      .view-tabs {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 8px;
-        margin: 10px 0 12px;
-      }
-
-      .view-tab {
-        min-height: 112px;
-        padding: 12px 8px;
-        border-radius: 22px;
-        flex-direction: column;
-        gap: 7px;
-        overflow: hidden;
-      }
-
-      .view-tab:hover {
-        transform: none;
-      }
-
-      .view-tab .tab-icon {
-        font-size: 28px;
-        line-height: 1;
-      }
-
-      .view-tab .tab-text {
-        width: 100%;
-        align-items: center;
-        text-align: center;
-        line-height: 1.15;
-        min-width: 0;
-      }
-
-      .view-tab .tab-title {
-        font-size: 20px;
-        letter-spacing: -0.8px;
-        white-space: nowrap;
-        word-break: keep-all;
-        overflow: hidden;
-        text-overflow: clip;
-      }
-
-      .view-tab .tab-desc {
-        margin-top: 6px;
-        font-size: 11px;
-        line-height: 1.15;
-        white-space: nowrap;
-        word-break: keep-all;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .view-tab .tab-title {
-        font-size: 18px;
-      }
-
-      .view-tab .tab-desc {
-        font-size: 10px;
-      }
-    }
-
-    /* ===== 모바일 전용 정리 CSS: PC/기능 영향 없음 ===== */
-    @media (max-width: 700px) {
-      /* 상단 3개 메뉴 버튼 축소 */
-      .view-tabs {
-        gap: 6px;
-        margin: 8px 0 10px;
-      }
-
-      .view-tab {
-        min-height: 64px;
-        padding: 7px 4px;
-        border-radius: 15px;
-        gap: 4px;
-        box-shadow: 0 5px 14px rgba(120, 120, 180, .14);
-      }
-
-      .view-tab.active {
-        outline: 3px solid rgba(255,255,255,.95);
-      }
-
-      .view-tab .tab-icon {
-        font-size: 18px;
-      }
-
-      .view-tab .tab-title {
-        font-size: 12px;
-        letter-spacing: -0.5px;
-      }
-
-      .view-tab .tab-desc {
-        margin-top: 3px;
-        font-size: 8px;
-        letter-spacing: -0.3px;
-      }
-
-      /* 랭킹 카드 내부 여백 축소 */
       .ranking-card {
-        border-radius: 22px;
-        padding: 12px 10px;
+        border-radius: var(--radius-md);
+        padding: 14px 10px;
       }
 
-      /* 후원/채팅 버튼은 2칸 가로, 월 선택은 아래 오른쪽 */
       .topbar {
         display: grid;
         grid-template-columns: 1fr;
@@ -723,7 +483,7 @@ td:nth-child(4) {
         width: 100%;
         min-height: 42px;
         padding: 8px 4px;
-        border-radius: 14px;
+        border-radius: var(--radius-sm);
         font-size: 12px;
         line-height: 1.15;
         white-space: nowrap;
@@ -739,11 +499,10 @@ td:nth-child(4) {
         width: auto;
         min-width: 116px;
         padding: 8px 10px;
-        border-radius: 13px;
+        border-radius: var(--radius-sm);
         font-size: 12px;
       }
 
-      /* TOTAL 3개 카드 가로 배치 */
       .summary {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 6px;
@@ -752,7 +511,7 @@ td:nth-child(4) {
 
       .summary-box {
         min-height: 66px;
-        border-radius: 16px;
+        border-radius: var(--radius-sm);
         padding: 9px 6px;
       }
 
@@ -770,7 +529,6 @@ td:nth-child(4) {
         letter-spacing: -0.8px;
       }
 
-      /* 1~3등 카드 모바일에서도 가로 3명 */
       .podium {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 6px;
@@ -783,7 +541,7 @@ td:nth-child(4) {
       .winner.rank-2,
       .winner.rank-3 {
         min-height: 132px;
-        border-radius: 17px;
+        border-radius: var(--radius-sm);
         padding: 9px 4px;
       }
 
@@ -802,9 +560,6 @@ td:nth-child(4) {
         margin-top: 7px;
         font-size: 11px;
         line-height: 1.15;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
       .winner-tier {
@@ -822,14 +577,8 @@ td:nth-child(4) {
         gap: 3px;
       }
 
-      /* 랭킹 표 모바일 겹침 방지 */
       .table-wrap {
-        border-radius: 16px;
-      }
-
-      table {
-        table-layout: fixed;
-        width: 100%;
+        border-radius: var(--radius-sm);
       }
 
       th, td {
@@ -838,25 +587,10 @@ td:nth-child(4) {
         line-height: 1.2;
       }
 
-      th:nth-child(1),
-      td:nth-child(1) {
-        width: 12%;
-      }
-
-      th:nth-child(2),
-      td:nth-child(2) {
-        width: 39%;
-      }
-
-      th:nth-child(3),
-      td:nth-child(3) {
-        width: 31%;
-      }
-
-      th:nth-child(4),
-      td:nth-child(4) {
-        width: 18%;
-      }
+      th:nth-child(1), td:nth-child(1) { width: 12%; }
+      th:nth-child(2), td:nth-child(2) { width: 39%; }
+      th:nth-child(3), td:nth-child(3) { width: 31%; }
+      th:nth-child(4), td:nth-child(4) { width: 18%; }
 
       .rank-num {
         width: auto;
@@ -871,7 +605,6 @@ td:nth-child(4) {
       }
 
       .mini-avatar {
-        flex: 0 0 auto;
         width: 28px;
         height: 28px;
         border-width: 2px;
@@ -881,9 +614,6 @@ td:nth-child(4) {
         max-width: 68px;
         font-size: 12px;
         line-height: 1.15;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
       td .tier-badge {
@@ -897,7 +627,6 @@ td:nth-child(4) {
       .sub-score {
         font-size: 10px;
         line-height: 1.15;
-        white-space: nowrap;
       }
 
       .phrase {
@@ -908,34 +637,9 @@ td:nth-child(4) {
     }
 
     @media (max-width: 380px) {
-      .view-tab {
-        min-height: 58px;
-        padding: 6px 3px;
-      }
-
-      .view-tab .tab-icon {
-        font-size: 16px;
-      }
-
-      .view-tab .tab-title {
-        font-size: 11px;
-      }
-
-      .view-tab .tab-desc {
-        font-size: 7px;
-      }
-
-      .tab-btn {
-        font-size: 11px;
-      }
-
-      .summary-label {
-        font-size: 7px;
-      }
-
-      .summary-value {
-        font-size: 16px;
-      }
+      .tab-btn { font-size: 11px; }
+      .summary-label { font-size: 7px; }
+      .summary-value { font-size: 16px; }
 
       .winner,
       .winner.rank-1,
@@ -968,129 +672,38 @@ td:nth-child(4) {
         font-size: 9px;
       }
     }
-
-
-    /* ===== 랭킹 페이지 상단 모바일 비율 보정: 멤버 조직도와 동일 / PC 영향 없음 ===== */
-    @media (max-width: 700px) {
-      .page {
-        width: 100%;
-        padding: 8px 7px 44px;
-      }
-
-      .hero-banner {
-        height: 104px;
-        border-radius: 15px;
-        margin-bottom: 8px;
-      }
-
-      .view-tabs {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 5px;
-        margin: 8px 0 9px;
-      }
-
-      .view-tab {
-        min-height: 58px;
-        padding: 6px 4px;
-        border-radius: 14px;
-        gap: 3px;
-        flex-direction: column;
-        overflow: hidden;
-        box-shadow: 0 5px 14px rgba(120, 120, 180, .14);
-      }
-
-      .view-tab.active {
-        outline-width: 2px;
-      }
-
-      .view-tab:hover {
-        transform: none;
-      }
-
-      .view-tab .tab-icon {
-        font-size: 18px;
-        line-height: 1;
-      }
-
-      .view-tab .tab-text {
-        width: 100%;
-        align-items: center;
-        text-align: center;
-        line-height: 1.08;
-        min-width: 0;
-      }
-
-      .view-tab .tab-title {
-        font-size: 12px;
-        letter-spacing: -0.7px;
-        white-space: nowrap;
-        word-break: keep-all;
-        overflow: hidden;
-        text-overflow: clip;
-      }
-
-      .view-tab .tab-desc {
-        margin-top: 3px;
-        font-size: 7.5px;
-        line-height: 1.1;
-        white-space: nowrap;
-        word-break: keep-all;
-        opacity: .76;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .view-tab .tab-title {
-        font-size: 11px;
-      }
-
-      .view-tab .tab-desc {
-        font-size: 7px;
-      }
-    }
-
-
   </style>
 </head>
 
 <body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="../">FANTAJ</a>
+
+      <nav class="nav-menu" aria-label="상단 메뉴">
+        <a href="../live/">LIVE</a>
+        <a href="../members/">MEMBER</a>
+        <a href="../notice/">NOTICE</a>
+        <a class="active" href="./">RANKING</a>
+        <a href="../play/">PLAY</a>
+        <a href="../signature/">SIGNATURE</a>
+      </nav>
+
+      <a class="nav-live" id="onAirButton" href="../live/">ON AIR</a>
+    </div>
+  </header>
 
   <main class="page">
-    <div class="hero-banner">
-      <img src="../images/banner.webp" alt="FantaJ Banner">
-    </div>
-
-    <div class="view-tabs" role="navigation" aria-label="메인 메뉴">
-      <a class="view-tab signature-tab" href="../signature/">
-        <span class="tab-icon">🎀</span>
-        <span class="tab-text">
-          <span class="tab-title">시그니처 목록</span>
-          <span class="tab-desc">번호 검색 · 음원 재생</span>
-        </span>
-      </a>
-
-      <a class="view-tab member-tab" href="../members/">
-        <span class="tab-icon">👥</span>
-        <span class="tab-text">
-          <span class="tab-title">멤버 조직도</span>
-          <span class="tab-desc">대표 · 멤버 · 웨이터</span>
-        </span>
-      </a>
-
-      <a class="view-tab ranking-tab active" href="../ranking/">
-        <span class="tab-icon">🏆</span>
-        <span class="tab-text">
-          <span class="tab-title">랭킹</span>
-          <span class="tab-desc">후원 · 채팅 TOP 100</span>
-        </span>
-      </a>
-    </div>
-
+    <section class="hero" aria-label="랭킹 배너">
+      <div class="hero-content">
+        <div class="hero-kicker">FANTAJ OFFICIAL FAN PORTAL</div>
+        <h1 class="hero-title">RANKING</h1>
+        <p class="hero-sub">SUPPORT · CHAT · TOP 100</p>
+      </div>
+    </section>
 
     <section class="ranking-card">
-
       <div class="topbar">
-
         <div class="tabs">
           <button class="tab-btn active" data-type="balloon">
             👑 후원 랭킹 TOP 100
@@ -1104,14 +717,12 @@ td:nth-child(4) {
         <div class="period-box">
           <select class="month-select" id="monthSelect">
             <option value="rank.json">전체</option>
-			<option value="rank_2026-05.json">2026년 5월</option>
+            <option value="rank_2026-05.json">2026년 5월</option>
           </select>
         </div>
-
       </div>
 
       <div class="summary">
-
         <div class="summary-box">
           <div class="summary-label">TOTAL SUPPORT</div>
           <div class="summary-value" id="totalBalloon">0</div>
@@ -1126,15 +737,12 @@ td:nth-child(4) {
           <div class="summary-label">TOTAL CHAT</div>
           <div class="summary-value" id="totalChat">0</div>
         </div>
-
       </div>
 
       <div class="podium" id="podium"></div>
 
       <div class="table-wrap">
-
         <table>
-
           <thead>
             <tr>
               <th>순위</th>
@@ -1146,27 +754,17 @@ td:nth-child(4) {
 
           <tbody id="rankingBody">
             <tr>
-              <td colspan="4" class="loading">
-                데이터 불러오는 중...
-              </td>
+              <td colspan="4" class="loading">데이터 불러오는 중...</td>
             </tr>
           </tbody>
-
         </table>
-
       </div>
-
     </section>
-
   </main>
 
   <script>
-
-    // =========================
-    // GitHub rank.json 주소
-    // =========================
-
     const RANK_RAW_BASE_URL = "./";
+    const DEFAULT_PROFILE_IMAGE = "https://profile.img.sooplive.co.kr/LOGO/sy/sysdemian/sysdemian.jpg";
 
     let rankingData = [];
     let currentType = "balloon";
@@ -1175,199 +773,102 @@ td:nth-child(4) {
     const $ = (selector) => document.querySelector(selector);
     const $$ = (selector) => document.querySelectorAll(selector);
 
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
     function formatNumber(value) {
       return Number(value || 0).toLocaleString("ko-KR");
     }
 
     function getProfileImage(userId) {
-      const prefix = String(userId || "").slice(0, 2);
+      const id = String(userId || "").trim();
 
-      return `https://profile.img.sooplive.co.kr/LOGO/${prefix}/${userId}/${userId}.jpg`;
+      if (!id) {
+        return DEFAULT_PROFILE_IMAGE;
+      }
+
+      const prefix = id.slice(0, 2);
+      return `https://profile.img.sooplive.co.kr/LOGO/${prefix}/${id}/${id}.jpg`;
     }
 
     function fallbackAvatar(img) {
-
       img.onerror = null;
-
-      img.src =
-        "data:image/svg+xml;charset=utf-8," +
-        encodeURIComponent(`
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="120"
-               height="120"
-               viewBox="0 0 120 120">
-            <rect width="120"
-                  height="120"
-                  rx="60"
-                  fill="#f3e7fb"/>
-            <circle cx="60"
-                    cy="46"
-                    r="22"
-                    fill="#c9afd9"/>
-            <path d="M22 104
-                     c7-25 25-38 38-38
-                     s31 13 38 38"
-                  fill="#c9afd9"/>
-          </svg>
-        `);
+      img.src = DEFAULT_PROFILE_IMAGE;
     }
 
-    // =========================
-    // 후원 등급
-    // =========================
-
     function getSupportTier(amount) {
-
       const value = Number(amount || 0);
 
-if (value <= 0) return { icon: "🥔", label: "STONE" };
+      if (value <= 0) return { icon: "🥔", label: "STONE" };
+      if (value >= 1000000) return { icon: "🌌", label: "ETERNAL" };
+      if (value >= 500000) return { icon: "👑", label: "LEGEND" };
+      if (value >= 200000) return { icon: "💎", label: "MASTER" };
+      if (value >= 100000) return { icon: "🟣", label: "DIAMOND" };
+      if (value >= 50000) return { icon: "🔵", label: "PLATINUM" };
+      if (value >= 10000) return { icon: "🟡", label: "GOLD" };
 
-      if (value >= 1000000) {
-        return {
-          icon: "🌌",
-          label: "ETERNAL"
-        };
-      }
-
-      if (value >= 500000) {
-        return {
-          icon: "👑",
-          label: "LEGEND"
-        };
-      }
-
-      if (value >= 200000) {
-        return {
-          icon: "💎",
-          label: "MASTER"
-        };
-      }
-
-      if (value >= 100000) {
-        return {
-          icon: "🟣",
-          label: "DIAMOND"
-        };
-      }
-
-      if (value >= 50000) {
-        return {
-          icon: "🔵",
-          label: "PLATINUM"
-        };
-      }
-
-      if (value >= 10000) {
-        return {
-          icon: "🟡",
-          label: "GOLD"
-        };
-      }
-
-      return {
-        icon: "⚪",
-        label: "SILVER"
-      };
+      return { icon: "⚪", label: "SILVER" };
     }
 
     function getSortedData() {
-
-      const key =
-        currentType === "chat"
-          ? "chat"
-          : "balloon";
+      const key = currentType === "chat" ? "chat" : "balloon";
 
       return [...rankingData]
-        .sort((a, b) =>
-          Number(b[key] || 0) -
-          Number(a[key] || 0)
-        )
+        .sort((a, b) => Number(b[key] || 0) - Number(a[key] || 0))
         .slice(0, 100);
     }
 
     function renderSummary() {
+      const totalChat = rankingData.reduce((sum, user) => sum + Number(user.chat || 0), 0);
+      const totalBalloon = rankingData.reduce((sum, user) => sum + Number(user.balloon || 0), 0);
+      const totalSupporters = rankingData.filter(user => Number(user.balloon || 0) > 0).length;
 
-      const totalChat =
-        rankingData.reduce(
-          (sum, user) =>
-            sum + Number(user.chat || 0),
-          0
-        );
-
-      const totalBalloon =
-        rankingData.reduce(
-          (sum, user) =>
-            sum + Number(user.balloon || 0),
-          0
-        );
-
-      const totalSupporters =
-        rankingData.filter(
-          user => Number(user.balloon || 0) > 0
-        ).length;
-
-      $("#totalBalloon").textContent =
-        formatNumber(totalBalloon);
-
-      $("#totalSupporters").textContent =
-        formatNumber(totalSupporters);
-
-      $("#totalChat").textContent =
-        formatNumber(totalChat);
+      $("#totalBalloon").textContent = formatNumber(totalBalloon);
+      $("#totalSupporters").textContent = formatNumber(totalSupporters);
+      $("#totalChat").textContent = formatNumber(totalChat);
     }
 
     function renderPodium(data) {
-
       const top3 = data.slice(0, 3);
-
       const order = [1, 0, 2];
-
       const crowns = ["🥇", "🥈", "🥉"];
 
       $("#podium").innerHTML = order
         .filter(index => top3[index])
         .map(index => {
-
           const user = top3[index];
-
           const rank = index + 1;
+          const tier = getSupportTier(user.balloon);
 
-          const tier =
-            getSupportTier(user.balloon);
-
-          const subText =
-            currentType === "chat"
-              ? `채팅 ${formatNumber(user.chat)}회`
-              : ``;
+          const subText = currentType === "chat"
+            ? `채팅 ${formatNumber(user.chat)}회`
+            : `총 ${formatNumber(user.donateCount)}회`;
 
           return `
             <div class="winner rank-${rank}">
-
-              <div class="crown">
-                ${crowns[index]}
-              </div>
+              <div class="crown">${crowns[index]}</div>
 
               <img
                 class="avatar"
                 src="${getProfileImage(user.id)}"
                 onerror="fallbackAvatar(this)"
-                alt="${user.nickname}"
+                alt="${escapeHtml(user.nickname)}"
+                loading="lazy"
               >
 
-              <div class="winner-name">
-                ${user.nickname}
-              </div>
+              <div class="winner-name">${escapeHtml(user.nickname)}</div>
 
               <div class="winner-tier">
-                <span class="tier-badge">
-                  ${tier.icon} ${tier.label}
-                </span>
+                <span class="tier-badge">${tier.icon} ${tier.label}</span>
               </div>
 
-              <div class="winner-sub">
-                ${subText}
-              </div>
-
+              <div class="winner-sub">${subText}</div>
             </div>
           `;
         })
@@ -1375,87 +876,43 @@ if (value <= 0) return { icon: "🥔", label: "STONE" };
     }
 
     function renderTable(data) {
-
-      $("#scoreHeader").textContent =
-        currentType === "chat"
-          ? "채팅 횟수"
-          : "후원 등급";
-
-      $("#extraHeader").textContent =
-        currentType === "chat"
-          ? "대표 문구"
-          : "후원 횟수";
+      $("#scoreHeader").textContent = currentType === "chat" ? "채팅 횟수" : "후원 등급";
+      $("#extraHeader").textContent = currentType === "chat" ? "대표 문구" : "후원 횟수";
 
       $("#rankingBody").innerHTML = data
         .map((user, index) => {
+          const tier = getSupportTier(user.balloon);
 
-          const tier =
-            getSupportTier(user.balloon);
+          const score = currentType === "chat"
+            ? `<div style="font-weight:950;">${formatNumber(user.chat)}회</div>`
+            : `<span class="tier-badge">${tier.icon} ${tier.label}</span>`;
 
-          const score =
-            currentType === "chat"
-              ? `
-                <div style="font-weight:1000;">
-                  ${formatNumber(user.chat)}회
-                </div>
-              `
-              : `
-                <span class="tier-badge">
-                  ${tier.icon} ${tier.label}
-                </span>
-              `;
-
-          const extra =
-            currentType === "chat"
-              ? `
-                <span class="phrase">
-                  ${user.topword || "-"}
-                </span>
-              `
-              : `
-                <div class="sub-score">
-                  총 ${formatNumber(user.donateCount)}회
-                </div>
-              `;
+          const extra = currentType === "chat"
+            ? `<span class="phrase">${escapeHtml(user.topword || "-")}</span>`
+            : `<div class="sub-score">총 ${formatNumber(user.donateCount)}회</div>`;
 
           return `
             <tr>
-
-              <td class="rank-num">
-                ${index + 1}
-              </td>
+              <td class="rank-num">${index + 1}</td>
 
               <td>
-
                 <div class="user-cell">
-
                   <img
                     class="mini-avatar"
                     src="${getProfileImage(user.id)}"
                     onerror="fallbackAvatar(this)"
-                    alt="${user.nickname}"
+                    alt="${escapeHtml(user.nickname)}"
+                    loading="lazy"
                   >
 
                   <div>
-
-                    <div class="nickname">
-                      ${user.nickname}
-                    </div>
-
+                    <div class="nickname">${escapeHtml(user.nickname)}</div>
                   </div>
-
                 </div>
-
               </td>
 
-              <td>
-                ${score}
-              </td>
-
-              <td>
-                ${extra}
-              </td>
-
+              <td>${score}</td>
+              <td>${extra}</td>
             </tr>
           `;
         })
@@ -1463,7 +920,6 @@ if (value <= 0) return { icon: "🥔", label: "STONE" };
     }
 
     function render() {
-
       const data = getSortedData();
 
       renderSummary();
@@ -1471,113 +927,51 @@ if (value <= 0) return { icon: "🥔", label: "STONE" };
       renderTable(data);
     }
 
-    function getMonthLabel(fileName) {
-
-      const match =
-        fileName.match(/^rank_(\d{4})-(\d{2})\.json$/);
-
-      if (!match) return "전체";
-
-      return `${match[1]}년 ${Number(match[2])}월`;
-    }
-
-    async function loadMonthOptions() {
-
-      try {
-
-        const response =
-          await fetch(
-            `${RANK_LIST_API_URL}&v=${Date.now()}`
-          );
-
-        const files = await response.json();
-
-        const monthFiles = files
-          .filter(file =>
-            /^rank_\d{4}-\d{2}\.json$/.test(file.name)
-          )
-          .map(file => file.name)
-          .sort()
-          .reverse();
-
-        const monthSelect = $("#monthSelect");
-
-        monthSelect.innerHTML = `
-          <option value="rank.json">전체</option>
-        `;
-
-        monthFiles.forEach(fileName => {
-          const option = document.createElement("option");
-          option.value = fileName;
-          option.textContent = getMonthLabel(fileName);
-          monthSelect.appendChild(option);
-        });
-
-      } catch (error) {
-
-        console.error(error);
-      }
-    }
-
     async function loadRankingData(fileName = "rank.json") {
-
       try {
-
         $("#rankingBody").innerHTML = `
           <tr>
-            <td colspan="4" class="loading">
-              데이터 불러오는 중...
-            </td>
+            <td colspan="4" class="loading">데이터 불러오는 중...</td>
           </tr>
         `;
 
         currentRankFile = fileName;
 
-        const response =
-          await fetch(
-            `${RANK_RAW_BASE_URL}${fileName}?v=${Date.now()}`
-          );
+        const response = await fetch(`${RANK_RAW_BASE_URL}${fileName}`);
+
+        if (!response.ok) {
+          throw new Error("랭킹 데이터 응답 오류");
+        }
 
         const data = await response.json();
 
         rankingData = Array.isArray(data) ? data : [];
 
         render();
-
       } catch (error) {
-
         console.error(error);
 
         rankingData = [];
 
         $("#podium").innerHTML = "";
-
         $("#totalBalloon").textContent = "0";
         $("#totalSupporters").textContent = "0";
         $("#totalChat").textContent = "0";
 
         $("#rankingBody").innerHTML = `
           <tr>
-            <td colspan="4" class="loading">
-              데이터 불러오기 실패
-            </td>
+            <td colspan="4" class="loading">데이터 불러오기 실패</td>
           </tr>
         `;
       }
     }
 
     $$(".tab-btn").forEach(button => {
-
       button.addEventListener("click", () => {
-
-        $$(".tab-btn").forEach(btn =>
-          btn.classList.remove("active")
-        );
+        $$(".tab-btn").forEach(btn => btn.classList.remove("active"));
 
         button.classList.add("active");
-
-        currentType =
-          button.dataset.type;
+        currentType = button.dataset.type;
 
         render();
       });
@@ -1588,8 +982,31 @@ if (value <= 0) return { icon: "🥔", label: "STONE" };
     });
 
     loadRankingData();
-
   </script>
+<script>
+const LIVE_API_URL_FOR_ON_AIR = "https://fantj-live.4rgn2004.workers.dev/";
 
+async function updateOnAirCount() {
+  const onAirButton = document.getElementById("onAirButton");
+  if (!onAirButton) return;
+
+  try {
+    const response = await fetch(LIVE_API_URL_FOR_ON_AIR, { cache: "no-store" });
+    if (!response.ok) throw new Error("LIVE API 응답 오류");
+
+    const data = await response.json();
+    const members = Array.isArray(data.members) ? data.members : [];
+    const liveCount = members.filter(member => member && member.isLive).length;
+
+    onAirButton.textContent = liveCount > 0 ? `ON AIR ${liveCount}` : "ON AIR";
+  } catch (error) {
+    console.error(error);
+    onAirButton.textContent = "ON AIR";
+  }
+}
+
+updateOnAirCount();
+setInterval(updateOnAirCount, 60000);
+</script>
 </body>
 </html>
