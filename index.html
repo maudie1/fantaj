@@ -1204,12 +1204,41 @@
       return `${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
     }
 
+    function isMobileDevice() {
+      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    function getLiveBroadNo(member) {
+      const direct = member.broadNo || member.broad_no || member.broadno || member.broadcastNo || member.broadcast_no;
+
+      if (direct) {
+        return String(direct).trim();
+      }
+
+      const url = String(member.url || "");
+      const match = url.match(/\/(\d+)(?:[?#].*)?$/);
+
+      return match ? match[1] : "";
+    }
+
+    function getLiveOpenUrl(member) {
+      const webUrl = member.url || "#";
+      const userId = String(member.soopId || member.id || "").trim();
+      const broadNo = getLiveBroadNo(member);
+
+      if (isMobileDevice() && userId && broadNo) {
+        return `sooplive://player/live?user_id=${encodeURIComponent(userId)}&broad_no=${encodeURIComponent(broadNo)}`;
+      }
+
+      return webUrl;
+    }
+
     function renderLiveCard(member) {
       const name = escapeHtml(member.name || member.soopId || "멤버");
       const title = escapeHtml(member.title || "방송 제목이 없습니다");
       const viewer = numberFormat(member.viewer || 0);
       const startedAt = escapeHtml(member.startedAt || "");
-      const url = member.url || "#";
+      const url = getLiveOpenUrl(member);
 
       const thumbHtml = member.thumbnail
         ? `<img src="${escapeHtml(member.thumbnail)}" alt="${name} 방송 썸네일" loading="lazy">`
