@@ -1167,6 +1167,7 @@ function createCard(item) {
     img.alt = item.name || String(item.number || "");
     img.loading = "lazy";
     img.decoding = "async";
+    img.fetchPriority = "low";
     applyImageWithFallback(img, imageCandidates, "이미지 없음");
     card.appendChild(img);
   } else {
@@ -1251,27 +1252,100 @@ function closeVideoModal() {
   videoList.innerHTML = "";
 }
 
+const TRANSPARENT_IMAGE = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+let imageResumeTimer = null;
+
+function pauseImagesForAudioPriority() {
+  clearTimeout(imageResumeTimer);
+
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+  const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+  const safeMargin = 80;
+
+  document.querySelectorAll("img.thumb").forEach(img => {
+    if (img.dataset.audioPaused === "1") return;
+
+    const src = img.currentSrc || img.src;
+    if (!src || src === TRANSPARENT_IMAGE) return;
+
+    const rect = img.getBoundingClientRect();
+    const isVisibleNow =
+      rect.bottom > -safeMargin &&
+      rect.top < viewportHeight + safeMargin &&
+      rect.right > -safeMargin &&
+      rect.left < viewportWidth + safeMargin;
+
+    if (isVisibleNow) return;
+    if (img.complete && img.naturalWidth > 0) return;
+
+    img.dataset.audioPaused = "1";
+    img.dataset.resumeSrc = src;
+    img.src = TRANSPARENT_IMAGE;
+  });
+}
+
+function resumeImagesAfterAudioPriority(delay = 900) {
+  clearTimeout(imageResumeTimer);
+
+  imageResumeTimer = setTimeout(() => {
+    document.querySelectorAll('img.thumb[data-audio-paused="1"]').forEach(img => {
+      const src = img.dataset.resumeSrc;
+      delete img.dataset.audioPaused;
+      delete img.dataset.resumeSrc;
+      if (src) img.src = src;
+    });
+  }, delay);
+}
+
+function prepareAudioFirst(url) {
+  document.querySelectorAll('link[data-audio-preload="true"]').forEach(link => link.remove());
+
+  const preloadLink = document.createElement("link");
+  preloadLink.rel = "preload";
+  preloadLink.as = "audio";
+  preloadLink.href = url;
+  preloadLink.setAttribute("data-audio-preload", "true");
+  preloadLink.fetchPriority = "high";
+  document.head.appendChild(preloadLink);
+}
+
 function playAudio(url, card) {
   if (!url) return;
 
   if (currentUrl === url && !player.paused) {
     stopAudio();
+    resumeImagesAfterAudioPriority(0);
     return;
   }
 
+  pauseImagesForAudioPriority();
   stopAudio();
 
   currentUrl = url;
   currentCard = card;
   currentCard.classList.add("loading");
 
+  prepareAudioFirst(url);
+
+  player.preload = "auto";
   player.src = url;
   player.volume = volume;
   player.load();
 
-  player.play().catch(() => {
-    stopAudio();
-  });
+  const playPromise = player.play();
+
+  if (playPromise && typeof playPromise.then === "function") {
+    playPromise
+      .then(() => {
+        resumeImagesAfterAudioPriority(900);
+      })
+      .catch(() => {
+        stopAudio();
+        resumeImagesAfterAudioPriority(0);
+      });
+  } else {
+    resumeImagesAfterAudioPriority(900);
+  }
 }
 
 function setPlayingState() {
@@ -1311,7 +1385,10 @@ document.addEventListener("keydown", event => {
 
 player.addEventListener("playing", setPlayingState);
 player.addEventListener("ended", stopAudio);
-player.addEventListener("error", stopAudio);
+player.addEventListener("error", () => {
+  stopAudio();
+  resumeImagesAfterAudioPriority(0);
+});
 
 async function init() {
   try {
