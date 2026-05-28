@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FANTAJ NOTICE</title>
+  <title>FANTAJ LIVE</title>
   <link rel="icon" type="image/png" href="../favicon.png">
 
   <style>
@@ -18,12 +18,14 @@
       --purple: #8f4eb2;
       --purple-2: #a061bb;
       --pink: #ff7eb7;
+      --deep-pink: #ff4f98;
       --line: rgba(226, 194, 223, 0.58);
       --card: rgba(255, 255, 255, 0.78);
       --soft-card: rgba(255, 246, 252, 0.82);
       --radius-sm: 8px;
       --radius-md: 10px;
       --radius-lg: 13px;
+      --shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
     }
 
     body {
@@ -37,6 +39,7 @@
     }
 
     a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
 
     .navbar {
       position: sticky;
@@ -154,11 +157,11 @@
       color: #6f527c;
     }
 
-    .notice-card {
+    .live-panel {
       border-radius: var(--radius-lg);
       background: var(--card);
       border: 1px solid var(--line);
-      box-shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
+      box-shadow: var(--shadow);
       padding: 22px;
       overflow: hidden;
     }
@@ -172,339 +175,439 @@
       margin-bottom: 18px;
     }
 
-    .notice-heading {
+    .tabs {
       display: flex;
-      align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .notice-heading h2 {
-      font-size: 22px;
-      color: #4b3659;
-      font-weight: 950;
-    }
-
-    .notice-count {
-      padding: 7px 10px;
-      border-radius: var(--radius-sm);
-      background: rgba(255,255,255,.78);
-      color: #8a4dae;
-      font-size: 12px;
-      font-weight: 950;
-      box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
-    }
-
-    .search-box {
-      min-width: 240px;
+    .tab-btn {
       border: 1px solid rgba(226, 194, 223, 0.66);
       border-radius: var(--radius-sm);
-      background: rgba(255,255,255,.92);
-      padding: 12px 14px;
-      color: #765a88;
-      font-family: inherit;
-      font-weight: 850;
-      outline: none;
+      padding: 12px 18px;
+      font-weight: 950;
+      cursor: pointer;
+      color: #7b628a;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: 0 8px 18px rgba(150, 94, 171, 0.08);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
     }
 
-    .notice-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .notice-item {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 12px;
-      align-items: center;
-      padding: 16px;
-      border-radius: var(--radius-md);
-      background: var(--soft-card);
-      border: 1px solid rgba(236, 206, 232, 0.75);
-      transition: transform .12s ease, box-shadow .12s ease;
-    }
-
-    .notice-item:hover {
+    .tab-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(150, 94, 171, 0.13);
+      box-shadow: 0 10px 22px rgba(150, 94, 171, 0.13);
     }
 
-    .notice-item-left { min-width: 0; }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 10px 24px rgba(176, 97, 209, .24);
+    }
 
-    .notice-meta {
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .summary-box {
+      border-radius: var(--radius-md);
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,241,249,.82));
+      border: 1px solid rgba(236, 206, 232, 0.78);
+    }
+
+    .summary-label {
+      font-size: 12px;
+      color: #9c82ae;
+      font-weight: 950;
+      margin-bottom: 5px;
+    }
+
+    .summary-value {
+      font-size: clamp(24px, 3vw, 31px);
+      font-weight: 950;
+      color: #b05cc9;
+      letter-spacing: -0.04em;
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .section-title-row {
       display: flex;
-      align-items: center;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-bottom: 8px;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
-    .badge {
+    .section-title {
+      font-size: 22px;
+      font-weight: 950;
+      color: #4b3659;
+    }
+
+    .section-note {
+      font-size: 13px;
+      font-weight: 900;
+      color: #a061bb;
+      white-space: nowrap;
+    }
+
+    .live-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .broadcast-card,
+    .offline-card,
+    .post-card {
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(226, 194, 223, 0.55);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .broadcast-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 292px;
+    }
+
+    .live-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      background: linear-gradient(135deg, #ffc1dc, #c7b2ff);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .live-thumb-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(16px);
+      transform: scale(1.12);
+      opacity: 0.45;
+    }
+
+    .live-thumb-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .live-thumb.no-image {
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 15px;
+      font-weight: 950;
+      text-shadow: 0 2px 10px rgba(98, 53, 125, 0.18);
+    }
+
+    .live-badge,
+    .rank-badge,
+    .post-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: var(--radius-sm);
-      padding: 6px 9px;
+      border-radius: 999px;
       font-size: 12px;
       font-weight: 950;
-      background: rgba(255,255,255,.85);
-      color: #735b84;
-      box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
+      white-space: nowrap;
     }
 
-    .badge.pin {
-      background: linear-gradient(135deg, #ff7eb7, #a965e8);
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(176, 97, 209, .18);
+    .live-badge {
+      position: absolute;
+      z-index: 2;
+      top: 12px;
+      left: 12px;
+      padding: 6px 10px;
+      background: var(--deep-pink);
+      color: white;
     }
 
-    .notice-title {
-      font-size: 16px;
-      line-height: 1.35;
+    .viewer-badge {
+      position: absolute;
+      z-index: 2;
+      right: 12px;
+      bottom: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .9);
+      color: #8a4dae;
+      font-size: 12px;
       font-weight: 950;
-      color: #4b3659;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      box-shadow: 0 6px 16px rgba(80, 43, 108, .16);
     }
 
-    .notice-summary {
-      margin-top: 7px;
-      font-size: 13px;
-      line-height: 1.45;
-      color: var(--text-sub);
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-
-    .notice-date {
-      color: #9a8aa3;
-      font-size: 13px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-
-
-    .pagination {
+    .live-info {
+      flex: 1;
+      padding: 13px 15px 15px;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      margin-top: 18px;
-      padding-top: 4px;
+      flex-direction: column;
     }
 
-    .page-btn {
-      min-width: 34px;
-      height: 34px;
-      padding: 0 10px;
-      border: 1px solid rgba(226, 194, 223, 0.72);
-      border-radius: var(--radius-sm);
-      background: rgba(255,255,255,.88);
-      color: #7b628a;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 950;
-      cursor: pointer;
-      box-shadow: 0 7px 16px rgba(150, 94, 171, 0.07);
-    }
-
-    .page-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 9px 20px rgba(150, 94, 171, 0.12);
-    }
-
-    .page-btn.active {
-      border-color: transparent;
-      background: linear-gradient(135deg, #ff7eb7, #a965e8);
-      color: #fff;
-      box-shadow: 0 9px 20px rgba(176, 97, 209, .22);
-    }
-
-    .page-btn:disabled {
-      cursor: default;
-      opacity: .42;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .detail-wrap {
-      display: none;
-    }
-
-    .detail-head {
+    .live-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
+      gap: 10px;
+      margin-bottom: 6px;
     }
 
-    .back-btn {
-      border: 1px solid rgba(226, 194, 223, 0.66);
+    .live-name {
+      min-width: 0;
+      font-size: 17px;
+      font-weight: 950;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .rank-badge {
+      flex: none;
+      padding: 5px 9px;
+      background: rgba(240, 220, 255, .9);
+      color: #8a4dae;
+    }
+
+    .live-title {
+      min-height: 0;
+      font-size: 13px;
+      line-height: 1.38;
+      color: #7c6d85;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .live-meta {
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #a061bb;
+      flex-wrap: wrap;
+    }
+
+    .live-open-btn {
+      margin-top: auto;
+      width: 100%;
+      border: 0;
       border-radius: var(--radius-sm);
-      padding: 11px 15px;
-      background: rgba(255,255,255,.9);
-      color: #7b628a;
-      font-family: inherit;
+      padding: 11px 12px;
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
+      color: white;
       font-size: 13px;
       font-weight: 950;
       cursor: pointer;
-      box-shadow: 0 8px 18px rgba(150, 94, 171, 0.08);
+      box-shadow: 0 8px 20px rgba(177, 92, 201, 0.22);
     }
 
+    .offline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
 
-
-    .detail-bottom-actions {
+    .offline-card {
+      padding: 13px;
       display: flex;
-      justify-content: center;
-      margin-top: 18px;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
     }
 
-    .detail-bottom-actions .back-btn {
-      min-width: 118px;
+    .offline-avatar {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      background: #f3e7fb;
+      box-shadow: 0 8px 18px rgba(144,88,175,.15);
     }
 
-
-    .detail-box {
-      border-radius: var(--radius-md);
-      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,246,252,.86));
-      border: 1px solid rgba(236, 206, 232, 0.78);
-      padding: 24px;
+    .offline-body {
+      min-width: 0;
+      flex: 1;
     }
 
-    .detail-title {
-      margin-top: 12px;
-      font-size: clamp(24px, 3vw, 34px);
-      line-height: 1.25;
+    .offline-name {
+      font-size: 14px;
       font-weight: 950;
       color: #4b3659;
-    }
-
-    .detail-content {
-      margin-top: 22px;
-      color: #5f4d69;
-      font-size: 16px;
-      line-height: 1.85;
-      font-weight: 650;
-      white-space: pre-line;
-      word-break: keep-all;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 42px 16px;
-      font-weight: 900;
-      color: #9d7daf;
-    }
-
-
-
-    body.detail-mode .hero {
-      display: none;
-    }
-
-    body.detail-mode .page {
-      padding-top: 26px;
-    }
-
-    .page-btn.edge {
-      color: #8c7a96;
-      background: rgba(255,255,255,.68);
-    }
-
-    .page-btn.active {
-      background: #2f2638;
-      color: #fff;
-      border-color: #2f2638;
-      box-shadow: 0 9px 20px rgba(47, 38, 56, .18);
-    }
-
-    .page-ellipsis {
-      min-width: 24px;
-      height: 34px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #9a8aa3;
-      font-size: 13px;
-      font-weight: 950;
-    }
-
-    .related-card {
-      margin-top: 18px;
-      border-radius: var(--radius-md);
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(236, 206, 232, 0.78);
-      overflow: hidden;
-    }
-
-    .related-title {
-      padding: 14px 16px;
-      font-size: 15px;
-      font-weight: 950;
-      color: #4b3659;
-      background: linear-gradient(135deg, rgba(255,127,200,.13), rgba(167,127,255,.12));
-      border-bottom: 1px solid rgba(226, 194, 223, 0.55);
-    }
-
-    .related-list {
-      display: grid;
-    }
-
-    .related-item {
-      display: grid;
-      grid-template-columns: 86px minmax(0, 1fr) 110px;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 16px;
-      border-bottom: 1px solid rgba(226, 194, 223, 0.38);
-      background: rgba(255,255,255,.35);
-    }
-
-    .related-item:last-child {
-      border-bottom: 0;
-    }
-
-    .related-item:hover {
-      background: rgba(255,245,251,.72);
-    }
-
-    .related-category {
-      justify-self: start;
-      max-width: 86px;
-      padding: 5px 7px;
-      border-radius: 6px;
-      background: rgba(255,255,255,.86);
-      color: #8a4dae;
-      font-size: 11px;
-      font-weight: 950;
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .offline-meta {
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .offline-state {
+      font-size: 11px;
+      font-weight: 900;
+      color: #9a8aa3;
       white-space: nowrap;
+    }
+
+    .station-link {
+      margin-left: auto;
+      flex: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.86);
+      color: #a061bb;
+      font-size: 14px;
+      font-weight: 950;
       box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
     }
 
-    .related-link-title {
-      min-width: 0;
-      color: #4b3659;
-      font-size: 14px;
-      font-weight: 950;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    .post-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .related-date {
-      color: #9a8aa3;
+    .post-card {
+      display: flex;
+      min-height: 150px;
+      background: rgba(255, 246, 252, 0.82);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(150, 94, 171, 0.14);
+    }
+
+    .post-body {
+      min-width: 0;
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .post-top {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 7px;
+      min-width: 0;
+    }
+
+    .post-writer {
+      min-width: 0;
       font-size: 12px;
-      font-weight: 900;
-      text-align: right;
+      font-weight: 950;
+      color: #b05cc9;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post-badge {
+      flex: none;
+      padding: 4px 7px;
+      background: #ff4f98;
+      color: white;
+      font-size: 10px;
+    }
+
+    .post-title {
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.35;
+      color: #4b3659;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .post-summary {
+      margin-top: 7px;
+      font-size: 12px;
+      line-height: 1.42;
+      color: #7c6d85;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .post-meta {
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 850;
+      color: #9a8aa3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post-thumb {
+      width: 140px;
+      flex: 0 0 140px;
+      background: linear-gradient(135deg, #ffe8f5, #efe1ff);
+      overflow: hidden;
+    }
+
+    .post-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .empty-card,
+    .loading-card {
+      grid-column: 1 / -1;
+      padding: 36px 18px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 900;
+      color: #8a7893;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(226, 194, 223, 0.55);
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 980px) {
+      .live-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .offline-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .post-list { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 900px) {
@@ -548,7 +651,17 @@
       }
 
       .nav-menu::-webkit-scrollbar { display: none; }
-      .nav-menu a { flex: 0 0 auto; }
+
+      .nav-menu a {
+        flex: 0 0 auto;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        white-space: nowrap;
+      }
+
       .hero { height: 210px; }
     }
 
@@ -580,6 +693,7 @@
       .page {
         width: min(100% - 20px, 1180px);
         padding-top: 12px;
+        padding-bottom: 52px;
       }
 
       .hero {
@@ -607,7 +721,7 @@
         line-height: 1.3;
       }
 
-      .notice-card {
+      .live-panel {
         border-radius: var(--radius-md);
         padding: 14px 10px;
       }
@@ -615,103 +729,180 @@
       .topbar {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 8px;
         margin-bottom: 12px;
       }
 
-      .notice-heading h2 { font-size: 18px; }
-
-      .search-box {
+      .tabs {
         width: 100%;
-        min-width: 0;
-        padding: 10px 12px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .tab-btn {
+        width: 100%;
+        min-height: 42px;
+        padding: 8px 4px;
+        border-radius: var(--radius-sm);
+        font-size: 12px;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+
+      .summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        margin-bottom: 12px;
+      }
+
+      .summary-box {
+        min-height: 44px;
+        border-radius: 7px;
+        padding: 5px 4px 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .summary-label {
+        font-size: 6px;
+        line-height: 1;
+        letter-spacing: -0.45px;
+        margin-bottom: 3px;
+        white-space: nowrap;
+      }
+
+      .summary-value {
+        font-size: clamp(12px, 4vw, 15px);
+        line-height: 1;
+        letter-spacing: -0.8px;
+        white-space: nowrap;
+      }
+
+      .section-title-row {
+        margin-bottom: 10px;
+      }
+
+      .section-title { font-size: 18px; }
+      .section-note { font-size: 11px; }
+
+      .live-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .broadcast-card {
+        min-height: 0;
+      }
+
+      .live-thumb {
+        aspect-ratio: 16 / 9;
+      }
+
+      .live-info {
+        padding: 11px 14px 13px;
+      }
+
+      .live-name { font-size: 15px; }
+      .live-title { min-height: 0; font-size: 12px; line-height: 1.34; }
+      .live-meta { margin-top: 3px; font-size: 11px; }
+      .live-open-btn { margin-top: 12px; padding: 10px; font-size: 12px; }
+
+      .offline-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .offline-card {
+        border-radius: var(--radius-sm);
+        padding: 9px;
+        gap: 8px;
+      }
+
+      .offline-avatar {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+        border-width: 2px;
+      }
+
+      .offline-name {
+        font-size: 12px;
+      }
+
+      .offline-meta {
+        margin-top: 3px;
+        gap: 4px;
+      }
+
+      .offline-state {
+        display: none;
+      }
+
+      .offline-card .rank-badge {
+        max-width: 60px;
+        padding: 4px 5px;
+        font-size: 9px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .station-link {
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        font-size: 12px;
+      }
+
+      .post-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .post-card {
+        min-height: 118px;
+        border-radius: var(--radius-sm);
+      }
+
+      .post-body {
+        padding: 12px;
+      }
+
+      .post-title {
         font-size: 13px;
       }
 
-      .notice-list { gap: 8px; }
-
-      .notice-item {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        padding: 13px 12px;
-        border-radius: var(--radius-sm);
-      }
-
-      .notice-title {
-        font-size: 14px;
-        white-space: normal;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-      }
-
-      .notice-summary { font-size: 12px; }
-      .notice-date { font-size: 11px; }
-
-
-      .pagination {
-        gap: 5px;
-        margin-top: 14px;
-      }
-
-      .page-btn {
-        min-width: 31px;
-        height: 31px;
-        padding: 0 8px;
-        font-size: 12px;
-      }
-      .badge { font-size: 10px; padding: 5px 7px; }
-
-      .page-ellipsis {
-        min-width: 18px;
-        height: 31px;
+      .post-summary {
         font-size: 11px;
+        margin-top: 6px;
       }
 
-      .related-card {
-        margin-top: 14px;
-        border-radius: var(--radius-sm);
-      }
-
-      .related-title {
-        padding: 12px 13px;
-        font-size: 14px;
-      }
-
-      .related-item {
-        grid-template-columns: 64px minmax(0, 1fr) 72px;
-        gap: 7px;
-        padding: 11px 12px;
-      }
-
-      .related-category {
-        max-width: 64px;
-        padding: 4px 5px;
+      .post-meta {
         font-size: 10px;
+        margin-top: 8px;
       }
 
-      .related-link-title {
-        font-size: 12px;
+      .post-thumb {
+        width: 82px;
+        flex-basis: 82px;
       }
 
-      .related-date {
-        font-size: 10px;
-      }
-
-
-      .detail-box {
-        padding: 17px 14px;
+      .empty-card,
+      .loading-card {
+        padding: 28px 14px;
         border-radius: var(--radius-sm);
+        font-size: 13px;
       }
+    }
 
-      .detail-title { font-size: 21px; }
-
-      .detail-content {
-        margin-top: 16px;
-        font-size: 14px;
-        line-height: 1.75;
-        word-break: normal;
-      }
+    @media (max-width: 380px) {
+      .tab-btn { font-size: 11px; }
+      .summary-label { font-size: 6.5px; }
+      .summary-value { font-size: 15px; }
+      .offline-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -722,82 +913,113 @@
       <a class="logo" href="../">FANTAJ</a>
 
       <nav class="nav-menu" aria-label="상단 메뉴">
-        <a href="../live/">LIVE</a>
+        <a class="active" href="./">LIVE</a>
         <a href="../members/">MEMBER</a>
-        <a class="active" href="./">NOTICE</a>
+        <a href="../notice/">NOTICE</a>
         <a href="../ranking/">RANKING</a>
         <a href="../play/">PLAY</a>
         <a href="../signature/">SIGNATURE</a>
       </nav>
 
-      <a class="nav-live" id="onAirButton" href="../live/">ON AIR</a>
+      <a class="nav-live" id="onAirButton" href="./">ON AIR</a>
     </div>
   </header>
 
   <main class="page">
-    <section class="hero" aria-label="공지사항 배너">
+    <section class="hero" aria-label="라이브 배너">
       <div class="hero-content">
         <div class="hero-kicker">FANTAJ OFFICIAL FAN PORTAL</div>
-        <h1 class="hero-title">NOTICE</h1>
-        <p class="hero-sub">NOTICE · UPDATE · GUIDE</p>
+        <h1 class="hero-title">LIVE</h1>
+        <p class="hero-sub">ON AIR · MEMBER · BOARD</p>
       </div>
     </section>
 
-    <section class="notice-card">
-      <div id="listWrap">
-        <div class="topbar">
-          <div class="notice-heading">
-            <h2>공지사항</h2>
-            <span class="notice-count" id="noticeCount">0개</span>
-          </div>
-
-          <input class="search-box" id="searchInput" type="search" placeholder="공지 검색" autocomplete="off">
+    <section class="live-panel">
+      <div class="topbar">
+        <div class="tabs">
+          <button class="tab-btn active" type="button" data-tab="live">🔴 LIVE</button>
+          <button class="tab-btn" type="button" data-tab="posts">📝 최근 게시물</button>
         </div>
-
-        <div class="notice-list" id="noticeList">
-          <div class="empty">공지사항을 불러오는 중입니다...</div>
-        </div>
-
-
-        <div class="pagination" id="pagination"></div>
       </div>
 
-      <div class="detail-wrap" id="detailWrap">
-        <div class="detail-head">
-          <div class="notice-heading">
-            <h2>공지 상세</h2>
-          </div>
-
-          <button class="back-btn" type="button" id="backButton">목록으로</button>
+      <div class="summary">
+        <div class="summary-box">
+          <div class="summary-label">ON AIR</div>
+          <div class="summary-value" id="summaryLive">0</div>
         </div>
 
-        <article class="detail-box" id="detailBox"></article>
-        <div class="related-card" id="relatedCard"></div>
-        <div class="detail-bottom-actions">
-          <button class="back-btn" type="button" id="bottomBackButton">목록으로</button>
+        <div class="summary-box">
+          <div class="summary-label">TOTAL MEMBER</div>
+          <div class="summary-value" id="summaryTotal">0</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-label">STATUS</div>
+          <div class="summary-value" id="summaryStatus">OPEN</div>
+        </div>
+      </div>
+
+      <div class="tab-panel active" id="livePanel">
+        <div class="section-title-row">
+          <h2 class="section-title">현재 LIVE</h2>
+          <div class="section-note" id="liveNote">불러오는 중</div>
+        </div>
+
+        <div class="live-grid" id="liveGrid">
+          <div class="loading-card">LIVE 정보를 불러오는 중입니다...</div>
+        </div>
+
+        <div class="section-title-row">
+          <h2 class="section-title">오프라인 멤버</h2>
+          <div class="section-note">대표부터 직급순</div>
+        </div>
+
+        <div class="offline-grid" id="offlineGrid">
+          <div class="loading-card">멤버 정보를 불러오는 중입니다...</div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="postsPanel">
+        <div class="section-title-row">
+          <h2 class="section-title">방송국 최근 게시물</h2>
+          <div class="section-note" id="postNote">최신 20개</div>
+        </div>
+
+        <div class="post-list" id="postList">
+          <div class="loading-card">최근 게시물을 불러오는 중입니다...</div>
         </div>
       </div>
     </section>
   </main>
 
   <script>
-    const NOTICE_DATA_URL = "../data/notice.json";
-    const LIVE_API_URL_FOR_ON_AIR = "https://fantj-live.4rgn2004.workers.dev/";
+    const LIVE_API_URL = "https://fantj-live.4rgn2004.workers.dev/";
+    const BOARD_API_URL = "https://fantaj-board-worker.4rgn2004.workers.dev/board";
+    const MEMBERS_URL = "../data/members.json";
+    const DEFAULT_PROFILE_IMAGE = "https://profile.img.sooplive.co.kr/LOGO/sy/sysdemian/sysdemian.jpg";
+    const MAX_POSTS = 20;
 
-    let noticeRows = [];
-    let currentPage = 1;
-    const PAGE_SIZE = 10;
+    const RANK_ORDER = {
+      "대표": 1,
+      "부대표": 10,
+      "이사": 20,
+      "팀장": 30,
+      "매니저": 40,
+      "멤버": 100,
+      "웨이터": 999
+    };
 
-    const noticeList = document.getElementById("noticeList");
-    const noticeCount = document.getElementById("noticeCount");
-    const pagination = document.getElementById("pagination");
-    const searchInput = document.getElementById("searchInput");
-    const listWrap = document.getElementById("listWrap");
-    const detailWrap = document.getElementById("detailWrap");
-    const detailBox = document.getElementById("detailBox");
-    const relatedCard = document.getElementById("relatedCard");
-    const backButton = document.getElementById("backButton");
-    const bottomBackButton = document.getElementById("bottomBackButton");
+    const SPECIAL_MEMBER_ORDER = {
+      "chzh1chzh": 1,
+      "rudals5467": 2
+    };
+
+    let liveData = null;
+    let memberData = [];
+    let boardData = [];
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => document.querySelectorAll(selector);
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -808,319 +1030,381 @@
         .replaceAll("'", "&#039;");
     }
 
-    function normalizeBoolean(value) {
-      if (value === true) return true;
-      const text = String(value || "").trim().toLowerCase();
-      return text === "true" || text === "1" || text === "yes" || text === "y" || text === "공개" || text === "표시" || text === "고정";
+    function formatNumber(value) {
+      return Number(value || 0).toLocaleString("ko-KR");
     }
 
-    function parseDate(value) {
-      const text = String(value || "").trim();
-      const date = new Date(text.replaceAll(".", "-").replace(" ", "T"));
-      return Number.isNaN(date.getTime()) ? 0 : date.getTime();
-    }
+    function getProfileImage(userId) {
+      const id = String(userId || "").trim();
 
-    function formatDate(value) {
-      const text = String(value || "").trim();
-      const match = text.match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
-
-      if (match) {
-        return `${match[1]}.${match[2].padStart(2, "0")}.${match[3].padStart(2, "0")}`;
+      if (!id) {
+        return DEFAULT_PROFILE_IMAGE;
       }
 
-      return text || "-";
+      const prefix = id.slice(0, 2);
+      return `https://profile.img.sooplive.co.kr/LOGO/${prefix}/${id}/${id}.jpg`;
     }
 
-    function getSortedNotices(rows) {
-      return [...rows]
-        .filter(item => item && normalizeBoolean(item.visible))
-        .sort((a, b) => {
-          const pinnedA = normalizeBoolean(a.pinned) ? 1 : 0;
-          const pinnedB = normalizeBoolean(b.pinned) ? 1 : 0;
+    function fallbackAvatar(img) {
+      img.onerror = null;
+      img.src = DEFAULT_PROFILE_IMAGE;
+    }
 
-          if (pinnedA !== pinnedB) return pinnedB - pinnedA;
+    function isMobileDevice() {
+      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
 
-          const dateA = parseDate(a.date);
-          const dateB = parseDate(b.date);
+    function getLiveBroadNo(member) {
+      const direct = member.broadNo || member.broad_no || member.broadno || member.broadcastNo || member.broadcast_no;
 
-          if (dateA !== dateB) return dateB - dateA;
+      if (direct) {
+        return String(direct).trim();
+      }
 
-          return Number(b.id || 0) - Number(a.id || 0);
+      const url = String(member.url || "");
+      const match = url.match(/\/(\d+)(?:[?#].*)?$/);
+
+      return match ? match[1] : "";
+    }
+
+    function getLiveOpenUrl(member) {
+      const webUrl = member.url || "#";
+      const userId = String(member.soopId || member.id || "").trim();
+      const broadNo = getLiveBroadNo(member);
+
+      if (isMobileDevice() && userId && broadNo) {
+        return `sooplive://player/live?user_id=${encodeURIComponent(userId)}&broad_no=${encodeURIComponent(broadNo)}`;
+      }
+
+      return webUrl;
+    }
+
+    function openLive(member) {
+      const url = getLiveOpenUrl(member);
+
+      if (!url || url === "#") {
+        return;
+      }
+
+      window.open(url, "_blank", "noopener");
+    }
+
+    function getStationUrl(member) {
+      const id = String(member.soopId || member.id || "").trim();
+      return id ? `https://www.sooplive.com/station/${encodeURIComponent(id)}` : "#";
+    }
+
+    function formatPostDate(dateText) {
+      if (!dateText) return "";
+
+      const date = new Date(String(dateText).replace(" ", "T"));
+      if (Number.isNaN(date.getTime())) return String(dateText).slice(5, 16);
+
+      const diff = Date.now() - date.getTime();
+      const min = Math.floor(diff / 60000);
+      const hour = Math.floor(min / 60);
+      const day = Math.floor(hour / 24);
+
+      if (min < 1) return "방금 전";
+      if (min < 60) return `${min}분 전`;
+      if (hour < 24) return `${hour}시간 전`;
+      if (day < 7) return `${day}일 전`;
+
+      return `${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+    }
+
+    function getRankOrder(member) {
+      const rank = String(member.rank || member.group || member.role || "멤버").trim();
+      return RANK_ORDER[rank] ?? 500;
+    }
+
+    function getSpecialOrder(member) {
+      const id = String(member.soopId || member.id || "").trim();
+      return SPECIAL_MEMBER_ORDER[id] ?? 500;
+    }
+
+    function mergeMembers() {
+      const apiMembers = Array.isArray(liveData?.members) ? liveData.members : [];
+      const apiMap = new Map(apiMembers.map(member => [String(member.soopId || member.id || "").trim(), member]));
+      const mergedIds = new Set();
+
+      const base = memberData.map((member, index) => {
+        const id = String(member.soopId || member.id || "").trim();
+        const api = apiMap.get(id) || {};
+        mergedIds.add(id);
+
+        return {
+          ...member,
+          ...api,
+          name: api.name || member.name,
+          soopId: id,
+          group: member.group || api.group || api.role || "멤버",
+          rank: member.rank || api.rank || api.role || "멤버",
+          originalIndex: index
+        };
+      });
+
+      apiMembers.forEach((member, index) => {
+        const id = String(member.soopId || member.id || "").trim();
+        if (!id || mergedIds.has(id)) return;
+
+        base.push({
+          ...member,
+          soopId: id,
+          group: member.group || member.role || "멤버",
+          rank: member.rank || member.role || "멤버",
+          originalIndex: memberData.length + index
         });
-    }
-
-    function getNoticeSummary(content) {
-      return String(content || "")
-        .replace(/\s+/g, " ")
-        .trim()
-        .slice(0, 120);
-    }
-
-
-    function renderPagination(totalItems) {
-      if (!pagination) return;
-
-      const totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
-      currentPage = Math.min(Math.max(1, currentPage), totalPages);
-
-      const buttons = [];
-      const disabledFirst = currentPage === 1 ? "disabled" : "";
-      const disabledLast = currentPage === totalPages ? "disabled" : "";
-
-      buttons.push(`<button class="page-btn edge" type="button" data-page="1" ${disabledFirst}>≪</button>`);
-      buttons.push(`<button class="page-btn edge" type="button" data-page="${currentPage - 1}" ${disabledFirst}>‹</button>`);
-
-      const pages = [];
-      if (totalPages <= 7) {
-        for (let page = 1; page <= totalPages; page++) pages.push(page);
-      } else {
-        pages.push(1);
-        const start = Math.max(2, currentPage - 1);
-        const end = Math.min(totalPages - 1, currentPage + 1);
-        if (start > 2) pages.push("dots-left");
-        for (let page = start; page <= end; page++) pages.push(page);
-        if (end < totalPages - 1) pages.push("dots-right");
-        pages.push(totalPages);
-      }
-
-      pages.forEach(page => {
-        if (typeof page === "string") {
-          buttons.push(`<span class="page-ellipsis">…</span>`);
-          return;
-        }
-
-        buttons.push(`<button class="page-btn ${page === currentPage ? "active" : ""}" type="button" data-page="${page}">${page}</button>`);
       });
 
-      buttons.push(`<button class="page-btn edge" type="button" data-page="${currentPage + 1}" ${disabledLast}>›</button>`);
-      buttons.push(`<button class="page-btn edge" type="button" data-page="${totalPages}" ${disabledLast}>≫</button>`);
-      pagination.innerHTML = buttons.join("");
+      return base;
     }
 
-    function renderList() {
-      const keyword = searchInput.value.trim().toLowerCase();
-      const sorted = getSortedNotices(noticeRows);
-      const filtered = keyword
-        ? sorted.filter(item => {
-            const target = `${item.category || ""} ${item.title || ""} ${item.content || ""}`.toLowerCase();
-            return target.includes(keyword);
-          })
-        : sorted;
-
-      noticeCount.textContent = `${filtered.length}개`;
-      renderPagination(filtered.length);
-
-      if (!filtered.length) {
-        noticeList.innerHTML = `<div class="empty">표시할 공지사항이 없습니다.</div>`;
-        return;
-      }
-
-      const startIndex = (currentPage - 1) * PAGE_SIZE;
-      const pageItems = filtered.slice(startIndex, startIndex + PAGE_SIZE);
-
-      noticeList.innerHTML = pageItems.map(item => {
-        const id = encodeURIComponent(item.id || "");
-        const pinned = normalizeBoolean(item.pinned);
-        const category = escapeHtml(item.category || "공지");
-        const title = escapeHtml(item.title || "제목 없음");
-        const summary = escapeHtml(getNoticeSummary(item.content));
-        const date = escapeHtml(formatDate(item.date));
-
-        return `
-          <a class="notice-item" href="?id=${id}" data-id="${id}">
-            <div class="notice-item-left">
-              <div class="notice-meta">
-                ${pinned ? `<span class="badge pin">고정</span>` : ""}
-                <span class="badge">${category}</span>
-              </div>
-              <div class="notice-title">${title}</div>
-              ${summary ? `<div class="notice-summary">${summary}</div>` : ""}
-            </div>
-            <div class="notice-date">${date}</div>
-          </a>
-        `;
-      }).join("");
+    function sortOfflineMembers(a, b) {
+      return getRankOrder(a) - getRankOrder(b)
+        || getSpecialOrder(a) - getSpecialOrder(b)
+        || Number(a.originalIndex || 0) - Number(b.originalIndex || 0)
+        || String(a.name || "").localeCompare(String(b.name || ""), "ko");
     }
 
-    function renderRelatedNotices(currentId) {
-      if (!relatedCard) return;
+    function renderSummary(allMembers, liveMembers) {
+      const liveCount = Number(liveData?.liveCount ?? liveMembers.length ?? 0);
+      const total = Number(liveData?.total ?? allMembers.length ?? 0);
 
-      const others = getSortedNotices(noticeRows)
-        .filter(row => String(row.id) !== String(currentId))
-        .slice(0, 6);
+      $("#summaryLive").textContent = formatNumber(liveCount);
+      $("#summaryTotal").textContent = formatNumber(total);
+      $("#summaryStatus").textContent = "OPEN";
 
-      if (!others.length) {
-        relatedCard.innerHTML = "";
-        return;
-      }
-
-      relatedCard.innerHTML = `
-        <div class="related-title">다른 공지사항</div>
-        <div class="related-list">
-          ${others.map(row => {
-            const id = encodeURIComponent(row.id || "");
-            const category = escapeHtml(row.category || "공지");
-            const title = escapeHtml(row.title || "제목 없음");
-            const date = escapeHtml(formatDate(row.date));
-
-            return `
-              <a class="related-item" href="?id=${id}" data-id="${id}">
-                <span class="related-category">${category}</span>
-                <span class="related-link-title">${title}</span>
-                <span class="related-date">${date}</span>
-              </a>
-            `;
-          }).join("")}
-        </div>
-      `;
-    }
-
-    function renderDetail(id) {
-      const item = getSortedNotices(noticeRows).find(row => String(row.id) === String(id));
-
-      document.body.classList.add("detail-mode");
-      listWrap.style.display = "none";
-      detailWrap.style.display = "block";
-
-      if (!item) {
-        detailBox.innerHTML = `<div class="empty">해당 공지를 찾을 수 없습니다.</div>`;
-        if (relatedCard) relatedCard.innerHTML = "";
-        return;
-      }
-
-      const pinned = normalizeBoolean(item.pinned);
-      const category = escapeHtml(item.category || "공지");
-      const date = escapeHtml(formatDate(item.date));
-      const title = escapeHtml(item.title || "제목 없음");
-      const content = escapeHtml(item.content || "내용이 없습니다.");
-
-      detailBox.innerHTML = `
-        <div class="notice-meta">
-          ${pinned ? `<span class="badge pin">고정</span>` : ""}
-          <span class="badge">${category}</span>
-          <span class="notice-date">${date}</span>
-        </div>
-        <h2 class="detail-title">${title}</h2>
-        <div class="detail-content">${content}</div>
-      `;
-
-      renderRelatedNotices(item.id);
-    }
-
-    function showList(push = true) {
-      document.body.classList.remove("detail-mode");
-      detailWrap.style.display = "none";
-      listWrap.style.display = "block";
-
-      if (push) {
-        history.pushState(null, "", location.pathname);
-      }
-
-      renderList();
-    }
-
-    function applyRoute() {
-      const params = new URLSearchParams(location.search);
-      const id = params.get("id");
-
-      if (id) {
-        renderDetail(id);
-      } else {
-        showList(false);
-      }
-    }
-
-    async function loadNotices() {
-      try {
-        const response = await fetch(NOTICE_DATA_URL, { cache: "no-store" });
-        if (!response.ok) throw new Error("공지 데이터 응답 오류");
-
-        const data = await response.json();
-        noticeRows = Array.isArray(data) ? data : [];
-        applyRoute();
-      } catch (error) {
-        console.error(error);
-        noticeRows = [];
-        noticeCount.textContent = "0개";
-        noticeList.innerHTML = `<div class="empty">공지사항을 불러오지 못했습니다.</div>`;
-      }
-    }
-
-    async function updateOnAirCount() {
-      const onAirButton = document.getElementById("onAirButton");
-      if (!onAirButton) return;
-
-      try {
-        const response = await fetch(LIVE_API_URL_FOR_ON_AIR, { cache: "no-store" });
-        if (!response.ok) throw new Error("LIVE API 응답 오류");
-
-        const data = await response.json();
-        const members = Array.isArray(data.members) ? data.members : [];
-        const liveCount = members.filter(member => member && member.isLive).length;
-
+      const onAirButton = $("#onAirButton");
+      if (onAirButton) {
         onAirButton.textContent = liveCount > 0 ? `ON AIR ${liveCount}` : "ON AIR";
-      } catch (error) {
-        console.error(error);
-        onAirButton.textContent = "ON AIR";
       }
     }
 
-    searchInput.addEventListener("input", () => {
-      currentPage = 1;
-      renderList();
-    });
+    function renderBroadcastCard(member) {
+      const name = escapeHtml(member.name || member.soopId || "멤버");
+      const title = escapeHtml(member.title || "방송 제목이 없습니다");
+      const viewer = formatNumber(member.viewer || 0);
+      const startedAt = escapeHtml(member.startedAt || "");
+      const rank = escapeHtml(member.rank || member.group || member.role || "멤버");
+      const thumbnail = member.thumbnail ? escapeHtml(member.thumbnail) : "";
+      const thumbClass = thumbnail ? "live-thumb" : "live-thumb no-image";
+      const thumbHtml = thumbnail
+        ? `<img class="live-thumb-bg" src="${thumbnail}" alt="" aria-hidden="true" loading="lazy"><img class="live-thumb-img" src="${thumbnail}" alt="${name} 방송 썸네일" loading="lazy">`
+        : name;
 
-    pagination.addEventListener("click", (event) => {
-      const button = event.target.closest("button.page-btn");
-      if (!button || button.disabled) return;
+      return `
+        <article class="broadcast-card">
+          <div class="${thumbClass}">
+            ${thumbHtml}
+            <span class="live-badge">LIVE</span>
+            <span class="viewer-badge">👀 ${viewer}</span>
+          </div>
 
-      currentPage = Number(button.dataset.page || 1);
-      renderList();
-      window.scrollTo({ top: listWrap.offsetTop - 90, behavior: "smooth" });
-    });
+          <div class="live-info">
+            <div class="live-head">
+              <div class="live-name">${name}</div>
+              <span class="rank-badge">${rank}</span>
+            </div>
 
-    noticeList.addEventListener("click", (event) => {
-      const link = event.target.closest("a.notice-item");
-      if (!link) return;
+            <div class="live-title">${title}</div>
 
-      event.preventDefault();
-      const id = link.dataset.id;
-      history.pushState(null, "", `?id=${encodeURIComponent(id)}`);
-      renderDetail(id);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+            <div class="live-meta">
+              ${startedAt ? `<span>시작 ${startedAt}</span>` : ""}
+            </div>
 
+            <button class="live-open-btn" type="button" data-live-id="${escapeHtml(member.soopId || "")}">LIVE 보러가기</button>
+          </div>
+        </article>
+      `;
+    }
 
-    if (relatedCard) {
-      relatedCard.addEventListener("click", (event) => {
-        const link = event.target.closest("a.related-item");
-        if (!link) return;
+    function renderOfflineCard(member) {
+      const id = String(member.soopId || member.id || "").trim();
+      const name = escapeHtml(member.name || id || "멤버");
+      const rank = escapeHtml(member.rank || member.group || member.role || "멤버");
+      const stationUrl = escapeHtml(getStationUrl(member));
 
-        event.preventDefault();
-        const id = link.dataset.id;
-        history.pushState(null, "", `?id=${encodeURIComponent(id)}`);
-        renderDetail(id);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      return `
+        <article class="offline-card">
+          <img
+            class="offline-avatar"
+            src="${getProfileImage(id)}"
+            onerror="fallbackAvatar(this)"
+            alt="${name}"
+            loading="lazy"
+          >
+
+          <div class="offline-body">
+            <div class="offline-name">${name}</div>
+            <div class="offline-meta">
+              <span class="rank-badge">${rank}</span>
+              <span class="offline-state">오프라인</span>
+            </div>
+          </div>
+
+          <a class="station-link" href="${stationUrl}" target="_blank" rel="noopener" aria-label="${name} 방송국 열기">↗</a>
+        </article>
+      `;
+    }
+
+    function renderLivePage() {
+      const allMembers = mergeMembers();
+      const liveMembers = allMembers
+        .filter(member => member.isLive)
+        .sort((a, b) => Number(b.viewer || 0) - Number(a.viewer || 0));
+
+      const offlineMembers = allMembers
+        .filter(member => !member.isLive)
+        .sort(sortOfflineMembers);
+
+      renderSummary(allMembers, liveMembers);
+
+      $("#liveNote").textContent = liveMembers.length ? `${formatNumber(liveMembers.length)}명 방송 중` : "현재 방송 없음";
+
+      $("#liveGrid").innerHTML = liveMembers.length
+        ? liveMembers.map(renderBroadcastCard).join("")
+        : `<div class="empty-card">현재 진행 중인 LIVE 방송이 없습니다.</div>`;
+
+      $("#offlineGrid").innerHTML = offlineMembers.length
+        ? offlineMembers.map(renderOfflineCard).join("")
+        : `<div class="empty-card">표시할 오프라인 멤버가 없습니다.</div>`;
+
+      $$(".live-open-btn").forEach(button => {
+        button.addEventListener("click", () => {
+          const id = button.dataset.liveId;
+          const member = liveMembers.find(item => String(item.soopId || "") === id);
+          if (member) openLive(member);
+        });
       });
     }
 
-    backButton.addEventListener("click", () => {
-      showList(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    function renderPostCard(post) {
+      const name = escapeHtml(post.bjName || post.writer || "멤버");
+      const title = escapeHtml(post.title || "제목 없음");
+      const summary = escapeHtml(post.summary || "");
+      const url = escapeHtml(post.url || "#");
+      const date = escapeHtml(formatPostDate(post.regDate));
+      const comments = formatNumber(post.commentCount || 0);
+      const reads = formatNumber(post.readCount || 0);
+      const thumbnail = escapeHtml(post.thumbnail || "");
+      const noticeBadge = post.isNotice ? `<span class="post-badge">공지</span>` : "";
+      const thumbHtml = thumbnail
+        ? `<div class="post-thumb"><img src="${thumbnail}" alt="${title}" loading="lazy"></div>`
+        : "";
 
-    if (bottomBackButton) {
-      bottomBackButton.addEventListener("click", () => {
-        showList(true);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
+      return `
+        <a class="post-card" href="${url}" target="_blank" rel="noopener">
+          <div class="post-body">
+            <div class="post-top">
+              <div class="post-writer">${name}</div>
+              ${noticeBadge}
+            </div>
+
+            <div class="post-title">${title}</div>
+            ${summary ? `<div class="post-summary">${summary}</div>` : ""}
+            <div class="post-meta">${date} · 댓글 ${comments} · 조회 ${reads}</div>
+          </div>
+
+          ${thumbHtml}
+        </a>
+      `;
     }
 
-    window.addEventListener("popstate", applyRoute);
+    function renderPosts() {
+      const posts = Array.isArray(boardData) ? boardData.slice(0, MAX_POSTS) : [];
+      $("#postNote").textContent = `최신 ${posts.length}개`;
 
-    loadNotices();
-    updateOnAirCount();
-    setInterval(updateOnAirCount, 60000);
+      $("#postList").innerHTML = posts.length
+        ? posts.map(renderPostCard).join("")
+        : `<div class="empty-card">표시할 최근 게시물이 없습니다.</div>`;
+    }
+
+    async function loadLiveData() {
+      const response = await fetch(LIVE_API_URL, { cache: "no-store" });
+      if (!response.ok) throw new Error("LIVE API 응답 오류");
+      liveData = await response.json();
+    }
+
+    async function loadMemberData() {
+      const response = await fetch(MEMBERS_URL, { cache: "no-store" });
+      if (!response.ok) throw new Error("MEMBERS 응답 오류");
+      const data = await response.json();
+      memberData = Array.isArray(data) ? data : [];
+    }
+
+    async function loadBoardData() {
+      const response = await fetch(BOARD_API_URL, { cache: "no-store" });
+      if (!response.ok) throw new Error("BOARD API 응답 오류");
+      const data = await response.json();
+      boardData = Array.isArray(data) ? data : (Array.isArray(data.data) ? data.data : []);
+    }
+
+    async function loadInitialData() {
+      try {
+        await Promise.all([loadLiveData(), loadMemberData()]);
+        renderLivePage();
+      } catch (error) {
+        console.error(error);
+
+        $("#liveGrid").innerHTML = `<div class="empty-card">LIVE 정보를 불러오지 못했습니다.</div>`;
+        $("#offlineGrid").innerHTML = `<div class="empty-card">멤버 정보를 불러오지 못했습니다.</div>`;
+      }
+    }
+
+    async function ensurePostsLoaded() {
+      if (boardData.length) {
+        renderPosts();
+        return;
+      }
+
+      try {
+        await loadBoardData();
+        renderPosts();
+      } catch (error) {
+        console.error(error);
+        $("#postList").innerHTML = `<div class="empty-card">최근 게시물을 불러오지 못했습니다.</div>`;
+      }
+    }
+
+    function setActiveTab(tabName, replaceUrl = true) {
+      const safeTab = tabName === "posts" ? "posts" : "live";
+
+      $$(".tab-btn").forEach(button => {
+        button.classList.toggle("active", button.dataset.tab === safeTab);
+      });
+
+      $("#livePanel").classList.toggle("active", safeTab === "live");
+      $("#postsPanel").classList.toggle("active", safeTab === "posts");
+
+      if (replaceUrl) {
+        const url = new URL(location.href);
+        if (safeTab === "posts") {
+          url.searchParams.set("tab", "posts");
+        } else {
+          url.searchParams.delete("tab");
+        }
+        history.replaceState(null, "", url.toString());
+      }
+    }
+
+    $$(".tab-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        setActiveTab(button.dataset.tab);
+
+        if (button.dataset.tab === "posts") {
+          ensurePostsLoaded();
+        }
+      });
+    });
+
+    const initialTab = new URLSearchParams(location.search).get("tab");
+    setActiveTab(initialTab, false);
+    loadInitialData();
+
+    if (initialTab === "posts") {
+      ensurePostsLoaded();
+    }
   </script>
 </body>
 </html>
