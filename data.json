@@ -1517,12 +1517,7 @@
     "image": "https://cdn.fantaj.kr/9999_whistle.gif",
     "audio": "https://cdn.fantaj.kr/9999_whistle.mp3",
     "bj": 999,
-    "videos": [
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869437"
-      }
-    ]
+    "videos": []
   },
   {
     "number": 10000,
@@ -1530,7 +1525,12 @@
     "image": "https://cdn.fantaj.kr/10000_mvp.gif",
     "audio": "https://cdn.fantaj.kr/10000_mvp.mp3",
     "bj": 1000,
-    "videos": []
+    "videos": [
+      {
+        "title": "선생님",
+        "url": "https://vod.sooplive.com/player/196869437"
+      }
+    ]
   },
   {
     "number": 10001,
@@ -2074,12 +2074,7 @@
     "image": "https://cdn.fantaj.kr/17777_fullbloom.gif",
     "audio": "https://cdn.fantaj.kr/17777_fullbloom.mp3",
     "bj": 1777,
-    "videos": [
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869679"
-      }
-    ]
+    "videos": []
   },
   {
     "number": 18888,
@@ -2095,7 +2090,12 @@
     "image": "https://cdn.fantaj.kr/20000_vip.gif",
     "audio": "https://cdn.fantaj.kr/20000_vip.mp3",
     "bj": 2000,
-    "videos": []
+    "videos": [
+      {
+        "title": "선생님",
+        "url": "https://vod.sooplive.com/player/196869679"
+      }
+    ]
   },
   {
     "number": 20044,
@@ -2143,12 +2143,7 @@
     "image": "https://cdn.fantaj.kr/25196_babyscomeout.gif",
     "audio": "https://cdn.fantaj.kr/25196_babyscomeout.mp3",
     "bj": 2596,
-    "videos": [
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869689"
-      }
-    ]
+    "videos": []
   },
   {
     "number": 29486,
@@ -2164,12 +2159,7 @@
     "image": "",
     "audio": "https://cdn.fantaj.kr/29999_quitiflose.mp3",
     "bj": 2999,
-    "videos": [
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869755"
-      }
-    ]
+    "videos": []
   },
   {
     "number": 30000,
@@ -2180,7 +2170,7 @@
     "videos": [
       {
         "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869827"
+        "url": "https://vod.sooplive.com/player/196869689"
       }
     ]
   },
@@ -2190,12 +2180,7 @@
     "image": "https://cdn.fantaj.kr/30003_godlovecatsanddogs.gif",
     "audio": "",
     "bj": 3003,
-    "videos": [
-      {
-        "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196869985"
-      }
-    ]
+    "videos": []
   },
   {
     "number": 50000,
@@ -2206,7 +2191,7 @@
     "videos": [
       {
         "title": "선생님",
-        "url": "https://vod.sooplive.com/player/196870045"
+        "url": "https://vod.sooplive.com/player/196869755"
       }
     ]
   },
@@ -2216,7 +2201,12 @@
     "image": "https://cdn.fantaj.kr/100000_smvp.gif",
     "audio": "https://cdn.fantaj.kr/100000_smvp.mp3",
     "bj": 10000,
-    "videos": []
+    "videos": [
+      {
+        "title": "선생님",
+        "url": "https://vod.sooplive.com/player/196869827"
+      }
+    ]
   },
   {
     "number": 200000,
@@ -2224,7 +2214,12 @@
     "image": "https://cdn.fantaj.kr/200000_svip.gif",
     "audio": "https://cdn.fantaj.kr/200000_svip.mp3",
     "bj": 20000,
-    "videos": []
+    "videos": [
+      {
+        "title": "선생님",
+        "url": "https://vod.sooplive.com/player/196869985"
+      }
+    ]
   },
   {
     "number": 300000,
@@ -2232,6 +2227,11 @@
     "image": "https://cdn.fantaj.kr/300000_svvip.gif",
     "audio": "https://cdn.fantaj.kr/300000_svvip.mp3",
     "bj": 30000,
-    "videos": []
+    "videos": [
+      {
+        "title": "선생님",
+        "url": "https://vod.sooplive.com/player/196870045"
+      }
+    ]
   }
 ]
