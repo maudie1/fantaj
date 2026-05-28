@@ -1,404 +1,1126 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FANTAJ LIVE</title>
-<link rel="icon" type="image/png" href="../favicon.png">
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FANTAJ NOTICE</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
 
-:root {
-  --text: #3d3148;
-  --muted: #7c6d85;
-  --soft: rgba(255, 255, 255, 0.78);
-  --line: rgba(226, 194, 223, 0.55);
-  --pink: #ff7eb7;
-  --purple: #a965e8;
-  --deep: #8f4eb2;
-  --mint: #25bec1;
-  --shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
-}
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  min-height: 100vh;
-  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
-  background:
-    radial-gradient(circle at 12% 5%, rgba(255, 183, 217, .26), transparent 28%),
-    radial-gradient(circle at 86% 12%, rgba(184, 156, 255, .22), transparent 30%),
-    linear-gradient(180deg, #fff7fb 0%, #f7f0ff 45%, #fffaf4 100%);
-  color: var(--text);
-}
+    :root {
+      --bg-1: #fff7fb;
+      --bg-2: #f7f0ff;
+      --bg-3: #fffaf4;
+      --text-main: #3d3148;
+      --text-sub: #7c6d85;
+      --purple: #8f4eb2;
+      --purple-2: #a061bb;
+      --pink: #ff7eb7;
+      --line: rgba(226, 194, 223, 0.58);
+      --card: rgba(255, 255, 255, 0.78);
+      --soft-card: rgba(255, 246, 252, 0.82);
+      --radius-sm: 8px;
+      --radius-md: 10px;
+      --radius-lg: 13px;
+    }
 
-a { color: inherit; text-decoration: none; }
+    body {
+      min-height: 100vh;
+      font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(255, 183, 217, .26), transparent 28%),
+        radial-gradient(circle at 86% 12%, rgba(184, 156, 255, .22), transparent 30%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
+      color: var(--text-main);
+    }
 
-.page {
-  min-height: 100vh;
-}
+    a { color: inherit; text-decoration: none; }
 
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(226, 194, 223, 0.55);
-  box-shadow: 0 8px 28px rgba(177, 122, 174, 0.12);
-}
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(226, 194, 223, 0.55);
+      box-shadow: 0 8px 28px rgba(177, 122, 174, 0.12);
+    }
 
-.nav-inner {
-  width: min(1180px, calc(100% - 32px));
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
+    .nav-inner {
+      width: min(1180px, calc(100% - 32px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-.logo {
-  font-size: 28px;
-  font-weight: 950;
-  letter-spacing: 0.12em;
-  color: var(--deep);
-}
+    .logo {
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      color: var(--purple);
+    }
 
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 26px;
-  font-size: 15px;
-  font-weight: 800;
-  color: #6b5b75;
-}
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #6b5b75;
+    }
 
-.nav-menu a:hover,
-.nav-menu a.active {
-  color: #b05cc9;
-}
+    .nav-menu a:hover,
+    .nav-menu a.active { color: #b05cc9; }
 
-.nav-live {
-  padding: 9px 15px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--pink), var(--purple));
-  color: white;
-  font-size: 13px;
-  font-weight: 900;
-  box-shadow: 0 8px 20px rgba(177, 92, 201, 0.24);
-  white-space: nowrap;
-}
+    .nav-live {
+      padding: 9px 15px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(177, 92, 201, 0.24);
+      white-space: nowrap;
+    }
 
-main {
-  width: min(1180px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 34px 0 80px;
-}
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0 80px;
+    }
 
-.coming-card {
-  position: relative;
-  min-height: calc(100vh - 170px);
-  border-radius: 13px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, .95), transparent 28%),
-    radial-gradient(circle at 86% 16%, rgba(255, 214, 239, .9), transparent 30%),
-    radial-gradient(circle at 50% 100%, rgba(255, 244, 214, .86), transparent 35%),
-    linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
-  border: 1px solid rgba(226, 194, 223, 0.55);
-  box-shadow: 0 26px 60px rgba(150, 94, 171, 0.18);
-}
+    .hero {
+      position: relative;
+      height: 300px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), transparent 26%),
+        radial-gradient(circle at 85% 22%, rgba(255, 214, 239, 0.9), transparent 28%),
+        linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
+      box-shadow: 0 26px 60px rgba(150, 94, 171, 0.18);
+      margin-bottom: 28px;
+    }
 
-.coming-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(120deg, transparent 12%, rgba(255,255,255,0.52) 48%, transparent 72%),
-    radial-gradient(circle at 46% 68%, rgba(255,255,255,0.66), transparent 24%);
-  opacity: .75;
-  pointer-events: none;
-}
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 10%, rgba(255,255,255,0.5) 48%, transparent 70%),
+        radial-gradient(circle at 45% 70%, rgba(255,255,255,0.72), transparent 22%);
+      opacity: 0.75;
+    }
 
-.coming-card::after {
-  content: "";
-  position: absolute;
-  inset: 22px;
-  border-radius: 11px;
-  border: 1px solid rgba(255,255,255,.52);
-  pointer-events: none;
-}
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+    }
 
-.coming-content {
-  position: relative;
-  z-index: 1;
-  min-height: calc(100vh - 170px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 54px 28px;
-  transform: translateY(18px);
-}
+    .hero-kicker {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      color: #a061bb;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: clamp(44px, 7vw, 78px);
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-shadow: 0 8px 28px rgba(117, 67, 151, 0.26);
+    }
+
+    .hero-sub {
+      margin-top: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #6f527c;
+    }
+
+    .notice-card {
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .notice-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .notice-heading h2 {
+      font-size: 22px;
+      color: #4b3659;
+      font-weight: 950;
+    }
+
+    .notice-count {
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.78);
+      color: #8a4dae;
+      font-size: 12px;
+      font-weight: 950;
+      box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
+    }
+
+    .search-box {
+      min-width: 240px;
+      border: 1px solid rgba(226, 194, 223, 0.66);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.92);
+      padding: 12px 14px;
+      color: #765a88;
+      font-family: inherit;
+      font-weight: 850;
+      outline: none;
+    }
+
+    .notice-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .notice-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: var(--soft-card);
+      border: 1px solid rgba(236, 206, 232, 0.75);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+    .notice-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(150, 94, 171, 0.13);
+    }
+
+    .notice-item-left { min-width: 0; }
+
+    .notice-meta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      padding: 6px 9px;
+      font-size: 12px;
+      font-weight: 950;
+      background: rgba(255,255,255,.85);
+      color: #735b84;
+      box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
+    }
+
+    .badge.pin {
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(176, 97, 209, .18);
+    }
+
+    .notice-title {
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 950;
+      color: #4b3659;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .notice-summary {
+      margin-top: 7px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--text-sub);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .notice-date {
+      color: #9a8aa3;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
 
 
-.kicker {
-  font-size: 14px;
-  font-weight: 950;
-  letter-spacing: .26em;
-  color: #a061bb;
-  margin-bottom: 14px;
-}
 
-.title {
-  font-size: clamp(48px, 8vw, 88px);
-  font-weight: 950;
-  letter-spacing: .08em;
-  color: #fff;
-  text-shadow: 0 8px 28px rgba(117, 67, 151, .26);
-}
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 18px;
+      padding-top: 4px;
+    }
 
-.sub {
-  margin-top: 12px;
-  font-size: clamp(22px, 3vw, 34px);
-  font-weight: 950;
-  color: #5f4072;
-  letter-spacing: -.03em;
-}
+    .page-btn {
+      min-width: 34px;
+      height: 34px;
+      padding: 0 10px;
+      border: 1px solid rgba(226, 194, 223, 0.72);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.88);
+      color: #7b628a;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 950;
+      cursor: pointer;
+      box-shadow: 0 7px 16px rgba(150, 94, 171, 0.07);
+    }
 
-.desc {
-  margin-top: 14px;
-  font-size: 15px;
-  font-weight: 850;
-  color: #7c6d85;
-}
+    .page-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 9px 20px rgba(150, 94, 171, 0.12);
+    }
 
-.actions {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+    .page-btn.active {
+      border-color: transparent;
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
+      color: #fff;
+      box-shadow: 0 9px 20px rgba(176, 97, 209, .22);
+    }
 
-.action-btn {
-  min-width: 130px;
-  padding: 12px 18px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 950;
-  border: 1px solid rgba(226, 194, 223, .65);
-  background: rgba(255, 255, 255, .82);
-  color: #765a88;
-  box-shadow: 0 10px 22px rgba(150, 94, 171, .10);
-  transition: .14s ease;
-}
+    .page-btn:disabled {
+      cursor: default;
+      opacity: .42;
+      transform: none;
+      box-shadow: none;
+    }
 
-.action-btn.primary {
-  border-color: transparent;
-  background: linear-gradient(135deg, var(--pink), var(--purple));
-  color: #fff;
-  box-shadow: 0 10px 22px rgba(176, 97, 209, .20);
-}
+    .detail-wrap {
+      display: none;
+    }
 
-.action-btn:hover {
-  transform: translateY(-2px);
-}
+    .detail-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .back-btn {
+      border: 1px solid rgba(226, 194, 223, 0.66);
+      border-radius: var(--radius-sm);
+      padding: 11px 15px;
+      background: rgba(255,255,255,.9);
+      color: #7b628a;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 950;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(150, 94, 171, 0.08);
+    }
 
 
-@media (max-width: 900px) {
-  .navbar {
-    height: auto;
-    padding: 12px 0 10px;
-  }
 
-  .nav-inner {
-    width: min(1180px, calc(100% - 24px));
-    flex-wrap: wrap;
-    gap: 10px 12px;
-  }
+    .detail-bottom-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
 
-  .logo {
-    order: 1;
-    font-size: 24px;
-    letter-spacing: .10em;
-  }
+    .detail-bottom-actions .back-btn {
+      min-width: 118px;
+    }
 
-  .nav-live {
-    order: 2;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    margin-left: auto;
-  }
 
-  .nav-menu {
-    order: 3;
-    width: 100%;
-    display: flex;
-    gap: 18px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 4px 2px 2px;
-    font-size: 13px;
-    white-space: nowrap;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
+    .detail-box {
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,246,252,.86));
+      border: 1px solid rgba(236, 206, 232, 0.78);
+      padding: 24px;
+    }
 
-  .nav-menu::-webkit-scrollbar {
-    display: none;
-  }
+    .detail-title {
+      margin-top: 12px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.25;
+      font-weight: 950;
+      color: #4b3659;
+    }
 
-  .nav-menu a {
-    flex: 0 0 auto;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-    white-space: nowrap;
-  }
+    .detail-content {
+      margin-top: 22px;
+      color: #5f4d69;
+      font-size: 16px;
+      line-height: 1.85;
+      font-weight: 650;
+      white-space: pre-line;
+      word-break: keep-all;
+    }
 
-  main { padding-top: 22px; }
-}
+    .empty {
+      text-align: center;
+      padding: 42px 16px;
+      font-weight: 900;
+      color: #9d7daf;
+    }
 
-@media (max-width: 560px) {
-  .navbar {
-    padding: 11px 0 9px;
-  }
 
-  .nav-inner {
-    width: min(100% - 20px, 1180px);
-    gap: 10px 12px;
-  }
 
-  .logo {
-    font-size: 22px;
-    letter-spacing: .10em;
-  }
+    body.detail-mode .hero {
+      display: none;
+    }
 
-  .nav-live {
-    padding: 8px 13px;
-    border-radius: 6px;
-    font-size: 12px;
-  }
+    body.detail-mode .page {
+      padding-top: 26px;
+    }
 
-  .nav-menu {
-    gap: 15px;
-    font-size: 12px;
-    padding-bottom: 1px;
-  }
+    .page-btn.edge {
+      color: #8c7a96;
+      background: rgba(255,255,255,.68);
+    }
 
-  .nav-menu a {
-    padding: 0;
-    border-radius: 0;
-    background: transparent;
-    border: 0;
-    font-size: inherit;
-  }
+    .page-btn.active {
+      background: #2f2638;
+      color: #fff;
+      border-color: #2f2638;
+      box-shadow: 0 9px 20px rgba(47, 38, 56, .18);
+    }
 
-  main {
-    width: min(100% - 20px, 1180px);
-    padding-top: 18px;
-  }
+    .page-ellipsis {
+      min-width: 24px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #9a8aa3;
+      font-size: 13px;
+      font-weight: 950;
+    }
 
-  .coming-card,
-  .coming-content {
-    min-height: calc(100vh - 120px);
-  }
+    .related-card {
+      margin-top: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(236, 206, 232, 0.78);
+      overflow: hidden;
+    }
 
-  .coming-content {
-    padding: 42px 18px;
-    transform: translateY(10px);
-  }
+    .related-title {
+      padding: 14px 16px;
+      font-size: 15px;
+      font-weight: 950;
+      color: #4b3659;
+      background: linear-gradient(135deg, rgba(255,127,200,.13), rgba(167,127,255,.12));
+      border-bottom: 1px solid rgba(226, 194, 223, 0.55);
+    }
 
-  .kicker {
-    font-size: 10px;
-    letter-spacing: .16em;
-  }
+    .related-list {
+      display: grid;
+    }
 
-  .title {
-    font-size: 42px;
-  }
+    .related-item {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr) 110px;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(226, 194, 223, 0.38);
+      background: rgba(255,255,255,.35);
+    }
 
-  .sub {
-    font-size: 22px;
-  }
+    .related-item:last-child {
+      border-bottom: 0;
+    }
 
-  .desc {
-    font-size: 13px;
-  }
+    .related-item:hover {
+      background: rgba(255,245,251,.72);
+    }
 
-  .action-btn {
-    min-width: 112px;
-    padding: 10px 14px;
-    font-size: 12px;
-  }
-}
-</style>
+    .related-category {
+      justify-self: start;
+      max-width: 86px;
+      padding: 5px 7px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.86);
+      color: #8a4dae;
+      font-size: 11px;
+      font-weight: 950;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
+    }
+
+    .related-link-title {
+      min-width: 0;
+      color: #4b3659;
+      font-size: 14px;
+      font-weight: 950;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .related-date {
+      color: #9a8aa3;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .navbar {
+        height: auto;
+        padding: 12px 0 10px;
+      }
+
+      .nav-inner {
+        width: min(1180px, calc(100% - 24px));
+        flex-wrap: wrap;
+        gap: 10px 12px;
+      }
+
+      .logo {
+        order: 1;
+        font-size: 24px;
+        letter-spacing: 0.10em;
+      }
+
+      .nav-live {
+        order: 2;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        margin-left: auto;
+      }
+
+      .nav-menu {
+        order: 3;
+        width: 100%;
+        display: flex;
+        gap: 18px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 4px 2px 2px;
+        font-size: 13px;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-menu::-webkit-scrollbar { display: none; }
+      .nav-menu a { flex: 0 0 auto; }
+      .hero { height: 210px; }
+    }
+
+    @media (max-width: 700px) {
+      .navbar { padding: 11px 0 9px; }
+
+      .nav-inner {
+        width: min(100% - 20px, 1180px);
+        gap: 10px 12px;
+      }
+
+      .logo {
+        font-size: 22px;
+        letter-spacing: 0.10em;
+      }
+
+      .nav-live {
+        padding: 8px 13px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+
+      .nav-menu {
+        gap: 15px;
+        font-size: 12px;
+        padding-bottom: 1px;
+      }
+
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 12px;
+      }
+
+      .hero {
+        height: 126px;
+        margin-bottom: 12px;
+        border-radius: 9px;
+      }
+
+      .hero-content { padding: 14px 10px; }
+
+      .hero-kicker {
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        margin-bottom: 5px;
+      }
+
+      .hero-title {
+        font-size: 30px;
+        letter-spacing: 0.05em;
+      }
+
+      .hero-sub {
+        margin-top: 6px;
+        font-size: 10px;
+        line-height: 1.3;
+      }
+
+      .notice-card {
+        border-radius: var(--radius-md);
+        padding: 14px 10px;
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .notice-heading h2 { font-size: 18px; }
+
+      .search-box {
+        width: 100%;
+        min-width: 0;
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .notice-list { gap: 8px; }
+
+      .notice-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 13px 12px;
+        border-radius: var(--radius-sm);
+      }
+
+      .notice-title {
+        font-size: 14px;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      .notice-summary { font-size: 12px; }
+      .notice-date { font-size: 11px; }
+
+
+      .pagination {
+        gap: 5px;
+        margin-top: 14px;
+      }
+
+      .page-btn {
+        min-width: 31px;
+        height: 31px;
+        padding: 0 8px;
+        font-size: 12px;
+      }
+      .badge { font-size: 10px; padding: 5px 7px; }
+
+      .page-ellipsis {
+        min-width: 18px;
+        height: 31px;
+        font-size: 11px;
+      }
+
+      .related-card {
+        margin-top: 14px;
+        border-radius: var(--radius-sm);
+      }
+
+      .related-title {
+        padding: 12px 13px;
+        font-size: 14px;
+      }
+
+      .related-item {
+        grid-template-columns: 64px minmax(0, 1fr) 72px;
+        gap: 7px;
+        padding: 11px 12px;
+      }
+
+      .related-category {
+        max-width: 64px;
+        padding: 4px 5px;
+        font-size: 10px;
+      }
+
+      .related-link-title {
+        font-size: 12px;
+      }
+
+      .related-date {
+        font-size: 10px;
+      }
+
+
+      .detail-box {
+        padding: 17px 14px;
+        border-radius: var(--radius-sm);
+      }
+
+      .detail-title { font-size: 21px; }
+
+      .detail-content {
+        margin-top: 16px;
+        font-size: 14px;
+        line-height: 1.75;
+        word-break: normal;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="page">
-    <header class="navbar">
-      <div class="nav-inner">
-        <a class="logo" href="../">FANTAJ</a>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="../">FANTAJ</a>
 
-        <nav class="nav-menu" aria-label="상단 메뉴">
-          <a class="active" href="./">LIVE</a>
-          <a href="../members/">MEMBER</a>
-          <a href="../notice/">NOTICE</a>
-          <a href="../ranking/">RANKING</a>
-          <a href="../play/">PLAY</a>
-          <a href="../signature/">SIGNATURE</a>
-        </nav>
+      <nav class="nav-menu" aria-label="상단 메뉴">
+        <a href="../live/">LIVE</a>
+        <a href="../members/">MEMBER</a>
+        <a class="active" href="./">NOTICE</a>
+        <a href="../ranking/">RANKING</a>
+        <a href="../play/">PLAY</a>
+        <a href="../signature/">SIGNATURE</a>
+      </nav>
 
-        <a class="nav-live" id="onAirButton" href="../live/">ON AIR</a>
+      <a class="nav-live" id="onAirButton" href="../live/">ON AIR</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" aria-label="공지사항 배너">
+      <div class="hero-content">
+        <div class="hero-kicker">FANTAJ OFFICIAL FAN PORTAL</div>
+        <h1 class="hero-title">NOTICE</h1>
+        <p class="hero-sub">NOTICE · UPDATE · GUIDE</p>
       </div>
-    </header>
+    </section>
 
-    <main>
-      <section class="coming-card" aria-label="LIVE 준비중">
-        <div class="coming-content">
-          <div class="kicker">FANTAJ OFFICIAL FAN PORTAL</div>
-          <h1 class="title">COMING SOON</h1>
-          <p class="sub">준비중입니다.</p>
-          <p class="desc">LIVE 페이지는 곧 방송 정보와 함께 열릴 예정입니다.</p>
-
-          <div class="actions">
-            <a class="action-btn primary" href="../">메인으로</a>
-            <a class="action-btn" href="../signature/">시그니처</a>
+    <section class="notice-card">
+      <div id="listWrap">
+        <div class="topbar">
+          <div class="notice-heading">
+            <h2>공지사항</h2>
+            <span class="notice-count" id="noticeCount">0개</span>
           </div>
+
+          <input class="search-box" id="searchInput" type="search" placeholder="공지 검색" autocomplete="off">
         </div>
-      </section>
-    </main>
-  </div>
-<script>
-const LIVE_API_URL_FOR_ON_AIR = "https://fantj-live.4rgn2004.workers.dev/";
 
-async function updateOnAirCount() {
-  const onAirButton = document.getElementById("onAirButton");
-  if (!onAirButton) return;
+        <div class="notice-list" id="noticeList">
+          <div class="empty">공지사항을 불러오는 중입니다...</div>
+        </div>
 
-  try {
-    const response = await fetch(LIVE_API_URL_FOR_ON_AIR, { cache: "no-store" });
-    if (!response.ok) throw new Error("LIVE API 응답 오류");
 
-    const data = await response.json();
-    const members = Array.isArray(data.members) ? data.members : [];
-    const liveCount = members.filter(member => member && member.isLive).length;
+        <div class="pagination" id="pagination"></div>
+      </div>
 
-    onAirButton.textContent = liveCount > 0 ? `ON AIR ${liveCount}` : "ON AIR";
-  } catch (error) {
-    console.error(error);
-    onAirButton.textContent = "ON AIR";
-  }
-}
+      <div class="detail-wrap" id="detailWrap">
+        <div class="detail-head">
+          <div class="notice-heading">
+            <h2>공지 상세</h2>
+          </div>
 
-updateOnAirCount();
-setInterval(updateOnAirCount, 60000);
-</script>
+          <button class="back-btn" type="button" id="backButton">목록으로</button>
+        </div>
+
+        <article class="detail-box" id="detailBox"></article>
+        <div class="related-card" id="relatedCard"></div>
+        <div class="detail-bottom-actions">
+          <button class="back-btn" type="button" id="bottomBackButton">목록으로</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const NOTICE_DATA_URL = "../data/notice.json";
+    const LIVE_API_URL_FOR_ON_AIR = "https://fantj-live.4rgn2004.workers.dev/";
+
+    let noticeRows = [];
+    let currentPage = 1;
+    const PAGE_SIZE = 10;
+
+    const noticeList = document.getElementById("noticeList");
+    const noticeCount = document.getElementById("noticeCount");
+    const pagination = document.getElementById("pagination");
+    const searchInput = document.getElementById("searchInput");
+    const listWrap = document.getElementById("listWrap");
+    const detailWrap = document.getElementById("detailWrap");
+    const detailBox = document.getElementById("detailBox");
+    const relatedCard = document.getElementById("relatedCard");
+    const backButton = document.getElementById("backButton");
+    const bottomBackButton = document.getElementById("bottomBackButton");
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function normalizeBoolean(value) {
+      if (value === true) return true;
+      const text = String(value || "").trim().toLowerCase();
+      return text === "true" || text === "1" || text === "yes" || text === "y" || text === "공개" || text === "표시" || text === "고정";
+    }
+
+    function parseDate(value) {
+      const text = String(value || "").trim();
+      const date = new Date(text.replaceAll(".", "-").replace(" ", "T"));
+      return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+    }
+
+    function formatDate(value) {
+      const text = String(value || "").trim();
+      const match = text.match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
+
+      if (match) {
+        return `${match[1]}.${match[2].padStart(2, "0")}.${match[3].padStart(2, "0")}`;
+      }
+
+      return text || "-";
+    }
+
+    function getSortedNotices(rows) {
+      return [...rows]
+        .filter(item => item && normalizeBoolean(item.visible))
+        .sort((a, b) => {
+          const pinnedA = normalizeBoolean(a.pinned) ? 1 : 0;
+          const pinnedB = normalizeBoolean(b.pinned) ? 1 : 0;
+
+          if (pinnedA !== pinnedB) return pinnedB - pinnedA;
+
+          const dateA = parseDate(a.date);
+          const dateB = parseDate(b.date);
+
+          if (dateA !== dateB) return dateB - dateA;
+
+          return Number(b.id || 0) - Number(a.id || 0);
+        });
+    }
+
+    function getNoticeSummary(content) {
+      return String(content || "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 120);
+    }
+
+
+    function renderPagination(totalItems) {
+      if (!pagination) return;
+
+      const totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
+      currentPage = Math.min(Math.max(1, currentPage), totalPages);
+
+      const buttons = [];
+      const disabledFirst = currentPage === 1 ? "disabled" : "";
+      const disabledLast = currentPage === totalPages ? "disabled" : "";
+
+      buttons.push(`<button class="page-btn edge" type="button" data-page="1" ${disabledFirst}>≪</button>`);
+      buttons.push(`<button class="page-btn edge" type="button" data-page="${currentPage - 1}" ${disabledFirst}>‹</button>`);
+
+      const pages = [];
+      if (totalPages <= 7) {
+        for (let page = 1; page <= totalPages; page++) pages.push(page);
+      } else {
+        pages.push(1);
+        const start = Math.max(2, currentPage - 1);
+        const end = Math.min(totalPages - 1, currentPage + 1);
+        if (start > 2) pages.push("dots-left");
+        for (let page = start; page <= end; page++) pages.push(page);
+        if (end < totalPages - 1) pages.push("dots-right");
+        pages.push(totalPages);
+      }
+
+      pages.forEach(page => {
+        if (typeof page === "string") {
+          buttons.push(`<span class="page-ellipsis">…</span>`);
+          return;
+        }
+
+        buttons.push(`<button class="page-btn ${page === currentPage ? "active" : ""}" type="button" data-page="${page}">${page}</button>`);
+      });
+
+      buttons.push(`<button class="page-btn edge" type="button" data-page="${currentPage + 1}" ${disabledLast}>›</button>`);
+      buttons.push(`<button class="page-btn edge" type="button" data-page="${totalPages}" ${disabledLast}>≫</button>`);
+      pagination.innerHTML = buttons.join("");
+    }
+
+    function renderList() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      const sorted = getSortedNotices(noticeRows);
+      const filtered = keyword
+        ? sorted.filter(item => {
+            const target = `${item.category || ""} ${item.title || ""} ${item.content || ""}`.toLowerCase();
+            return target.includes(keyword);
+          })
+        : sorted;
+
+      noticeCount.textContent = `${filtered.length}개`;
+      renderPagination(filtered.length);
+
+      if (!filtered.length) {
+        noticeList.innerHTML = `<div class="empty">표시할 공지사항이 없습니다.</div>`;
+        return;
+      }
+
+      const startIndex = (currentPage - 1) * PAGE_SIZE;
+      const pageItems = filtered.slice(startIndex, startIndex + PAGE_SIZE);
+
+      noticeList.innerHTML = pageItems.map(item => {
+        const id = encodeURIComponent(item.id || "");
+        const pinned = normalizeBoolean(item.pinned);
+        const category = escapeHtml(item.category || "공지");
+        const title = escapeHtml(item.title || "제목 없음");
+        const summary = escapeHtml(getNoticeSummary(item.content));
+        const date = escapeHtml(formatDate(item.date));
+
+        return `
+          <a class="notice-item" href="?id=${id}" data-id="${id}">
+            <div class="notice-item-left">
+              <div class="notice-meta">
+                ${pinned ? `<span class="badge pin">고정</span>` : ""}
+                <span class="badge">${category}</span>
+              </div>
+              <div class="notice-title">${title}</div>
+              ${summary ? `<div class="notice-summary">${summary}</div>` : ""}
+            </div>
+            <div class="notice-date">${date}</div>
+          </a>
+        `;
+      }).join("");
+    }
+
+    function renderRelatedNotices(currentId) {
+      if (!relatedCard) return;
+
+      const others = getSortedNotices(noticeRows)
+        .filter(row => String(row.id) !== String(currentId))
+        .slice(0, 6);
+
+      if (!others.length) {
+        relatedCard.innerHTML = "";
+        return;
+      }
+
+      relatedCard.innerHTML = `
+        <div class="related-title">다른 공지사항</div>
+        <div class="related-list">
+          ${others.map(row => {
+            const id = encodeURIComponent(row.id || "");
+            const category = escapeHtml(row.category || "공지");
+            const title = escapeHtml(row.title || "제목 없음");
+            const date = escapeHtml(formatDate(row.date));
+
+            return `
+              <a class="related-item" href="?id=${id}" data-id="${id}">
+                <span class="related-category">${category}</span>
+                <span class="related-link-title">${title}</span>
+                <span class="related-date">${date}</span>
+              </a>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function renderDetail(id) {
+      const item = getSortedNotices(noticeRows).find(row => String(row.id) === String(id));
+
+      document.body.classList.add("detail-mode");
+      listWrap.style.display = "none";
+      detailWrap.style.display = "block";
+
+      if (!item) {
+        detailBox.innerHTML = `<div class="empty">해당 공지를 찾을 수 없습니다.</div>`;
+        if (relatedCard) relatedCard.innerHTML = "";
+        return;
+      }
+
+      const pinned = normalizeBoolean(item.pinned);
+      const category = escapeHtml(item.category || "공지");
+      const date = escapeHtml(formatDate(item.date));
+      const title = escapeHtml(item.title || "제목 없음");
+      const content = escapeHtml(item.content || "내용이 없습니다.");
+
+      detailBox.innerHTML = `
+        <div class="notice-meta">
+          ${pinned ? `<span class="badge pin">고정</span>` : ""}
+          <span class="badge">${category}</span>
+          <span class="notice-date">${date}</span>
+        </div>
+        <h2 class="detail-title">${title}</h2>
+        <div class="detail-content">${content}</div>
+      `;
+
+      renderRelatedNotices(item.id);
+    }
+
+    function showList(push = true) {
+      document.body.classList.remove("detail-mode");
+      detailWrap.style.display = "none";
+      listWrap.style.display = "block";
+
+      if (push) {
+        history.pushState(null, "", location.pathname);
+      }
+
+      renderList();
+    }
+
+    function applyRoute() {
+      const params = new URLSearchParams(location.search);
+      const id = params.get("id");
+
+      if (id) {
+        renderDetail(id);
+      } else {
+        showList(false);
+      }
+    }
+
+    async function loadNotices() {
+      try {
+        const response = await fetch(NOTICE_DATA_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error("공지 데이터 응답 오류");
+
+        const data = await response.json();
+        noticeRows = Array.isArray(data) ? data : [];
+        applyRoute();
+      } catch (error) {
+        console.error(error);
+        noticeRows = [];
+        noticeCount.textContent = "0개";
+        noticeList.innerHTML = `<div class="empty">공지사항을 불러오지 못했습니다.</div>`;
+      }
+    }
+
+    async function updateOnAirCount() {
+      const onAirButton = document.getElementById("onAirButton");
+      if (!onAirButton) return;
+
+      try {
+        const response = await fetch(LIVE_API_URL_FOR_ON_AIR, { cache: "no-store" });
+        if (!response.ok) throw new Error("LIVE API 응답 오류");
+
+        const data = await response.json();
+        const members = Array.isArray(data.members) ? data.members : [];
+        const liveCount = members.filter(member => member && member.isLive).length;
+
+        onAirButton.textContent = liveCount > 0 ? `ON AIR ${liveCount}` : "ON AIR";
+      } catch (error) {
+        console.error(error);
+        onAirButton.textContent = "ON AIR";
+      }
+    }
+
+    searchInput.addEventListener("input", () => {
+      currentPage = 1;
+      renderList();
+    });
+
+    pagination.addEventListener("click", (event) => {
+      const button = event.target.closest("button.page-btn");
+      if (!button || button.disabled) return;
+
+      currentPage = Number(button.dataset.page || 1);
+      renderList();
+      window.scrollTo({ top: listWrap.offsetTop - 90, behavior: "smooth" });
+    });
+
+    noticeList.addEventListener("click", (event) => {
+      const link = event.target.closest("a.notice-item");
+      if (!link) return;
+
+      event.preventDefault();
+      const id = link.dataset.id;
+      history.pushState(null, "", `?id=${encodeURIComponent(id)}`);
+      renderDetail(id);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+
+    if (relatedCard) {
+      relatedCard.addEventListener("click", (event) => {
+        const link = event.target.closest("a.related-item");
+        if (!link) return;
+
+        event.preventDefault();
+        const id = link.dataset.id;
+        history.pushState(null, "", `?id=${encodeURIComponent(id)}`);
+        renderDetail(id);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    backButton.addEventListener("click", () => {
+      showList(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    if (bottomBackButton) {
+      bottomBackButton.addEventListener("click", () => {
+        showList(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    window.addEventListener("popstate", applyRoute);
+
+    loadNotices();
+    updateOnAirCount();
+    setInterval(updateOnAirCount, 60000);
+  </script>
 </body>
 </html>
