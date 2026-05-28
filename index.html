@@ -653,7 +653,7 @@
       min-height: 96px;
     }
 
-    .sig-card::after {''
+    .sig-card::after {
       content: "♪";
       position: absolute;
       right: 14px;
@@ -1047,7 +1047,7 @@
             <div>
               <h2 class="section-title">방송국 새 글</h2>
             </div>
-            <a class="section-more" href="#board">전체 보기</a>
+            <a class="section-more" href="live/?tab=posts">전체 보기</a>
           </div>
 
           <div class="post-strip" id="boardPosts">
@@ -1070,18 +1070,10 @@
               <a class="section-more" href="notice/">더보기</a>
             </div>
 
-            <div class="card notice-list">
+            <div class="card notice-list" id="noticePreview">
               <div class="notice-item">
-                <span class="notice-title">FANTAJ 메인 페이지 업데이트 안내</span>
-                <span class="notice-date">05.26</span>
-              </div>
-              <div class="notice-item">
-                <span class="notice-title">시그니처 목록 데이터 갱신 안내</span>
-                <span class="notice-date">05.25</span>
-              </div>
-              <div class="notice-item">
-                <span class="notice-title">랭킹 페이지 베타 오픈 예정</span>
-                <span class="notice-date">05.24</span>
+                <span class="notice-title">공지사항을 불러오는 중입니다...</span>
+                <span class="notice-date">-</span>
               </div>
             </div>
           </div>
@@ -1135,6 +1127,7 @@
     const BOARD_API_URL = "https://fantaj-board-worker.4rgn2004.workers.dev/board";
     const RANK_API_URL = "ranking/rank.json";
     const SIGNATURE_API_URL = "data.json";
+    const NOTICE_API_URL = "data/notice.json";
     const DEFAULT_PROFILE_IMAGE = "https://profile.img.sooplive.co.kr/LOGO/sy/sysdemian/sysdemian.jpg";
 
     const liveGrid = document.getElementById("liveGrid");
@@ -1142,6 +1135,7 @@
     const boardPosts = document.getElementById("boardPosts");
     const rankingPreview = document.getElementById("rankingPreview");
     const signaturePreview = document.getElementById("signaturePreview");
+    const noticePreview = document.getElementById("noticePreview");
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -1432,6 +1426,98 @@
       }).join("");
     }
 
+    function normalizeNoticeBoolean(value) {
+      if (value === true) return true;
+      const text = String(value || "").trim().toLowerCase();
+      return text === "true" || text === "1" || text === "yes" || text === "y" || text === "공개" || text === "표시" || text === "고정";
+    }
+
+    function parseNoticeDate(value) {
+      const text = String(value || "").trim();
+      const date = new Date(text.replaceAll(".", "-").replace(" ", "T"));
+      return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+    }
+
+    function formatNoticeDate(value) {
+      const text = String(value || "").trim();
+      const match = text.match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
+
+      if (match) {
+        return `${match[2].padStart(2, "0")}.${match[3].padStart(2, "0")}`;
+      }
+
+      return text ? text.slice(5, 10).replace("-", ".") : "-";
+    }
+
+    function sortNoticeRows(rows) {
+      return [...rows].sort((a, b) => {
+        const pinnedA = normalizeNoticeBoolean(a.pinned) ? 1 : 0;
+        const pinnedB = normalizeNoticeBoolean(b.pinned) ? 1 : 0;
+
+        if (pinnedA !== pinnedB) return pinnedB - pinnedA;
+
+        const dateA = parseNoticeDate(a.date);
+        const dateB = parseNoticeDate(b.date);
+
+        if (dateA !== dateB) return dateB - dateA;
+
+        return Number(b.id || 0) - Number(a.id || 0);
+      });
+    }
+
+    function renderNoticePreview(rows) {
+      if (!noticePreview) return;
+
+      const data = sortNoticeRows(Array.isArray(rows) ? rows : [])
+        .filter(item => item && normalizeNoticeBoolean(item.visible))
+        .slice(0, 3);
+
+      if (!data.length) {
+        noticePreview.innerHTML = `
+          <div class="notice-item">
+            <span class="notice-title">표시할 공지사항이 없습니다.</span>
+            <span class="notice-date">-</span>
+          </div>
+        `;
+        return;
+      }
+
+      noticePreview.innerHTML = data.map(item => {
+        const id = encodeURIComponent(item.id || "");
+        const category = item.category ? `[${escapeHtml(item.category)}] ` : "";
+        const title = `${category}${escapeHtml(item.title || "제목 없음")}`;
+        const date = escapeHtml(formatNoticeDate(item.date));
+
+        return `
+          <a class="notice-item" href="notice/?id=${id}">
+            <span class="notice-title">${title}</span>
+            <span class="notice-date">${date}</span>
+          </a>
+        `;
+      }).join("");
+    }
+
+    async function loadNoticePreview() {
+      try {
+        const response = await fetch(NOTICE_API_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error("NOTICE API 응답 오류");
+
+        const data = await response.json();
+        renderNoticePreview(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error(error);
+
+        if (noticePreview) {
+          noticePreview.innerHTML = `
+            <div class="notice-item">
+              <span class="notice-title">공지사항을 불러오지 못했습니다.</span>
+              <span class="notice-date">!</span>
+            </div>
+          `;
+        }
+      }
+    }
+
     async function loadSignaturePreview() {
       try {
         const response = await fetch(SIGNATURE_API_URL, { cache: "no-store" });
@@ -1455,7 +1541,7 @@
     }
 
 
-    async function loadLiveMembers() {''
+    async function loadLiveMembers() {
       try {
         const response = await fetch(LIVE_API_URL, { cache: "no-store" });
         if (!response.ok) throw new Error("LIVE API 응답 오류");
@@ -1658,11 +1744,13 @@
     loadBoardPosts();
     loadRankingPreview();
     loadSignaturePreview();
+    loadNoticePreview();
 
     setInterval(loadLiveMembers, 60000);
     setInterval(loadBoardPosts, 300000);
     setInterval(loadRankingPreview, 300000);
     setInterval(loadSignaturePreview, 300000);
+    setInterval(loadNoticePreview, 300000);
   </script>
 </body>
 </html>
