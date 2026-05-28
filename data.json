@@ -932,7 +932,7 @@
     "name": "세은 응원가",
     "image": "",
     "audio": "https://cdn.fantaj.kr/2442_seeuncheer.mp3",
-    "bj": 243,
+    "bj": "",
     "videos": []
   },
   {
@@ -1020,7 +1020,7 @@
     "name": "한시온 응원가",
     "image": "",
     "audio": "",
-    "bj": 281,
+    "bj": "",
     "videos": []
   },
   {
@@ -1028,7 +1028,7 @@
     "name": "뽀뇨 응원가",
     "image": "",
     "audio": "https://cdn.fantaj.kr/2845_ponyo.mp3",
-    "bj": 245,
+    "bj": "",
     "videos": []
   },
   {
@@ -1036,7 +1036,7 @@
     "name": "파닥 응원가",
     "image": "https://cdn.fantaj.kr/2884_padakchant.gif",
     "audio": "",
-    "bj": 245,
+    "bj": "",
     "videos": []
   },
   {
@@ -1044,7 +1044,7 @@
     "name": "만다 응원가",
     "image": "",
     "audio": "",
-    "bj": 245,
+    "bj": "",
     "videos": []
   },
   {
@@ -1068,7 +1068,7 @@
     "name": "소원 응원가",
     "image": "",
     "audio": "https://cdn.fantaj.kr/2988_sowoncheersong.mp3",
-    "bj": 292,
+    "bj": "",
     "videos": []
   },
   {
@@ -1116,7 +1116,7 @@
     "name": "이리오너라",
     "image": "https://cdn.fantaj.kr/3084_irioneora.gif",
     "audio": "",
-    "bj": 302,
+    "bj": "",
     "videos": []
   },
   {
@@ -1140,7 +1140,7 @@
     "name": "가비 응원가",
     "image": "",
     "audio": "https://cdn.fantaj.kr/3120_gabicheer.mp3",
-    "bj": 313,
+    "bj": "",
     "videos": []
   },
   {
@@ -1625,7 +1625,7 @@
     "name": "범죄자좀꺼져",
     "image": "https://cdn.fantaj.kr/10056_criminalgetout.gif",
     "audio": "https://cdn.fantaj.kr/10056_criminalgetout.mp3",
-    "bj": 1055,
+    "bj": 1056,
     "videos": []
   },
   {
@@ -1777,7 +1777,7 @@
     "name": "낭만단 총집합",
     "image": "https://cdn.fantaj.kr/10311_romancecall.gif",
     "audio": "https://cdn.fantaj.kr/10311_romancecall.mp3",
-    "bj": 1134,
+    "bj": 1031,
     "videos": []
   },
   {
@@ -1801,7 +1801,7 @@
     "name": "유별 신호탄",
     "image": "https://cdn.fantaj.kr/10468_yubyeolsignal.gif",
     "audio": "https://cdn.fantaj.kr/10468_yubyeolsignal.mp3",
-    "bj": 1145,
+    "bj": "",
     "videos": []
   },
   {
@@ -1905,7 +1905,7 @@
     "name": "소플단 달려",
     "image": "",
     "audio": "https://cdn.fantaj.kr/11970_sopldango.mp3",
-    "bj": 1526,
+    "bj": "",
     "videos": []
   },
   {
