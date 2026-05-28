@@ -818,8 +818,8 @@
   {
     "number": 2002,
     "name": "윤아현 응원가",
-    "image": "",
-    "audio": "",
+    "image": "https://cdn.fantaj.kr/2002_ahyeoncheer.gif",
+    "audio": "https://cdn.fantaj.kr/2002_ahyeoncheer.mp3",
     "bj": "",
     "videos": []
   },
@@ -1139,7 +1139,7 @@
     "number": 3120,
     "name": "가비 응원가",
     "image": "",
-    "audio": "https://cdn.fantaj.kr/3120_gabicheer.mp3?v=1",
+    "audio": "https://cdn.fantaj.kr/3120_gabicheer.mp3",
     "bj": 313,
     "videos": []
   },
@@ -1338,8 +1338,8 @@
   {
     "number": 5002,
     "name": "윤아현 신호탄",
-    "image": "",
-    "audio": "",
+    "image": "https://cdn.fantaj.kr/5002_ahyeonsignal.gif",
+    "audio": "https://cdn.fantaj.kr/5002_ahyeonsignal.mp3",
     "bj": "",
     "videos": []
   },
@@ -1622,9 +1622,9 @@
   },
   {
     "number": 10056,
-    "name": "큰손",
-    "image": "",
-    "audio": "",
+    "name": "범죄자좀꺼져",
+    "image": "https://cdn.fantaj.kr/10056_criminalgetout.gif",
+    "audio": "https://cdn.fantaj.kr/10056_criminalgetout.mp3",
     "bj": 1055,
     "videos": []
   },
@@ -1671,7 +1671,7 @@
   {
     "number": 10086,
     "name": "이촌동한량",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10086_hallyang.gif",
     "audio": "https://cdn.fantaj.kr/10086_hallyang.mp3",
     "bj": 1084,
     "videos": []
@@ -1774,9 +1774,9 @@
   },
   {
     "number": 10311,
-    "name": "플단시그",
-    "image": "",
-    "audio": "",
+    "name": "낭만단 총집합",
+    "image": "https://cdn.fantaj.kr/10311_romancecall.gif",
+    "audio": "https://cdn.fantaj.kr/10311_romancecall.mp3",
     "bj": 1134,
     "videos": []
   },
