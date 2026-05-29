@@ -108,15 +108,27 @@ main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 26px 0 56
 .track-board::after { content: "FINISH"; position: absolute; top: 9px; right: 5px; writing-mode: vertical-rl; font-size: 10px; font-weight: 950; color: rgba(176, 92, 201, .52); letter-spacing: .16em; }
 .racer-row { position: absolute; left: 0; right: 0; height: 80px; border-bottom: 2px dashed rgba(152, 139, 162, .42); }
 .racer-row:last-child { border-bottom: 0; }
-.racer { position: absolute; left: 8px; bottom: 5px; width: 48px; height: 69px; transform: translateX(0); transition: filter .18s ease; will-change: transform; }
-.racer img { width: 100%; height: 100%; object-fit: contain; image-rendering: auto; display: block; }
+.racer { position: absolute; left: 8px; bottom: 5px; width: 48px; height: 69px; transform: translateX(0); transition: filter .18s ease; will-change: transform; isolation: isolate; }
+.racer::before { content: ""; position: absolute; left: -13px; right: -13px; top: -11px; bottom: -9px; border-radius: 999px; background: radial-gradient(circle, rgba(255, 227, 142, .48) 0%, rgba(255, 162, 207, .26) 43%, rgba(169, 101, 232, .12) 62%, transparent 74%); opacity: 0; transform: scale(.92); pointer-events: none; z-index: 0; }
+.racer img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; image-rendering: auto; display: block; }
 .racer.jump { animation: hop .42s ease-in-out infinite alternate; }
 .racer.stop { filter: grayscale(.15) brightness(.9); }
 .racer.boost { filter: drop-shadow(0 0 8px rgba(246,183,60,.8)); }
+.racer.finished::before { opacity: .72; }
+.racer.winner::before { animation: winnerAura .78s ease-in-out infinite alternate; }
+.racer.final-boost::before { opacity: .82; animation: finalBoostAura .58s ease-in-out infinite alternate; }
+@keyframes winnerAura {
+  from { opacity: .62; transform: scale(.92); }
+  to { opacity: .95; transform: scale(1.12); }
+}
+@keyframes finalBoostAura {
+  from { opacity: .48; transform: scale(.92); }
+  to { opacity: .86; transform: scale(1.08); }
+}
 @keyframes hop { from { margin-bottom: 0; } to { margin-bottom: 12px; } }
-.name-tag { position: absolute; left: 0; bottom: -6px; transform: translateX(-8px); white-space: nowrap; font-size: 12px; font-weight: 950; text-shadow: 0 2px 0 rgba(255,255,255,.9); }
+.name-tag { position: absolute; z-index: 3; left: 0; bottom: -6px; transform: translateX(-8px); white-space: nowrap; font-size: 12px; font-weight: 950; text-shadow: 0 2px 0 rgba(255,255,255,.9); }
 .rank-chip { opacity: .65; margin-right: 3px; color: #7b6b84; }
-.speech { position: absolute; left: 38px; bottom: 56px; max-width: 132px; padding: 7px 9px; border-radius: 10px; background: rgba(255,255,255,.94); border: 1px solid rgba(216, 198, 223, .82); box-shadow: 0 5px 13px rgba(90, 70, 110, .12); font-size: 12px; font-weight: 900; color: #55415f; white-space: nowrap; opacity: 0; transform: translateY(5px); pointer-events: none; }
+.speech { position: absolute; z-index: 4; left: 38px; bottom: 56px; max-width: 132px; padding: 7px 9px; border-radius: 10px; background: rgba(255,255,255,.94); border: 1px solid rgba(216, 198, 223, .82); box-shadow: 0 5px 13px rgba(90, 70, 110, .12); font-size: 12px; font-weight: 900; color: #55415f; white-space: nowrap; opacity: 0; transform: translateY(5px); pointer-events: none; }
 .speech.show { animation: bubble 1.55s ease forwards; }
 @keyframes bubble { 0% { opacity: 0; transform: translateY(6px) scale(.96); } 12%, 78% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-5px) scale(.98); } }
 .sparkle { position: absolute; width: 6px; height: 6px; border-radius: 999px; pointer-events: none; animation: sparkle .7s ease-out forwards; z-index: 2; }
@@ -356,7 +368,8 @@ const eventTypes = [
   { type:"megaBoost", label:"대폭주", image:"run", duration:[1700, 3300], speed:[4.2, 6.4], messages:["대폭주 시작!", "아무도 못 막는다!", "갑자기 치고 나갑니다!", "혼자 다른 게임 중!"] },
   { type:"slow", label:"느려짐", image:"walk", duration:[1300, 2600], speed:[0.18, 0.55], messages:["고장 난 지유...", "발이 무겁다...", "잠깐 느려짐", "어째 느린데?", "체력 방전..."] },
   { type:"stop", label:"멈춤", image:"idle", duration:[900, 1900], speed:[0, 0.02], messages:["잠깐 쉬어갈게요", "멈칫!", "어? 멈췄다", "생각 중...", "결승선이 무서워요"] },
-  { type:"back", label:"뒤로 감", image:"walk", duration:[800, 1600], speed:[-1.25, -0.45], messages:["어? 뒤로 간다!", "길을 잘못 들었다!", "후진합니다", "잠깐 뒤로!", "이건 억까야"] },
+  { type:"smallBack", label:"살짝 밀림", image:"walk", duration:[850, 1200], slideDistance:[2.2, 4.0], messages:["살짝 밀렸다!", "앗, 조금 뒤로!", "발이 꼬였다!", "잠깐 흔들림!", "아차차!"] },
+  { type:"bigBack", label:"크게 밀림", image:"walk", duration:[1400, 2200], slideDistance:[6.0, 10.0], messages:["크게 밀려났다!", "뒤로 쭉 밀립니다!", "이건 큰 실수!", "한참 뒤로 밀림!", "어어어 뒤로 간다!"] },
   { type:"jump", label:"점프", image:"jump", duration:[850, 1700], speed:[1.1, 2.0], messages:["폴짝!", "장애물 회피!", "점프 성공!", "가볍게 뛰었다!", "뛰면서 추월!"] },
   { type:"leaderOops", label:"1등 방심", image:"idle", duration:[850, 1700], speed:[0, 0.18], target:"leader", messages:["1등 방심했나요?", "선두가 멈칫!", "결승선 앞에서 왜 멈춰!", "잠깐 딴생각!"] }
 ];
@@ -404,6 +417,7 @@ let targetWidth = 100;
 function random(min, max) { return Math.random() * (max - min) + min; }
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+function easeInOut(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
 function formatTime(ms) {
   const total = Math.max(0, Math.floor(ms / 1000));
   return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
@@ -479,7 +493,12 @@ function createRacers() {
       finishTime: 0,
       laneLuck: random(.82, 1.22),
       personality: pick(["steady", "chaos", "late", "fast", "sleepy"]),
-      nextTalk: random(1200, 4200)
+      nextTalk: random(1200, 4200),
+      finalBoost: false,
+      slideUntil: 0,
+      slideStart: 0,
+      slideFrom: 0,
+      slideTo: 0
     };
   });
   updateVisuals();
@@ -489,8 +508,37 @@ function setState(racer, state) {
   racer.state = state;
   racer.el.classList.toggle("jump", state === "jump");
   racer.el.classList.toggle("boost", state === "run");
-  racer.el.classList.toggle("stop", state === "idle");
+  racer.el.classList.toggle("stop", state === "idle" && !racer.finished);
   racer.img.src = ASSETS[state] || ASSETS.walk;
+}
+function markFinished(racer, now) {
+  racer.finished = true;
+  racer.finishTime = now;
+  racer.finalBoost = false;
+  racer.el.classList.remove("final-boost");
+  racer.el.classList.add("finished");
+  finishOrder.push(racer);
+  if (finishOrder.length === 1) {
+    racer.el.classList.add("winner");
+    createSparkles(racer, 14);
+  }
+  setState(racer, "idle");
+  showSpeech(racer, finishOrder.length === 1 ? "내가 1등!" : "도착했다!");
+  addLog(`${finishOrder.length}등 도착 · ${racer.name}`);
+}
+function activateFinalBoost(now) {
+  const active = racers.filter(r => !r.finished);
+  if (active.length !== 1 || racers.length < 2) return;
+  const lastRacer = active[0];
+  if (lastRacer.finalBoost) return;
+  lastRacer.finalBoost = true;
+  lastRacer.boost = 18;
+  lastRacer.effectUntil = now + 12000;
+  lastRacer.el.classList.add("final-boost");
+  setState(lastRacer, "run");
+  showSpeech(lastRacer, "마지막 부스터!");
+  addLog(`마지막 1명 부스터 · ${lastRacer.name}`);
+  createSparkles(lastRacer, 12);
 }
 function showSpeech(racer, message) {
   racer.speech.textContent = message;
@@ -519,9 +567,21 @@ function createSparkles(racer, count = 5) {
   }
 }
 
+function startSlideBack(racer, event, now) {
+  const duration = random(event.duration[0], event.duration[1]);
+  const distance = random(event.slideDistance[0], event.slideDistance[1]);
+  racer.slideStart = now;
+  racer.slideUntil = now + duration;
+  racer.slideFrom = racer.progress;
+  racer.slideTo = Math.max(0, racer.progress - distance);
+  racer.boost = 0;
+  racer.effectUntil = racer.slideUntil;
+  setState(racer, event.image);
+}
+
 function triggerEvent(now) {
-  const active = racers.filter(r => !r.finished);
-  if (!active.length) return;
+  const active = racers.filter(r => !r.finished && !r.finalBoost && !(r.slideUntil && now < r.slideUntil));
+  if (active.length <= 1) return;
   const sorted = [...active].sort((a,b) => b.progress - a.progress);
   const leader = sorted[0];
   const last = sorted[sorted.length - 1];
@@ -529,32 +589,58 @@ function triggerEvent(now) {
   const lateRace = elapsed > 22000 || (leader && leader.progress > 55);
   let target = pick(active);
   let event = pick(eventTypes);
+  let eventLocked = false;
 
   const gap = leader && last ? leader.progress - last.progress : 0;
   if (lateRace && last && gap > 14 && Math.random() < .20) {
     target = last;
     event = { type:"comeback", label:"꼴찌의 반란", image:"run", duration:[2300, 4300], speed:[4.8, 7.2], messages: comebackMessages };
+    eventLocked = true;
   } else if (leader && gap > 18 && Math.random() < .14) {
     target = leader;
     event = { type:"leaderOops", label:"1등 방심", image:"idle", duration:[900, 1900], speed:[0, 0.12], messages:["1등 방심했나요?", "선두가 멈칫!", "뒤에서 따라옵니다!", "갑자기 멈춰버림!"] };
+    eventLocked = true;
   } else if (lateRace && Math.random() < .18) {
     target = sorted[Math.floor(random(Math.max(0, sorted.length - 3), sorted.length))] || target;
     event = { type:"lateBoost", label:"막판 스퍼트", image:"run", duration:[1700, 3200], speed:[3.2, 5.6], messages:["막판 스퍼트!", "결승선 앞 대혼전!", "역전 가자!", "마지막 힘을 짜낸다!", "갑자기 튀어나옵니다!"] };
+    eventLocked = true;
   } else if (event.target === "leader" && leader) {
     target = leader;
   }
 
-  const duration = random(event.duration[0], event.duration[1]);
-  const speed = random(event.speed[0], event.speed[1]);
-  target.boost = speed;
-  target.effectUntil = now + duration;
-  setState(target, event.image);
-
-  if (event.type === "back") {
-    target.progress = Math.max(0, target.progress - random(3.5, 8.5));
+  if (!eventLocked) {
+    const rankIndex = sorted.findIndex(r => r === target);
+    const behindRatio = rankIndex / Math.max(1, sorted.length - 1);
+    const gapFromLeader = leader ? Math.max(0, leader.progress - target.progress) : 0;
+    const distanceRatio = clamp(gapFromLeader / 35, 0, 1);
+    const boostChance = 0.04 + behindRatio * 0.09 + distanceRatio * 0.10;
+    if (Math.random() < boostChance) {
+      const boostEvents = [
+        { type:"boost", label:"부스터", image:"run", duration:[1300, 2800], speed:[2.6, 4.8], messages:["부스터 발동!", "따라잡는다!", "속도 올립니다!", "추격 시작!"] },
+        { type:"jump", label:"점프", image:"jump", duration:[850, 1700], speed:[1.1, 2.0], messages:["폴짝!", "가볍게 추격!", "점프 성공!", "뛰면서 따라간다!"] }
+      ];
+      if (lateRace || gapFromLeader > 18) {
+        boostEvents.push({ type:"lateBoost", label:"막판 스퍼트", image:"run", duration:[1700, 3200], speed:[3.2, 5.6], messages:["막판 스퍼트!", "아직 안 끝났다!", "역전 가자!", "갑자기 튀어나옵니다!"] });
+      }
+      if (gapFromLeader > 26 && Math.random() < .38) {
+        boostEvents.push({ type:"megaBoost", label:"대폭주", image:"run", duration:[1700, 3000], speed:[4.0, 6.0], messages:["대폭주 시작!", "추격 불 붙었다!", "혼자 다른 속도!", "따라잡으러 갑니다!"] });
+      }
+      event = pick(boostEvents);
+    }
   }
-  if (event.type === "megaBoost" || event.type === "comeback") {
-    target.progress = Math.min(99, target.progress + random(1.5, 4.2));
+
+  if (event.type === "smallBack" || event.type === "bigBack") {
+    startSlideBack(target, event, now);
+  } else {
+    const duration = random(event.duration[0], event.duration[1]);
+    const speed = random(event.speed[0], event.speed[1]);
+    target.boost = speed;
+    target.effectUntil = now + duration;
+    setState(target, event.image);
+
+    if (event.type === "megaBoost" || event.type === "comeback") {
+      target.progress = Math.min(99, target.progress + random(1.5, 4.2));
+    }
   }
 
   const msg = pick(event.messages);
@@ -603,8 +689,20 @@ function raceLoop(now) {
   const elapsed = now - startTime;
   timer.textContent = formatTime(elapsed);
   const active = racers.filter(r => !r.finished);
+  activateFinalBoost(now);
   const afterburner = elapsed > 90000 ? 1.55 : elapsed > 65000 ? 1.24 : 1;
   active.forEach(racer => {
+    if (racer.slideUntil && now < racer.slideUntil) {
+      const slideRatio = clamp((now - racer.slideStart) / Math.max(1, racer.slideUntil - racer.slideStart), 0, 1);
+      racer.progress = racer.slideFrom + (racer.slideTo - racer.slideFrom) * easeInOut(slideRatio);
+      return;
+    }
+    if (racer.slideUntil && now >= racer.slideUntil) {
+      racer.progress = racer.slideTo;
+      racer.slideUntil = 0;
+      racer.boost = 1;
+      if (racer.state !== "walk") setState(racer, "walk");
+    }
     if (now > racer.effectUntil) {
       racer.boost = 1;
       if (racer.state !== "walk") setState(racer, "walk");
@@ -616,14 +714,13 @@ function raceLoop(now) {
     if (racer.personality === "chaos") personalityBonus = random(.78, 1.35);
     let speed = racer.baseSpeed * racer.laneLuck * racer.boost * afterburner * personalityBonus;
     speed += random(-0.22, 0.28);
+    if (racer.finalBoost) {
+      speed = Math.max(speed, 54);
+      if (Math.random() < .45) createSparkles(racer, 2);
+    }
     racer.progress = clamp(racer.progress + speed * dt, 0, 100);
     if (racer.progress >= 100 && !racer.finished) {
-      racer.finished = true;
-      racer.finishTime = now;
-      finishOrder.push(racer);
-      setState(racer, "idle");
-      showSpeech(racer, finishOrder.length === 1 ? "내가 1등!" : "도착했다!");
-      addLog(`${finishOrder.length}등 도착 · ${racer.name}`);
+      markFinished(racer, now);
     }
   });
   eventTimer -= (now - (raceLoop.prev || now));
@@ -720,6 +817,7 @@ function resetRace() {
   eventLog.innerHTML = "";
   finishOrder = [];
   resultModal.classList.remove("show");
+  [...trackBoard.querySelectorAll(".racer")].forEach(node => node.classList.remove("finished", "winner", "final-boost"));
   createRacers();
   racers.forEach(r => setState(r, "idle"));
 }
