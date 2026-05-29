@@ -1114,6 +1114,16 @@ const videoModalTitle = document.getElementById("videoModalTitle");
 const videoList = document.getElementById("videoList");
 const videoFrame = document.getElementById("videoFrame");
 const videoClose = document.getElementById("videoClose");
+let videoFrameTimer = null;
+
+function setVideoFrameSafely(url) {
+  clearTimeout(videoFrameTimer);
+  videoFrame.src = "about:blank";
+
+  videoFrameTimer = setTimeout(() => {
+    videoFrame.src = url || "";
+  }, 50);
+}
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -1318,7 +1328,7 @@ function openVideoModal(item, videos) {
   videoList.innerHTML = "";
 
   const firstVideo = videos[0];
-  videoFrame.src = firstVideo.url;
+  setVideoFrameSafely(firstVideo.url);
 
   videos.forEach((video, index) => {
     const button = document.createElement("button");
@@ -1331,7 +1341,7 @@ function openVideoModal(item, videos) {
     }
 
     button.addEventListener("click", () => {
-      videoFrame.src = video.url;
+      setVideoFrameSafely(video.url);
       videoList.querySelectorAll(".video-link").forEach(link => link.classList.remove("active"));
       button.classList.add("active");
     });
@@ -1344,6 +1354,7 @@ function openVideoModal(item, videos) {
 }
 
 function closeVideoModal() {
+  clearTimeout(videoFrameTimer);
   videoModal.classList.remove("active");
   videoModal.setAttribute("aria-hidden", "true");
   videoFrame.src = "";
