@@ -85,7 +85,7 @@
     }
 
     .footer-install-button {
-      display: inline-flex;
+      display: none;
       align-items: center;
       justify-content: center;
       border: 0;
@@ -1117,6 +1117,12 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  .footer-install-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 </style>
@@ -1895,25 +1901,17 @@
     let deferredInstallPrompt = null;
     const desktopInstallButton = document.getElementById("desktopInstallButton");
 
-    function isRunningAsApp() {
-      return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-    }
-
     function isIosDevice() {
       return /iphone|ipad|ipod/i.test(navigator.userAgent);
     }
 
-    function getInstallGuideMessage() {
-      if (isIosDevice()) {
-        return "iPhone Safari 설치 방법\n\n사파리에서 fantaj.kr을 열고, 하단 공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택해주세요.";
-      }
-
-      return "앱 설치 방법\n\nAndroid는 Chrome에서 fantaj.kr을 직접 열고, 약 30초 정도 기다린 뒤 하단의 ‘앱 설치’ 버튼을 다시 눌러주세요.\n\n카카오톡/네이버 앱에서는 메뉴에서 ‘Chrome에서 열기’ 또는 ‘다른 브라우저로 열기’를 선택해주세요.";
+    function isAndroidDevice() {
+      return /android/i.test(navigator.userAgent);
     }
 
     async function runInstallPrompt() {
-      if (isRunningAsApp()) {
-        alert("이미 FANTAJ 앱으로 실행 중입니다.");
+      if (isIosDevice()) {
+        alert("아이폰 설치 방법\n\nSafari에서 fantaj.kr을 열고,\n공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택해주세요.");
         return;
       }
 
@@ -1924,7 +1922,12 @@
         return;
       }
 
-      alert(getInstallGuideMessage());
+      if (isAndroidDevice()) {
+        alert("앱 설치 방법\n\nChrome에서 fantaj.kr을 직접 열고,\n잠시 후 ‘앱 설치’를 다시 눌러주세요.");
+        return;
+      }
+
+      alert("모바일 Chrome 또는 Safari에서 앱 설치를 진행해주세요.");
     }
 
     window.addEventListener("beforeinstallprompt", function (event) {
