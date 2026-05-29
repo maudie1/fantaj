@@ -84,25 +84,6 @@
       white-space: nowrap;
     }
 
-    .nav-install-mobile {
-      display: none;
-      border: 0;
-      padding: 8px 13px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.86);
-      color: #8f4eb2;
-      font-size: 12px;
-      font-weight: 950;
-      box-shadow: inset 0 0 0 1px rgba(169, 101, 232, 0.34), 0 8px 18px rgba(150, 94, 171, 0.12);
-      white-space: nowrap;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .nav-install-mobile:hover {
-      background: rgba(255, 247, 251, 0.96);
-    }
-
     .footer-install-button {
       display: inline-flex;
       align-items: center;
@@ -813,16 +794,6 @@
       }
 
 
-      body.show-mobile-install .nav-live {
-        display: none;
-      }
-
-      body.show-mobile-install .nav-install-mobile {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-
       .nav-menu {
         gap: 15px;
         font-size: 12px;
@@ -1146,10 +1117,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-
-  .footer-install-button {
-    display: none;
-  }
 }
 
 </style>
@@ -1170,7 +1137,6 @@
         </nav>
 
         <a class="nav-live" href="live/">ON AIR</a>
-        <button id="mobileInstallButton" class="nav-install-mobile" type="button">앱 설치</button>
       </div>
     </header>
 
@@ -1927,12 +1893,7 @@
 
   <script>
     let deferredInstallPrompt = null;
-    const mobileInstallButton = document.getElementById("mobileInstallButton");
     const desktopInstallButton = document.getElementById("desktopInstallButton");
-
-    function isMobileViewport() {
-      return window.matchMedia("(max-width: 560px)").matches;
-    }
 
     function isRunningAsApp() {
       return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
@@ -1942,37 +1903,34 @@
       return /iphone|ipad|ipod/i.test(navigator.userAgent);
     }
 
-    function updateMobileInstallButton() {
-      const shouldShowInstall = isMobileViewport() && !isRunningAsApp();
-      document.body.classList.toggle("show-mobile-install", shouldShowInstall);
+    function getInstallGuideMessage() {
+      if (isIosDevice()) {
+        return "iPhone Safari 설치 방법\n\n사파리에서 fantaj.kr을 열고, 하단 공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택해주세요.";
+      }
+
+      return "앱 설치 방법\n\nAndroid는 Chrome에서 fantaj.kr을 직접 열고, 약 30초 정도 기다린 뒤 하단의 ‘앱 설치’ 버튼을 다시 눌러주세요.\n\n카카오톡/네이버 앱에서는 메뉴에서 ‘Chrome에서 열기’ 또는 ‘다른 브라우저로 열기’를 선택해주세요.";
     }
 
     async function runInstallPrompt() {
-      if (isIosDevice() && !deferredInstallPrompt) {
-        alert("아이폰은 사파리 하단 공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택해주세요.");
+      if (isRunningAsApp()) {
+        alert("이미 FANTAJ 앱으로 실행 중입니다.");
         return;
       }
 
-      if (!deferredInstallPrompt) {
-        alert("브라우저 메뉴에서 ‘앱 설치’ 또는 ‘홈 화면에 추가’를 선택해주세요.");
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
         return;
       }
 
-      deferredInstallPrompt.prompt();
-      await deferredInstallPrompt.userChoice;
-      deferredInstallPrompt = null;
-      updateMobileInstallButton();
+      alert(getInstallGuideMessage());
     }
 
     window.addEventListener("beforeinstallprompt", function (event) {
       event.preventDefault();
       deferredInstallPrompt = event;
-      updateMobileInstallButton();
     });
-
-    if (mobileInstallButton) {
-      mobileInstallButton.addEventListener("click", runInstallPrompt);
-    }
 
     if (desktopInstallButton) {
       desktopInstallButton.addEventListener("click", runInstallPrompt);
@@ -1980,11 +1938,7 @@
 
     window.addEventListener("appinstalled", function () {
       deferredInstallPrompt = null;
-      updateMobileInstallButton();
     });
-
-    window.addEventListener("resize", updateMobileInstallButton);
-    updateMobileInstallButton();
   </script>
 
   <script>
