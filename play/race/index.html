@@ -431,6 +431,12 @@ function initInputs() {
     input.value = name;
     input.maxLength = 14;
     input.setAttribute("aria-label", `${index + 1}번 참가자 이름`);
+    input.addEventListener("focus", () => {
+      setTimeout(() => input.select(), 0);
+    });
+    input.addEventListener("mouseup", event => {
+      event.preventDefault();
+    });
     nameInputs.appendChild(input);
   });
 }
