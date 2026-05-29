@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>지유 레이스 | FANTAJ PLAY</title>
+<link rel="icon" type="image/png" href="../../favicon.png">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --text: #3d3148;
+  --muted: #7c6d85;
+  --soft: rgba(255, 255, 255, 0.78);
+  --line: rgba(226, 194, 223, 0.55);
+  --pink: #ff7eb7;
+  --purple: #a965e8;
+  --deep: #8f4eb2;
+  --mint: #25bec1;
+  --gold: #f6b73c;
+  --shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
+}
+body {
+  min-height: 100vh;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 12% 5%, rgba(255, 183, 217, .26), transparent 28%),
+    radial-gradient(circle at 86% 12%, rgba(184, 156, 255, .22), transparent 30%),
+    linear-gradient(180deg, #fff7fb 0%, #f7f0ff 45%, #fffaf4 100%);
+  color: var(--text);
+}
+a { color: inherit; text-decoration: none; }
+button, input { font-family: inherit; }
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(226, 194, 223, 0.55);
+  box-shadow: 0 8px 28px rgba(177, 122, 174, 0.12);
+}
+.nav-inner { width: min(1180px, calc(100% - 32px)); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.logo { font-size: 28px; font-weight: 950; letter-spacing: 0.12em; color: var(--deep); white-space: nowrap; }
+.nav-menu { display: flex; align-items: center; gap: 26px; font-size: 15px; font-weight: 800; color: #6b5b75; }
+.nav-menu a:hover, .nav-menu a.active { color: #b05cc9; }
+.nav-live { padding: 9px 15px; border-radius: 10px; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; font-size: 13px; font-weight: 900; box-shadow: 0 8px 20px rgba(177, 92, 201, 0.24); white-space: nowrap; }
+main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 26px 0 56px; }
+.race-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  padding: 30px 24px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.95), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(255,255,255,.82), transparent 28%),
+    linear-gradient(135deg, rgba(255,241,249,.94), rgba(239,225,255,.9));
+  box-shadow: 0 26px 60px rgba(150, 94, 171, 0.14);
+  border: 1px solid rgba(226, 194, 223, 0.62);
+  margin-bottom: 18px;
+}
+.race-kicker { font-size: 13px; font-weight: 950; letter-spacing: .24em; color: #a061bb; margin-bottom: 8px; }
+.race-title { font-size: clamp(34px, 5vw, 58px); font-weight: 950; color: #fff; letter-spacing: .04em; text-shadow: 0 8px 28px rgba(117, 67, 151, 0.26); }
+.race-sub { margin-top: 10px; font-size: 14px; font-weight: 850; color: #6f527c; line-height: 1.55; word-break: keep-all; }
+.race-wrap { display: grid; grid-template-columns: 1fr 300px; gap: 16px; align-items: start; }
+.panel {
+  border-radius: 14px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(226, 194, 223, 0.55);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.control-panel { padding: 18px; }
+.control-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.control-title { font-size: 18px; font-weight: 950; color: #4b3659; }
+.back-link { display: inline-flex; align-items: center; min-height: 34px; padding: 0 11px; border-radius: 9px; background: rgba(255,255,255,.75); border: 1px solid rgba(226, 194, 223, .68); color: #856195; font-size: 12px; font-weight: 950; }
+.names-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.name-input { width: 100%; height: 38px; border: 1px solid rgba(226, 194, 223, .75); border-radius: 9px; background: rgba(255,255,255,.8); padding: 0 10px; color: #5b4867; font-size: 13px; font-weight: 850; outline: none; }
+.name-input:focus { border-color: rgba(176, 92, 201, .72); box-shadow: 0 0 0 3px rgba(176, 92, 201, .1); }
+.option-row { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.volume-box { display: flex; align-items: center; gap: 9px; min-width: min(100%, 270px); color: #765e83; font-size: 12px; font-weight: 950; }
+.volume-box input { flex: 1; accent-color: #b05cc9; }
+.volume-value { min-width: 34px; text-align: right; }
+.action-row { margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.btn { min-height: 42px; border: 0; border-radius: 10px; font-size: 13px; font-weight: 950; cursor: pointer; }
+.btn-primary { background: linear-gradient(135deg, var(--pink), var(--purple)); color: #fff; box-shadow: 0 10px 22px rgba(176, 97, 209, .20); }
+.btn-ghost { background: rgba(255,255,255,.82); color: #856195; border: 1px solid rgba(226, 194, 223, .68); }
+.btn:disabled { opacity: .55; cursor: default; }
+.race-stage { position: relative; padding: 18px; }
+.stage-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.stage-title { font-size: 18px; font-weight: 950; color: #4b3659; }
+.timer { min-width: 92px; text-align: right; font-size: 14px; font-weight: 950; color: #b05cc9; }
+.track-board {
+  position: relative;
+  height: 720px;
+  border-radius: 13px;
+  border: 1px solid rgba(226, 194, 223, .62);
+  background:
+    linear-gradient(90deg, transparent calc(100% - 28px), rgba(255,126,183,.16) calc(100% - 28px), rgba(255,126,183,.16) calc(100% - 24px), transparent calc(100% - 24px)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.78) 0 78px, rgba(248,245,251,.86) 78px 80px),
+    linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,250,255,.58));
+  overflow: hidden;
+}
+.track-board::after { content: "FINISH"; position: absolute; top: 9px; right: 5px; writing-mode: vertical-rl; font-size: 10px; font-weight: 950; color: rgba(176, 92, 201, .52); letter-spacing: .16em; }
+.racer-row { position: absolute; left: 0; right: 0; height: 80px; border-bottom: 2px dashed rgba(152, 139, 162, .42); }
+.racer-row:last-child { border-bottom: 0; }
+.racer { position: absolute; left: 8px; bottom: 5px; width: 48px; height: 69px; transform: translateX(0); transition: filter .18s ease; will-change: transform; }
+.racer img { width: 100%; height: 100%; object-fit: contain; image-rendering: auto; display: block; }
+.racer.jump { animation: hop .42s ease-in-out infinite alternate; }
+.racer.stop { filter: grayscale(.15) brightness(.9); }
+.racer.boost { filter: drop-shadow(0 0 8px rgba(246,183,60,.8)); }
+@keyframes hop { from { margin-bottom: 0; } to { margin-bottom: 12px; } }
+.name-tag { position: absolute; left: 0; bottom: -6px; transform: translateX(-8px); white-space: nowrap; font-size: 12px; font-weight: 950; text-shadow: 0 2px 0 rgba(255,255,255,.9); }
+.rank-chip { opacity: .65; margin-right: 3px; color: #7b6b84; }
+.speech { position: absolute; left: 38px; bottom: 56px; max-width: 132px; padding: 7px 9px; border-radius: 10px; background: rgba(255,255,255,.94); border: 1px solid rgba(216, 198, 223, .82); box-shadow: 0 5px 13px rgba(90, 70, 110, .12); font-size: 12px; font-weight: 900; color: #55415f; white-space: nowrap; opacity: 0; transform: translateY(5px); pointer-events: none; }
+.speech.show { animation: bubble 1.55s ease forwards; }
+@keyframes bubble { 0% { opacity: 0; transform: translateY(6px) scale(.96); } 12%, 78% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-5px) scale(.98); } }
+.sparkle { position: absolute; width: 6px; height: 6px; border-radius: 999px; pointer-events: none; animation: sparkle .7s ease-out forwards; z-index: 2; }
+.sparkle.star { width: 8px; height: 8px; border-radius: 0; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 56%, 80% 92%, 50% 70%, 20% 92%, 32% 56%, 2% 35%, 39% 35%); }
+@keyframes sparkle { from { opacity: 1; transform: translateY(0) scale(.6); } to { opacity: 0; transform: translateY(-18px) scale(1.7); } }
+.countdown {
+  position: absolute;
+  inset: 18px;
+  display: none;
+  place-items: center;
+  border-radius: 13px;
+  background: rgba(255,255,255,.64);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+.countdown.show { display: grid; }
+.count-number { font-size: clamp(54px, 12vw, 128px); font-weight: 950; color: #b05cc9; text-shadow: 0 10px 30px rgba(176,92,201,.22); animation: pop .42s ease; }
+@keyframes pop { from { transform: scale(.72); opacity: .1; } to { transform: scale(1); opacity: 1; } }
+.side-panel { display: grid; gap: 12px; }
+.rank-panel, .log-panel { padding: 16px; }
+.side-title { font-size: 16px; font-weight: 950; color: #4b3659; margin-bottom: 10px; }
+.rank-list { display: grid; gap: 6px; }
+.rank-item { min-height: 33px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 9px; border-radius: 9px; background: rgba(255,255,255,.68); border: 1px solid rgba(236, 206, 232, .62); font-size: 12px; font-weight: 950; color: #6f527c; }
+.rank-no { color: #b05cc9; }
+.log-box { height: 222px; overflow: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; }
+.log-line { padding: 7px 9px; border-radius: 9px; background: rgba(255,255,255,.68); border: 1px solid rgba(236, 206, 232, .52); font-size: 11px; font-weight: 850; color: #7b687f; line-height: 1.35; }
+.result-modal { position: fixed; inset: 0; z-index: 300; display: none; align-items: center; justify-content: center; padding: 18px; background: rgba(60, 43, 69, .32); backdrop-filter: blur(8px); }
+.result-modal.show { display: flex; }
+.result-card { width: min(560px, 100%); max-height: min(82vh, 720px); overflow: auto; border-radius: 18px; background: rgba(255,255,255,.94); border: 1px solid rgba(226, 194, 223, .8); box-shadow: 0 26px 80px rgba(80, 45, 95, .24); padding: 22px; text-align: center; }
+.winner-title { font-size: 28px; font-weight: 950; color: #b05cc9; }
+.winner-msg { margin-top: 8px; font-size: 14px; font-weight: 900; color: #6f527c; line-height: 1.5; }
+.final-list { margin-top: 16px; display: grid; gap: 7px; text-align: left; }
+.final-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-radius: 11px; background: rgba(255,246,252,.86); border: 1px solid rgba(236, 206, 232, .68); font-size: 14px; font-weight: 950; color: #5b4867; }
+.final-item:first-child { background: linear-gradient(135deg, rgba(255,235,247,.95), rgba(242,229,255,.95)); border-color: rgba(176, 92, 201, .3); }
+.final-actions { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.site-footer { width: min(1180px, calc(100% - 32px)); margin: 0 auto 26px; padding: 15px 0 4px; border-top: 1px solid rgba(190, 160, 199, 0.34); text-align: center; color: rgba(124, 109, 133, 0.82); }
+.site-footer .footer-brand { display: inline-flex; align-items: center; justify-content: center; gap: 7px; font-size: 12px; font-weight: 950; letter-spacing: 0.18em; color: rgba(143, 78, 178, 0.82); line-height: 1; }
+.site-footer .footer-icon { width: 22px; height: 22px; object-fit: cover; display: block; }
+.site-footer .footer-links { margin-top: 9px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0; font-size: 11px; font-weight: 750; line-height: 1.4; }
+.site-footer .footer-links a { color: rgba(111, 82, 124, 0.78); padding: 0 10px; }
+.site-footer .footer-links a:hover { color: rgba(176, 92, 201, 0.92); }
+.site-footer .footer-links a + a { border-left: 1px solid rgba(190, 160, 199, 0.42); }
+.site-footer .footer-info { margin-top: 8px; font-size: 11px; font-weight: 650; line-height: 1.55; color: rgba(138, 120, 147, 0.76); word-break: keep-all; }
+
+/* race update compact controls */
+.control-panel { padding: 14px 16px; }
+.control-head { margin-bottom: 10px; }
+.names-grid { grid-template-columns: repeat(8, minmax(86px, 1fr)); gap: 6px; }
+.name-input { height: 34px; border-radius: 8px; padding: 0 8px; font-size: 12px; }
+.input-help { margin-top: 7px; font-size: 11px; font-weight: 850; color: #9b82a8; }
+.race-controlbar { margin-top: 11px; display: grid; grid-template-columns: auto 1fr minmax(210px, 270px); align-items: center; gap: 10px; }
+.race-buttons { display: flex; align-items: center; gap: 8px; }
+.race-buttons .btn { min-width: 92px; min-height: 38px; }
+.status-mini { justify-self: start; font-size: 12px; font-weight: 950; color: #b05cc9; }
+.compact-volume { min-width: 0; justify-self: end; }
+.track-board { height: 660px; transition: height .2s ease; }
+.final-actions.single-action { grid-template-columns: 1fr; }
+.final-actions.single-action .btn { width: min(260px, 100%); margin: 0 auto; }
+
+@media (max-width: 980px) {
+  .race-wrap { grid-template-columns: 1fr; }
+  .side-panel { grid-template-columns: 1fr 1fr; }
+  .names-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .race-controlbar { grid-template-columns: 1fr; }
+  .compact-volume { justify-self: stretch; }
+}
+@media (max-width: 960px) {
+  .navbar { height: auto; padding: 12px 0 10px; }
+  .nav-inner { width: min(1180px, calc(100% - 24px)); flex-wrap: wrap; gap: 10px 12px; }
+  .logo { order: 1; font-size: 24px; letter-spacing: 0.10em; }
+  .nav-live { order: 2; padding: 8px 12px; border-radius: 6px; font-size: 12px; margin-left: auto; }
+  .nav-menu { order: 3; width: 100%; display: flex; gap: 18px; overflow-x: auto; overflow-y: hidden; padding: 4px 2px 2px; font-size: 13px; white-space: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .nav-menu::-webkit-scrollbar { display: none; }
+  .nav-menu a { flex: 0 0 auto; }
+}
+@media (max-width: 640px) {
+  .nav-inner { width: min(100% - 20px, 1180px); gap: 10px 12px; }
+  .logo { font-size: 22px; letter-spacing: .10em; }
+  .nav-live { padding: 8px 13px; border-radius: 6px; font-size: 12px; }
+  .nav-menu { gap: 15px; font-size: 12px; padding-bottom: 1px; }
+  main { width: min(100% - 20px, 1180px); padding-top: 16px; padding-bottom: 46px; }
+  .race-hero { padding: 20px 12px; border-radius: 10px; margin-bottom: 12px; }
+  .race-kicker { font-size: 10px; letter-spacing: .14em; }
+  .race-title { font-size: 32px; }
+  .race-sub { font-size: 12px; }
+  .control-panel, .race-stage, .rank-panel, .log-panel { padding: 12px; }
+  .names-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .race-buttons { display: grid; grid-template-columns: 1fr 1fr; }
+  .race-buttons .btn { min-width: 0; }
+  .action-row, .final-actions { grid-template-columns: 1fr; }
+  .side-panel { grid-template-columns: 1fr; }
+  .track-board { height: 680px; }
+  .racer-row { height: 76px; }
+  .racer { width: 44px; height: 63px; }
+  .name-tag { font-size: 11px; }
+  .speech { font-size: 11px; max-width: 112px; padding: 6px 8px; }
+  .winner-title { font-size: 24px; }
+  .site-footer { width: min(100% - 24px, 1180px); margin-bottom: 22px; padding-top: 13px; }
+}
+</style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="../../">FANTAJ</a>
+      <nav class="nav-menu" aria-label="상단 메뉴">
+        <a href="../../live/">LIVE</a>
+        <a href="../../members/">MEMBER</a>
+        <a href="../../notice/">NOTICE</a>
+        <a href="../../ranking/">RANKING</a>
+        <a class="active" href="../">PLAY</a>
+        <a href="../../signature/">SIGNATURE</a>
+      </nav>
+      <a class="nav-live" id="onAirButton" href="../../live/">ON AIR</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="race-hero" aria-label="지유 레이스 배너">
+      <div class="race-kicker">FANTAJ MINI GAME</div>
+      <h1 class="race-title">지유 레이스</h1>
+      <p class="race-sub">이름이 적힌 참가자만 출전합니다. 최소 2명부터 최대 8명까지 자유롭게 달려보세요.</p>
+    </section>
+
+    <section class="panel control-panel" aria-label="게임 설정">
+      <div class="control-head">
+        <h2 class="control-title">참가자 설정</h2>
+        <a class="back-link" href="../">PLAY로 돌아가기</a>
+      </div>
+      <div class="names-grid" id="nameInputs"></div>
+      <p class="input-help">빈칸은 참가하지 않습니다. 참가자는 최소 2명 이상 필요합니다.</p>
+      <div class="race-controlbar">
+        <div class="race-buttons">
+          <button class="btn btn-primary" id="startButton">출발</button>
+          <button class="btn btn-ghost" id="resetButton">초기화</button>
+        </div>
+        <div class="status-mini" id="statusText">대기 중</div>
+        <div class="volume-box compact-volume">
+          <span>음량</span>
+          <input id="volumeSlider" type="range" min="0" max="100" value="30" aria-label="배경음 음량">
+          <span class="volume-value" id="volumeValue">30%</span>
+        </div>
+      </div>
+    </section>
+
+    <div style="height:16px"></div>
+
+    <section class="race-wrap">
+      <div class="panel race-stage">
+        <div class="stage-top">
+          <h2 class="stage-title">레이스 경기장</h2>
+          <div class="timer" id="timer">00:00</div>
+        </div>
+        <div class="track-board" id="trackBoard">
+          <div class="countdown" id="countdown"><div class="count-number" id="countNumber">3</div></div>
+        </div>
+      </div>
+      <aside class="side-panel">
+        <div class="panel rank-panel">
+          <h2 class="side-title">실시간 순위</h2>
+          <div class="rank-list" id="rankList"></div>
+        </div>
+        <div class="panel log-panel">
+          <h2 class="side-title">이벤트 로그</h2>
+          <div class="log-box" id="eventLog"></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div class="result-modal" id="resultModal" role="dialog" aria-modal="true" aria-label="최종 결과">
+    <div class="result-card">
+      <h2 class="winner-title" id="winnerTitle">결과 발표</h2>
+      <p class="winner-msg" id="winnerMessage"></p>
+      <div class="final-list" id="finalList"></div>
+      <div class="final-actions single-action">
+        <button class="btn btn-primary" id="closeResultButton">결과화면 닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <img src="/fantajicon.png" alt="FANTAJ" class="footer-icon">
+      <span>FANTAJ</span>
+    </div>
+    <div class="footer-links">
+      <a href="/policy/#terms">서비스 이용약관</a>
+      <a href="/policy/#privacy">개인정보 처리방침</a>
+      <a href="/policy/#youth">청소년 보호정책</a>
+    </div>
+    <div class="footer-info">회사명: ribitu · 문의: ribitu0510@gmail.com · © 2026 FANTAJ. All rights reserved.</div>
+  </footer>
+
+  <audio id="bgm" src="./jiyurunbgm.mp3" loop preload="auto"></audio>
+
+<script>
+const LIVE_API_URL_FOR_ON_AIR = "https://fantj-live.4rgn2004.workers.dev/";
+async function updateOnAirCount() {
+  const onAirButton = document.getElementById("onAirButton");
+  if (!onAirButton) return;
+  try {
+    const response = await fetch(LIVE_API_URL_FOR_ON_AIR, { cache: "no-store" });
+    if (!response.ok) throw new Error("LIVE API 응답 오류");
+    const data = await response.json();
+    const members = Array.isArray(data.members) ? data.members : [];
+    const liveCount = members.filter(member => member && member.isLive).length;
+    onAirButton.textContent = liveCount > 0 ? `ON AIR ${liveCount}` : "ON AIR";
+  } catch (error) {
+    onAirButton.textContent = "ON AIR";
+  }
+}
+updateOnAirCount();
+setInterval(updateOnAirCount, 60000);
+
+const ASSETS = {
+  idle: "./jiyuidle.gif",
+  walk: "./jiyuwalk.gif",
+  run: "./jiyurun.gif",
+  jump: "./jiyujump.gif"
+};
+const defaultNames = ["행운 지유 💜", "반짝 지유 ✨", "고고 지유 🌸", "느긋 지유 🐰", "폭주 지유 ⚡", "길잃은 지유 🌀", "딸기 지유 🍓", "왕눈이 지유 👓"];
+const colors = ["#b05cc9", "#f0a72f", "#f07aa7", "#69b266", "#f25f5c", "#6b8bd6", "#ff78a8", "#6b5b75"];
+const commonMessages = ["여기가 어디야..?", "지금이 기회다!", "결승선 보인다!", "역전 각이다!", "살짝 미끄러짐", "힘을 내 지유!", "갑자기 각성!", "길을 잃었다...", "앞만 보고 간다!", "오늘 느낌 좋은데?", "나 좀 빠른 듯?", "잠깐만 비켜줘!", "배고프다...", "내가 이걸 왜 했지?", "소리 없이 올라간다...", "이번 판 심상치 않다!", "먼저 가... 난 볼일 봤어", "어라라...?", "눈치 싸움 시작!", "이 정도면 우승각?"];
+const characterMessages = [
+  ["운이 터졌다!", "행운 부스터!", "오늘 느낌 좋다!"],
+  ["반짝반짝 질주!", "눈부신 속도!", "빛처럼 간다!"],
+  ["고고고!", "멈추지 않아!", "앞만 보고 달린다!"],
+  ["천천히 갈래...", "잠깐 쉬자", "느려도 괜찮아"],
+  ["속도 제한 몰라요", "폭주 시작!", "브레이크 고장!"],
+  ["여기가 길 맞아?", "돌아가는 중...", "지도 좀 줘"],
+  ["딸기 파워!", "상큼하게 간다!", "달콤한 질주!"],
+  ["다 보여요", "눈 크게 뜨고 간다", "안경 고쳐 쓰고 출발!"]
+];
+const eventTypes = [
+  { type:"boost", label:"부스터", image:"run", duration:[1300, 2800], speed:[2.6, 4.8], messages:["부스터 발동!", "속도 미쳤다!", "갑자기 빨라졌다!", "불꽃 질주!", "폼 미쳤다!"] },
+  { type:"megaBoost", label:"대폭주", image:"run", duration:[1700, 3300], speed:[4.2, 6.4], messages:["대폭주 시작!", "아무도 못 막는다!", "갑자기 치고 나갑니다!", "혼자 다른 게임 중!"] },
+  { type:"slow", label:"느려짐", image:"walk", duration:[1300, 2600], speed:[0.18, 0.55], messages:["고장 난 지유...", "발이 무겁다...", "잠깐 느려짐", "어째 느린데?", "체력 방전..."] },
+  { type:"stop", label:"멈춤", image:"idle", duration:[900, 1900], speed:[0, 0.02], messages:["잠깐 쉬어갈게요", "멈칫!", "어? 멈췄다", "생각 중...", "결승선이 무서워요"] },
+  { type:"back", label:"뒤로 감", image:"walk", duration:[800, 1600], speed:[-1.25, -0.45], messages:["어? 뒤로 간다!", "길을 잘못 들었다!", "후진합니다", "잠깐 뒤로!", "이건 억까야"] },
+  { type:"jump", label:"점프", image:"jump", duration:[850, 1700], speed:[1.1, 2.0], messages:["폴짝!", "장애물 회피!", "점프 성공!", "가볍게 뛰었다!", "뛰면서 추월!"] },
+  { type:"leaderOops", label:"1등 방심", image:"idle", duration:[850, 1700], speed:[0, 0.18], target:"leader", messages:["1등 방심했나요?", "선두가 멈칫!", "결승선 앞에서 왜 멈춰!", "잠깐 딴생각!"] }
+];
+const winnerMessages = [
+  "{name} 우승! 이걸 해냅니다!",
+  "{name}, 마지막에 제대로 터졌습니다!",
+  "오늘의 주인공은 {name}!",
+  "{name}이 결승선을 찢었습니다!",
+  "{name}, 믿기 힘든 역전승!",
+  "{name} 우승! 레이스의 전설이 탄생했습니다!",
+  "모두가 방심한 사이 {name}이 가져갑니다!",
+  "{name}, 이 판의 주인공 확정!"
+];
+const comebackMessages = ["꼴찌의 반란 시작!", "나 아직 안 끝났다!", "갑자기 각성했다!", "이걸 따라잡는다고?", "막판에 미쳤다!", "역전 각 제대로 떴다!"];
+
+const trackBoard = document.getElementById("trackBoard");
+const rankList = document.getElementById("rankList");
+const eventLog = document.getElementById("eventLog");
+const nameInputs = document.getElementById("nameInputs");
+const startButton = document.getElementById("startButton");
+const resetButton = document.getElementById("resetButton");
+const closeResultButton = document.getElementById("closeResultButton");
+const countdown = document.getElementById("countdown");
+const countNumber = document.getElementById("countNumber");
+const timer = document.getElementById("timer");
+const resultModal = document.getElementById("resultModal");
+const finalList = document.getElementById("finalList");
+const winnerTitle = document.getElementById("winnerTitle");
+const winnerMessage = document.getElementById("winnerMessage");
+const statusText = document.getElementById("statusText");
+const bgm = document.getElementById("bgm");
+const volumeSlider = document.getElementById("volumeSlider");
+const volumeValue = document.getElementById("volumeValue");
+
+let racers = [];
+let running = false;
+let finished = false;
+let startTime = 0;
+let lastTime = 0;
+let eventTimer = 0;
+let animationId = null;
+let finishOrder = [];
+let targetWidth = 100;
+
+function random(min, max) { return Math.random() * (max - min) + min; }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+function formatTime(ms) {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
+}
+
+function initInputs() {
+  nameInputs.innerHTML = "";
+  defaultNames.forEach((name, index) => {
+    const input = document.createElement("input");
+    input.className = "name-input";
+    input.value = name;
+    input.maxLength = 14;
+    input.setAttribute("aria-label", `${index + 1}번 참가자 이름`);
+    nameInputs.appendChild(input);
+  });
+}
+function getNames() {
+  return [...nameInputs.querySelectorAll("input")]
+    .map(input => input.value.trim())
+    .filter(name => name.length > 0);
+}
+function setInputsDisabled(disabled) {
+  nameInputs.querySelectorAll("input").forEach(input => input.disabled = disabled);
+}
+function setVolume() {
+  const value = Number(volumeSlider.value || 30);
+  bgm.volume = value / 100;
+  volumeValue.textContent = `${value}%`;
+}
+volumeSlider.addEventListener("input", setVolume);
+setVolume();
+
+function createRacers() {
+  [...trackBoard.querySelectorAll(".racer-row")].forEach(node => node.remove());
+  [...trackBoard.querySelectorAll(".sparkle")].forEach(node => node.remove());
+  finishOrder = [];
+  const names = getNames();
+  const laneCount = Math.max(2, names.length || 0);
+  const rowHeight = window.innerWidth <= 640 ? 76 : 82;
+  const boardHeight = Math.max(190, laneCount * rowHeight);
+  trackBoard.style.height = `${boardHeight}px`;
+  const boardWidth = trackBoard.clientWidth;
+  targetWidth = Math.max(120, boardWidth - 92);
+  racers = names.map((name, index) => {
+    const row = document.createElement("div");
+    row.className = "racer-row";
+    row.style.top = `${index * (boardHeight / laneCount)}px`;
+    row.style.height = `${boardHeight / laneCount}px`;
+    const racer = document.createElement("div");
+    racer.className = "racer";
+    const img = document.createElement("img");
+    img.src = ASSETS.idle;
+    img.alt = name;
+    const speech = document.createElement("div");
+    speech.className = "speech";
+    const tag = document.createElement("div");
+    tag.className = "name-tag";
+    tag.style.color = colors[index % colors.length];
+    tag.innerHTML = `<span class="rank-chip">${index + 1}번</span>${name}`;
+    racer.appendChild(img);
+    racer.appendChild(speech);
+    racer.appendChild(tag);
+    row.appendChild(racer);
+    trackBoard.appendChild(row);
+    return {
+      index, name, color: colors[index % colors.length], row, el: racer, img, speech, tag,
+      progress: 0,
+      baseSpeed: random(0.95, 1.85),
+      boost: 1,
+      effectUntil: 0,
+      state: "idle",
+      finished: false,
+      finishTime: 0,
+      laneLuck: random(.82, 1.22),
+      personality: pick(["steady", "chaos", "late", "fast", "sleepy"]),
+      nextTalk: random(1200, 4200)
+    };
+  });
+  updateVisuals();
+  updateRanks();
+}
+function setState(racer, state) {
+  racer.state = state;
+  racer.el.classList.toggle("jump", state === "jump");
+  racer.el.classList.toggle("boost", state === "run");
+  racer.el.classList.toggle("stop", state === "idle");
+  racer.img.src = ASSETS[state] || ASSETS.walk;
+}
+function showSpeech(racer, message) {
+  racer.speech.textContent = message;
+  racer.speech.classList.remove("show");
+  void racer.speech.offsetWidth;
+  racer.speech.classList.add("show");
+}
+function addLog(message) {
+  const line = document.createElement("div");
+  line.className = "log-line";
+  line.textContent = message;
+  eventLog.prepend(line);
+  while (eventLog.children.length > 28) eventLog.lastElementChild.remove();
+}
+function createSparkles(racer, count = 5) {
+  const rect = racer.el.getBoundingClientRect();
+  const boardRect = trackBoard.getBoundingClientRect();
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement("span");
+    s.className = `sparkle ${Math.random() > .5 ? "star" : ""}`;
+    s.style.background = Math.random() > .5 ? racer.color : "#f6b73c";
+    s.style.left = `${rect.left - boardRect.left + random(18, 56)}px`;
+    s.style.top = `${rect.top - boardRect.top + random(10, 48)}px`;
+    trackBoard.appendChild(s);
+    setTimeout(() => s.remove(), 760);
+  }
+}
+
+function triggerEvent(now) {
+  const active = racers.filter(r => !r.finished);
+  if (!active.length) return;
+  const sorted = [...active].sort((a,b) => b.progress - a.progress);
+  const leader = sorted[0];
+  const last = sorted[sorted.length - 1];
+  const elapsed = now - startTime;
+  const lateRace = elapsed > 22000 || (leader && leader.progress > 55);
+  let target = pick(active);
+  let event = pick(eventTypes);
+
+  const gap = leader && last ? leader.progress - last.progress : 0;
+  if (lateRace && last && gap > 14 && Math.random() < .20) {
+    target = last;
+    event = { type:"comeback", label:"꼴찌의 반란", image:"run", duration:[2300, 4300], speed:[4.8, 7.2], messages: comebackMessages };
+  } else if (leader && gap > 18 && Math.random() < .14) {
+    target = leader;
+    event = { type:"leaderOops", label:"1등 방심", image:"idle", duration:[900, 1900], speed:[0, 0.12], messages:["1등 방심했나요?", "선두가 멈칫!", "뒤에서 따라옵니다!", "갑자기 멈춰버림!"] };
+  } else if (lateRace && Math.random() < .18) {
+    target = sorted[Math.floor(random(Math.max(0, sorted.length - 3), sorted.length))] || target;
+    event = { type:"lateBoost", label:"막판 스퍼트", image:"run", duration:[1700, 3200], speed:[3.2, 5.6], messages:["막판 스퍼트!", "결승선 앞 대혼전!", "역전 가자!", "마지막 힘을 짜낸다!", "갑자기 튀어나옵니다!"] };
+  } else if (event.target === "leader" && leader) {
+    target = leader;
+  }
+
+  const duration = random(event.duration[0], event.duration[1]);
+  const speed = random(event.speed[0], event.speed[1]);
+  target.boost = speed;
+  target.effectUntil = now + duration;
+  setState(target, event.image);
+
+  if (event.type === "back") {
+    target.progress = Math.max(0, target.progress - random(3.5, 8.5));
+  }
+  if (event.type === "megaBoost" || event.type === "comeback") {
+    target.progress = Math.min(99, target.progress + random(1.5, 4.2));
+  }
+
+  const msg = pick(event.messages);
+  showSpeech(target, msg);
+  addLog(`${target.name} · ${event.label} · ${msg}`);
+  if (["boost", "megaBoost", "comeback", "lateBoost", "jump"].includes(event.type)) createSparkles(target, event.type === "jump" ? 5 : 10);
+}
+function talkRandomly(now) {
+  racers.forEach(racer => {
+    if (racer.finished) return;
+    if (now > racer.nextTalk) {
+      const pool = Math.random() > .45 ? commonMessages : (characterMessages[racer.index] || commonMessages);
+      showSpeech(racer, pick(pool));
+      racer.nextTalk = now + random(4500, 9500);
+    }
+  });
+}
+
+function updateVisuals() {
+  const ordered = getRanked();
+  racers.forEach(racer => {
+    const x = (racer.progress / 100) * targetWidth;
+    racer.el.style.transform = `translateX(${x}px)`;
+    const rank = ordered.findIndex(item => item === racer) + 1;
+    racer.tag.innerHTML = `<span class="rank-chip">${rank}등</span>${racer.name}`;
+    racer.tag.style.color = racer.color;
+  });
+}
+function getRanked() {
+  return [...racers].sort((a,b) => {
+    if (a.finished && b.finished) return a.finishTime - b.finishTime;
+    if (a.finished) return -1;
+    if (b.finished) return 1;
+    return b.progress - a.progress;
+  });
+}
+function updateRanks() {
+  const ordered = getRanked();
+  rankList.innerHTML = ordered.length ? ordered.map((r, i) => `<div class="rank-item"><span><span class="rank-no">${i + 1}등</span> ${r.name}</span><span>${r.finished ? "완주" : Math.floor(r.progress) + "%"}</span></div>`).join("") : `<div class="rank-item"><span>참가자를 입력해주세요</span><span>대기</span></div>`;
+}
+
+function raceLoop(now) {
+  if (!running || finished) return;
+  const dt = Math.min(0.05, (now - lastTime) / 1000);
+  lastTime = now;
+  const elapsed = now - startTime;
+  timer.textContent = formatTime(elapsed);
+  const active = racers.filter(r => !r.finished);
+  const afterburner = elapsed > 90000 ? 1.55 : elapsed > 65000 ? 1.24 : 1;
+  active.forEach(racer => {
+    if (now > racer.effectUntil) {
+      racer.boost = 1;
+      if (racer.state !== "walk") setState(racer, "walk");
+    }
+    let personalityBonus = 1;
+    if (racer.personality === "fast" && elapsed < 18000) personalityBonus = 1.22;
+    if (racer.personality === "late" && elapsed > 26000) personalityBonus = 1.28;
+    if (racer.personality === "sleepy" && elapsed < 18000) personalityBonus = .78;
+    if (racer.personality === "chaos") personalityBonus = random(.78, 1.35);
+    let speed = racer.baseSpeed * racer.laneLuck * racer.boost * afterburner * personalityBonus;
+    speed += random(-0.22, 0.28);
+    racer.progress = clamp(racer.progress + speed * dt, 0, 100);
+    if (racer.progress >= 100 && !racer.finished) {
+      racer.finished = true;
+      racer.finishTime = now;
+      finishOrder.push(racer);
+      setState(racer, "idle");
+      showSpeech(racer, finishOrder.length === 1 ? "내가 1등!" : "도착했다!");
+      addLog(`${finishOrder.length}등 도착 · ${racer.name}`);
+    }
+  });
+  eventTimer -= (now - (raceLoop.prev || now));
+  raceLoop.prev = now;
+  if (eventTimer <= 0) {
+    triggerEvent(now);
+    eventTimer = random(520, 1200);
+  }
+  talkRandomly(now);
+  updateVisuals();
+  updateRanks();
+  if (finishOrder.length === racers.length) {
+    endRace();
+    return;
+  }
+  animationId = requestAnimationFrame(raceLoop);
+}
+
+async function startCountdown() {
+  countdown.classList.add("show");
+  const steps = ["3", "2", "1", "START!"];
+  for (const step of steps) {
+    countNumber.textContent = step;
+    countNumber.style.animation = "none";
+    void countNumber.offsetWidth;
+    countNumber.style.animation = "pop .42s ease";
+    await new Promise(resolve => setTimeout(resolve, step === "START!" ? 620 : 820));
+  }
+  countdown.classList.remove("show");
+}
+
+async function startRace() {
+  if (running) return;
+  const names = getNames();
+  if (names.length < 2) {
+    statusText.textContent = "참가자 2명 이상 필요";
+    alert("참가자는 최소 2명 이상 입력해주세요. 빈칸은 참가하지 않습니다.");
+    return;
+  }
+  resultModal.classList.remove("show");
+  createRacers();
+  setInputsDisabled(true);
+  startButton.disabled = true;
+  resetButton.disabled = false;
+  statusText.textContent = "카운트다운";
+  eventLog.innerHTML = "";
+  racers.forEach(r => setState(r, "idle"));
+  bgm.currentTime = 0;
+  setVolume();
+  try { await bgm.play(); } catch (e) { addLog("브라우저 정책으로 배경음 재생이 막혔습니다. 화면을 한 번 클릭 후 다시 시작해보세요."); }
+  await startCountdown();
+  running = true;
+  finished = false;
+  startTime = performance.now();
+  lastTime = startTime;
+  raceLoop.prev = startTime;
+  eventTimer = 600;
+  statusText.textContent = "레이스 중";
+  racers.forEach(r => setState(r, "walk"));
+  addLog(`${racers.length}명 레이스 시작!`);
+  animationId = requestAnimationFrame(raceLoop);
+}
+function stopBgm() {
+  bgm.pause();
+  bgm.currentTime = 0;
+}
+function endRace() {
+  running = false;
+  finished = true;
+  cancelAnimationFrame(animationId);
+  stopBgm();
+  setInputsDisabled(false);
+  startButton.disabled = false;
+  resetButton.disabled = false;
+  statusText.textContent = "경기 종료";
+  const ordered = getRanked();
+  const winner = ordered[0];
+  winnerTitle.textContent = `${winner.name} 우승!`;
+  winnerMessage.textContent = pick(winnerMessages).replace("{name}", winner.name);
+  finalList.innerHTML = ordered.map((r, i) => `<div class="final-item"><span>${i + 1}등 · ${r.name}</span><span>${i === 0 ? "🏆" : i === 1 ? "🥈" : i === 2 ? "🥉" : "완주"}</span></div>`).join("");
+  setTimeout(() => resultModal.classList.add("show"), 450);
+}
+function resetRace() {
+  running = false;
+  finished = false;
+  cancelAnimationFrame(animationId);
+  stopBgm();
+  setInputsDisabled(false);
+  startButton.disabled = false;
+  resetButton.disabled = false;
+  countdown.classList.remove("show");
+  statusText.textContent = "대기 중";
+  timer.textContent = "00:00";
+  eventLog.innerHTML = "";
+  finishOrder = [];
+  resultModal.classList.remove("show");
+  createRacers();
+  racers.forEach(r => setState(r, "idle"));
+}
+
+startButton.addEventListener("click", startRace);
+resetButton.addEventListener("click", resetRace);
+closeResultButton.addEventListener("click", () => { resultModal.classList.remove("show"); });
+window.addEventListener("resize", () => { if (!running) createRacers(); });
+initInputs();
+createRacers();
+</script>
+</body>
+</html>
