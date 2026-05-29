@@ -995,7 +995,105 @@
         font-size: 28px;
       }
     }
-  </style>
+  
+
+
+/* FANTAJ slim footer */
+.site-footer {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto 26px;
+  padding: 15px 0 4px;
+  border-top: 1px solid rgba(190, 160, 199, 0.34);
+  text-align: center;
+  color: rgba(124, 109, 133, 0.82);
+}
+
+.site-footer .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+  color: rgba(143, 78, 178, 0.82);
+  line-height: 1;
+}
+
+.site-footer .footer-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  display: block;
+}
+
+.site-footer .footer-links {
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.site-footer .footer-links a {
+  color: rgba(111, 82, 124, 0.78);
+  padding: 0 10px;
+}
+
+.site-footer .footer-links a:hover {
+  color: rgba(176, 92, 201, 0.92);
+}
+
+.site-footer .footer-links a + a {
+  border-left: 1px solid rgba(190, 160, 199, 0.42);
+}
+
+.site-footer .footer-info {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.55;
+  color: rgba(138, 120, 147, 0.76);
+  word-break: keep-all;
+}
+
+@media (max-width: 640px) {
+  .site-footer {
+    width: min(100% - 24px, 1180px);
+    margin-bottom: 22px;
+    padding-top: 13px;
+  }
+
+  .site-footer .footer-brand {
+    font-size: 11px;
+  }
+
+  .site-footer .footer-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .site-footer .footer-links {
+    gap: 7px 0;
+    font-size: 11px;
+  }
+
+  .site-footer .footer-links a {
+    padding: 0 8px;
+  }
+
+  .site-footer .footer-info {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+</style>
 </head>
 <body>
   <div class="page">
@@ -1752,5 +1850,19 @@
     setInterval(loadSignaturePreview, 300000);
     setInterval(loadNoticePreview, 300000);
   </script>
+
+<footer class="site-footer">
+  <div class="footer-brand">
+    <img src="/fantajicon.png" alt="FANTAJ" class="footer-icon">
+    <span>FANTAJ</span>
+  </div>
+  <div class="footer-links">
+    <a href="/policy/#terms">서비스 이용약관</a>
+    <a href="/policy/#privacy">개인정보 처리방침</a>
+    <a href="/policy/#youth">청소년 보호정책</a>
+  </div>
+  <div class="footer-info">회사명: ribitu · 문의: ribitu0510@gmail.com · © 2026 FANTAJ. All rights reserved.</div>
+</footer>
+
 </body>
 </html>
