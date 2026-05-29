@@ -1867,5 +1867,13 @@
   <div class="footer-info">회사명: ribitu · 문의: ribitu0510@gmail.com · © 2026 FANTAJ. All rights reserved.</div>
 </footer>
 
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/sw.js");
+      });
+    }
+  </script>
+
 </body>
 </html>
