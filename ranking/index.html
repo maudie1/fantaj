@@ -961,6 +961,8 @@
     const DEFAULT_PROFILE_IMAGE = "https://profile.img.sooplive.co.kr/LOGO/sy/sysdemian/sysdemian.jpg";
 
     let rankingData = [];
+    let supportData = [];
+    let chatData = [];
     let currentType = "balloon";
     let currentRankFile = "rank.json";
 
@@ -1011,17 +1013,18 @@
     }
 
     function getSortedData() {
+      const sourceData = currentType === "chat" ? chatData : supportData;
       const key = currentType === "chat" ? "chat" : "balloon";
 
-      return [...rankingData]
+      return [...sourceData]
         .sort((a, b) => Number(b[key] || 0) - Number(a[key] || 0))
         .slice(0, 100);
     }
 
     function renderSummary() {
-      const totalChat = rankingData.reduce((sum, user) => sum + Number(user.chat || 0), 0);
-      const totalBalloon = rankingData.reduce((sum, user) => sum + Number(user.balloon || 0), 0);
-      const totalSupporters = rankingData.filter(user => Number(user.balloon || 0) > 0).length;
+      const totalChat = chatData.reduce((sum, user) => sum + Number(user.chat || 0), 0);
+      const totalBalloon = supportData.reduce((sum, user) => sum + Number(user.balloon || 0), 0);
+      const totalSupporters = supportData.filter(user => Number(user.balloon || 0) > 0).length;
 
       $("#totalBalloon").textContent = formatNumber(totalBalloon);
       $("#totalSupporters").textContent = formatNumber(totalSupporters);
@@ -1121,6 +1124,27 @@
       renderTable(data);
     }
 
+    function getChatFileName(fileName) {
+      if (fileName === "rank.json") return "chatrank.json";
+
+      const match = String(fileName).match(/^rank_(\d{4}-\d{2})\.json$/);
+      if (match) return `chatrank_${match[1]}.json`;
+
+      return "chatrank.json";
+    }
+
+    async function fetchJsonFile(fileName) {
+      const response = await fetch(`${RANK_RAW_BASE_URL}${fileName}`, { cache: "no-store" });
+
+      if (!response.ok) {
+        if (fileName.startsWith("chatrank")) return [];
+        throw new Error(`${fileName} 데이터 응답 오류`);
+      }
+
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
+    }
+
     async function loadRankingData(fileName = "rank.json") {
       try {
         $("#rankingBody").innerHTML = `
@@ -1131,21 +1155,18 @@
 
         currentRankFile = fileName;
 
-        const response = await fetch(`${RANK_RAW_BASE_URL}${fileName}`);
+        supportData = await fetchJsonFile(fileName);
+        chatData = await fetchJsonFile(getChatFileName(fileName));
 
-        if (!response.ok) {
-          throw new Error("랭킹 데이터 응답 오류");
-        }
-
-        const data = await response.json();
-
-        rankingData = Array.isArray(data) ? data : [];
+        rankingData = currentType === "chat" ? chatData : supportData;
 
         render();
       } catch (error) {
         console.error(error);
 
         rankingData = [];
+        supportData = [];
+        chatData = [];
 
         $("#podium").innerHTML = "";
         $("#totalBalloon").textContent = "0";
