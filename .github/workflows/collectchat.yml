@@ -33,7 +33,7 @@ jobs:
 
       - name: Collect chat ranking
         env:
-          MAX_VODS_PER_RUN: 5
+          MAX_VODS_PER_RUN: 20
         run: npm run collect:chat
 
       - name: Commit chat ranking data
