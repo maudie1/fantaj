@@ -340,6 +340,27 @@
       padding: 7px 10px;
     }
 
+    .favorite-bj {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 180px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.72);
+      color: #7a5b8c;
+      font-size: 13px;
+      font-weight: 950;
+      box-shadow: inset 0 0 0 1px rgba(220,183,238,.42);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 7px 10px;
+    }
+
+    .hidden-col {
+      display: none;
+    }
+
     .table-wrap {
       overflow: hidden;
       border-radius: var(--radius-md);
@@ -354,9 +375,10 @@
     }
 
     th:nth-child(1), td:nth-child(1) { width: 80px; }
-    th:nth-child(2), td:nth-child(2) { width: 38%; }
-    th:nth-child(3), td:nth-child(3) { width: 28%; }
-    th:nth-child(4), td:nth-child(4) { width: 26%; }
+    th:nth-child(2), td:nth-child(2) { width: 30%; }
+    th:nth-child(3), td:nth-child(3) { width: 20%; }
+    th:nth-child(4), td:nth-child(4) { width: 22%; }
+    th:nth-child(5), td:nth-child(5) { width: 24%; }
 
     thead {
       background: linear-gradient(135deg, rgba(255,127,200,.18), rgba(167,127,255,.16));
@@ -730,6 +752,12 @@
         padding: 5px 7px;
         font-size: 10px;
       }
+
+      .favorite-bj {
+        max-width: 78px;
+        padding: 5px 7px;
+        font-size: 10px;
+      }
     }
 
     @media (max-width: 380px) {
@@ -911,7 +939,6 @@
         <div class="period-box">
           <select class="month-select" id="monthSelect">
             <option value="rank.json">전체</option>
-            <option value="rank_2026-05.json">2026년 5월</option>
           </select>
         </div>
       </div>
@@ -942,13 +969,14 @@
               <th>순위</th>
               <th>닉네임</th>
               <th id="scoreHeader">후원 등급</th>
+              <th id="favoriteHeader" class="hidden-col">최다 채팅 방송</th>
               <th id="extraHeader">후원 횟수</th>
             </tr>
           </thead>
 
           <tbody id="rankingBody">
             <tr>
-              <td colspan="4" class="loading">데이터 불러오는 중...</td>
+              <td colspan="5" class="loading">데이터 불러오는 중...</td>
             </tr>
           </tbody>
         </table>
@@ -958,6 +986,7 @@
 
   <script>
     const RANK_RAW_BASE_URL = "./";
+    const MONTHS_FILE = "months.json";
     const DEFAULT_PROFILE_IMAGE = "https://profile.img.sooplive.co.kr/LOGO/sy/sysdemian/sysdemian.jpg";
 
     let rankingData = [];
@@ -980,6 +1009,60 @@
 
     function formatNumber(value) {
       return Number(value || 0).toLocaleString("ko-KR");
+    }
+
+    function getCacheBustedUrl(fileName) {
+      const separator = String(fileName).includes("?") ? "&" : "?";
+      return `${RANK_RAW_BASE_URL}${fileName}${separator}v=${Date.now()}`;
+    }
+
+    function formatMonthLabel(month) {
+      const match = String(month || "").match(/^(\d{4})-(\d{2})$/);
+      if (!match) return String(month || "");
+
+      return `${match[1]}년 ${Number(match[2])}월`;
+    }
+
+    function normalizeMonthList(value) {
+      const list = Array.isArray(value) ? value : [];
+      return list
+        .map(item => {
+          if (typeof item === "string") {
+            return item.trim();
+          }
+
+          if (item && typeof item === "object") {
+            return String(item.month || item.value || "").trim();
+          }
+
+          return "";
+        })
+        .filter(month => /^\d{4}-\d{2}$/.test(month))
+        .filter((month, index, array) => array.indexOf(month) === index)
+        .sort((a, b) => a.localeCompare(b));
+    }
+
+    async function loadMonthOptions() {
+      const monthSelect = $("#monthSelect");
+      let months = [];
+
+      try {
+        const response = await fetch(getCacheBustedUrl(MONTHS_FILE), { cache: "no-store" });
+        if (response.ok) {
+          months = normalizeMonthList(await response.json());
+        }
+      } catch (error) {
+        console.warn("months.json 불러오기 실패", error);
+      }
+
+      if (!months.length) {
+        months = ["2026-05"];
+      }
+
+      monthSelect.innerHTML = `
+        <option value="rank.json">전체</option>
+        ${months.map(month => `<option value="rank_${month}.json">${formatMonthLabel(month)}</option>`).join("")}
+      `;
     }
 
     function getProfileImage(userId) {
@@ -1073,19 +1156,27 @@
     }
 
     function renderTable(data) {
-      $("#scoreHeader").textContent = currentType === "chat" ? "채팅 횟수" : "후원 등급";
-      $("#extraHeader").textContent = currentType === "chat" ? "대표 문구" : "후원 횟수";
+      const isChat = currentType === "chat";
+
+      $("#scoreHeader").textContent = isChat ? "채팅 횟수" : "후원 등급";
+      $("#favoriteHeader").textContent = "최다 채팅 방송";
+      $("#extraHeader").textContent = isChat ? "대표 문구" : "후원 횟수";
+      $("#favoriteHeader").classList.toggle("hidden-col", !isChat);
 
       $("#rankingBody").innerHTML = data
         .map((user, index) => {
           const tier = getSupportTier(user.balloon);
 
-          const score = currentType === "chat"
+          const score = isChat
             ? `<div style="font-weight:950;">${formatNumber(user.chat)}회</div>`
             : `<span class="tier-badge">${tier.icon} ${tier.label}</span>`;
 
-          const extra = currentType === "chat"
-            ? `<span class="phrase">${escapeHtml(user.topword || "-")}</span>`
+          const favorite = isChat
+            ? `<td><span class="favorite-bj" title="${escapeHtml(user.favoriteBj || "-")}">${escapeHtml(user.favoriteBj || "-")}</span></td>`
+            : "";
+
+          const extra = isChat
+            ? `<span class="phrase" title="${escapeHtml(user.topword || "-")}">${escapeHtml(user.topword || "-")}</span>`
             : `<div class="sub-score">총 ${formatNumber(user.donateCount)}회</div>`;
 
           return `
@@ -1109,12 +1200,14 @@
               </td>
 
               <td>${score}</td>
+              ${favorite}
               <td>${extra}</td>
             </tr>
           `;
         })
         .join("");
     }
+
 
     function render() {
       const data = getSortedData();
@@ -1134,10 +1227,10 @@
     }
 
     async function fetchJsonFile(fileName) {
-      const response = await fetch(`${RANK_RAW_BASE_URL}${fileName}`, { cache: "no-store" });
+      const response = await fetch(getCacheBustedUrl(fileName), { cache: "no-store" });
 
       if (!response.ok) {
-        if (fileName.startsWith("chatrank")) return [];
+        if (fileName.startsWith("chatrank") || fileName.startsWith("rank_")) return [];
         throw new Error(`${fileName} 데이터 응답 오류`);
       }
 
@@ -1149,7 +1242,7 @@
       try {
         $("#rankingBody").innerHTML = `
           <tr>
-            <td colspan="4" class="loading">데이터 불러오는 중...</td>
+            <td colspan="5" class="loading">데이터 불러오는 중...</td>
           </tr>
         `;
 
@@ -1175,7 +1268,7 @@
 
         $("#rankingBody").innerHTML = `
           <tr>
-            <td colspan="4" class="loading">데이터 불러오기 실패</td>
+            <td colspan="5" class="loading">데이터 불러오기 실패</td>
           </tr>
         `;
       }
@@ -1196,7 +1289,12 @@
       loadRankingData(event.target.value);
     });
 
-    loadRankingData();
+    async function initRankingPage() {
+      await loadMonthOptions();
+      await loadRankingData($("#monthSelect").value || "rank.json");
+    }
+
+    initRankingPage();
   </script>
 <script>
 const LIVE_API_URL_FOR_ON_AIR = "https://fantj-live.4rgn2004.workers.dev/";
