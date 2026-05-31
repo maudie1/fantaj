@@ -1242,8 +1242,8 @@
   {
     "number": 3999,
     "name": "패스트카",
-    "image": "https://cdn.fantaj.kr/3999_fastcar.mp3",
-    "audio": "https://cdn.fantaj.kr/3999_fastcar.png",
+    "image": "https://cdn.fantaj.kr/3999_fastcar.png",
+    "audio": "https://cdn.fantaj.kr/3999_fastcar.mp3",
     "bj": 399,
     "videos": []
   },
