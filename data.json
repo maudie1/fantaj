@@ -488,14 +488,6 @@
     "videos": []
   },
   {
-    "number": 1544,
-    "name": "숨숨",
-    "image": "",
-    "audio": "https://cdn.fantaj.kr/1544_sumsum.mp3",
-    "bj": 154,
-    "videos": []
-  },
-  {
     "number": 1548,
     "name": "드립",
     "image": "https://cdn.fantaj.kr/1548_drip.png",
@@ -994,7 +986,7 @@
   {
     "number": 2777,
     "name": "롤러코스터",
-    "image": "https://cdn.fantaj.kr/2777_rollercoaster.pn",
+    "image": "https://cdn.fantaj.kr/2777_rollercoaster.png",
     "audio": "https://cdn.fantaj.kr/2777_rollercoaster.mp3",
     "bj": 277,
     "videos": []
@@ -1426,7 +1418,7 @@
   {
     "number": 5888,
     "name": "파티트레인",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/5888_partytrain.gif",
     "audio": "https://cdn.fantaj.kr/5888_partytrain.mp3",
     "bj": 588,
     "videos": []
@@ -1629,6 +1621,14 @@
     "videos": []
   },
   {
+    "number": 10044,
+    "name": "숨숨",
+    "image": "",
+    "audio": "https://cdn.fantaj.kr/10044_sumsum.mp3",
+    "bj": 1044,
+    "videos": []
+  },
+  {
     "number": 10052,
     "name": "엔화",
     "image": "https://cdn.fantaj.kr/10052_yen.gif",
@@ -1706,14 +1706,6 @@
     "image": "",
     "audio": "https://cdn.fantaj.kr/10088_notmyproblem.mp3",
     "bj": 1188,
-    "videos": []
-  },
-  {
-    "number": 10089,
-    "name": "피코데블몬",
-    "image": "https://cdn.fantaj.kr/10089_picodevilmon.gif",
-    "audio": "https://cdn.fantaj.kr/10089_picodevilmon.mp3",
-    "bj": 1089,
     "videos": []
   },
   {
@@ -2061,14 +2053,6 @@
     "videos": []
   },
   {
-    "number": 15044,
-    "name": "숨셔숨숨",
-    "image": "",
-    "audio": "https://cdn.fantaj.kr/15044_sumsum.mp3",
-    "bj": 1544,
-    "videos": []
-  },
-  {
     "number": 15555,
     "name": "마녀키키",
     "image": "",
@@ -2120,14 +2104,6 @@
         "url": "https://vod.sooplive.com/player/196869679"
       }
     ]
-  },
-  {
-    "number": 20044,
-    "name": "큰숨셔숨숨",
-    "image": "",
-    "audio": "https://cdn.fantaj.kr/20044_sumsum.mp3",
-    "bj": 2044,
-    "videos": []
   },
   {
     "number": 21111,
