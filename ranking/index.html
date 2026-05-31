@@ -375,10 +375,9 @@
     }
 
     th:nth-child(1), td:nth-child(1) { width: 80px; }
-    th:nth-child(2), td:nth-child(2) { width: 30%; }
-    th:nth-child(3), td:nth-child(3) { width: 20%; }
-    th:nth-child(4), td:nth-child(4) { width: 22%; }
-    th:nth-child(5), td:nth-child(5) { width: 24%; }
+    th:nth-child(2), td:nth-child(2) { width: 38%; }
+    th:nth-child(3), td:nth-child(3) { width: 26%; }
+    th:nth-child(4), td:nth-child(4) { width: 30%; }
 
     thead {
       background: linear-gradient(135deg, rgba(255,127,200,.18), rgba(167,127,255,.16));
@@ -706,9 +705,9 @@
       }
 
       th:nth-child(1), td:nth-child(1) { width: 12%; }
-      th:nth-child(2), td:nth-child(2) { width: 39%; }
-      th:nth-child(3), td:nth-child(3) { width: 31%; }
-      th:nth-child(4), td:nth-child(4) { width: 18%; }
+      th:nth-child(2), td:nth-child(2) { width: 38%; }
+      th:nth-child(3), td:nth-child(3) { width: 25%; }
+      th:nth-child(4), td:nth-child(4) { width: 25%; }
 
       .rank-num {
         width: auto;
@@ -969,14 +968,13 @@
               <th>순위</th>
               <th>닉네임</th>
               <th id="scoreHeader">후원 등급</th>
-              <th id="favoriteHeader" class="hidden-col">최다 채팅 방송</th>
               <th id="extraHeader">후원 횟수</th>
             </tr>
           </thead>
 
           <tbody id="rankingBody">
             <tr>
-              <td colspan="5" class="loading">데이터 불러오는 중...</td>
+              <td colspan="4" class="loading">데이터 불러오는 중...</td>
             </tr>
           </tbody>
         </table>
@@ -1159,9 +1157,7 @@
       const isChat = currentType === "chat";
 
       $("#scoreHeader").textContent = isChat ? "채팅 횟수" : "후원 등급";
-      $("#favoriteHeader").textContent = "최다 채팅 방송";
-      $("#extraHeader").textContent = isChat ? "대표 문구" : "후원 횟수";
-      $("#favoriteHeader").classList.toggle("hidden-col", !isChat);
+      $("#extraHeader").textContent = isChat ? "최다 채팅 방송" : "후원 횟수";
 
       $("#rankingBody").innerHTML = data
         .map((user, index) => {
@@ -1171,12 +1167,8 @@
             ? `<div style="font-weight:950;">${formatNumber(user.chat)}회</div>`
             : `<span class="tier-badge">${tier.icon} ${tier.label}</span>`;
 
-          const favorite = isChat
-            ? `<td><span class="favorite-bj" title="${escapeHtml(user.favoriteBj || "-")}">${escapeHtml(user.favoriteBj || "-")}</span></td>`
-            : "";
-
           const extra = isChat
-            ? `<span class="phrase" title="${escapeHtml(user.topword || "-")}">${escapeHtml(user.topword || "-")}</span>`
+            ? `<span class="favorite-bj" title="${escapeHtml(user.favoriteBj || "-")}">${escapeHtml(user.favoriteBj || "-")}</span>`
             : `<div class="sub-score">총 ${formatNumber(user.donateCount)}회</div>`;
 
           return `
@@ -1200,7 +1192,6 @@
               </td>
 
               <td>${score}</td>
-              ${favorite}
               <td>${extra}</td>
             </tr>
           `;
@@ -1242,7 +1233,7 @@
       try {
         $("#rankingBody").innerHTML = `
           <tr>
-            <td colspan="5" class="loading">데이터 불러오는 중...</td>
+            <td colspan="4" class="loading">데이터 불러오는 중...</td>
           </tr>
         `;
 
@@ -1268,7 +1259,7 @@
 
         $("#rankingBody").innerHTML = `
           <tr>
-            <td colspan="5" class="loading">데이터 불러오기 실패</td>
+            <td colspan="4" class="loading">데이터 불러오기 실패</td>
           </tr>
         `;
       }
