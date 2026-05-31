@@ -1258,6 +1258,7 @@
     const LIVE_API_URL = "https://fantj-live.4rgn2004.workers.dev/";
     const BOARD_API_URL = "https://fantaj-board-worker.4rgn2004.workers.dev/board";
     const RANK_API_URL = "ranking/rank.json";
+    const CHAT_RANK_API_URL = "ranking/chatrank.json";
     const SIGNATURE_API_URL = "data.json";
     const NOTICE_API_URL = "data/notice.json";
     const DEFAULT_PROFILE_IMAGE = "https://profile.img.sooplive.co.kr/LOGO/sy/sysdemian/sysdemian.jpg";
@@ -1414,13 +1415,14 @@
       `;
     }
 
-    function renderRankingPreview(rows) {
-      const data = Array.isArray(rows) ? rows : [];
-      const sorted = [...data].sort((a, b) => Number(b.balloon || 0) - Number(a.balloon || 0));
+    function renderRankingPreview(supportRows, chatRows) {
+      const supportData = Array.isArray(supportRows) ? supportRows : [];
+      const chatData = Array.isArray(chatRows) ? chatRows : [];
+      const sorted = [...supportData].sort((a, b) => Number(b.balloon || 0) - Number(a.balloon || 0));
       const top = sorted.slice(0, 8);
 
-      const totalSupport = data.reduce((sum, item) => sum + Number(item.balloon || 0), 0);
-      const totalChat = data.reduce((sum, item) => sum + Number(item.chat || 0), 0);
+      const totalSupport = supportData.reduce((sum, item) => sum + Number(item.balloon || 0), 0);
+      const totalChat = chatData.reduce((sum, item) => sum + Number(item.chat || 0), 0);
 
       document.getElementById("rankTotalSupport").textContent = numberFormat(totalSupport);
       document.getElementById("rankTotalChat").textContent = numberFormat(totalChat);
@@ -1740,11 +1742,21 @@
 
     async function loadRankingPreview() {
       try {
-        const response = await fetch(RANK_API_URL, { cache: "no-store" });
-        if (!response.ok) throw new Error("RANK API 응답 오류");
+        const [rankResponse, chatRankResponse] = await Promise.all([
+          fetch(RANK_API_URL, { cache: "no-store" }),
+          fetch(CHAT_RANK_API_URL, { cache: "no-store" })
+        ]);
 
-        const data = await response.json();
-        renderRankingPreview(Array.isArray(data) ? data : []);
+        if (!rankResponse.ok) throw new Error("RANK API 응답 오류");
+        if (!chatRankResponse.ok) throw new Error("CHAT RANK API 응답 오류");
+
+        const rankData = await rankResponse.json();
+        const chatRankData = await chatRankResponse.json();
+
+        renderRankingPreview(
+          Array.isArray(rankData) ? rankData : [],
+          Array.isArray(chatRankData) ? chatRankData : []
+        );
       } catch (error) {
         console.error(error);
         rankingPreview.innerHTML = `
