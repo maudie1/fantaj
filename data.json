@@ -1019,7 +1019,7 @@
     "number": 2884,
     "name": "파닥 응원가",
     "image": "https://cdn.fantaj.kr/2884_padakchant.gif",
-    "audio": "",
+    "audio": "https://cdn.fantaj.kr/2884_padakchant.mp3",
     "bj": "",
     "videos": []
   },
@@ -1083,7 +1083,7 @@
     "number": 3084,
     "name": "이리오너라",
     "image": "https://cdn.fantaj.kr/3084_irioneora.gif",
-    "audio": "",
+    "audio": "https://cdn.fantaj.kr/3084_irioneora.mp3",
     "bj": "",
     "videos": []
   },
@@ -1299,7 +1299,7 @@
     "number": 4884,
     "name": "파닥 신호탄",
     "image": "https://cdn.fantaj.kr/4884_padaksignal.gif",
-    "audio": "",
+    "audio": "https://cdn.fantaj.kr/4884_padaksignal.mp3",
     "bj": 488,
     "videos": []
   },
@@ -1720,7 +1720,7 @@
     "number": 10084,
     "name": "파닥몬진화",
     "image": "https://cdn.fantaj.kr/10084_padakmonevolution.gif",
-    "audio": "",
+    "audio": "https://cdn.fantaj.kr/10084_padakmonevolution.mp3",
     "bj": 1084,
     "videos": []
   },
@@ -1738,6 +1738,14 @@
     "image": "https://cdn.fantaj.kr/10088_notmyproblem.gif",
     "audio": "https://cdn.fantaj.kr/10088_notmyproblem.mp3",
     "bj": 1188,
+    "videos": []
+  },
+  {
+    "number": 10089,
+    "name": "피코데블몬",
+    "image": "https://cdn.fantaj.kr/10089_picodevilmon.gif",
+    "audio": "https://cdn.fantaj.kr/10089_picodevilmon.mp3",
+    "bj": "",
     "videos": []
   },
   {
