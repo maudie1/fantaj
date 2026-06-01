@@ -914,7 +914,7 @@
   {
     "number": 2442,
     "name": "세은 응원가",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/2442_seeuncheer.gif",
     "audio": "https://cdn.fantaj.kr/2442_seeuncheer.mp3",
     "bj": "",
     "videos": []
@@ -1002,8 +1002,8 @@
   {
     "number": 2828,
     "name": "한시온 응원가",
-    "image": "",
-    "audio": "",
+    "image": "https://cdn.fantaj.kr/2828_sioncheer.gif",
+    "audio": "https://cdn.fantaj.kr2828_sioncheer.mp3",
     "bj": "",
     "videos": []
   },
@@ -1378,7 +1378,7 @@
   {
     "number": 5432,
     "name": "한시온 신호탄",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/5432_sionflare.gif",
     "audio": "https://cdn.fantaj.kr/5432_sionflare.mp3",
     "bj": "",
     "videos": []
@@ -1613,6 +1613,14 @@
     "videos": []
   },
   {
+    "number": 10033,
+    "name": "불량감자~~~",
+    "image": "https://cdn.fantaj.kr/10033_badpotato.gif",
+    "audio": "https://cdn.fantaj.kr/10033_badpotato.mp3",
+    "bj": "",
+    "videos": []
+  },
+  {
     "number": 10034,
     "name": "지유의현성",
     "image": "https://cdn.fantaj.kr/10034_jiyuhyeonseong.gif",
@@ -1658,6 +1666,14 @@
     "image": "https://cdn.fantaj.kr/10071_fantajworld.gif",
     "audio": "https://cdn.fantaj.kr/10071_fantajworld.mp3",
     "bj": 1171,
+    "videos": []
+  },
+  {
+    "number": 10073,
+    "name": "김복덩V",
+    "image": "https://cdn.fantaj.kr/10073_lucky.gif",
+    "audio": "https://cdn.fantaj.kr/10073_lucky.mp3",
+    "bj": "",
     "videos": []
   },
   {
@@ -1754,6 +1770,14 @@
     "image": "https://cdn.fantaj.kr/10126_autumnleaves.gif",
     "audio": "https://cdn.fantaj.kr/10126_autumnleaves.mp3",
     "bj": 1126,
+    "videos": []
+  },
+  {
+    "number": 10162,
+    "name": "로드",
+    "image": "https://cdn.fantaj.kr/10162_road.gif",
+    "audio": "https://cdn.fantaj.kr/10162_road.mp3",
+    "bj": "",
     "videos": []
   },
   {
