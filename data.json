@@ -1003,7 +1003,7 @@
     "number": 2828,
     "name": "한시온 응원가",
     "image": "https://cdn.fantaj.kr/2828_sioncheer.gif",
-    "audio": "https://cdn.fantaj.kr2828_sioncheer.mp3",
+    "audio": "https://cdn.fantaj.kr/2828_sioncheer.mp3",
     "bj": "",
     "videos": []
   },
@@ -1106,7 +1106,7 @@
   {
     "number": 3120,
     "name": "가비 응원가",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/3120_gabicheer.gif",
     "audio": "https://cdn.fantaj.kr/3120_gabicheer.mp3",
     "bj": "",
     "videos": []
@@ -1133,6 +1133,14 @@
     "image": "https://cdn.fantaj.kr/3256_vouch.png",
     "audio": "https://cdn.fantaj.kr/3256_vouch.mp3",
     "bj": 325,
+    "videos": []
+  },
+  {
+    "number": 3325,
+    "name": "미숑 응원가",
+    "image": "https://cdn.fantaj.kr/3325_mishongcheer.gif",
+    "audio": "https://cdn.fantaj.kr/3325_mishongcheer.mp3",
+    "bj": "",
     "videos": []
   },
   {
@@ -1370,7 +1378,7 @@
   {
     "number": 5312,
     "name": "가비 신호탄",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/5312_gabisignal.gif",
     "audio": "https://cdn.fantaj.kr/5312_gabisignal.mp3",
     "bj": "",
     "videos": []
@@ -1610,6 +1618,14 @@
     "image": "https://cdn.fantaj.kr/10022_freesia.gif",
     "audio": "https://cdn.fantaj.kr/10022_freesia.mp3",
     "bj": 1022,
+    "videos": []
+  },
+  {
+    "number": 10025,
+    "name": "미숑신호탄",
+    "image": "https://cdn.fantaj.kr/10025_mishongsignal.gif",
+    "audio": "https://cdn.fantaj.kr/10025_mishongsignal.mp3",
+    "bj": "",
     "videos": []
   },
   {
