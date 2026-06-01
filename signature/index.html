@@ -1367,14 +1367,25 @@ let imageResumeTimer = null;
 function pauseImagesForAudioPriority() {
   clearTimeout(imageResumeTimer);
 
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+  const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+  const safeMargin = 80;
+
   document.querySelectorAll("img.thumb").forEach(img => {
     if (img.dataset.audioPaused === "1") return;
 
     const src = img.currentSrc || img.src;
     if (!src || src === TRANSPARENT_IMAGE) return;
 
-    const isAlreadyLoaded = img.complete && img.naturalWidth > 0;
-    if (isAlreadyLoaded) return;
+    const rect = img.getBoundingClientRect();
+    const isVisibleNow =
+      rect.bottom > -safeMargin &&
+      rect.top < viewportHeight + safeMargin &&
+      rect.right > -safeMargin &&
+      rect.left < viewportWidth + safeMargin;
+
+    if (isVisibleNow) return;
+    if (img.complete && img.naturalWidth > 0) return;
 
     img.dataset.audioPaused = "1";
     img.dataset.resumeSrc = src;
@@ -1435,14 +1446,14 @@ function playAudio(url, card) {
   if (playPromise && typeof playPromise.then === "function") {
     playPromise
       .then(() => {
-        resumeImagesAfterAudioPriority(0);
+        resumeImagesAfterAudioPriority(900);
       })
       .catch(() => {
         stopAudio();
         resumeImagesAfterAudioPriority(0);
       });
   } else {
-    resumeImagesAfterAudioPriority(0);
+    resumeImagesAfterAudioPriority(900);
   }
 }
 
