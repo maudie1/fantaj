@@ -1010,7 +1010,7 @@
   {
     "number": 2845,
     "name": "뽀뇨 응원가",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/2845_ponyo.gif",
     "audio": "https://cdn.fantaj.kr/2845_ponyo.mp3",
     "bj": "",
     "videos": []
@@ -1346,7 +1346,7 @@
   {
     "number": 5045,
     "name": "뽀뇨 신호탄",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/5045_ponyosignal.gif",
     "audio": "https://cdn.fantaj.kr/5045_ponyosignal.mp3",
     "bj": "",
     "videos": []
@@ -1567,7 +1567,7 @@
   {
     "number": 10008,
     "name": "FantaJ Control",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10008_fantajcontrol.gif",
     "audio": "https://cdn.fantaj.kr/10008_fantajcontrol.mp3",
     "bj": 1008,
     "videos": []
@@ -1623,7 +1623,7 @@
   {
     "number": 10044,
     "name": "숨숨",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10044_sumsum.gif",
     "audio": "https://cdn.fantaj.kr/10044_sumsum.mp3",
     "bj": 1044,
     "videos": []
@@ -1655,7 +1655,7 @@
   {
     "number": 10071,
     "name": "FantaJ World",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10071_fantajworld.gif",
     "audio": "https://cdn.fantaj.kr/10071_fantajworld.mp3",
     "bj": 1171,
     "videos": []
@@ -1663,7 +1663,7 @@
   {
     "number": 10077,
     "name": "귀멸의칼날",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10077_demonslayer.gif",
     "audio": "https://cdn.fantaj.kr/10077_demonslayer.mp3",
     "bj": 1177,
     "videos": []
@@ -1671,7 +1671,7 @@
   {
     "number": 10080,
     "name": "오마이갓",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10080_omygod.gif",
     "audio": "https://cdn.fantaj.kr/10080_omygod.mp3",
     "bj": 1082,
     "videos": []
@@ -1791,7 +1791,7 @@
   {
     "number": 10333,
     "name": "chu",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10333_chu.gif",
     "audio": "https://cdn.fantaj.kr/10333_chu.mp3",
     "bj": 1133,
     "videos": []
@@ -1901,9 +1901,17 @@
     "videos": []
   },
   {
+    "number": 11482,
+    "name": "소밥주는광우",
+    "image": "https://cdn.fantaj.kr/11482_sobapgwang.gif",
+    "audio": "https://cdn.fantaj.kr/11482_sobapgwang.mp3",
+    "bj": "",
+    "videos": []
+  },
+  {
     "number": 11526,
     "name": "루니솔라",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/11526_lunisol.gif",
     "audio": "https://cdn.fantaj.kr/11526_lunisol.mp3",
     "bj": 1526,
     "videos": []
@@ -1935,7 +1943,7 @@
   {
     "number": 12333,
     "name": "on my way",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/12333_onmyway.gif",
     "audio": "https://cdn.fantaj.kr/12333_onmyway.mp3",
     "bj": 1233,
     "videos": []
@@ -1943,7 +1951,7 @@
   {
     "number": 12345,
     "name": "That's OK",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/12345_thatsok.gif",
     "audio": "https://cdn.fantaj.kr/12345_thatsok.mp3",
     "bj": 1234,
     "videos": []
@@ -1982,7 +1990,7 @@
   },
   {
     "number": 12545,
-    "name": "함뜨든가",
+    "name": "캘리포니아",
     "image": "https://cdn.fantaj.kr/12545_letsgo.gif",
     "audio": "https://cdn.fantaj.kr/12545_letsgo.mp3",
     "bj": 1254,
@@ -2015,7 +2023,7 @@
   {
     "number": 13131,
     "name": "FantaJ 베이비",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/13131_fantajbaby.gif",
     "audio": "https://cdn.fantaj.kr/13131_fantajbaby.mp3",
     "bj": 1331,
     "videos": []
@@ -2031,7 +2039,7 @@
   {
     "number": 14242,
     "name": "네버다이",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/14242_neverdie.gif",
     "audio": "https://cdn.fantaj.kr/14242_neverdie.mp3",
     "bj": 1442,
     "videos": []
@@ -2047,7 +2055,7 @@
   {
     "number": 15555,
     "name": "마녀키키",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/15555_kikithewitch.gif",
     "audio": "https://cdn.fantaj.kr/15555_kikithewitch.mp3",
     "bj": 1555,
     "videos": []
@@ -2062,7 +2070,7 @@
   },
   {
     "number": 17296,
-    "name": "heart of asia",
+    "name": "Untouchable",
     "image": "https://cdn.fantaj.kr/17296_heartofasia.gif",
     "audio": "https://cdn.fantaj.kr/17296_heartofasia.mp3",
     "bj": 1796,
@@ -2100,7 +2108,7 @@
   {
     "number": 21111,
     "name": "남자의 로진",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/21111_mensrosin.gif",
     "audio": "https://cdn.fantaj.kr/21111_mensrosin.mp3",
     "bj": 2111,
     "videos": []
@@ -2116,7 +2124,7 @@
   {
     "number": 22222,
     "name": "love is gone",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/22222_loveisgone.gif",
     "audio": "https://cdn.fantaj.kr/22222_loveisgone.mp3",
     "bj": 2222,
     "videos": []
@@ -2124,7 +2132,7 @@
   {
     "number": 23456,
     "name": "큰손입장",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/23456_bigsponsorentry.gif",
     "audio": "https://cdn.fantaj.kr/23456_bigsponsorentry.mp3",
     "bj": 2356,
     "videos": []
