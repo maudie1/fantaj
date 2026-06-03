@@ -800,6 +800,18 @@
         border-radius: 13px;
       }
 
+      .hero-image-slide {
+        background:
+          radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), transparent 26%),
+          radial-gradient(circle at 85% 22%, rgba(255, 214, 239, 0.9), transparent 28%),
+          linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
+      }
+
+      .hero-image-slide .hero-image {
+        object-fit: contain;
+        object-position: center center;
+      }
+
       .signature-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -851,7 +863,8 @@
       }
 
       .hero {
-        height: 216px;
+        height: auto;
+        aspect-ratio: 2.86 / 1;
         border-radius: 12px;
       }
 
@@ -1345,7 +1358,7 @@
     }
 
     heroDots.forEach((dot, index) => {
-      dot.addEventListener("click", () => {18
+      dot.addEventListener("click", () => {
         showHeroSlide(index);
         startHeroSlider();
       });
