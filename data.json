@@ -1567,8 +1567,8 @@
   {
     "number": 10005,
     "name": "냥강조",
-    "image": "",
-    "audio": "",
+    "image": "https://cdn.fantaj.kr/10005_nyang.gif",
+    "audio": "https://cdn.fantaj.kr/10005_nyang.mp3",
     "bj": 1005,
     "videos": []
   },
@@ -1831,7 +1831,7 @@
   {
     "number": 10304,
     "name": "Me낼름",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10304_menaelreum.gif",
     "audio": "https://cdn.fantaj.kr/10304_menaelreum.mp3",
     "bj": 1134,
     "videos": []
@@ -1863,7 +1863,7 @@
   {
     "number": 10519,
     "name": "REWRITE THE STARS",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/10519_rewrite.gif",
     "audio": "https://cdn.fantaj.kr/10519_rewrite.mp3",
     "bj": 1059,
     "videos": []
@@ -1992,7 +1992,7 @@
     "number": 12333,
     "name": "on my way",
     "image": "https://cdn.fantaj.kr/12333_onmyway.gif",
-    "audio": "https://cdn.fantaj.kr/12333_onmyway.mp3",
+    "audio": "https://cdn.fantaj.kr/12333_onmyway.wav",
     "bj": 1233,
     "videos": []
   },
@@ -2164,7 +2164,7 @@
   {
     "number": 21571,
     "name": "슈퍼냥이강쥐조아",
-    "image": "",
+    "image": "https://cdn.fantaj.kr/21571_superlovecatsanddogs.gif",
     "audio": "https://cdn.fantaj.kr/21571_superlovecatsanddogs.mp3",
     "bj": 2171,
     "videos": []
