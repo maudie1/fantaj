@@ -6,7 +6,7 @@
 <title>FANTAJ 관리자</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif;background:linear-gradient(180deg,#fff7fb,#f7f0ff 45%,#fffaf4);color:#3d3148;min-height:100vh}a{text-decoration:none;color:inherit}button,input,select{font-family:inherit}.nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.78);backdrop-filter:blur(16px);border-bottom:1px solid rgba(226,194,223,.58);box-shadow:0 8px 28px rgba(177,122,174,.12)}.navin{width:min(1280px,calc(100% - 32px));min-height:72px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}.logo{font-size:27px;font-weight:950;letter-spacing:.12em;color:#8f4eb2}.navlinks{display:flex;gap:8px}.navlinks a{padding:10px 13px;border-radius:8px;background:#fff;color:#8a4dae;font-size:12px;font-weight:950;box-shadow:inset 0 0 0 1px rgba(169,101,232,.25)}.navlinks a.main{background:linear-gradient(135deg,#ff7eb7,#a965e8);color:#fff}main{width:min(1280px,calc(100% - 32px));margin:auto;padding:24px 0 70px}.hero{border-radius:12px;padding:24px;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.95),transparent 26%),radial-gradient(circle at 85% 22%,rgba(255,214,239,.9),transparent 28%),linear-gradient(135deg,#f9d8ee,#e6d9ff 48%,#fff0d8);box-shadow:0 26px 60px rgba(150,94,171,.14)}.hero h1{font-size:clamp(30px,5vw,54px);color:#fff;letter-spacing:.1em;text-shadow:0 8px 28px rgba(117,67,151,.26)}.hero p{margin-top:10px;color:#6f527c;font-size:14px;font-weight:850}.status{margin-top:14px;padding:13px 15px;border-radius:10px;background:rgba(255,255,255,.82);border:1px solid rgba(226,194,223,.58);color:#765a88;font-size:13px;font-weight:850;line-height:1.55;white-space:pre-line}.tabs{margin-top:18px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.tab{min-height:43px;border:1px solid rgba(226,194,223,.68);border-radius:8px;background:rgba(255,255,255,.86);color:#765a88;font-size:13px;font-weight:950;cursor:pointer}.tab.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,#ff7eb7,#a965e8)}.panel{display:none;margin-top:18px}.panel.active{display:block}.box{border-radius:12px;background:rgba(255,255,255,.82);border:1px solid rgba(226,194,223,.58);box-shadow:0 18px 42px rgba(150,94,171,.11);padding:16px;margin-bottom:14px}.head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.title{font-size:18px;font-weight:950;color:#4b3659}.help{margin-top:7px;color:#8b7199;font-size:12px;font-weight:800;line-height:1.55}.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.btn{min-height:38px;border:0;border-radius:8px;padding:0 13px;background:linear-gradient(135deg,#ff7eb7,#a965e8);color:#fff;font-size:12px;font-weight:950;cursor:pointer}.btn.light{color:#8a4dae;background:#fff;box-shadow:inset 0 0 0 1px rgba(169,101,232,.28)}.btn.danger{background:linear-gradient(135deg,#ff6b7e,#cc4560)}.input,.select{width:100%;border:1px solid rgba(226,194,223,.72);border-radius:8px;background:#fff;color:#3d3148;outline:0;padding:10px 11px;font-size:13px;font-weight:800}.form{display:grid;grid-template-columns:110px 1fr 110px 130px 150px 90px auto;gap:8px;align-items:center}.scroll{overflow-x:auto;border-radius:10px}table{width:100%;min-width:980px;border-collapse:collapse;background:rgba(255,255,255,.84)}th,td{border-bottom:1px solid rgba(226,194,223,.48);padding:9px 8px;text-align:left;vertical-align:middle;font-size:12px}th{background:rgba(251,242,255,.92);color:#6d3b86;font-weight:950;white-space:nowrap}td{color:#4c375b;font-weight:750}.tin,.tsel{width:100%;min-height:34px;border:1px solid rgba(226,194,223,.68);border-radius:7px;background:#fff;padding:7px 8px;font-size:12px;font-weight:800;color:#3d3148}.tin.file{min-width:150px}.tin.url{min-width:260px}.rbtn{min-height:32px;border:0;border-radius:7px;padding:0 9px;font-size:11px;font-weight:950;cursor:pointer;white-space:nowrap}.rbtn.p{background:#e8e1ff;color:#5f3eb0}.rbtn.r{background:#ffe0e5;color:#b73950}.rbtn.k{background:#f7d8ef;color:#8b2f74}.thumb{width:54px;height:34px;object-fit:cover;border-radius:6px;background:#f3e7fb;display:block}.badge{display:inline-flex;align-items:center;justify-content:center;min-width:46px;min-height:24px;border-radius:6px;padding:0 7px;font-size:11px;font-weight:950;background:#f0dcff;color:#8a4dae}.upload{display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:10px}.files{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.filecard{border:1px solid rgba(226,194,223,.58);background:#fff;border-radius:9px;padding:7px;overflow:hidden}.prev{width:100%;aspect-ratio:16/9;border-radius:7px;background:linear-gradient(135deg,#ffe8f5,#efe1ff);display:grid;place-items:center;overflow:hidden;color:#8a4dae;font-size:12px;font-weight:950}.prev img{width:100%;height:100%;object-fit:cover}.fname{margin-top:6px;font-size:10px;font-weight:950;word-break:break-all}.fmeta{margin-top:3px;font-size:10px;font-weight:750;color:#8b7199}.factions{margin-top:6px;display:grid;grid-template-columns:1fr 1fr;gap:4px}.vedit{display:grid;grid-template-columns:160px 1fr 1.2fr auto;gap:8px;align-items:center;margin-bottom:8px}@media(max-width:900px){.tabs{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:1fr 1fr}.files{grid-template-columns:repeat(3,1fr)}.vedit{grid-template-columns:1fr}}@media(max-width:560px){.navin,main{width:min(100% - 20px,1280px)}.navin{min-height:62px}.logo{font-size:21px}.navlinks a{padding:8px 9px;font-size:11px}.hero{padding:18px}.box{padding:12px}.head{align-items:flex-start;flex-direction:column}.tabs{gap:6px}.tab{min-height:38px;font-size:12px}.form,.upload{grid-template-columns:1fr}.files{grid-template-columns:1fr}}
-.viewerToolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.viewerSections{display:grid;gap:18px}.viewerSectionTitle{margin:8px 0 10px;padding:10px 12px;border-radius:8px;background:#efe1ff;color:#6d3b86;font-size:14px;font-weight:950}.viewerGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.viewerCard{position:relative;border:1px solid rgba(226,194,223,.68);border-radius:9px;background:#fff;overflow:hidden;box-shadow:0 8px 22px rgba(150,94,171,.08)}.viewerCard.off{opacity:.34}.viewerCard img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#f3e7fb}.viewerCardName{padding:7px 6px 9px;text-align:center;font-size:12px;font-weight:950;color:#5d3f70}.eyeBtn{position:absolute;right:6px;top:6px;z-index:2;min-width:30px;height:24px;border:0;border-radius:6px;background:rgba(0,0,0,.62);color:#fff;font-size:13px;font-weight:950;cursor:pointer}.viewerModal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(25,18,30,.62);padding:20px}.viewerModal.show{display:flex}.viewerModalBox{width:min(560px,100%);border-radius:12px;background:#fff;padding:18px;box-shadow:0 28px 80px rgba(0,0,0,.24)}.viewerModalHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.viewerModalTitle{font-size:18px;font-weight:950;color:#2f2438}.viewerChecks{display:grid;gap:8px;margin:12px 0}.viewerCheck{display:flex;align-items:center;gap:10px;border:1px solid rgba(226,194,223,.68);border-radius:8px;padding:11px;background:#fbf7ff;font-size:13px;font-weight:900;color:#4b3659}.viewerCheck input{width:16px;height:16px}.viewerModalActions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.viewerClose{border:0;background:#fff;color:#765a88;font-size:20px;font-weight:950;cursor:pointer}.memberNote{font-size:12px;font-weight:850;color:#8b7199;line-height:1.55}@media(max-width:900px){.viewerGrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.viewerGrid{grid-template-columns:repeat(2,1fr)}}body.authchecking header,body.authchecking main{display:none}</style>
+.viewerToolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.viewerSections{display:grid;gap:18px}.viewerSectionTitle{margin:8px 0 10px;padding:10px 12px;border-radius:8px;background:#efe1ff;color:#6d3b86;font-size:14px;font-weight:950}.viewerGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.viewerCard{position:relative;border:1px solid rgba(226,194,223,.68);border-radius:9px;background:#fff;overflow:hidden;box-shadow:0 8px 22px rgba(150,94,171,.08)}.viewerCard.off{opacity:.34}.viewerCard img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#f3e7fb}.viewerCardName{padding:7px 6px 9px;text-align:center;font-size:12px;font-weight:950;color:#5d3f70}.eyeBtn{position:absolute;right:6px;top:6px;z-index:2;min-width:30px;height:24px;border:0;border-radius:6px;background:rgba(0,0,0,.62);color:#fff;font-size:13px;font-weight:950;cursor:pointer}.viewerModal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(25,18,30,.62);padding:20px}.viewerModal.show{display:flex}.viewerModalBox{width:min(560px,100%);border-radius:12px;background:#fff;padding:18px;box-shadow:0 28px 80px rgba(0,0,0,.24)}.viewerModalHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.viewerModalTitle{font-size:18px;font-weight:950;color:#2f2438}.viewerChecks{display:grid;gap:8px;margin:12px 0}.viewerCheck{display:flex;align-items:center;gap:10px;border:1px solid rgba(226,194,223,.68);border-radius:8px;padding:11px;background:#fbf7ff;font-size:13px;font-weight:900;color:#4b3659}.viewerCheck input{width:16px;height:16px}.viewerModalActions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.viewerClose{border:0;background:#fff;color:#765a88;font-size:20px;font-weight:950;cursor:pointer}.memberNote{font-size:12px;font-weight:850;color:#8b7199;line-height:1.55}@media(max-width:900px){.viewerGrid{grid-template-columns:repeat(4,1fr)}}@media(max-width:560px){.viewerGrid{grid-template-columns:repeat(2,1fr)}}body.authchecking header,body.authchecking main{display:none}</style>
 </head>
 <body class="authchecking">
 <header class="nav"><div class="navin"><a class="logo" href="/">FANTAJ</a><div class="navlinks"><a href="/signature/">시그목록</a><a class="main" href="/">메인</a></div></div></header>
@@ -90,8 +90,9 @@ async function changeRole(id,role){
 }
 
 
-const VIEWER_DOWNLOAD_DELAY=650;
+const VIEWER_DOWNLOAD_DELAY=180;
 let viewerHiddenNumbers=new Set();
+const viewerImageCache=new Map();
 
 function viewerToday(){
   const d=new Date();
@@ -224,12 +225,13 @@ async function downloadViewerSections(ids){
     if(!items.length)continue;
 
     try{
+      await preloadViewerImages(items);
       const canvas=section.type==="personal"
         ? await makePersonalSectionCanvas(section,items)
         : await makeNormalSectionCanvas(section,items);
 
       await downloadCanvasAsPng(canvas,viewerFileName(section,items.length));
-      setStatus(`${i+1}/${sections.length} 다운로드 준비 완료: ${section.label}`);
+      setStatus(`${i+1}/${sections.length} 다운로드 완료: ${section.label}`);
       await sleep(VIEWER_DOWNLOAD_DELAY);
     }catch(error){
       console.error(error);
@@ -239,7 +241,7 @@ async function downloadViewerSections(ids){
 }
 
 function viewerFileName(section,count){
-  const safe=section.label.replaceAll("~","~").replace(/[\\/:*?"<>|]/g,"").replace(/\s+/g,"");
+  const safe=section.label.replace(/[\\/:*?"<>|]/g,"").replace(/\s+/g,"");
   return `판타지유_시그니처_${safe} (${count}개)_${viewerToday()}.png`;
 }
 
@@ -248,21 +250,36 @@ function sleep(ms){
 }
 
 function loadCanvasImage(src){
-  return new Promise(resolve=>{
+  const key=String(src||"");
+  if(viewerImageCache.has(key))return viewerImageCache.get(key);
+
+  const promise=new Promise(resolve=>{
     const img=new Image();
     img.crossOrigin="anonymous";
     img.onload=()=>resolve(img);
     img.onerror=()=>resolve(null);
-    img.src=src+(String(src).includes("?")?"&":"?")+"v="+Date.now();
+    img.src=key;
   });
+
+  viewerImageCache.set(key,promise);
+  return promise;
+}
+
+async function preloadViewerImages(items){
+  await Promise.all(items.map(item=>loadCanvasImage(item.image)));
+}
+
+function getCachedCanvasImage(src){
+  const p=viewerImageCache.get(String(src||""));
+  return p || loadCanvasImage(src);
 }
 
 function coverDraw(ctx,img,x,y,w,h){
   if(!img){
-    ctx.fillStyle="#21172d";
+    ctx.fillStyle="#fff3fb";
     ctx.fillRect(x,y,w,h);
-    ctx.fillStyle="#bfa2df";
-    ctx.font="700 20px Arial";
+    ctx.fillStyle="#9b67bd";
+    ctx.font="800 18px Arial";
     ctx.textAlign="center";
     ctx.textBaseline="middle";
     ctx.fillText("이미지 없음",x+w/2,y+h/2);
@@ -296,48 +313,64 @@ function roundRect(ctx,x,y,w,h,r){
   ctx.closePath();
 }
 
+function fillViewerBackground(ctx,width,height){
+  const bg=ctx.createLinearGradient(0,0,0,height);
+  bg.addColorStop(0,"#fff7fb");
+  bg.addColorStop(.45,"#f7f0ff");
+  bg.addColorStop(1,"#fffaf4");
+  ctx.fillStyle=bg;
+  ctx.fillRect(0,0,width,height);
+}
+
 function drawTitle(ctx,title,width){
-  ctx.fillStyle="#080611";
-  ctx.fillRect(0,0,width,98);
-  ctx.fillStyle="#d9b8ff";
-  ctx.font="800 34px Arial";
+  const grad=ctx.createLinearGradient(24,20,width-24,112);
+  grad.addColorStop(0,"#f9d8ee");
+  grad.addColorStop(.55,"#e6d9ff");
+  grad.addColorStop(1,"#fff0d8");
+  ctx.fillStyle=grad;
+  roundRect(ctx,24,18,width-48,104,12);
+  ctx.fill();
+  ctx.fillStyle="#ffffff";
+  ctx.font="900 46px Arial";
   ctx.textAlign="center";
   ctx.textBaseline="middle";
-  ctx.fillText(`판타지유 시그니처 ${title}`,width/2,52);
+  ctx.fillText("SIGNATURE",width/2,62);
+  ctx.fillStyle="#8f4eb2";
+  ctx.font="900 22px Arial";
+  ctx.fillText(title,width/2,100);
 }
 
 async function makeNormalSectionCanvas(section,items){
-  const cols=4;
-  const pad=18;
-  const gap=12;
-  const cardW=320;
-  const imgH=120;
-  const textH=58;
+  const cols=6;
+  const pad=24;
+  const gap=10;
+  const cardW=200;
+  const imgH=112;
+  const textH=48;
   const cardH=imgH+textH;
-  const titleH=98;
+  const titleH=140;
   const headerH=44;
   const rows=Math.ceil(items.length/cols);
   const width=pad*2+cols*cardW+(cols-1)*gap;
-  const height=titleH+pad+headerH+gap+rows*cardH+Math.max(0,rows-1)*gap+pad;
+  const height=titleH+headerH+gap+rows*cardH+Math.max(0,rows-1)*gap+pad;
 
   const canvas=document.createElement("canvas");
   canvas.width=width;
   canvas.height=height;
   const ctx=canvas.getContext("2d");
 
-  ctx.fillStyle="#090612";
-  ctx.fillRect(0,0,width,height);
+  fillViewerBackground(ctx,width,height);
   drawTitle(ctx,`${section.label} (${items.length}개)`,width);
 
-  let y=titleH+pad;
-  ctx.fillStyle="#26183e";
-  roundRect(ctx,pad,y,width-pad*2,headerH,6);
+  let y=titleH;
+  ctx.fillStyle="rgba(255,255,255,.92)";
+  roundRect(ctx,pad,y,width-pad*2,headerH,10);
   ctx.fill();
-  ctx.strokeStyle="#7c58b5";
+  ctx.strokeStyle="rgba(169,101,232,.28)";
   ctx.lineWidth=2;
   ctx.stroke();
-  ctx.fillStyle="#d9b8ff";
-  ctx.font="800 19px Arial";
+  ctx.fillStyle="#8f4eb2";
+  ctx.font="900 18px Arial";
   ctx.textAlign="left";
   ctx.textBaseline="middle";
   ctx.fillText(`${section.label} (${items.length}개)`,pad+18,y+headerH/2);
@@ -363,20 +396,20 @@ async function makePersonalSectionCanvas(section,items){
     groups.get(member).push(item);
   });
 
-  const cols=5;
-  const pad=18;
+  const cols=6;
+  const pad=24;
   const gap=10;
-  const labelW=145;
-  const cardW=190;
-  const imgH=96;
-  const textH=48;
+  const labelW=130;
+  const cardW=176;
+  const imgH=100;
+  const textH=44;
   const cardH=imgH+textH;
-  const titleH=98;
-  const headerH=42;
+  const titleH=140;
+  const headerH=44;
   const groupGap=14;
   const width=pad*2+labelW+gap+cols*cardW+(cols-1)*gap;
 
-  let height=titleH+pad+headerH+gap+pad;
+  let height=titleH+headerH+gap+pad;
   for(const arr of groups.values()){
     const rows=Math.max(1,Math.ceil(arr.length/cols));
     height+=rows*cardH+Math.max(0,rows-1)*gap+groupGap;
@@ -387,19 +420,18 @@ async function makePersonalSectionCanvas(section,items){
   canvas.height=height;
   const ctx=canvas.getContext("2d");
 
-  ctx.fillStyle="#090612";
-  ctx.fillRect(0,0,width,height);
+  fillViewerBackground(ctx,width,height);
   drawTitle(ctx,`${section.label} (${items.length}개)`,width);
 
-  let y=titleH+pad;
-  ctx.fillStyle="#26183e";
-  roundRect(ctx,pad,y,width-pad*2,headerH,6);
+  let y=titleH;
+  ctx.fillStyle="rgba(255,255,255,.92)";
+  roundRect(ctx,pad,y,width-pad*2,headerH,10);
   ctx.fill();
-  ctx.strokeStyle="#7c58b5";
+  ctx.strokeStyle="rgba(169,101,232,.28)";
   ctx.lineWidth=2;
   ctx.stroke();
-  ctx.fillStyle="#d9b8ff";
-  ctx.font="800 19px Arial";
+  ctx.fillStyle="#8f4eb2";
+  ctx.font="900 18px Arial";
   ctx.textAlign="left";
   ctx.textBaseline="middle";
   ctx.fillText(`${section.label} (${items.length}개)`,pad+18,y+headerH/2);
@@ -409,20 +441,20 @@ async function makePersonalSectionCanvas(section,items){
     const rows=Math.max(1,Math.ceil(arr.length/cols));
     const groupH=rows*cardH+Math.max(0,rows-1)*gap;
 
-    ctx.fillStyle="#211633";
-    roundRect(ctx,pad,y,labelW,groupH,8);
+    ctx.fillStyle="rgba(255,255,255,.88)";
+    roundRect(ctx,pad,y,labelW,groupH,10);
     ctx.fill();
-    ctx.strokeStyle="#7c58b5";
+    ctx.strokeStyle="rgba(169,101,232,.38)";
     ctx.lineWidth=2;
     ctx.stroke();
 
-    ctx.fillStyle="#d9b8ff";
-    ctx.font="800 20px Arial";
+    ctx.fillStyle="#8f4eb2";
+    ctx.font="900 20px Arial";
     ctx.textAlign="center";
     ctx.textBaseline="middle";
     ctx.fillText(member,pad+labelW/2,y+groupH/2-12);
-    ctx.font="700 14px Arial";
-    ctx.fillText(`(${arr.length}개)`,pad+labelW/2,y+groupH/2+18);
+    ctx.font="800 13px Arial";
+    ctx.fillText(`(${arr.length}개)`,pad+labelW/2,y+groupH/2+17);
 
     for(let i=0;i<arr.length;i++){
       const item=arr[i];
@@ -441,31 +473,31 @@ async function makePersonalSectionCanvas(section,items){
 
 async function drawViewerCardToCanvas(ctx,item,x,y,w,imgH,textH){
   const h=imgH+textH;
-  ctx.fillStyle="#171126";
-  roundRect(ctx,x,y,w,h,7);
+  ctx.fillStyle="rgba(255,255,255,.94)";
+  roundRect(ctx,x,y,w,h,8);
   ctx.fill();
-  ctx.strokeStyle="#3c2c5d";
+  ctx.strokeStyle="rgba(226,194,223,.8)";
   ctx.lineWidth=1.5;
   ctx.stroke();
 
-  const img=await loadCanvasImage(item.image);
-  coverDraw(ctx,img,x+2,y+2,w-4,imgH-4);
+  const img=await getCachedCanvasImage(item.image);
+  coverDraw(ctx,img,x+5,y+5,w-10,imgH-8);
 
-  ctx.fillStyle="#171126";
-  ctx.fillRect(x+2,y+imgH,w-4,textH-2);
+  ctx.fillStyle="#ffffff";
+  ctx.fillRect(x+5,y+imgH,w-10,textH-5);
 
-  ctx.fillStyle="#d9b8ff";
+  ctx.fillStyle="#5d3f70";
   ctx.textAlign="center";
   ctx.textBaseline="middle";
-  ctx.font="800 22px Arial";
+  ctx.font="900 17px Arial";
   const text=`${item.number||""} ${item.name||""}`;
-  fitText(ctx,text,x+w/2,y+imgH+textH/2,w-16,22,13);
+  fitText(ctx,text,x+w/2,y+imgH+textH/2,w-14,17,11);
 }
 
 function fitText(ctx,text,cx,cy,maxWidth,startSize,minSize){
   let size=startSize;
   while(size>minSize){
-    ctx.font=`800 ${size}px Arial`;
+    ctx.font=`900 ${size}px Arial`;
     if(ctx.measureText(text).width<=maxWidth)break;
     size--;
   }
@@ -494,7 +526,7 @@ function downloadCanvasAsPng(canvas,fileName){
         document.body.appendChild(a);
         a.click();
         a.remove();
-        setTimeout(()=>URL.revokeObjectURL(url),1500);
+        setTimeout(()=>URL.revokeObjectURL(url),1200);
         resolve();
       },"image/png");
     }catch(error){
