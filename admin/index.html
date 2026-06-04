@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FANTAJ 관리자</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #fff7ff;
+      color: #3d264e;
+      padding: 24px;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 26px;
+      color: #944dc0;
+      letter-spacing: 0.08em;
+    }
+
+    .home {
+      color: #8a4ab4;
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(183, 104, 255, 0.2);
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 12px 30px rgba(132, 73, 166, 0.12);
+      margin-bottom: 18px;
+    }
+
+    .message {
+      white-space: pre-line;
+      line-height: 1.6;
+      font-size: 14px;
+      font-weight: 800;
+      color: #7a5a8f;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #f0dff7;
+      padding: 11px 10px;
+      text-align: left;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    th {
+      background: #fbf2ff;
+      color: #6d3b86;
+      font-weight: 950;
+    }
+
+    td {
+      color: #4c375b;
+      font-weight: 700;
+    }
+
+    .profile {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #eee;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 10px rgba(132, 73, 166, 0.14);
+    }
+
+    .role {
+      font-weight: 950;
+    }
+
+    .role.admin {
+      color: #d84fa6;
+    }
+
+    .role.user {
+      color: #5c6f86;
+    }
+
+    button {
+      height: 34px;
+      border: 0;
+      border-radius: 7px;
+      cursor: pointer;
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 900;
+      font-family: inherit;
+    }
+
+    .refresh {
+      background: #944dc0;
+      color: #fff;
+    }
+
+    .admin-btn {
+      background: #f7d8ef;
+      color: #8b2f74;
+    }
+
+    .user-btn {
+      background: #e8e8ff;
+      color: #4d4aa8;
+    }
+
+    .danger {
+      color: #cc3f3f;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 14px;
+      }
+
+      table {
+        min-width: 760px;
+      }
+
+      .table-scroll {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>FANTAJ ADMIN</h1>
+      <a class="home" href="/">메인으로</a>
+    </div>
+
+    <div class="box">
+      <div id="message" class="message">관리자 정보를 확인하는 중입니다...</div>
+    </div>
+
+    <div class="box">
+      <div class="top">
+        <h2 style="margin:0;font-size:18px;">회원 관리</h2>
+        <button class="refresh" type="button" onclick="loadUsers()">새로고침</button>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>프로필</th>
+              <th>SOOP ID</th>
+              <th>닉네임</th>
+              <th>방송국</th>
+              <th>권한</th>
+              <th>마지막 로그인</th>
+              <th>관리</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody">
+            <tr>
+              <td colspan="7">불러오는 중입니다...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const LOGIN_STORAGE_KEY = "FANTAJ_SOOP_LOGIN_USER";
+    const ADMIN_USERS_URL = "https://fantajsoopauth.4rgn2004.workers.dev/admin/users";
+    const ADMIN_ROLE_URL = "https://fantajsoopauth.4rgn2004.workers.dev/admin/user-role";
+
+    const messageEl = document.getElementById("message");
+    const userTableBody = document.getElementById("userTableBody");
+
+    let currentUser = null;
+
+    function showMessage(text) {
+      messageEl.textContent = text || "";
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function getSavedUser() {
+      try {
+        return JSON.parse(localStorage.getItem(LOGIN_STORAGE_KEY) || "null");
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function formatDate(value) {
+      if (!value) return "-";
+
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "-";
+
+      return date.toLocaleString("ko-KR");
+    }
+
+    async function apiPost(url, body) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.detail || data.message || "요청 실패");
+      }
+
+      return data;
+    }
+
+    async function loadUsers() {
+      try {
+        showMessage("회원 목록을 불러오는 중입니다...");
+
+        const data = await apiPost(ADMIN_USERS_URL, {
+          adminSoopId: currentUser.soopId
+        });
+
+        renderUsers(data.users || []);
+        showMessage(`${currentUser.nickname} 관리자님, 환영합니다.`);
+      } catch (error) {
+        console.error(error);
+        showMessage("회원 목록을 불러오지 못했습니다.\n" + (error.message || error));
+      }
+    }
+
+    function renderUsers(users) {
+      if (!users.length) {
+        userTableBody.innerHTML = `<tr><td colspan="7">회원이 없습니다.</td></tr>`;
+        return;
+      }
+
+      userTableBody.innerHTML = users.map(user => {
+        const role = user.role || "user";
+        const nextRole = role === "admin" ? "user" : "admin";
+        const buttonText = role === "admin" ? "일반으로" : "관리자로";
+        const buttonClass = role === "admin" ? "user-btn" : "admin-btn";
+        const profile = user.profile_image
+          ? `<img class="profile" src="${escapeHtml(user.profile_image)}" alt="">`
+          : "-";
+
+        return `
+          <tr>
+            <td>${profile}</td>
+            <td>${escapeHtml(user.soop_id || "-")}</td>
+            <td>${escapeHtml(user.nickname || user.soop_nickname || "-")}</td>
+            <td>${escapeHtml(user.station_name || "-")}</td>
+            <td><span class="role ${escapeHtml(role)}">${escapeHtml(role)}</span></td>
+            <td>${escapeHtml(formatDate(user.last_login_at))}</td>
+            <td>
+              <button class="${buttonClass}" type="button" onclick="changeRole('${escapeHtml(user.soop_id)}', '${nextRole}')">
+                ${buttonText}
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    async function changeRole(targetSoopId, role) {
+      if (!targetSoopId) {
+        alert("SOOP ID가 없습니다.");
+        return;
+      }
+
+      const label = role === "admin" ? "관리자" : "일반 유저";
+
+      if (!confirm(`이 회원을 ${label}로 변경할까요?`)) {
+        return;
+      }
+
+      try {
+        showMessage("권한을 변경하는 중입니다...");
+
+        await apiPost(ADMIN_ROLE_URL, {
+          adminSoopId: currentUser.soopId,
+          targetSoopId,
+          role
+        });
+
+        await loadUsers();
+      } catch (error) {
+        console.error(error);
+        showMessage("권한 변경에 실패했습니다.\n" + (error.message || error));
+      }
+    }
+
+    function initAdmin() {
+      currentUser = getSavedUser();
+
+      if (!currentUser) {
+        alert("로그인이 필요합니다.");
+        location.href = "/login/";
+        return;
+      }
+
+      if (currentUser.role !== "admin") {
+        alert("관리자만 접근할 수 있습니다.");
+        location.href = "/";
+        return;
+      }
+
+      loadUsers();
+    }
+
+    initAdmin();
+  </script>
+</body>
+</html>
