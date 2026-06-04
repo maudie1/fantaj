@@ -90,7 +90,7 @@ async function changeRole(id,role){
 }
 
 
-const VIEWER_DOWNLOAD_DELAY=180;
+const VIEWER_DOWNLOAD_DELAY=60;
 let viewerHiddenNumbers=new Set();
 const viewerImageCache=new Map();
 
@@ -254,11 +254,13 @@ function loadCanvasImage(src){
   if(viewerImageCache.has(key))return viewerImageCache.get(key);
 
   const promise=new Promise(resolve=>{
+    if(!key){resolve(null);return;}
     const img=new Image();
     img.crossOrigin="anonymous";
+    img.decoding="async";
     img.onload=()=>resolve(img);
     img.onerror=()=>resolve(null);
-    img.src=key;
+    img.src=key+(key.includes("?")?"&":"?")+"v="+Date.now();
   });
 
   viewerImageCache.set(key,promise);
@@ -342,38 +344,35 @@ function drawTitle(ctx,title,width){
 
 async function makeNormalSectionCanvas(section,items){
   const cols=6;
-  const pad=24;
+  const pad=10;
   const gap=10;
   const cardW=200;
   const imgH=112;
-  const textH=48;
+  const textH=31;
   const cardH=imgH+textH;
-  const titleH=140;
-  const headerH=44;
+  const topPad=12;
+  const headerH=36;
   const rows=Math.ceil(items.length/cols);
   const width=pad*2+cols*cardW+(cols-1)*gap;
-  const height=titleH+headerH+gap+rows*cardH+Math.max(0,rows-1)*gap+pad;
+  const height=topPad+headerH+gap+rows*cardH+Math.max(0,rows-1)*gap+pad;
 
   const canvas=document.createElement("canvas");
   canvas.width=width;
   canvas.height=height;
   const ctx=canvas.getContext("2d");
 
-  fillViewerBackground(ctx,width,height);
-  drawTitle(ctx,`${section.label} (${items.length}개)`,width);
+  ctx.fillStyle="#fffafc";
+  ctx.fillRect(0,0,width,height);
 
-  let y=titleH;
-  ctx.fillStyle="rgba(255,255,255,.92)";
-  roundRect(ctx,pad,y,width-pad*2,headerH,10);
+  let y=topPad;
+  ctx.fillStyle="#efe1ff";
+  roundRect(ctx,pad,y,width-pad*2,headerH,7);
   ctx.fill();
-  ctx.strokeStyle="rgba(169,101,232,.28)";
-  ctx.lineWidth=2;
-  ctx.stroke();
-  ctx.fillStyle="#8f4eb2";
-  ctx.font="900 18px Arial";
+  ctx.fillStyle="#6d3b86";
+  ctx.font="900 14px Arial";
   ctx.textAlign="left";
   ctx.textBaseline="middle";
-  ctx.fillText(`${section.label} (${items.length}개)`,pad+18,y+headerH/2);
+  ctx.fillText(`${section.label} (${items.length}/${items.length}개)`,pad+12,y+headerH/2);
   y+=headerH+gap;
 
   for(let i=0;i<items.length;i++){
@@ -397,19 +396,19 @@ async function makePersonalSectionCanvas(section,items){
   });
 
   const cols=6;
-  const pad=24;
+  const pad=10;
   const gap=10;
-  const labelW=130;
-  const cardW=176;
-  const imgH=100;
-  const textH=44;
+  const labelW=110;
+  const cardW=180;
+  const imgH=101;
+  const textH=31;
   const cardH=imgH+textH;
-  const titleH=140;
-  const headerH=44;
-  const groupGap=14;
+  const topPad=12;
+  const headerH=36;
+  const groupGap=12;
   const width=pad*2+labelW+gap+cols*cardW+(cols-1)*gap;
 
-  let height=titleH+headerH+gap+pad;
+  let height=topPad+headerH+gap+pad;
   for(const arr of groups.values()){
     const rows=Math.max(1,Math.ceil(arr.length/cols));
     height+=rows*cardH+Math.max(0,rows-1)*gap+groupGap;
@@ -420,41 +419,38 @@ async function makePersonalSectionCanvas(section,items){
   canvas.height=height;
   const ctx=canvas.getContext("2d");
 
-  fillViewerBackground(ctx,width,height);
-  drawTitle(ctx,`${section.label} (${items.length}개)`,width);
+  ctx.fillStyle="#fffafc";
+  ctx.fillRect(0,0,width,height);
 
-  let y=titleH;
-  ctx.fillStyle="rgba(255,255,255,.92)";
-  roundRect(ctx,pad,y,width-pad*2,headerH,10);
+  let y=topPad;
+  ctx.fillStyle="#efe1ff";
+  roundRect(ctx,pad,y,width-pad*2,headerH,7);
   ctx.fill();
-  ctx.strokeStyle="rgba(169,101,232,.28)";
-  ctx.lineWidth=2;
-  ctx.stroke();
-  ctx.fillStyle="#8f4eb2";
-  ctx.font="900 18px Arial";
+  ctx.fillStyle="#6d3b86";
+  ctx.font="900 14px Arial";
   ctx.textAlign="left";
   ctx.textBaseline="middle";
-  ctx.fillText(`${section.label} (${items.length}개)`,pad+18,y+headerH/2);
+  ctx.fillText(`${section.label} (${items.length}/${items.length}개)`,pad+12,y+headerH/2);
   y+=headerH+gap;
 
   for(const [member,arr] of groups){
     const rows=Math.max(1,Math.ceil(arr.length/cols));
     const groupH=rows*cardH+Math.max(0,rows-1)*gap;
 
-    ctx.fillStyle="rgba(255,255,255,.88)";
-    roundRect(ctx,pad,y,labelW,groupH,10);
+    ctx.fillStyle="#ffffff";
+    roundRect(ctx,pad,y,labelW,groupH,8);
     ctx.fill();
-    ctx.strokeStyle="rgba(169,101,232,.38)";
-    ctx.lineWidth=2;
+    ctx.strokeStyle="rgba(226,194,223,.8)";
+    ctx.lineWidth=1.5;
     ctx.stroke();
 
-    ctx.fillStyle="#8f4eb2";
-    ctx.font="900 20px Arial";
+    ctx.fillStyle="#6d3b86";
+    ctx.font="900 16px Arial";
     ctx.textAlign="center";
     ctx.textBaseline="middle";
-    ctx.fillText(member,pad+labelW/2,y+groupH/2-12);
-    ctx.font="800 13px Arial";
-    ctx.fillText(`(${arr.length}개)`,pad+labelW/2,y+groupH/2+17);
+    fitText(ctx,member,pad+labelW/2,y+groupH/2-10,labelW-14,16,11);
+    ctx.font="800 12px Arial";
+    ctx.fillText(`(${arr.length}개)`,pad+labelW/2,y+groupH/2+14);
 
     for(let i=0;i<arr.length;i++){
       const item=arr[i];
@@ -473,25 +469,24 @@ async function makePersonalSectionCanvas(section,items){
 
 async function drawViewerCardToCanvas(ctx,item,x,y,w,imgH,textH){
   const h=imgH+textH;
-  ctx.fillStyle="rgba(255,255,255,.94)";
-  roundRect(ctx,x,y,w,h,8);
+  ctx.fillStyle="#ffffff";
+  roundRect(ctx,x,y,w,h,7);
   ctx.fill();
-  ctx.strokeStyle="rgba(226,194,223,.8)";
-  ctx.lineWidth=1.5;
+  ctx.strokeStyle="rgba(226,194,223,.9)";
+  ctx.lineWidth=1.2;
   ctx.stroke();
 
   const img=await getCachedCanvasImage(item.image);
-  coverDraw(ctx,img,x+5,y+5,w-10,imgH-8);
+  coverDraw(ctx,img,x+3,y+3,w-6,imgH-5);
 
   ctx.fillStyle="#ffffff";
-  ctx.fillRect(x+5,y+imgH,w-10,textH-5);
+  ctx.fillRect(x+3,y+imgH,w-6,textH-3);
 
   ctx.fillStyle="#5d3f70";
   ctx.textAlign="center";
   ctx.textBaseline="middle";
-  ctx.font="900 17px Arial";
   const text=`${item.number||""} ${item.name||""}`;
-  fitText(ctx,text,x+w/2,y+imgH+textH/2,w-14,17,11);
+  fitText(ctx,text,x+w/2,y+imgH+textH/2,w-12,13,10);
 }
 
 function fitText(ctx,text,cx,cy,maxWidth,startSize,minSize){
