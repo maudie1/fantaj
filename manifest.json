@@ -1,0 +1,21 @@
+{
+  "name": "FANTAJ",
+  "short_name": "FANTAJ",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ead6ff",
+  "theme_color": "#b678ff",
+  "icons": [
+    {
+      "src": "/fantajicon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/fantajicon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
