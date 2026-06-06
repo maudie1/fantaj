@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "collect:chat": "node scripts/collectchat.js"
-  },
-  "dependencies": {
-    "playwright": "^1.46.0"
-  }
-}

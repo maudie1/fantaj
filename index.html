@@ -3,48 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FANTAJ 판타지유</title>
-<link rel="manifest" href="/manifest.json">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/fantajicon192.png">
-<link rel="apple-touch-icon" href="/fantajicon512.png">
-<meta name="theme-color" content="#b678ff">
-<style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  <title>FANTAJ 업데이트 안내</title>
+  <meta name="description" content="FANTAJ 사이트 업데이트 중입니다." />
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/fantajicon192.png">
+  <link rel="apple-touch-icon" href="/fantajicon512.png">
+  <meta name="theme-color" content="#b678ff">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --text: #3d3148;
       --muted: #7c6d85;
-      --soft: rgba(255, 255, 255, 0.78);
-      --line: rgba(226, 194, 223, 0.55);
       --pink: #ff7eb7;
       --purple: #a965e8;
       --deep: #8f4eb2;
-      --mint: #25bec1;
-      --shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
+      --soft: rgba(255, 255, 255, 0.76);
+      --shadow: 0 26px 70px rgba(150, 94, 171, 0.16);
+    }
+
+    html,
+    body {
+      min-height: 100%;
     }
 
     body {
       font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
-      background: linear-gradient(180deg, #fff7fb 0%, #f7f0ff 45%, #fffaf4 100%);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 215, 239, 0.95), transparent 28%),
+        radial-gradient(circle at 82% 20%, rgba(218, 200, 255, 0.9), transparent 30%),
+        radial-gradient(circle at 50% 88%, rgba(255, 236, 201, 0.86), transparent 32%),
+        linear-gradient(180deg, #fff7fb 0%, #f7f0ff 48%, #fffaf4 100%);
       color: var(--text);
+      overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-    .page { min-height: 100vh; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
     .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
       height: 76px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: rgba(255, 255, 255, 0.72);
       backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(226, 194, 223, 0.55);
       box-shadow: 0 8px 28px rgba(177, 122, 174, 0.12);
     }
 
@@ -53,7 +70,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
     }
 
     .logo {
@@ -63,695 +80,179 @@
       color: var(--deep);
     }
 
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      font-size: 15px;
-      font-weight: 800;
-      color: #6b5b75;
-    }
-
-    .nav-menu a:hover,
-    .nav-menu a.active { color: #b05cc9; }
-
-    .nav-live {
+    .status-badge {
       padding: 9px 15px;
-      border-radius: 10px;
+      border-radius: 8px;
       background: linear-gradient(135deg, var(--pink), var(--purple));
-      color: white;
+      color: #ffffff;
       font-size: 13px;
-      font-weight: 900;
+      font-weight: 950;
       box-shadow: 0 8px 20px rgba(177, 92, 201, 0.24);
       white-space: nowrap;
     }
 
-    .footer-install-button {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      border: 0;
-      padding: 5px 8px;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.86);
-      color: #8f4eb2;
-      font-size: 10px;
-      font-weight: 950;
-      letter-spacing: 0;
-      box-shadow: inset 0 0 0 1px rgba(169, 101, 232, 0.34), 0 6px 14px rgba(150, 94, 171, 0.10);
-      cursor: pointer;
-      font-family: inherit;
-      line-height: 1.2;
-    }
-
-    .footer-install-button:hover {
-      background: rgba(255, 247, 251, 0.96);
-    }
-
     main {
+      flex: 1;
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 26px 0 80px;
+      display: grid;
+      place-items: center;
+      padding: 54px 0 74px;
     }
 
-    .hero {
+    .coming-card {
       position: relative;
-      height: 390px;
-      border-radius: 10px;
-      overflow: hidden;
+      width: min(860px, 100%);
+      min-height: 520px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 58px 34px;
+      border-radius: 16px;
       background:
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), transparent 26%),
-        radial-gradient(circle at 85% 22%, rgba(255, 214, 239, 0.9), transparent 28%),
-        linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
-      box-shadow: 0 26px 60px rgba(150, 94, 171, 0.18);
-    }
-
-    .hero::before {
-      display: none;
-    }
-
-    .hero-track {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      transition: transform 0.65s ease;
-      will-change: transform;
-    }
-
-    .hero-slide {
-      position: relative;
-      flex: 0 0 100%;
-      height: 100%;
+        linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,246,252,0.78)),
+        radial-gradient(circle at 50% 24%, rgba(255, 255, 255, 0.92), transparent 28%);
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
 
-    .hero-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-    }
-
-    .hero-text-slide {
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), transparent 26%),
-        radial-gradient(circle at 85% 22%, rgba(255, 214, 239, 0.9), transparent 28%),
-        linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
-    }
-
-    .hero-text-slide::before {
+    .coming-card::before {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: 18px;
+      border-radius: 12px;
       background:
-        linear-gradient(120deg, transparent 10%, rgba(255,255,255,0.5) 48%, transparent 70%),
-        radial-gradient(circle at 45% 70%, rgba(255,255,255,0.72), transparent 22%);
-      opacity: 0.75;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 32px;
-    }
-
-    .hero-kicker {
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 0.28em;
-      color: #a061bb;
-      margin-bottom: 12px;
-    }
-
-    .hero-title {
-      font-size: clamp(52px, 8vw, 92px);
-      font-weight: 950;
-      letter-spacing: 0.11em;
-      color: #ffffff;
-      text-shadow: 0 8px 28px rgba(117, 67, 151, 0.26);
-    }
-
-    .hero-sub {
-      margin-top: 14px;
-      font-size: 17px;
-      font-weight: 800;
-      color: #6f527c;
-    }
-
-    .hero-dots {
-      position: absolute;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
-      z-index: 2;
-    }
-
-    .hero-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(143,78,178,0.25);
-      padding: 0;
-      cursor: pointer;
-      transition: width 0.2s ease, background 0.2s ease;
-    }
-
-    .hero-dot.active {
-      width: 28px;
-      background: #9c62c5;
-    }
-
-    section { margin-top: 28px; }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      gap: 12px;
-    }
-
-    .section-title {
-      font-size: 22px;
-      font-weight: 950;
-      color: #4b3659;
-    }
-
-    .section-more {
-      font-size: 13px;
-      font-weight: 900;
-      color: #a061bb;
-      white-space: nowrap;
-    }
-
-    .card {
-      border-radius: 13px;
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(226, 194, 223, 0.55);
-      box-shadow: var(--shadow);
-    }
-
-    #live {
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: pan-y;
-    }
-
-    #live.is-dragging,
-    #live.is-dragging a {
-      cursor: grabbing;
-    }
-
-    .live-grid {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: none;
-      scroll-behavior: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      overscroll-behavior-x: contain;
-    }
-
-    .live-grid::-webkit-scrollbar { display: none; }
-
-    .live-card {
-      flex: 0 0 calc((100% - 48px) / 4);
-      min-width: 250px;
-      overflow: hidden;
-      -webkit-user-drag: none;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    #live.is-dragging .live-card:hover {
-      transform: none;
-      box-shadow: none;
-    }
-
-    .live-thumb {
-      height: 122px;
-      background: linear-gradient(135deg, #ffc1dc, #c7b2ff);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .live-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+        radial-gradient(circle at 20% 24%, rgba(255, 126, 183, 0.18), transparent 22%),
+        radial-gradient(circle at 78% 28%, rgba(169, 101, 232, 0.17), transparent 24%),
+        radial-gradient(circle at 50% 80%, rgba(255, 216, 164, 0.24), transparent 28%);
       pointer-events: none;
-      -webkit-user-drag: none;
     }
 
-    .live-thumb.no-image {
-      display: grid;
-      place-items: center;
-      color: rgba(255, 255, 255, 0.92);
-      font-size: 14px;
-      font-weight: 900;
-      text-shadow: 0 2px 10px rgba(98, 53, 125, 0.18);
-    }
-
-    .live-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #ff4f98;
-      color: white;
-      font-size: 12px;
-      font-weight: 950;
-    }
-
-    .live-info { padding: 15px; }
-
-    .live-name {
-      font-size: 16px;
-      font-weight: 950;
-      margin-bottom: 6px;
-    }
-
-    .live-desc {
-      font-size: 13px;
-      color: #7c6d85;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .live-meta {
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 900;
-      color: #a061bb;
-    }
-
-    .live-empty {
-      flex: 1 0 100%;
-      padding: 34px 18px;
-      text-align: center;
-      font-size: 15px;
-      font-weight: 900;
-      color: #8a7893;
-    }
-
-    .board-card {
-      padding: 20px 22px 20px;
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
-      overflow: hidden;
-      touch-action: pan-y;
-    }
-
-    .board-card.is-dragging {
-      cursor: grabbing;
-    }
-
-    .board-card.is-dragging a {
-      cursor: grabbing;
-    }
-
-    .board-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .post-strip {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 8px 0 10px;
-      scroll-snap-type: none;
-      scroll-behavior: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      overscroll-behavior-x: contain;
-      pointer-events: auto;
-    }
-
-    .post-strip::-webkit-scrollbar { display: none; }
-
-    .post-item {
-      flex: 0 0 calc((100% - 42px) / 4);
-      min-width: 248px;
-      height: 128px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px;
-      border-radius: 10px;
-      background: rgba(255, 246, 252, 0.82);
-      border: 1px solid rgba(236, 206, 232, 0.75);
-      overflow: hidden;
-      scroll-snap-align: none;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      -webkit-user-drag: none;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    .post-item.text-only .post-body {
-      justify-content: center;
-    }
-
-    .post-item.text-only .post-meta {
-      margin-top: 8px;
-    }
-
-    .post-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(150, 94, 171, 0.14);
-    }
-
-    .board-card.is-dragging .post-item:hover {
-      transform: none;
-      box-shadow: none;
-    }
-
-    .post-thumb {
-      width: 88px;
-      height: 88px;
-      flex: 0 0 88px;
-      overflow: hidden;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #ffe8f5, #efe1ff);
-      align-self: center;
-      margin-left: auto;
-    }
-
-    .post-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      pointer-events: none;
-      -webkit-user-drag: none;
-    }
-
-    .post-body {
-      min-width: 0;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .post-category {
-      font-size: 12px;
-      font-weight: 950;
-      color: #b05cc9;
-      margin-bottom: 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .post-title {
-      font-size: 14px;
-      font-weight: 950;
-      line-height: 1.35;
-      color: #4b3659;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .post-summary {
-      margin-top: 6px;
-      font-size: 12px;
-      line-height: 1.38;
-      color: #7c6d85;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .post-meta {
-      margin-top: 8px;
-      padding-top: 0;
-      font-size: 11px;
-      font-weight: 800;
-      color: #9a8aa3;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.85fr);
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .left-column {
-      display: grid;
-      gap: 22px;
-    }
-
-    .notice-list,
-    .ranking-list { padding: 18px 22px; }
-
-    .notice-item,
-    .rank-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 13px 0;
-      border-bottom: 1px solid rgba(226, 194, 223, 0.45);
-    }
-
-    .notice-item:last-child,
-    .rank-item:last-child { border-bottom: none; }
-
-    .notice-title {
-      font-size: 15px;
-      font-weight: 850;
-    }
-
-    .notice-date {
-      flex: none;
-      font-size: 12px;
-      color: #9a8aa3;
-    }
-
-    .ranking-card {
-      height: 100%;
-      padding-bottom: 8px;
-      overflow: hidden;
-    }
-
-    .rank-left {
-      min-width: 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .rank-avatar {
-      width: 34px;
-      height: 34px;
-      flex: 0 0 34px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #fff;
-      background: #f3e7fb;
-      box-shadow: 0 6px 14px rgba(144, 88, 175, 0.14);
-    }
-
-    .rank-user {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .rank-tier {
-      flex: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      min-width: 78px;
-      padding: 6px 8px;
-      border-radius: 8px;
-      background: rgba(255,255,255,.78);
-      color: #735b84;
-      font-size: 12px;
-      font-weight: 950;
-      box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
-      white-space: nowrap;
-    }
-
-    .rank-num {
-      width: 30px;
-      height: 30px;
-      flex: 0 0 30px;
-      border-radius: 7px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #f7d9ff, #fff1c8);
-      font-weight: 950;
-      color: #8a4dae;
-    }
-
-    .rank-name {
-      min-width: 0;
-      font-size: 15px;
-      font-weight: 950;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .rank-score {
-      flex: none;
-      font-size: 14px;
-      font-weight: 950;
-      color: #b05cc9;
-    }
-
-    .ranking-summary {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 14px 22px 2px;
-    }
-
-    .ranking-mini-box {
-      padding: 11px 12px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,244,251,.85));
-      border: 1px solid rgba(236, 206, 232, 0.65);
-    }
-
-    .ranking-mini-label {
-      font-size: 11px;
-      color: #9a8aa3;
-      font-weight: 900;
-      margin-bottom: 3px;
-    }
-
-    .ranking-mini-value {
-      font-size: 18px;
-      color: #25bec1;
-      font-weight: 950;
-    }
-
-    .signature-grid {
-      padding: 18px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .sig-card {
-      min-height: 128px;
-      padding: 16px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,241,250,0.92));
-      border: 1px solid rgba(236, 206, 232, 0.75);
-      position: relative;
-      overflow: hidden;
-    }
-
-
-    .sig-card {
-      display: block;
-      color: inherit;
-      text-decoration: none;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .sig-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(150, 94, 171, 0.14);
-    }
-
-    .sig-thumb {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 8px;
-      object-fit: cover;
-      display: block;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #ffe8f5, #efe1ff);
-    }
-
-    .sig-thumb.no-image {
-      display: grid;
-      place-items: center;
-      color: #a061bb;
-      font-size: 13px;
-      font-weight: 950;
-    }
-
-    .sig-loading {
-      grid-column: 1 / -1;
-      min-height: 96px;
-    }
-
-    .sig-card::after {
+    .coming-card::after {
       content: "♪";
       position: absolute;
-      right: 14px;
-      bottom: 4px;
-      font-size: 48px;
-      color: rgba(176, 92, 201, 0.12);
-      font-weight: 900;
+      right: 34px;
+      bottom: 14px;
+      font-size: 106px;
+      font-weight: 950;
+      color: rgba(176, 92, 201, 0.09);
+      line-height: 1;
+      pointer-events: none;
     }
 
-    .sig-number {
+    .coming-content {
+      position: relative;
+      z-index: 1;
+      width: min(680px, 100%);
+    }
+
+    .icon-box {
+      width: 86px;
+      height: 86px;
+      margin: 0 auto 24px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 14px 34px rgba(150, 94, 171, 0.14);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .icon-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .kicker {
+      font-size: 14px;
+      font-weight: 950;
+      letter-spacing: 0.28em;
+      color: #a061bb;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(46px, 8vw, 86px);
+      font-weight: 950;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+      text-shadow: 0 9px 32px rgba(117, 67, 151, 0.28);
+      line-height: 1.02;
+    }
+
+    .date {
+      margin-top: 22px;
       display: inline-flex;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: #f0dcff;
-      color: #8a4dae;
-      font-size: 12px;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(255, 126, 183, 0.16), rgba(169, 101, 232, 0.16));
+      color: #8f4eb2;
+      font-size: clamp(20px, 4vw, 34px);
       font-weight: 950;
-      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+      box-shadow: inset 0 0 0 1px rgba(169, 101, 232, 0.18);
     }
 
-    .sig-name {
-      font-size: 16px;
-      font-weight: 950;
-      margin-bottom: 8px;
-    }
-
-    .sig-type {
-      font-size: 12px;
-      color: #9a8aa3;
+    .message {
+      margin: 24px auto 0;
+      max-width: 560px;
+      color: #6f527c;
+      font-size: 18px;
       font-weight: 800;
+      line-height: 1.72;
+      word-break: keep-all;
     }
 
-    @media (max-width: 900px) {
+    .small-message {
+      margin-top: 16px;
+      color: #9a8aa3;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+
+    .footer {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto 26px;
+      padding: 15px 0 4px;
+      text-align: center;
+      color: rgba(124, 109, 133, 0.82);
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.18em;
+      color: rgba(143, 78, 178, 0.82);
+      line-height: 1;
+    }
+
+    .footer-icon {
+      width: 22px;
+      height: 22px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .footer-info {
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.55;
+      color: rgba(138, 120, 147, 0.76);
+      word-break: keep-all;
+    }
+
+    @media (max-width: 640px) {
       .navbar {
         height: auto;
         padding: 12px 0 10px;
@@ -759,79 +260,6 @@
 
       .nav-inner {
         width: min(1180px, calc(100% - 24px));
-        flex-wrap: wrap;
-        gap: 10px 12px;
-      }
-
-      .nav-menu {
-        order: 3;
-        width: 100%;
-        display: flex;
-        gap: 18px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 4px 2px 2px;
-        font-size: 13px;
-        white-space: nowrap;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .nav-menu::-webkit-scrollbar {
-        display: none;
-      }
-
-      .nav-menu a {
-        flex: 0 0 auto;
-        padding: 0;
-        border: 0;
-        border-radius: 0;
-        background: transparent;
-        box-shadow: none;
-        white-space: nowrap;
-      }
-
-      .nav-live {
-        border-radius: 6px;
-      }
-
-      .hero {
-        height: 310px;
-        border-radius: 13px;
-      }
-
-      .hero-image-slide {
-        background:
-          radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), transparent 26%),
-          radial-gradient(circle at 85% 22%, rgba(255, 214, 239, 0.9), transparent 28%),
-          linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
-      }
-
-      .hero-image-slide .hero-image {
-        object-fit: contain;
-        object-position: center center;
-      }
-
-      .signature-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .live-card {
-        flex-basis: 250px;
-      }
-
-      .post-item {
-        flex: 0 0 320px;
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .navbar {
-        padding: 11px 0 9px;
       }
 
       .logo {
@@ -839,1220 +267,117 @@
         letter-spacing: 0.1em;
       }
 
-      .nav-live {
-        padding: 8px 13px;
+      .status-badge {
+        padding: 8px 12px;
         border-radius: 6px;
         font-size: 12px;
-      }
-
-
-      .nav-menu {
-        gap: 15px;
-        font-size: 12px;
-        padding-bottom: 1px;
       }
 
       main {
         width: min(100% - 20px, 1180px);
-        padding-top: 16px;
-        padding-bottom: 52px;
+        padding: 28px 0 46px;
       }
 
-      section {
-        margin-top: 24px;
+      .coming-card {
+        min-height: 470px;
+        padding: 42px 20px;
+        border-radius: 13px;
       }
 
-      .hero {
-        height: auto;
-        aspect-ratio: 2.86 / 1;
-        border-radius: 12px;
+      .coming-card::before {
+        inset: 10px;
+        border-radius: 10px;
       }
 
-      .hero-image {
-        object-position: center center;
+      .coming-card::after {
+        right: 16px;
+        bottom: 8px;
+        font-size: 72px;
       }
 
-      .hero-content {
-        padding: 24px 18px;
+      .icon-box {
+        width: 70px;
+        height: 70px;
+        border-radius: 13px;
+        margin-bottom: 20px;
       }
 
-      .hero-kicker {
+      .kicker {
         font-size: 11px;
-        letter-spacing: 0.23em;
-        line-height: 1.35;
-        margin-bottom: 10px;
+        letter-spacing: 0.22em;
       }
 
-      .hero-title {
-        font-size: 40px;
-        letter-spacing: 0.09em;
+      h1 {
+        font-size: 42px;
+        letter-spacing: 0.08em;
       }
 
-      .hero-sub {
-        margin-top: 12px;
-        font-size: 12px;
-        line-height: 1.35;
+      .date {
+        margin-top: 20px;
+        padding: 11px 14px;
+        border-radius: 8px;
+        font-size: 23px;
       }
 
-      .hero-dots {
-        bottom: 18px;
-      }
-
-      .section-head {
-        margin-bottom: 12px;
-      }
-
-      .section-title {
-        font-size: 19px;
-      }
-
-      .section-more {
-        font-size: 12px;
-      }
-
-      .live-grid {
-        gap: 14px;
-      }
-
-      .live-card {
-        flex-basis: calc(100vw - 70px);
-        min-width: calc(100vw - 70px);
-      }
-
-      .live-thumb {
-        height: 128px;
-      }
-
-      .live-info {
-        padding: 13px 14px;
-      }
-
-      .live-name {
+      .message {
+        margin-top: 22px;
         font-size: 15px;
+        line-height: 1.68;
       }
 
-      .live-desc {
+      .small-message {
         font-size: 12px;
       }
 
-      .board-card {
-        padding: 17px 14px 15px;
+      .footer {
+        width: min(100% - 24px, 1180px);
+        margin-bottom: 22px;
+        padding-top: 13px;
       }
 
-      .board-head {
-        margin-bottom: 12px;
-      }
-
-      .post-strip {
-        gap: 12px;
-        padding: 5px 0 7px;
-      }
-
-      .post-item {
-        flex: 0 0 calc(100vw - 66px);
-        height: 118px;
-        padding: 12px;
-        gap: 11px;
-      }
-
-      .post-thumb {
-        width: 78px;
-        height: 78px;
-        flex-basis: 78px;
-      }
-
-      .post-category {
-        font-size: 11px;
-        margin-bottom: 5px;
-      }
-
-      .post-title {
-        font-size: 13px;
-      }
-
-      .post-summary {
+      .footer-brand {
         font-size: 11px;
       }
 
-      .post-meta {
-        font-size: 10px;
+      .footer-icon {
+        width: 20px;
+        height: 20px;
       }
 
-      .notice-list,
-      .ranking-list {
-        padding: 14px 16px;
-      }
-
-      .notice-item,
-      .rank-item {
-        gap: 10px;
-        padding: 11px 0;
-      }
-
-      .notice-title {
-        font-size: 14px;
-      }
-
-      .notice-date {
-        font-size: 11px;
-      }
-
-      .ranking-summary {
-        grid-template-columns: 1fr;
-        padding: 12px 16px 0;
-      }
-
-      .ranking-mini-value {
-        font-size: 17px;
-      }
-
-      .rank-left {
-        gap: 8px;
-      }
-
-      .rank-avatar {
-        width: 30px;
-        height: 30px;
-        flex-basis: 30px;
-        border-width: 2px;
-      }
-
-      .rank-num {
-        width: 28px;
-        height: 28px;
-        flex-basis: 28px;
-        font-size: 13px;
-      }
-
-      .rank-name {
-        font-size: 14px;
-      }
-
-      .rank-tier {
-        min-width: 68px;
-        padding: 5px 6px;
-        font-size: 10px;
-      }
-
-      .signature-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-        padding: 10px;
-      }
-
-      .sig-card {
-        min-height: 0;
-        padding: 9px;
-        border-radius: 9px;
-      }
-
-      .sig-thumb {
-        aspect-ratio: 16 / 7;
-        border-radius: 6px;
-        margin-bottom: 7px;
-      }
-
-      .sig-number {
-        padding: 3px 6px;
-        font-size: 10px;
-        margin-bottom: 5px;
-      }
-
-      .sig-name {
-        font-size: 12px;
-        line-height: 1.25;
-        margin-bottom: 4px;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-
-      .sig-type {
-        font-size: 10px;
-      }
-
-      .sig-card::after {
-        right: 8px;
-        bottom: 0;
-        font-size: 28px;
+      .footer-info {
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
-  
-
-
-/* FANTAJ slim footer */
-.site-footer {
-  width: min(1180px, calc(100% - 32px));
-  margin: 0 auto 26px;
-  padding: 15px 0 4px;
-  border-top: 1px solid rgba(190, 160, 199, 0.34);
-  text-align: center;
-  color: rgba(124, 109, 133, 0.82);
-}
-
-.site-footer .footer-brand {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  font-size: 12px;
-  font-weight: 950;
-  letter-spacing: 0.18em;
-  color: rgba(143, 78, 178, 0.82);
-  line-height: 1;
-}
-
-.site-footer .footer-icon {
-  width: 22px;
-  height: 22px;
-  object-fit: cover;
-  display: block;
-}
-
-.site-footer .footer-links {
-  margin-top: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0;
-  font-size: 11px;
-  font-weight: 750;
-  line-height: 1.4;
-}
-
-.site-footer .footer-links a {
-  color: rgba(111, 82, 124, 0.78);
-  padding: 0 10px;
-}
-
-.site-footer .footer-links a:hover {
-  color: rgba(176, 92, 201, 0.92);
-}
-
-.site-footer .footer-links a + a {
-  border-left: 1px solid rgba(190, 160, 199, 0.42);
-}
-
-.site-footer .footer-info {
-  margin-top: 8px;
-  font-size: 11px;
-  font-weight: 650;
-  line-height: 1.55;
-  color: rgba(138, 120, 147, 0.76);
-  word-break: keep-all;
-}
-
-@media (max-width: 640px) {
-  .site-footer {
-    width: min(100% - 24px, 1180px);
-    margin-bottom: 22px;
-    padding-top: 13px;
-  }
-
-  .site-footer .footer-brand {
-    font-size: 11px;
-  }
-
-  .site-footer .footer-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .site-footer .footer-links {
-    gap: 7px 0;
-    font-size: 11px;
-  }
-
-  .site-footer .footer-links a {
-    padding: 0 8px;
-  }
-
-  .site-footer .footer-info {
-    max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .footer-install-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-</style>
+  </style>
 </head>
 <body>
   <div class="page">
     <header class="navbar">
       <div class="nav-inner">
-        <a class="logo" href="./">FANTAJ</a>
-
-        <nav class="nav-menu">
-          <a href="live/">LIVE</a>
-          <a href="members/">MEMBER</a>
-          <a href="notice/">NOTICE</a>
-          <a href="ranking/">RANKING</a>
-          <a href="play/">PLAY</a>
-          <a href="signature/">SIGNATURE</a>
-        </nav>
-
-        <a class="nav-live" href="live/">ON AIR</a>
+        <a class="logo" href="/">FANTAJ</a>
+        <div class="status-badge">UPDATE</div>
       </div>
     </header>
 
     <main>
-      <section class="hero" aria-label="메인 배너">
-        <div class="hero-track" id="heroTrack">
-          <article class="hero-slide hero-image-slide" aria-label="PADAK 대표 배너">
-            <img class="hero-image" src="images/padakbanner.png" alt="PADAK The Queen of FANTAJ" loading="eager">
-          </article>
-
-          <article class="hero-slide hero-text-slide" aria-label="FANTAJ 소개 배너">
-            <div class="hero-content">
-              <div class="hero-kicker">FANTAJ 판타지유 공식 팬 포털</div>
-              <h1 class="hero-title">FANTAJ</h1>
-              <p class="hero-sub">LIVE · COMMUNITY · RANKING · SIGNATURE</p>
-            </div>
-          </article>
+      <section class="coming-card" aria-label="사이트 업데이트 안내">
+        <div class="coming-content">
+          <div class="kicker">FANTAJ SITE UPDATE</div>
+          <h1>COMING SOON</h1>
+          <div class="date">2026.06.08</div>
+          <p class="message">
+            더 좋은 모습으로 준비 중입니다.
+          </p>
+          <p class="small-message">
+            이용에 불편을 드려 죄송합니다. 조금만 기다려주세요.
+          </p>
         </div>
-
-        <div class="hero-dots" aria-label="배너 선택">
-          <button class="hero-dot active" type="button" aria-label="1번 배너"></button>
-          <button class="hero-dot" type="button" aria-label="2번 배너"></button>
-        </div>
-      </section>
-
-      <section id="live">
-        <div class="section-head">
-          <h2 class="section-title">LIVE 방송국</h2>
-          <a class="section-more" href="live/">전체 보기</a>
-        </div>
-
-        <div class="live-grid" id="liveGrid">
-          <div class="card live-empty">LIVE 정보를 불러오는 중입니다...</div>
-        </div>
-      </section>
-
-      <section id="board" class="board-section">
-        <div class="card board-card">
-          <div class="board-head">
-            <div>
-              <h2 class="section-title">방송국 새 글</h2>
-            </div>
-            <a class="section-more" href="live/?tab=posts">전체 보기</a>
-          </div>
-
-          <div class="post-strip" id="boardPosts">
-            <article class="post-item text-only">
-              <div class="post-body">
-                <div class="post-category">불러오는 중</div>
-                <div class="post-title">방송국 새 글을 불러오는 중입니다...</div>
-                <div class="post-meta">잠시만 기다려주세요</div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="content-grid">
-        <div class="left-column">
-          <div id="notice">
-            <div class="section-head">
-              <h2 class="section-title">공지사항</h2>
-              <a class="section-more" href="notice/">더보기</a>
-            </div>
-
-            <div class="card notice-list" id="noticePreview">
-              <div class="notice-item">
-                <span class="notice-title">공지사항을 불러오는 중입니다...</span>
-                <span class="notice-date">-</span>
-              </div>
-            </div>
-          </div>
-
-          <div id="signature">
-            <div class="section-head">
-              <h2 class="section-title">인기 시그니처</h2>
-              <a class="section-more" href="signature/">시그 목록</a>
-            </div>
-
-            <div class="card signature-grid" id="signaturePreview">
-              <article class="sig-card sig-loading">
-                <div class="sig-number">SIGNATURE</div>
-                <div class="sig-name">시그니처를 불러오는 중입니다...</div>
-                <div class="sig-type">잠시만 기다려주세요</div>
-              </article>
-            </div>
-          </div>
-        </div>
-
-        <aside id="ranking" class="card ranking-card">
-          <div class="section-head" style="padding: 22px 22px 0; margin-bottom: 0;">
-            <h2 class="section-title">랭킹</h2>
-            <a class="section-more" href="ranking/">전체 랭킹</a>
-          </div>
-
-          <div class="ranking-summary">
-            <div class="ranking-mini-box">
-              <div class="ranking-mini-label">TOTAL SUPPORT</div>
-              <div class="ranking-mini-value" id="rankTotalSupport">-</div>
-            </div>
-            <div class="ranking-mini-box">
-              <div class="ranking-mini-label">TOTAL CHAT</div>
-              <div class="ranking-mini-value" id="rankTotalChat">-</div>
-            </div>
-          </div>
-
-          <div class="ranking-list" id="rankingPreview">
-            <div class="rank-item">
-              <div class="rank-left"><span class="rank-num">-</span><span class="rank-name">랭킹을 불러오는 중입니다...</span></div>
-              <span class="rank-score">-</span>
-            </div>
-          </div>
-        </aside>
       </section>
     </main>
+
   </div>
-
-  <script>
-    const LIVE_API_URL = "https://fantj-live.4rgn2004.workers.dev/";
-    const BOARD_API_URL = "https://fantaj-board-worker.4rgn2004.workers.dev/board";
-    const RANK_API_URL = "ranking/rank.json";
-    const CHAT_RANK_API_URL = "ranking/chatrank.json";
-    const SIGNATURE_API_URL = "data.json";
-    const NOTICE_API_URL = "data/notice.json";
-    const DEFAULT_PROFILE_IMAGE = "https://profile.img.sooplive.co.kr/LOGO/sy/sysdemian/sysdemian.jpg";
-
-    const liveGrid = document.getElementById("liveGrid");
-    const onAirButton = document.querySelector(".nav-live");
-    const boardPosts = document.getElementById("boardPosts");
-    const rankingPreview = document.getElementById("rankingPreview");
-    const signaturePreview = document.getElementById("signaturePreview");
-    const noticePreview = document.getElementById("noticePreview");
-    const heroTrack = document.getElementById("heroTrack");
-    const heroDots = Array.from(document.querySelectorAll(".hero-dot"));
-    let heroIndex = 0;
-    let heroTimer = null;
-
-    function showHeroSlide(index) {
-      if (!heroTrack || !heroDots.length) return;
-
-      heroIndex = (index + heroDots.length) % heroDots.length;
-      heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
-
-      heroDots.forEach((dot, dotIndex) => {
-        dot.classList.toggle("active", dotIndex === heroIndex);
-      });
-    }
-
-    function startHeroSlider() {
-      if (!heroTrack || heroDots.length < 2) return;
-
-      clearInterval(heroTimer);
-      heroTimer = setInterval(() => {
-        showHeroSlide(heroIndex + 1);
-      }, 180000);
-    }
-
-    heroDots.forEach((dot, index) => {
-      dot.addEventListener("click", () => {
-        showHeroSlide(index);
-        startHeroSlider();
-      });
-    });
-
-    startHeroSlider();
-
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function numberFormat(value) {
-      return Number(value || 0).toLocaleString("ko-KR");
-    }
-
-    function getProfileImage(userId) {
-      const id = String(userId || "").trim();
-
-      if (!id) {
-        return DEFAULT_PROFILE_IMAGE;
-      }
-
-      const prefix = id.slice(0, 2);
-      return `https://profile.img.sooplive.co.kr/LOGO/${prefix}/${id}/${id}.jpg`;
-    }
-
-    function fallbackAvatar(img) {
-      img.onerror = null;
-      img.src = DEFAULT_PROFILE_IMAGE;
-    }
-
-    function getSupportTier(amount) {
-      const value = Number(amount || 0);
-
-      if (value <= 0) return { icon: "🥔", label: "STONE" };
-      if (value >= 1000000) return { icon: "🌌", label: "ETERNAL" };
-      if (value >= 500000) return { icon: "👑", label: "LEGEND" };
-      if (value >= 200000) return { icon: "💎", label: "MASTER" };
-      if (value >= 100000) return { icon: "🟣", label: "DIAMOND" };
-      if (value >= 50000) return { icon: "🔵", label: "PLATINUM" };
-      if (value >= 10000) return { icon: "🟡", label: "GOLD" };
-
-      return { icon: "⚪", label: "SILVER" };
-    }
-
-    function formatPostDate(dateText) {
-      if (!dateText) return "";
-      const date = new Date(String(dateText).replace(" ", "T"));
-      if (Number.isNaN(date.getTime())) return String(dateText).slice(5, 10);
-
-      const diff = Date.now() - date.getTime();
-      const min = Math.floor(diff / 60000);
-      const hour = Math.floor(min / 60);
-      const day = Math.floor(hour / 24);
-
-      if (min < 1) return "방금 전";
-      if (min < 60) return `${min}분 전`;
-      if (hour < 24) return `${hour}시간 전`;
-      if (day < 7) return `${day}일 전`;
-
-      return `${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
-    }
-
-    function isMobileDevice() {
-      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
-
-    function getLiveBroadNo(member) {
-      const direct = member.broadNo || member.broad_no || member.broadno || member.broadcastNo || member.broadcast_no;
-
-      if (direct) {
-        return String(direct).trim();
-      }
-
-      const url = String(member.url || "");
-      const match = url.match(/\/(\d+)(?:[?#].*)?$/);
-
-      return match ? match[1] : "";
-    }
-
-    function getLiveOpenUrl(member) {
-      const webUrl = member.url || "#";
-      const userId = String(member.soopId || member.id || "").trim();
-      const broadNo = getLiveBroadNo(member);
-
-      if (isMobileDevice() && userId && broadNo) {
-        return `sooplive://player/live?user_id=${encodeURIComponent(userId)}&broad_no=${encodeURIComponent(broadNo)}`;
-      }
-
-      return webUrl;
-    }
-
-    function renderLiveCard(member) {
-      const name = escapeHtml(member.name || member.soopId || "멤버");
-      const title = escapeHtml(member.title || "방송 제목이 없습니다");
-      const viewer = numberFormat(member.viewer || 0);
-      const startedAt = escapeHtml(member.startedAt || "");
-      const url = getLiveOpenUrl(member);
-
-      const thumbHtml = member.thumbnail
-        ? `<img src="${escapeHtml(member.thumbnail)}" alt="${name} 방송 썸네일" loading="lazy">`
-        : `${name}`;
-
-      const thumbClass = member.thumbnail ? "live-thumb" : "live-thumb no-image";
-
-      return `
-        <a class="card live-card" href="${escapeHtml(url)}" target="_blank" rel="noopener">
-          <div class="${thumbClass}">
-            ${thumbHtml}
-            <span class="live-badge">LIVE</span>
-          </div>
-          <div class="live-info">
-            <div class="live-name">${name}</div>
-            <div class="live-desc">${title}</div>
-            <div class="live-meta">
-              <span>👀 ${viewer}</span>
-              ${startedAt ? `<span>· ${startedAt}</span>` : ""}
-            </div>
-          </div>
-        </a>
-      `;
-    }
-
-    function renderBoardPost(post) {
-      const name = escapeHtml(post.bjName || post.writer || "멤버");
-      const title = escapeHtml(post.title || "제목 없음");
-      const summary = escapeHtml(post.summary || "");
-      const url = escapeHtml(post.url || "#");
-      const date = escapeHtml(formatPostDate(post.regDate));
-      const comments = Number(post.commentCount || 0);
-      const reads = numberFormat(post.readCount || 0);
-      const thumbnail = escapeHtml(post.thumbnail || "");
-      const hasThumbnail = Boolean(thumbnail);
-
-      return `
-        <a class="post-item ${hasThumbnail ? "has-image" : "text-only"}" href="${url}" target="_blank" rel="noopener" draggable="false">
-          <div class="post-body">
-            <div class="post-category">${name}${post.isNotice ? " · 공지" : ""}</div>
-            <div class="post-title">${title}</div>
-            ${summary ? `<div class="post-summary">${summary}</div>` : ""}
-            <div class="post-meta">${date} · 댓글 ${comments} · 조회 ${reads}</div>
-          </div>
-          ${hasThumbnail ? `<div class="post-thumb"><img src="${thumbnail}" alt="${title}" loading="lazy" draggable="false"></div>` : ""}
-        </a>
-      `;
-    }
-
-    function renderRankingPreview(supportRows, chatRows) {
-      const supportData = Array.isArray(supportRows) ? supportRows : [];
-      const chatData = Array.isArray(chatRows) ? chatRows : [];
-      const sorted = [...supportData].sort((a, b) => Number(b.balloon || 0) - Number(a.balloon || 0));
-      const top = sorted.slice(0, 8);
-
-      const totalSupport = supportData.reduce((sum, item) => sum + Number(item.balloon || 0), 0);
-      const totalChat = chatData.reduce((sum, item) => sum + Number(item.chat || 0), 0);
-
-      document.getElementById("rankTotalSupport").textContent = numberFormat(totalSupport);
-      document.getElementById("rankTotalChat").textContent = numberFormat(totalChat);
-
-      if (!top.length) {
-        rankingPreview.innerHTML = `
-          <div class="rank-item">
-            <div class="rank-left"><span class="rank-num">-</span><span class="rank-name">표시할 랭킹 데이터가 없습니다.</span></div>
-            <span class="rank-score">-</span>
-          </div>
-        `;
-        return;
-      }
-
-      rankingPreview.innerHTML = top.map((item, index) => {
-        const tier = getSupportTier(item.balloon);
-        const nickname = escapeHtml(item.nickname || item.id || "닉네임 없음");
-
-        return `
-          <div class="rank-item">
-            <div class="rank-left">
-              <span class="rank-num">${index + 1}</span>
-              <img
-                class="rank-avatar"
-                src="${getProfileImage(item.id)}"
-                onerror="fallbackAvatar(this)"
-                alt="${nickname}"
-                loading="lazy"
-              >
-              <span class="rank-user">
-                <span class="rank-name">${nickname}</span>
-              </span>
-            </div>
-            <span class="rank-tier">${tier.icon} ${tier.label}</span>
-          </div>
-        `;
-      }).join("");
-    }
-
-
-    function getFileNameFromUrl(url) {
-      if (!url) return "";
-
-      try {
-        return decodeURIComponent(String(url).split("/").pop().split("?")[0]);
-      } catch (error) {
-        return String(url).split("/").pop().split("?")[0];
-      }
-    }
-
-    function getSignatureImageCandidates(url) {
-      if (!url) return [];
-
-      const fileName = getFileNameFromUrl(url);
-      const baseName = fileName.replace(/\.(png|jpg|jpeg|gif|webp)$/i, "");
-
-      return [
-        `images/${baseName}.webp`,
-        fileName ? `images/${fileName}` : "",
-        String(url)
-      ].filter(Boolean);
-    }
-
-    function signatureImageHtml(item) {
-      const candidates = getSignatureImageCandidates(item.image);
-
-      if (!candidates.length) {
-        return `<div class="sig-thumb no-image">이미지 없음</div>`;
-      }
-
-      const encoded = candidates.map(src => escapeHtml(src));
-      const first = encoded.shift();
-      const fallbackList = encoded.join("|");
-
-      return `
-        <img
-          class="sig-thumb"
-          src="${first}"
-          alt="${escapeHtml(item.name || "시그니처")}"
-          loading="lazy"
-          data-fallbacks="${fallbackList}"
-          onerror="fallbackSignatureImage(this)"
-        >
-      `;
-    }
-
-    function fallbackSignatureImage(img) {
-      const fallbacks = String(img.dataset.fallbacks || "").split("|").filter(Boolean);
-
-      if (!fallbacks.length) {
-        const noImage = document.createElement("div");
-        noImage.className = "sig-thumb no-image";
-        noImage.textContent = "이미지 없음";
-        img.replaceWith(noImage);
-        return;
-      }
-
-      const next = fallbacks.shift();
-      img.dataset.fallbacks = fallbacks.join("|");
-      img.src = next;
-    }
-
-    function renderSignaturePreview(rows) {
-      const data = Array.isArray(rows) ? rows : [];
-      const preview = data
-        .filter(item => item && item.number)
-        .sort((a, b) => Number(a.number || 0) - Number(b.number || 0))
-        .slice(0, 4);
-
-      if (!signaturePreview) return;
-
-      if (!preview.length) {
-        signaturePreview.innerHTML = `
-          <article class="sig-card sig-loading">
-            <div class="sig-number">SIGNATURE</div>
-            <div class="sig-name">표시할 시그니처가 없습니다.</div>
-            <div class="sig-type">데이터를 확인해주세요</div>
-          </article>
-        `;
-        return;
-      }
-
-      signaturePreview.innerHTML = preview.map(item => {
-        const number = Number(item.number || 0);
-        const type = number >= 10000 ? "만개 이상" : "만개 이하";
-
-        return `
-          <a class="sig-card" href="signature/">
-            ${signatureImageHtml(item)}
-            <div class="sig-number">${numberFormat(number)}개</div>
-            <div class="sig-name">${escapeHtml(item.name || "이름 없음")}</div>
-            <div class="sig-type">${type}</div>
-          </a>
-        `;
-      }).join("");
-    }
-
-    function normalizeNoticeBoolean(value) {
-      if (value === true) return true;
-      const text = String(value || "").trim().toLowerCase();
-      return text === "true" || text === "1" || text === "yes" || text === "y" || text === "공개" || text === "표시" || text === "고정";
-    }
-
-    function parseNoticeDate(value) {
-      const text = String(value || "").trim();
-      const date = new Date(text.replaceAll(".", "-").replace(" ", "T"));
-      return Number.isNaN(date.getTime()) ? 0 : date.getTime();
-    }
-
-    function formatNoticeDate(value) {
-      const text = String(value || "").trim();
-      const match = text.match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
-
-      if (match) {
-        return `${match[2].padStart(2, "0")}.${match[3].padStart(2, "0")}`;
-      }
-
-      return text ? text.slice(5, 10).replace("-", ".") : "-";
-    }
-
-    function sortNoticeRows(rows) {
-      return [...rows].sort((a, b) => {
-        const pinnedA = normalizeNoticeBoolean(a.pinned) ? 1 : 0;
-        const pinnedB = normalizeNoticeBoolean(b.pinned) ? 1 : 0;
-
-        if (pinnedA !== pinnedB) return pinnedB - pinnedA;
-
-        const dateA = parseNoticeDate(a.date);
-        const dateB = parseNoticeDate(b.date);
-
-        if (dateA !== dateB) return dateB - dateA;
-
-        return Number(b.id || 0) - Number(a.id || 0);
-      });
-    }
-
-    function renderNoticePreview(rows) {
-      if (!noticePreview) return;
-
-      const data = sortNoticeRows(Array.isArray(rows) ? rows : [])
-        .filter(item => item && normalizeNoticeBoolean(item.visible))
-        .slice(0, 3);
-
-      if (!data.length) {
-        noticePreview.innerHTML = `
-          <div class="notice-item">
-            <span class="notice-title">표시할 공지사항이 없습니다.</span>
-            <span class="notice-date">-</span>
-          </div>
-        `;
-        return;
-      }
-
-      noticePreview.innerHTML = data.map(item => {
-        const id = encodeURIComponent(item.id || "");
-        const category = item.category ? `[${escapeHtml(item.category)}] ` : "";
-        const title = `${category}${escapeHtml(item.title || "제목 없음")}`;
-        const date = escapeHtml(formatNoticeDate(item.date));
-
-        return `
-          <a class="notice-item" href="notice/?id=${id}">
-            <span class="notice-title">${title}</span>
-            <span class="notice-date">${date}</span>
-          </a>
-        `;
-      }).join("");
-    }
-
-    async function loadNoticePreview() {
-      try {
-        const response = await fetch(NOTICE_API_URL, { cache: "no-store" });
-        if (!response.ok) throw new Error("NOTICE API 응답 오류");
-
-        const data = await response.json();
-        renderNoticePreview(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error(error);
-
-        if (noticePreview) {
-          noticePreview.innerHTML = `
-            <div class="notice-item">
-              <span class="notice-title">공지사항을 불러오지 못했습니다.</span>
-              <span class="notice-date">!</span>
-            </div>
-          `;
-        }
-      }
-    }
-
-    async function loadSignaturePreview() {
-      try {
-        const response = await fetch(SIGNATURE_API_URL, { cache: "no-store" });
-        if (!response.ok) throw new Error("SIGNATURE API 응답 오류");
-
-        const data = await response.json();
-        renderSignaturePreview(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error(error);
-
-        if (signaturePreview) {
-          signaturePreview.innerHTML = `
-            <article class="sig-card sig-loading">
-              <div class="sig-number">!</div>
-              <div class="sig-name">시그니처 데이터를 불러오지 못했습니다.</div>
-              <div class="sig-type">data.json 연결을 확인해주세요</div>
-            </article>
-          `;
-        }
-      }
-    }
-
-
-    async function loadLiveMembers() {
-      try {
-        const response = await fetch(LIVE_API_URL, { cache: "no-store" });
-        if (!response.ok) throw new Error("LIVE API 응답 오류");
-
-        const data = await response.json();
-        const members = Array.isArray(data.members) ? data.members : [];
-        const liveMembers = members
-          .filter(member => member.isLive)
-          .sort((a, b) => Number(b.viewer || 0) - Number(a.viewer || 0))
-          .slice(0, 10);
-
-        if (onAirButton) {
-          onAirButton.textContent = liveMembers.length > 0 ? `ON AIR ${liveMembers.length}` : "ON AIR";
-        }
-
-        if (liveMembers.length === 0) {
-          liveGrid.innerHTML = `<div class="card live-empty">현재 진행 중인 LIVE 방송이 없습니다.</div>`;
-          return;
-        }
-
-        liveGrid.innerHTML = liveMembers.map(renderLiveCard).join("");
-      } catch (error) {
-        console.error(error);
-        liveGrid.innerHTML = `<div class="card live-empty">LIVE 정보를 불러오지 못했습니다.</div>`;
-      }
-    }
-
-    async function loadBoardPosts() {
-      try {
-        const response = await fetch(BOARD_API_URL, { cache: "no-store" });
-        if (!response.ok) throw new Error("BOARD API 응답 오류");
-
-        const data = await response.json();
-        const posts = Array.isArray(data) ? data : (Array.isArray(data.data) ? data.data : []);
-        const latestPosts = posts.slice(0, 10);
-
-        if (latestPosts.length === 0) {
-          boardPosts.innerHTML = `
-            <article class="post-item text-only">
-              <div class="post-body">
-                <div class="post-category">새 글 없음</div>
-                <div class="post-title">표시할 방송국 새 글이 없습니다.</div>
-                <div class="post-meta">잠시 후 다시 확인해주세요</div>
-              </div>
-            </article>
-          `;
-          return;
-        }
-
-        boardPosts.innerHTML = latestPosts.map(renderBoardPost).join("");
-      } catch (error) {
-        console.error(error);
-        boardPosts.innerHTML = `
-          <article class="post-item">
-            <div class="post-body">
-              <div class="post-category">오류</div>
-              <div class="post-title">방송국 새 글을 불러오지 못했습니다.</div>
-              <div class="post-meta">API 연결을 확인해주세요</div>
-            </div>
-          </article>
-        `;
-      }
-    }
-
-    async function loadRankingPreview() {
-      try {
-        const [rankResponse, chatRankResponse] = await Promise.all([
-          fetch(RANK_API_URL, { cache: "no-store" }),
-          fetch(CHAT_RANK_API_URL, { cache: "no-store" })
-        ]);
-
-        if (!rankResponse.ok) throw new Error("RANK API 응답 오류");
-        if (!chatRankResponse.ok) throw new Error("CHAT RANK API 응답 오류");
-
-        const rankData = await rankResponse.json();
-        const chatRankData = await chatRankResponse.json();
-
-        renderRankingPreview(
-          Array.isArray(rankData) ? rankData : [],
-          Array.isArray(chatRankData) ? chatRankData : []
-        );
-      } catch (error) {
-        console.error(error);
-        rankingPreview.innerHTML = `
-          <div class="rank-item">
-            <div class="rank-left"><span class="rank-num">!</span><span class="rank-name">랭킹 데이터를 불러오지 못했습니다.</span></div>
-            <span class="rank-score">-</span>
-          </div>
-        `;
-      }
-    }
-
-    function enableDragScroll(dragArea, scrollTarget, draggingClassTarget) {
-      if (!dragArea || !scrollTarget) return;
-
-      let isDown = false;
-      let moved = false;
-      let blockClick = false;
-      let startX = 0;
-      let scrollStart = 0;
-      let lastX = 0;
-      let lastTime = 0;
-      let velocity = 0;
-      let momentumFrame = null;
-      const dragThreshold = 14;
-      const classTarget = draggingClassTarget || dragArea;
-
-      function stopMomentum() {
-        if (momentumFrame) {
-          cancelAnimationFrame(momentumFrame);
-          momentumFrame = null;
-        }
-      }
-
-      function maxScrollLeft() {
-        return Math.max(0, scrollTarget.scrollWidth - scrollTarget.clientWidth);
-      }
-
-      function clampScroll(value) {
-        return Math.min(maxScrollLeft(), Math.max(0, value));
-      }
-
-      function startDrag(event) {
-        if (event.button !== undefined && event.button !== 0) return;
-
-        stopMomentum();
-        isDown = true;
-        moved = false;
-        blockClick = false;
-        startX = event.clientX;
-        lastX = event.clientX;
-        lastTime = performance.now();
-        scrollStart = scrollTarget.scrollLeft;
-        velocity = 0;
-      }
-
-      function moveDrag(event) {
-        if (!isDown) return;
-
-        const now = performance.now();
-        const dx = event.clientX - startX;
-        const frameMove = event.clientX - lastX;
-        const dt = Math.max(8, now - lastTime);
-
-        if (Math.abs(dx) > dragThreshold) {
-          moved = true;
-          classTarget.classList.add("is-dragging");
-        }
-
-        if (moved) {
-          event.preventDefault();
-          scrollTarget.scrollLeft = clampScroll(scrollStart - dx);
-          velocity = frameMove / dt;
-        }
-
-        lastX = event.clientX;
-        lastTime = now;
-      }
-
-      function stopDrag() {
-        if (!isDown) return;
-        isDown = false;
-        classTarget.classList.remove("is-dragging");
-
-        if (moved) {
-          let speed = -velocity * 22;
-
-          function momentum() {
-            if (Math.abs(speed) < 0.08) {
-              momentumFrame = null;
-              return;
-            }
-
-            const next = clampScroll(scrollTarget.scrollLeft + speed);
-            if (next === 0 || next === maxScrollLeft()) {
-              speed *= 0.35;
-            } else {
-              speed *= 0.93;
-            }
-
-            scrollTarget.scrollLeft = next;
-            momentumFrame = requestAnimationFrame(momentum);
-          }
-
-          momentumFrame = requestAnimationFrame(momentum);
-
-          blockClick = true;
-          setTimeout(() => {
-            blockClick = false;
-          }, 160);
-        }
-      }
-
-      dragArea.addEventListener("pointerdown", startDrag);
-      window.addEventListener("pointermove", moveDrag, { passive: false });
-      window.addEventListener("pointerup", stopDrag);
-      window.addEventListener("pointercancel", stopDrag);
-
-      dragArea.addEventListener("click", (event) => {
-        if (!blockClick) return;
-        event.preventDefault();
-        event.stopPropagation();
-      }, true);
-    }
-
-    enableDragScroll(document.querySelector(".board-card"), boardPosts, document.querySelector(".board-card"));
-    enableDragScroll(document.getElementById("live"), liveGrid, document.getElementById("live"));
-
-    loadLiveMembers();
-    loadBoardPosts();
-    loadRankingPreview();
-    loadSignaturePreview();
-    loadNoticePreview();
-
-    setInterval(loadLiveMembers, 60000);
-    setInterval(loadBoardPosts, 300000);
-    setInterval(loadRankingPreview, 300000);
-    setInterval(loadSignaturePreview, 300000);
-    setInterval(loadNoticePreview, 300000);
-  </script>
-
-<footer class="site-footer">
-  <div class="footer-brand">
-    <img src="/fantajicon.png" alt="FANTAJ" class="footer-icon">
-    <span>FANTAJ · 판타지유</span>
-    <button id="desktopInstallButton" class="footer-install-button" type="button">앱 설치</button>
-  </div>
-  <div class="footer-links">
-    <a href="/policy/#terms">서비스 이용약관</a>
-    <a href="/policy/#privacy">개인정보 처리방침</a>
-    <a href="/policy/#youth">청소년 보호정책</a>
-  </div>
-  <div class="footer-info">회사명: ribitu · 문의: ribitu0510@gmail.com · © 2026 FANTAJ. All rights reserved.</div>
-</footer>
-
-  <script>
-    let deferredInstallPrompt = null;
-    const desktopInstallButton = document.getElementById("desktopInstallButton");
-
-    function isIosDevice() {
-      return /iphone|ipad|ipod/i.test(navigator.userAgent);
-    }
-
-    function isAndroidDevice() {
-      return /android/i.test(navigator.userAgent);
-    }
-
-    async function runInstallPrompt() {
-      if (isIosDevice()) {
-        alert("아이폰 설치 방법\n\nSafari에서 fantaj.kr을 열고,\n공유 버튼을 누른 뒤 ‘홈 화면에 추가’를 선택해주세요.");
-        return;
-      }
-
-      if (deferredInstallPrompt) {
-        deferredInstallPrompt.prompt();
-        await deferredInstallPrompt.userChoice;
-        deferredInstallPrompt = null;
-        return;
-      }
-
-      if (isAndroidDevice()) {
-        alert("앱 설치 방법\n\nChrome에서 fantaj.kr을 직접 열고,\n잠시 후 ‘앱 설치’를 다시 눌러주세요.");
-        return;
-      }
-
-      alert("모바일 Chrome 또는 Safari에서 앱 설치를 진행해주세요.");
-    }
-
-    window.addEventListener("beforeinstallprompt", function (event) {
-      event.preventDefault();
-      deferredInstallPrompt = event;
-    });
-
-    if (desktopInstallButton) {
-      desktopInstallButton.addEventListener("click", runInstallPrompt);
-    }
-
-    window.addEventListener("appinstalled", function () {
-      deferredInstallPrompt = null;
-    });
-  </script>
 
   <script>
     if ("serviceWorker" in navigator) {
@@ -2061,6 +386,5 @@
       });
     }
   </script>
-
 </body>
 </html>
