@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FANTAJ RANKING</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-1: #fff7fb;
+      --bg-2: #f7f0ff;
+      --bg-3: #fffaf4;
+      --text-main: #3d3148;
+      --text-sub: #7c6d85;
+      --purple: #8f4eb2;
+      --purple-2: #a061bb;
+      --pink: #ff7eb7;
+      --line: rgba(226, 194, 223, 0.58);
+      --card: rgba(255, 255, 255, 0.78);
+      --soft-card: rgba(255, 246, 252, 0.82);
+      --radius-sm: 8px;
+      --radius-md: 10px;
+      --radius-lg: 13px;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(255, 183, 217, .26), transparent 28%),
+        radial-gradient(circle at 86% 12%, rgba(184, 156, 255, .22), transparent 30%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
+      color: var(--text-main);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(226, 194, 223, 0.55);
+      box-shadow: 0 8px 28px rgba(177, 122, 174, 0.12);
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 32px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      color: var(--purple);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #6b5b75;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      color: #b05cc9;
+    }
+
+    .nav-live {
+      padding: 9px 15px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(177, 92, 201, 0.24);
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0 80px;
+    }
+
+    .hero {
+      position: relative;
+      height: 300px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), transparent 26%),
+        radial-gradient(circle at 85% 22%, rgba(255, 214, 239, 0.9), transparent 28%),
+        linear-gradient(135deg, #f9d8ee 0%, #e6d9ff 48%, #fff0d8 100%);
+      box-shadow: 0 26px 60px rgba(150, 94, 171, 0.18);
+      margin-bottom: 28px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 10%, rgba(255,255,255,0.5) 48%, transparent 70%),
+        radial-gradient(circle at 45% 70%, rgba(255,255,255,0.72), transparent 22%);
+      opacity: 0.75;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .hero-kicker {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      color: #a061bb;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: clamp(44px, 7vw, 78px);
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-shadow: 0 8px 28px rgba(117, 67, 151, 0.26);
+    }
+
+    .hero-sub {
+      margin-top: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #6f527c;
+    }
+
+    .ranking-card {
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 42px rgba(150, 94, 171, 0.11);
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      border: 1px solid rgba(226, 194, 223, 0.66);
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      font-family: inherit;
+      font-weight: 950;
+      cursor: pointer;
+      color: #7b628a;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: 0 8px 18px rgba(150, 94, 171, 0.08);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(150, 94, 171, 0.13);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #ff7eb7, #a965e8);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 10px 24px rgba(176, 97, 209, .24);
+    }
+
+    .period-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .month-select {
+      border: 1px solid rgba(226, 194, 223, 0.66);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.92);
+      padding: 12px 14px;
+      color: #765a88;
+      font-family: inherit;
+      font-weight: 850;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .summary-box {
+      border-radius: var(--radius-md);
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,241,249,.82));
+      border: 1px solid rgba(236, 206, 232, 0.78);
+    }
+
+    .summary-label {
+      font-size: 12px;
+      color: #9c82ae;
+      font-weight: 950;
+      margin-bottom: 5px;
+    }
+
+    .summary-value {
+      font-size: clamp(24px, 3vw, 31px);
+      font-weight: 950;
+      color: #b05cc9;
+      letter-spacing: -0.04em;
+    }
+
+    .podium {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .winner {
+      border-radius: var(--radius-md);
+      padding: 18px 14px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,241,251,.9));
+      border: 1px solid rgba(236, 206, 232, 0.72);
+      box-shadow: 0 12px 30px rgba(177, 116, 195, .12);
+    }
+
+    .winner.rank-1 {
+      min-height: 218px;
+      background: linear-gradient(180deg, #fff6cf 0%, #fff 48%, #ffe8f7 100%);
+    }
+
+    .winner.rank-2 { min-height: 188px; }
+    .winner.rank-3 { min-height: 170px; }
+
+    .crown {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      background: #f3e7fb;
+      box-shadow: 0 10px 24px rgba(144,88,175,.2);
+    }
+
+    .winner-name {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 950;
+      color: #4b3659;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .winner-tier {
+      margin-top: 9px;
+    }
+
+    .winner-sub {
+      margin-top: 7px;
+      min-height: 16px;
+      font-size: 12px;
+      color: #9d7daf;
+      font-weight: 800;
+    }
+
+    .tier-badge,
+    .phrase {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      max-width: 100%;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.78);
+      color: #735b84;
+      font-size: 13px;
+      font-weight: 950;
+      box-shadow: inset 0 0 0 1px rgba(220,183,238,.45);
+      white-space: nowrap;
+    }
+
+    .tier-badge {
+      padding: 8px 12px;
+    }
+
+    .phrase {
+      display: inline-block;
+      max-width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 7px 10px;
+    }
+
+    .favorite-bj {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 180px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.72);
+      color: #7a5b8c;
+      font-size: 13px;
+      font-weight: 950;
+      box-shadow: inset 0 0 0 1px rgba(220,183,238,.42);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 7px 10px;
+    }
+
+    .hidden-col {
+      display: none;
+    }
+
+    .table-wrap {
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(236, 206, 232, 0.72);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    th:nth-child(1), td:nth-child(1) { width: 80px; }
+    th:nth-child(2), td:nth-child(2) { width: 38%; }
+    th:nth-child(3), td:nth-child(3) { width: 26%; }
+    th:nth-child(4), td:nth-child(4) { width: 30%; }
+
+    thead {
+      background: linear-gradient(135deg, rgba(255,127,200,.18), rgba(167,127,255,.16));
+      color: #7d5a92;
+    }
+
+    th, td {
+      padding: 14px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(221,199,232,.45);
+    }
+
+    tbody tr:hover {
+      background: rgba(255,245,251,.72);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .rank-num {
+      font-weight: 950;
+      color: #a27ab5;
+      width: 70px;
+    }
+
+    .user-cell {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 230px;
+      margin: 0 auto;
+      gap: 10px;
+      text-align: left;
+      min-width: 180px;
+    }
+
+    .mini-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      background: #f3e7fb;
+      flex: 0 0 auto;
+    }
+
+    .nickname {
+      font-weight: 950;
+      color: #4b3659;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 165px;
+    }
+
+    .sub-score {
+      font-size: 13px;
+      color: #9c80ad;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      font-weight: 900;
+      color: #9d7daf;
+    }
+
+    @media (max-width: 900px) {
+      .navbar {
+        height: auto;
+        padding: 12px 0 10px;
+      }
+
+      .nav-inner {
+        width: min(1180px, calc(100% - 24px));
+        flex-wrap: wrap;
+        gap: 10px 12px;
+      }
+
+      .logo {
+        order: 1;
+        font-size: 24px;
+        letter-spacing: 0.10em;
+      }
+
+      .nav-live {
+        order: 2;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        margin-left: auto;
+      }
+
+      .nav-menu {
+        order: 3;
+        width: 100%;
+        display: flex;
+        gap: 18px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 4px 2px 2px;
+        font-size: 13px;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .nav-menu::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-menu a {
+        flex: 0 0 auto;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        white-space: nowrap;
+      }
+
+      .hero { height: 210px; }
+      .podium { gap: 10px; }
+    }
+
+    @media (max-width: 700px) {
+      .navbar {
+        padding: 11px 0 9px;
+      }
+
+      .nav-inner {
+        width: min(100% - 20px, 1180px);
+        gap: 10px 12px;
+      }
+
+      .logo {
+        font-size: 22px;
+        letter-spacing: 0.10em;
+      }
+
+      .nav-live {
+        padding: 8px 13px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+
+      .nav-menu {
+        gap: 15px;
+        font-size: 12px;
+        padding-bottom: 1px;
+      }
+
+      .nav-menu a {
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: 0;
+        font-size: inherit;
+      }
+
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 12px;
+      }
+
+      .hero {
+        height: 126px;
+        margin-bottom: 12px;
+        border-radius: 9px;
+      }
+
+      .hero-content {
+        padding: 14px 10px;
+      }
+
+      .hero-kicker {
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        margin-bottom: 5px;
+      }
+
+      .hero-title {
+        font-size: 30px;
+        letter-spacing: 0.05em;
+      }
+
+      .hero-sub {
+        margin-top: 6px;
+        font-size: 10px;
+        line-height: 1.3;
+      }
+
+      .ranking-card {
+        border-radius: var(--radius-md);
+        padding: 14px 10px;
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .tabs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .tab-btn {
+        width: 100%;
+        min-height: 42px;
+        padding: 8px 4px;
+        border-radius: var(--radius-sm);
+        font-size: 12px;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      .period-box {
+        width: auto;
+        justify-content: flex-end;
+        margin-left: auto;
+      }
+
+      .month-select {
+        width: auto;
+        min-width: 116px;
+        padding: 8px 10px;
+        border-radius: var(--radius-sm);
+        font-size: 12px;
+      }
+
+      .summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        margin-bottom: 9px;
+      }
+
+      .summary-box {
+        min-height: 44px;
+        border-radius: 7px;
+        padding: 5px 4px 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .summary-label {
+        font-size: 6px;
+        line-height: 1;
+        letter-spacing: -0.45px;
+        margin-bottom: 3px;
+        white-space: nowrap;
+      }
+
+      .summary-value {
+        font-size: clamp(12px, 4vw, 15px);
+        line-height: 1;
+        letter-spacing: -0.8px;
+        white-space: nowrap;
+      }
+
+      .podium {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        align-items: stretch;
+        margin-bottom: 12px;
+      }
+
+      .winner,
+      .winner.rank-1,
+      .winner.rank-2,
+      .winner.rank-3 {
+        min-height: 132px;
+        border-radius: var(--radius-sm);
+        padding: 9px 4px;
+      }
+
+      .crown {
+        font-size: 17px;
+        margin-bottom: 5px;
+      }
+
+      .avatar {
+        width: 46px;
+        height: 46px;
+        border-width: 3px;
+      }
+
+      .winner-name {
+        margin-top: 7px;
+        font-size: 11px;
+        line-height: 1.15;
+      }
+
+      .winner-tier {
+        margin-top: 6px;
+      }
+
+      .winner-sub {
+        margin-top: 4px;
+        font-size: 9px;
+      }
+
+      .winner .tier-badge {
+        font-size: 9px;
+        padding: 5px 6px;
+        gap: 3px;
+      }
+
+      .table-wrap {
+        border-radius: var(--radius-sm);
+      }
+
+      th, td {
+        padding: 9px 3px;
+        font-size: 11px;
+        line-height: 1.2;
+      }
+
+      th:nth-child(1), td:nth-child(1) { width: 12%; }
+      th:nth-child(2), td:nth-child(2) { width: 38%; }
+      th:nth-child(3), td:nth-child(3) { width: 25%; }
+      th:nth-child(4), td:nth-child(4) { width: 25%; }
+
+      .rank-num {
+        width: auto;
+        font-size: 14px;
+      }
+
+      .user-cell {
+        width: 100%;
+        min-width: 0;
+        gap: 5px;
+        justify-content: flex-start;
+      }
+
+      .mini-avatar {
+        width: 28px;
+        height: 28px;
+        border-width: 2px;
+      }
+
+      .nickname {
+        max-width: 68px;
+        font-size: 12px;
+        line-height: 1.15;
+      }
+
+      td .tier-badge {
+        max-width: 92px;
+        padding: 5px 6px;
+        gap: 3px;
+        font-size: 10px;
+        line-height: 1;
+      }
+
+      .sub-score {
+        font-size: 10px;
+        line-height: 1.15;
+      }
+
+      .phrase {
+        max-width: 92px;
+        padding: 5px 7px;
+        font-size: 10px;
+      }
+
+      .favorite-bj {
+        max-width: 78px;
+        padding: 5px 7px;
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .tab-btn { font-size: 11px; }
+      .summary-label { font-size: 6.5px; }
+      .summary-value { font-size: 15px; }
+
+      .winner,
+      .winner.rank-1,
+      .winner.rank-2,
+      .winner.rank-3 {
+        min-height: 124px;
+      }
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+      }
+
+      .winner-name {
+        font-size: 10px;
+      }
+
+      .nickname {
+        max-width: 58px;
+        font-size: 11px;
+      }
+
+      td .tier-badge {
+        max-width: 82px;
+        font-size: 9px;
+        padding: 5px 5px;
+      }
+
+      .sub-score {
+        font-size: 9px;
+      }
+    }
+  
+
+
+/* FANTAJ slim footer */
+.site-footer {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto 26px;
+  padding: 15px 0 4px;
+  border-top: 1px solid rgba(190, 160, 199, 0.34);
+  text-align: center;
+  color: rgba(124, 109, 133, 0.82);
+}
+
+.site-footer .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+  color: rgba(143, 78, 178, 0.82);
+  line-height: 1;
+}
+
+.site-footer .footer-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  display: block;
+}
+
+.site-footer .footer-links {
+  margin-top: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.site-footer .footer-links a {
+  color: rgba(111, 82, 124, 0.78);
+  padding: 0 10px;
+}
+
+.site-footer .footer-links a:hover {
+  color: rgba(176, 92, 201, 0.92);
+}
+
+.site-footer .footer-links a + a {
+  border-left: 1px solid rgba(190, 160, 199, 0.42);
+}
+
+.site-footer .footer-info {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.55;
+  color: rgba(138, 120, 147, 0.76);
+  word-break: keep-all;
+}
+
+@media (max-width: 640px) {
+  .site-footer {
+    width: min(100% - 24px, 1180px);
+    margin-bottom: 22px;
+    padding-top: 13px;
+  }
+
+  .site-footer .footer-brand {
+    font-size: 11px;
+  }
+
+  .site-footer .footer-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .site-footer .footer-links {
+    gap: 7px 0;
+    font-size: 11px;
+  }
+
+  .site-footer .footer-links a {
+    padding: 0 8px;
+  }
+
+  .site-footer .footer-info {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+</style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="../">FANTAJ</a>
+
+      <nav class="nav-menu" aria-label="상단 메뉴">
+        <a href="../live/">LIVE</a>
+        <a href="../members/">MEMBER</a>
+        <a href="../notice/">NOTICE</a>
+        <a class="active" href="./">RANKING</a>
+        <a href="../play/">PLAY</a>
+        <a href="../signature/">SIGNATURE</a>
+      </nav>
+
+      <a class="nav-live" id="onAirButton" href="../live/">ON AIR</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" aria-label="랭킹 배너">
+      <div class="hero-content">
+        <div class="hero-kicker">FANTAJ OFFICIAL FAN PORTAL</div>
+        <h1 class="hero-title">RANKING</h1>
+        <p class="hero-sub">SUPPORT · CHAT · TOP 100</p>
+      </div>
+    </section>
+
+    <section class="ranking-card">
+      <div class="topbar">
+        <div class="tabs">
+          <button class="tab-btn active" data-type="balloon">
+            👑 후원 랭킹 TOP 100
+          </button>
+
+          <button class="tab-btn" data-type="chat">
+            💬 채팅 랭킹 TOP 100
+          </button>
+        </div>
+
+        <div class="period-box">
+          <select class="month-select" id="monthSelect">
+            <option value="rank.json">전체</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="summary">
+        <div class="summary-box">
+          <div class="summary-label">TOTAL SUPPORT</div>
+          <div class="summary-value" id="totalBalloon">0</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-label">TOTAL SUPPORTERS</div>
+          <div class="summary-value" id="totalSupporters">0</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-label">TOTAL CHAT</div>
+          <div class="summary-value" id="totalChat">0</div>
+        </div>
+      </div>
+
+      <div class="podium" id="podium"></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>순위</th>
+              <th>닉네임</th>
+              <th id="scoreHeader">후원 등급</th>
+              <th id="extraHeader">후원 횟수</th>
+            </tr>
+          </thead>
+
+          <tbody id="rankingBody">
+            <tr>
+              <td colspan="4" class="loading">데이터 불러오는 중...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const RANK_RAW_BASE_URL = "./";
+    const MONTHS_FILE = "months.json";
+    const DEFAULT_PROFILE_IMAGE = "https://profile.img.sooplive.co.kr/LOGO/sy/sysdemian/sysdemian.jpg";
+
+    let rankingData = [];
+    let supportData = [];
+    let chatData = [];
+    let currentType = "balloon";
+    let currentRankFile = "rank.json";
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => document.querySelectorAll(selector);
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function formatNumber(value) {
+      return Number(value || 0).toLocaleString("ko-KR");
+    }
+
+    function getCacheBustedUrl(fileName) {
+      const separator = String(fileName).includes("?") ? "&" : "?";
+      return `${RANK_RAW_BASE_URL}${fileName}${separator}v=${Date.now()}`;
+    }
+
+    function formatMonthLabel(month) {
+      const match = String(month || "").match(/^(\d{4})-(\d{2})$/);
+      if (!match) return String(month || "");
+
+      return `${match[1]}년 ${Number(match[2])}월`;
+    }
+
+    function normalizeMonthList(value) {
+      const list = Array.isArray(value) ? value : [];
+      return list
+        .map(item => {
+          if (typeof item === "string") {
+            return item.trim();
+          }
+
+          if (item && typeof item === "object") {
+            return String(item.month || item.value || "").trim();
+          }
+
+          return "";
+        })
+        .filter(month => /^\d{4}-\d{2}$/.test(month))
+        .filter((month, index, array) => array.indexOf(month) === index)
+        .sort((a, b) => a.localeCompare(b));
+    }
+
+    async function loadMonthOptions() {
+      const monthSelect = $("#monthSelect");
+      let months = [];
+
+      try {
+        const response = await fetch(getCacheBustedUrl(MONTHS_FILE), { cache: "no-store" });
+        if (response.ok) {
+          months = normalizeMonthList(await response.json());
+        }
+      } catch (error) {
+        console.warn("months.json 불러오기 실패", error);
+      }
+
+      if (!months.length) {
+        months = ["2026-05"];
+      }
+
+      monthSelect.innerHTML = `
+        <option value="rank.json">전체</option>
+        ${months.map(month => `<option value="rank_${month}.json">${formatMonthLabel(month)}</option>`).join("")}
+      `;
+    }
+
+    function getProfileImage(userId) {
+      const id = String(userId || "").trim();
+
+      if (!id) {
+        return DEFAULT_PROFILE_IMAGE;
+      }
+
+      const prefix = id.slice(0, 2);
+      return `https://profile.img.sooplive.co.kr/LOGO/${prefix}/${id}/${id}.jpg`;
+    }
+
+    function fallbackAvatar(img) {
+      img.onerror = null;
+      img.src = DEFAULT_PROFILE_IMAGE;
+    }
+
+    function getSupportTier(amount) {
+      const value = Number(amount || 0);
+
+      if (value <= 0) return { icon: "🥔", label: "STONE" };
+      if (value >= 1000000) return { icon: "🌌", label: "ETERNAL" };
+      if (value >= 500000) return { icon: "👑", label: "LEGEND" };
+      if (value >= 200000) return { icon: "💎", label: "MASTER" };
+      if (value >= 100000) return { icon: "🟣", label: "DIAMOND" };
+      if (value >= 50000) return { icon: "🔵", label: "PLATINUM" };
+      if (value >= 10000) return { icon: "🟡", label: "GOLD" };
+
+      return { icon: "⚪", label: "SILVER" };
+    }
+
+    function getSortedData() {
+      const sourceData = currentType === "chat" ? chatData : supportData;
+      const key = currentType === "chat" ? "chat" : "balloon";
+
+      return [...sourceData]
+        .sort((a, b) => Number(b[key] || 0) - Number(a[key] || 0))
+        .slice(0, 100);
+    }
+
+    function renderSummary() {
+      const totalChat = chatData.reduce((sum, user) => sum + Number(user.chat || 0), 0);
+      const totalBalloon = supportData.reduce((sum, user) => sum + Number(user.balloon || 0), 0);
+      const totalSupporters = supportData.filter(user => Number(user.balloon || 0) > 0).length;
+
+      $("#totalBalloon").textContent = formatNumber(totalBalloon);
+      $("#totalSupporters").textContent = formatNumber(totalSupporters);
+      $("#totalChat").textContent = formatNumber(totalChat);
+    }
+
+    function renderPodium(data) {
+      const top3 = data.slice(0, 3);
+      const order = [1, 0, 2];
+      const crowns = ["🥇", "🥈", "🥉"];
+
+      $("#podium").innerHTML = order
+        .filter(index => top3[index])
+        .map(index => {
+          const user = top3[index];
+          const rank = index + 1;
+          const tier = getSupportTier(user.balloon);
+
+          const subText = currentType === "chat"
+            ? `채팅 ${formatNumber(user.chat)}회`
+            : `총 ${formatNumber(user.donateCount)}회`;
+
+          return `
+            <div class="winner rank-${rank}">
+              <div class="crown">${crowns[index]}</div>
+
+              <img
+                class="avatar"
+                src="${getProfileImage(user.id)}"
+                onerror="fallbackAvatar(this)"
+                alt="${escapeHtml(user.nickname)}"
+                loading="lazy"
+              >
+
+              <div class="winner-name">${escapeHtml(user.nickname)}</div>
+
+              <div class="winner-tier">
+                <span class="tier-badge">${tier.icon} ${tier.label}</span>
+              </div>
+
+              <div class="winner-sub">${subText}</div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function renderTable(data) {
+      const isChat = currentType === "chat";
+
+      $("#scoreHeader").textContent = isChat ? "채팅 횟수" : "후원 등급";
+      $("#extraHeader").textContent = isChat ? "최다 채팅 방송" : "후원 횟수";
+
+      $("#rankingBody").innerHTML = data
+        .map((user, index) => {
+          const tier = getSupportTier(user.balloon);
+
+          const score = isChat
+            ? `<div style="font-weight:950;">${formatNumber(user.chat)}회</div>`
+            : `<span class="tier-badge">${tier.icon} ${tier.label}</span>`;
+
+          const extra = isChat
+            ? `<span class="favorite-bj" title="${escapeHtml(user.favoriteBj || "-")}">${escapeHtml(user.favoriteBj || "-")}</span>`
+            : `<div class="sub-score">총 ${formatNumber(user.donateCount)}회</div>`;
+
+          return `
+            <tr>
+              <td class="rank-num">${index + 1}</td>
+
+              <td>
+                <div class="user-cell">
+                  <img
+                    class="mini-avatar"
+                    src="${getProfileImage(user.id)}"
+                    onerror="fallbackAvatar(this)"
+                    alt="${escapeHtml(user.nickname)}"
+                    loading="lazy"
+                  >
+
+                  <div>
+                    <div class="nickname">${escapeHtml(user.nickname)}</div>
+                  </div>
+                </div>
+              </td>
+
+              <td>${score}</td>
+              <td>${extra}</td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+
+    function render() {
+      const data = getSortedData();
+
+      renderSummary();
+      renderPodium(data);
+      renderTable(data);
+    }
+
+    function getChatFileName(fileName) {
+      if (fileName === "rank.json") return "chatrank.json";
+
+      const match = String(fileName).match(/^rank_(\d{4}-\d{2})\.json$/);
+      if (match) return `chatrank_${match[1]}.json`;
+
+      return "chatrank.json";
+    }
+
+    async function fetchJsonFile(fileName) {
+      const response = await fetch(getCacheBustedUrl(fileName), { cache: "no-store" });
+
+      if (!response.ok) {
+        if (fileName.startsWith("chatrank") || fileName.startsWith("rank_")) return [];
+        throw new Error(`${fileName} 데이터 응답 오류`);
+      }
+
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
+    }
+
+    async function loadRankingData(fileName = "rank.json") {
+      try {
+        $("#rankingBody").innerHTML = `
+          <tr>
+            <td colspan="4" class="loading">데이터 불러오는 중...</td>
+          </tr>
+        `;
+
+        currentRankFile = fileName;
+
+        supportData = await fetchJsonFile(fileName);
+        chatData = await fetchJsonFile(getChatFileName(fileName));
+
+        rankingData = currentType === "chat" ? chatData : supportData;
+
+        render();
+      } catch (error) {
+        console.error(error);
+
+        rankingData = [];
+        supportData = [];
+        chatData = [];
+
+        $("#podium").innerHTML = "";
+        $("#totalBalloon").textContent = "0";
+        $("#totalSupporters").textContent = "0";
+        $("#totalChat").textContent = "0";
+
+        $("#rankingBody").innerHTML = `
+          <tr>
+            <td colspan="4" class="loading">데이터 불러오기 실패</td>
+          </tr>
+        `;
+      }
+    }
+
+    $$(".tab-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        $$(".tab-btn").forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+        currentType = button.dataset.type;
+
+        render();
+      });
+    });
+
+    $("#monthSelect").addEventListener("change", (event) => {
+      loadRankingData(event.target.value);
+    });
+
+    async function initRankingPage() {
+      await loadMonthOptions();
+      await loadRankingData($("#monthSelect").value || "rank.json");
+    }
+
+    initRankingPage();
+  </script>
+<script>
+const LIVE_API_URL_FOR_ON_AIR = "https://fantj-live.4rgn2004.workers.dev/";
+
+async function updateOnAirCount() {
+  const onAirButton = document.getElementById("onAirButton");
+  if (!onAirButton) return;
+
+  try {
+    const response = await fetch(LIVE_API_URL_FOR_ON_AIR, { cache: "no-store" });
+    if (!response.ok) throw new Error("LIVE API 응답 오류");
+
+    const data = await response.json();
+    const members = Array.isArray(data.members) ? data.members : [];
+    const liveCount = members.filter(member => member && member.isLive).length;
+
+    onAirButton.textContent = liveCount > 0 ? `ON AIR ${liveCount}` : "ON AIR";
+  } catch (error) {
+    console.error(error);
+    onAirButton.textContent = "ON AIR";
+  }
+}
+
+updateOnAirCount();
+setInterval(updateOnAirCount, 60000);
+</script>
+
+<footer class="site-footer">
+  <div class="footer-brand">
+    <img src="/fantajicon.png" alt="FANTAJ" class="footer-icon">
+    <span>FANTAJ</span>
+  </div>
+  <div class="footer-links">
+    <a href="/policy/#terms">서비스 이용약관</a>
+    <a href="/policy/#privacy">개인정보 처리방침</a>
+    <a href="/policy/#youth">청소년 보호정책</a>
+  </div>
+  <div class="footer-info">회사명: ribitu · 문의: ribitu0510@gmail.com · © 2026 FANTAJ. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
